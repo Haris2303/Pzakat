@@ -12,7 +12,7 @@
   <!-- cdn swiperjs -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
   <!-- my css -->
-  <link rel="stylesheet" href="<?= BASEURL ?>/css/main.css">
+  <link rel="stylesheet" href="<?= BASEURL ?>/css/app.css">
 </head>
 
 <body>
@@ -51,8 +51,8 @@
                   </button>
 
                   <div class="md:mt-2 md:p-3 md:scale-0 md:group-hover:scale-110 md:h-auto h-0 overflow-hidden transition-500 dropdown-menu flex gap-1 flex-col md:absolute bg-white text-lightgray rounded-md w-52 md:shadow-md">
-                    <a class="dropdown-item hover:text-green transition-300" href="#">Latar Belakang</a>
-                    <a class="dropdown-item hover:text-green transition-300" href="#">Visi Misi dan Prinsip</a>
+                    <a class="dropdown-item hover:text-green transition-300" href="<?= BASEURL ?>/latarbelakang">Latar Belakang</a>
+                    <a class="dropdown-item hover:text-green transition-300" href="<?= BASEURL ?>/visimisi">Visi Misi dan Prinsip</a>
                     <a class="dropdown-item hover:text-green transition-300" href="#">Laporan Keuangan</a>
                   </div>
                 </div>

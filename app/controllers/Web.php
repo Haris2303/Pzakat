@@ -2,14 +2,14 @@
 
 class Web extends Controller {
   
-  public function index() {
+  public function index(): void {
     $data['judul'] = 'Home';
     $this->view('template/header', $data);
     $this->view('web/index', $data);
     $this->view('template/footer', $data);
   }
 
-  public function profil() {
+  public function profil(): void {
     $data['judul'] = 'Profile';
     $this->view('template/header', $data);
     $this->view('web/profil', $data);
