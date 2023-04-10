@@ -301,11 +301,31 @@
 
             <div class="flex gap-3">
               <div class="w-20">
-                <img src="<?= BASEURL ?>/img/banner/banner.jpg" alt="" class="object-cover w-full h-full">
+                <a href="">
+                  <img src="<?= BASEURL ?>/img/banner/banner.jpg" alt="" class="object-cover w-full h-full">
+                </a>
+              </div>
+              <div class="flex-1 flex-col justify-evenly md:w-full lg:w-80">
+                <a href="">
+                  <div class="text-sm font-normal text-darkgray">
+                    Jadwal Imsakiyah Ramadhan 1444 H Di Seluruh Wilayah Indonesia, Dan Jadwal Imsakiyah Ramadhan 1444 Di Wilayah Waktu Indonesia Timur
+                  </div>
+                </a>
+                <span class="text-xs text-lightgray">20 March 2023</span>
+              </div>
+            </div>
+
+            <div class="flex gap-3">
+              <div class="w-20">
+                <a href="">
+                  <img src="<?= BASEURL ?>/img/banner/banner.jpg" alt="" class="object-cover w-full h-full">
+                </a>
               </div>
               <div class="flex-1 flex-col justify-evenly md:w-full lg:w-80">
                 <div class="text-sm font-normal text-darkgray">
-                  Jadwal Imsakiyah Ramadhan 1444 H Di Seluruh Wilayah Indonesia, Dan Jadwal Imsakiyah Ramadhan 1444 Di Wilayah Waktu Indonesia Timur
+                  <a href="">
+                    Lorem ipsum dolor sit amet consectetur.
+                  </a>
                 </div>
                 <span class="text-xs text-lightgray">20 March 2023</span>
               </div>
@@ -313,11 +333,15 @@
 
             <div class="flex gap-3">
               <div class="w-20">
-                <img src="<?= BASEURL ?>/img/banner/banner.jpg" alt="" class="object-cover w-full h-full">
+                <a href="">
+                  <img src="<?= BASEURL ?>/img/banner/banner.jpg" alt="" class="object-cover w-full h-full">
+                </a>
               </div>
               <div class="flex-1 flex-col justify-evenly md:w-full lg:w-80">
                 <div class="text-sm font-normal text-darkgray">
-                  Lorem ipsum dolor sit amet consectetur.
+                  <a href="">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae,
+                  </a>
                 </div>
                 <span class="text-xs text-lightgray">20 March 2023</span>
               </div>
@@ -325,23 +349,15 @@
 
             <div class="flex gap-3">
               <div class="w-20">
-                <img src="<?= BASEURL ?>/img/banner/banner.jpg" alt="" class="object-cover w-full h-full">
+                <a href="">
+                  <img src="<?= BASEURL ?>/img/banner/2.jpeg" alt="" class="object-cover w-full h-full">
+                </a>
               </div>
               <div class="flex-1 flex-col justify-evenly md:w-full lg:w-80">
                 <div class="text-sm font-normal text-darkgray">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae,
-                </div>
-                <span class="text-xs text-lightgray">20 March 2023</span>
-              </div>
-            </div>
-
-            <div class="flex gap-3">
-              <div class="w-20">
-                <img src="<?= BASEURL ?>/img/banner/2.jpeg" alt="" class="object-cover w-full h-full">
-              </div>
-              <div class="flex-1 flex-col justify-evenly md:w-full lg:w-80">
-                <div class="text-sm font-normal text-darkgray">
-                  Jadwal Imsakiyah Ramadhan 1444 H Di Seluruh Wilayah Indonesia, Dan Jadwal Imsakiyah Ramadhan 1444 Di Wilayah Waktu Indonesia Timur
+                  <a href="">
+                    Jadwal Imsakiyah Ramadhan 1444 H Di Seluruh Wilayah Indonesia, Dan Jadwal Imsakiyah Ramadhan 1444 Di Wilayah Waktu Indonesia Timur
+                  </a>
                 </div>
                 <span class="text-xs text-lightgray">20 March 2023</span>
               </div>
@@ -349,9 +365,11 @@
 
           </div>
 
-          <div class="w-40 m-auto">
-            <button class="mt-10 btn btn-lightgreen">Artikel lainnya</button>
-          </div>
+          <a href="<?= BASEURL ?>/page/artikel">
+            <div class="w-40 m-auto">
+              <button class="mt-10 btn btn-lightgreen">Artikel lainnya</button>
+            </div>
+          </a>
 
         </div>
       </div>
@@ -370,7 +388,7 @@
       </div>
 
       <div class="flex flex-wrap justify-evenly center mt-10 gap-y-20">
-      <a href="" class="lg:w-1/3 w-1/2">
+        <a href="" class="lg:w-1/3 w-1/2">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
             <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md">
               <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-calendar3 scale-50 fill-darkgreen" viewBox="0 0 16 16">
@@ -466,7 +484,9 @@
             <div class="swiper-slide">
               <div class="flex lg:flex-nowrap flex-wrap gap-10 px-5">
                 <div class="lg:w-1/2">
-                  <img src="<?= BASEURL ?>/img/banner/banner.jpg" alt="" class="w-full h-full rounded-lg">
+                  <a href="">
+                    <img src="<?= BASEURL ?>/img/banner/banner.jpg" alt="" class="w-full h-full rounded-lg">
+                  </a>
                 </div>
                 <div class="lg:w-1/2 relative">
                   <span class="absolute bg-lightgreen text-darkgreen text-sm rounded-lg block px-3">Laporan</span>
@@ -477,9 +497,11 @@
                     <div class="text-sm text-lightgreen">
                       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, quasi aliquam? Enim in ex dolores perferendis numquam architecto exercitationem! Soluta?</p>
                     </div>
-                    <div class="w-40">
-                      <button class="btn bg-green text-darkgreen">Detail</button>
-                    </div>
+                    <a href="">
+                      <div class="w-40">
+                        <button class="btn bg-green text-darkgreen">Detail</button>
+                      </div>
+                    </a>
                   </div>
                 </div>
               </div>
