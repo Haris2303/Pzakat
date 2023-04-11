@@ -123,9 +123,11 @@
             </div>
           </div>
 
-          <div class="w-40 m-auto">
-            <button class="mt-10 btn btn-lightgreen">Lihat Semua</button>
-          </div>
+          <a href="<?= BASEURL ?>/program">
+            <div class="w-40 m-auto">
+              <button class="mt-10 btn btn-lightgreen">Lihat Semua</button>
+            </div>
+          </a>
         </section>
         <!-- end program donasi -->
 
@@ -168,11 +170,11 @@
 
         <div class="w-full flex gap-5 flex-col lg:flex-row md:gap-5 mt-5 text-sm">
           <div class="lg:w-1/3 shadow-md">
-            <a href="#">
+            <a href="<?= BASEURL ?>/view">
               <img src="<?= BASEURL ?>/img/banner/banner.jpg" alt="" class="lg:h-48 h-64 lg:w-full w-screen">
             </a>
             <div class="px-4 my-4 flex flex-col gap-1">
-              <a href="">
+              <a href="<?= BASEURL ?>/view">
                 <h4 class="text-lg text-darkgray">Zakat mari zakat ayo kita zakat</h4>
               </a>
 
@@ -199,7 +201,9 @@
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi consectetur ipsum amet possimus iure? Cumque enim optio at molestiae totam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, nobis.
                 </p>
               </div>
-              <button class="btn btn-green">Lihat Selengkapnya...</button>
+              <a href="<?= BASEURL ?>/view">
+                <button class="btn btn-green">Lihat Selengkapnya...</button>
+              </a>
             </div>
           </div>
 
@@ -276,9 +280,11 @@
           </div>
         </div>
 
-        <div class="w-40 m-auto">
-          <button class="mt-10 btn btn-lightgreen">Berita lainnya</button>
-        </div>
+        <a href="<?= BASEURL ?>/page/news">
+          <div class="w-40 m-auto">
+            <button class="mt-10 btn btn-lightgreen">Berita lainnya</button>
+          </div>
+        </a>
       </section>
     </div>
   </div>
@@ -301,12 +307,12 @@
 
             <div class="flex gap-3">
               <div class="w-20">
-                <a href="">
+                <a href="<?= BASEURL ?>/view">
                   <img src="<?= BASEURL ?>/img/banner/banner.jpg" alt="" class="object-cover w-full h-full">
                 </a>
               </div>
               <div class="flex-1 flex-col justify-evenly md:w-full lg:w-80">
-                <a href="">
+                <a href="<?= BASEURL ?>/view">
                   <div class="text-sm font-normal text-darkgray">
                     Jadwal Imsakiyah Ramadhan 1444 H Di Seluruh Wilayah Indonesia, Dan Jadwal Imsakiyah Ramadhan 1444 Di Wilayah Waktu Indonesia Timur
                   </div>

@@ -59,7 +59,7 @@
 
               </li>
               <li class="group md:pb-0 pb-2">
-                <a href="" class="text-lightgray group-hover:text-green transition-300">Berita</a>
+                <a href="<?= BASEURL ?>/page/news" class="text-lightgray group-hover:text-green transition-300">Berita</a>
               </li>
               <li class="group md:pb-0 pb-2">
                 <a href="<?= BASEURL ?>/program" class="text-lightgray group-hover:text-green transition-300">Program</a>
