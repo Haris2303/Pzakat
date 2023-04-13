@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .content {
-  @apply xl:px-28 px-2
+  @apply xl:px-28
 }
 
 /* button */
@@ -48,7 +48,7 @@
 }
 
 .nav-menu {
-  @apply py-5 bg-white shadow-lg px-5 rounded-lg max-w-[250px] w-full right-4 top-full md:block md:static md:bg-transparent md:max-w-full md:shadow-none
+  @apply py-5 bg-white shadow-lg px-5 rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none
 }
 
 .menu {
@@ -107,7 +107,7 @@
 
 /* style title  */
 .title {
-  @apply text-center mt-20
+  @apply text-center mt-10
 }
 
 .text-title {
