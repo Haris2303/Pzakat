@@ -64,6 +64,7 @@
                     <a class="dropdown-item hover:text-green transition-300" href="<?= BASEURL ?>/latarbelakang">Latar Belakang</a>
                     <a class="dropdown-item hover:text-green transition-300" href="<?= BASEURL ?>/visimisi">Visi Misi dan Prinsip</a>
                     <a class="dropdown-item hover:text-green transition-300" href="#">Laporan Keuangan</a>
+                    <a class="dropdown-item hover:text-green transition-300" href="#">About Us</a>
                   </div>
                 </div>
 
