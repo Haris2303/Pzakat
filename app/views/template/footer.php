@@ -94,18 +94,8 @@
     },
   });
 </script>
-
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('.nav-menu .dropmenu').hover(function() {
-      $(this).find('.sm-menu').first().stop(true, true).slideDown(150);
-    }, function() {
-      $(this).find('.sm-menu').first().stop(true, true).slideUp(100)
-    });
-  });
-</script> -->
-<script type="text/javascript" src="<?= BASEURL ?>/js/script.js"></script>
+<script src="<?= BASEURL ?>/js/jquery/jquery-3.6.4.js"></script>
+<script type="text/javascript" src="<?= BASEURL ?>/js/main.js"></script>
 </body>
 
 </html>

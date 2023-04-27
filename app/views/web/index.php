@@ -54,19 +54,84 @@
             <span class="text-sm text-lightgray mt-2 inline-block">Silahkan pilih program donasi yang anda inginkan</span>
           </div>
 
-          <div class="w-full flex gap-2 md:gap-5 text-center mt-10 text-sm">
-            <a href="" class="w-1/3 bg-lightgreen py-2 hover:bg-green hover:text-white transition-300 shadow-md">Zakat</a>
-            <a href="" class="w-1/3 bg-lightgreen py-2 hover:bg-green hover:text-white transition-300 shadow-md">Qurban</a>
-            <a href="" class="w-1/3 bg-lightgreen py-2 hover:bg-green hover:text-white transition-300 shadow-md">Infaq</a>
+          <div class="w-full flex gap-2 md:gap-5 text-center mt-10 text-sm program-kategori">
+            <a class="w-1/3 bg-lightgreen py-2 hover:bg-green hover:text-white transition-300 shadow-md">Zakat</a>
+            <a class="w-1/3 bg-lightgreen py-2 hover:bg-green hover:text-white transition-300 shadow-md">Qurban</a>
+            <a class="w-1/3 bg-lightgreen py-2 hover:bg-green hover:text-white transition-300 shadow-md">Infaq</a>
           </div>
 
-          <div class="w-full flex gap-5 flex-col lg:flex-row md:gap-5 mt-5 text-sm">
+          <!-- zakat -->
+          <div class="w-full flex gap-5 flex-col lg:flex-row md:gap-5 mt-5 text-sm program">
+            <div class="lg:w-1/3 shadow-md">
+              <a href="#">
+                <img src="<?= BASEURL ?>/img/banner/2.jpeg" alt="" class="lg:h-48 h-64 lg:w-full w-screen">
+              </a>
+              <div class="px-4 my-4 flex flex-col gap-1">
+                <a href=""><span class="category text-lightgray text-xs">Zakat</span></a>
+                <a href="">
+                  <h4 class="text-md text-darkgray">Zakat mari zakat ayo kita zakat</h4>
+                </a>
+                <span class="garis-progress my-1 after:w-8"></span>
+                <div class="flex justify-between text-xs text-lightgray">
+                  <div>Donasi Terkumpul</div>
+                  <div>Donatur</div>
+                </div>
+                <div class="flex justify-between text-md text">
+                  <div class="font-bold text-darkgray">Rp 123.456.789</div>
+                  <div class="text-darkgray">23</div>
+                </div>
+              </div>
+            </div>
+            <div class="lg:w-1/3 shadow-md">
+              <a href="#">
+                <img src="<?= BASEURL ?>/img/banner/2.jpeg" alt="" class="lg:h-48 h-64 lg:w-full w-screen">
+              </a>
+              <div class="px-4 my-4 flex flex-col gap-1">
+                <a href=""><span class="category text-lightgray text-xs">Zakat</span></a>
+                <a href="">
+                  <h4 class="text-md text-darkgray">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, placeat.</h4>
+                </a>
+                <span class="garis-progress my-1 after:w-[80%]"></span>
+                <div class="flex justify-between text-xs text-lightgray">
+                  <div>Donasi Terkumpul</div>
+                  <div>Donatur</div>
+                </div>
+                <div class="flex justify-between text-md text">
+                  <div class="font-bold text-darkgray">Rp 123.456.789</div>
+                  <div class="text-darkgray">23</div>
+                </div>
+              </div>
+            </div>
+            <div class="lg:w-1/3 shadow-md">
+              <a href="#">
+                <img src="<?= BASEURL ?>/img/banner/2.jpeg" alt="" class="lg:h-48 h-64 lg:w-full w-screen">
+              </a>
+              <div class="px-4 my-4 flex flex-col gap-1">
+                <a href=""><span class="category text-lightgray text-xs">Zakat</span></a>
+                <a href="">
+                  <h4 class="text-md text-darkgray">Lorem ipsum dolor sit amet consectetur adipisicing. Lorem ipsum dolor,</h4>
+                </a>
+                <span class="garis-progress my-1 after:w-[60%]"></span>
+                <div class="flex justify-between text-xs text-lightgray">
+                  <div>Donasi Terkumpul</div>
+                  <div>Donatur</div>
+                </div>
+                <div class="flex justify-between text-md text">
+                  <div class="font-bold text-darkgray">Rp 123.456.789</div>
+                  <div class="text-darkgray">23</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Qurban -->
+          <div class="w-full hidden gap-5 flex-col lg:flex-row md:gap-5 mt-5 text-sm program">
             <div class="lg:w-1/3 shadow-md">
               <a href="#">
                 <img src="<?= BASEURL ?>/img/banner/banner.jpg" alt="" class="lg:h-48 h-64 lg:w-full w-screen">
               </a>
               <div class="px-4 my-4 flex flex-col gap-1">
-                <a href=""><span class="category text-lightgray text-xs">Zakat</span></a>
+                <a href=""><span class="category text-lightgray text-xs">Qurban</span></a>
                 <a href="">
                   <h4 class="text-md text-darkgray">Zakat mari zakat ayo kita zakat</h4>
                 </a>
@@ -106,7 +171,71 @@
                 <img src="<?= BASEURL ?>/img/banner/banner.jpg" alt="" class="lg:h-48 h-64 lg:w-full w-screen">
               </a>
               <div class="px-4 my-4 flex flex-col gap-1">
-                <a href=""><span class="category text-lightgray text-xs">Zakat</span></a>
+                <a href=""><span class="category text-lightgray text-xs">Qurban</span></a>
+                <a href="">
+                  <h4 class="text-md text-darkgray">Lorem ipsum dolor sit amet consectetur adipisicing. Lorem ipsum dolor,</h4>
+                </a>
+                <span class="garis-progress my-1 after:w-[60%]"></span>
+                <div class="flex justify-between text-xs text-lightgray">
+                  <div>Donasi Terkumpul</div>
+                  <div>Donatur</div>
+                </div>
+                <div class="flex justify-between text-md text">
+                  <div class="font-bold text-darkgray">Rp 123.456.789</div>
+                  <div class="text-darkgray">23</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- infaq -->
+          <div class="w-full hidden gap-5 flex-col lg:flex-row md:gap-5 mt-5 text-sm program">
+            <div class="lg:w-1/3 shadow-md">
+              <a href="#">
+                <img src="<?= BASEURL ?>/img/banner/3.jpeg" alt="" class="lg:h-48 h-64 lg:w-full w-screen">
+              </a>
+              <div class="px-4 my-4 flex flex-col gap-1">
+                <a href=""><span class="category text-lightgray text-xs">Infaq</span></a>
+                <a href="">
+                  <h4 class="text-md text-darkgray">Zakat mari zakat ayo kita zakat</h4>
+                </a>
+                <span class="garis-progress my-1 after:w-8"></span>
+                <div class="flex justify-between text-xs text-lightgray">
+                  <div>Donasi Terkumpul</div>
+                  <div>Donatur</div>
+                </div>
+                <div class="flex justify-between text-md text">
+                  <div class="font-bold text-darkgray">Rp 123.456.789</div>
+                  <div class="text-darkgray">23</div>
+                </div>
+              </div>
+            </div>
+            <div class="lg:w-1/3 shadow-md">
+              <a href="#">
+                <img src="<?= BASEURL ?>/img/banner/3.jpeg" alt="" class="lg:h-48 h-64 lg:w-full w-screen">
+              </a>
+              <div class="px-4 my-4 flex flex-col gap-1">
+                <a href=""><span class="category text-lightgray text-xs">Infaq</span></a>
+                <a href="">
+                  <h4 class="text-md text-darkgray">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, placeat.</h4>
+                </a>
+                <span class="garis-progress my-1 after:w-[80%]"></span>
+                <div class="flex justify-between text-xs text-lightgray">
+                  <div>Donasi Terkumpul</div>
+                  <div>Donatur</div>
+                </div>
+                <div class="flex justify-between text-md text">
+                  <div class="font-bold text-darkgray">Rp 123.456.789</div>
+                  <div class="text-darkgray">23</div>
+                </div>
+              </div>
+            </div>
+            <div class="lg:w-1/3 shadow-md">
+              <a href="#">
+                <img src="<?= BASEURL ?>/img/banner/3.jpeg" alt="" class="lg:h-48 h-64 lg:w-full w-screen">
+              </a>
+              <div class="px-4 my-4 flex flex-col gap-1">
+                <a href=""><span class="category text-lightgray text-xs">Infaq</span></a>
                 <a href="">
                   <h4 class="text-md text-darkgray">Lorem ipsum dolor sit amet consectetur adipisicing. Lorem ipsum dolor,</h4>
                 </a>
@@ -146,9 +275,11 @@
           <div class="sm:w-36 w-32">
             <button class="btn btn-lightgreen">Konsultasi</button>
           </div>
-          <div class="sm:w-36 w-32">
-            <button class="btn btn-lightgreen">Kalkulator Zakat</button>
-          </div>
+          <a href="<?= BASEURL ?>/perhitunganzakat">
+            <div class="sm:w-36 w-32">
+              <button class="btn btn-lightgreen">Kalkulator Zakat</button>
+            </div>
+          </a>
           <div class="sm:w-36 w-32">
             <button class="btn btn-lightgreen">Konfirmasi Zakat</button>
           </div>
