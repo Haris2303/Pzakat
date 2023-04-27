@@ -3,7 +3,6 @@
 <script>
   tinymce.init({
     selector: 'textarea#default',
-    width: 1000,
     height: 350,
     plugins: [
       'advlist', 
