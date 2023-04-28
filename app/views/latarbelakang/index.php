@@ -2,7 +2,7 @@
   <div class="content">
     <div class="title mb-20">
       <h3 class="text-title">Latar Belakang</h3>
-      <span class="text-sm text-lightgray mt-2 inline-block">Silahkan pilih program donasi yang anda inginkan</span>
+      <span class="text-sm text-lightgray mt-2 inline-block">Mengapa Aplikasi Ini dibuat</span>
     </div>
 
     <!-- content latar belakang -->
