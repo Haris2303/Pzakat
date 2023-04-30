@@ -10,10 +10,10 @@
   <!-- icon shorcut -->
   <link rel="shortcut icon" href="<?= BASEURL ?>/img/logo/logo.png" type="image/x-icon">
   <!-- my css -->
-  <link rel="stylesheet" href="<?= BASEURL ?>/css/main.css">
+  <link rel="stylesheet" href="<?= BASEURL ?>/css/app.css">
 </head>
 
-<body class="bg-darkgreen">
+<body class="bg-white">
 
   
   <div class="container h-screen flex justify-center items-center">
