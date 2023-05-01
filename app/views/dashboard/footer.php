@@ -1,22 +1,22 @@
-    <!-- Bootstrap core JavaScript-->
-    <script src="<?= BASEURL ?>/js/jquery/jquery.min.js"></script>
-    <script src="<?= BASEURL ?>/js/bootstrap/bootstrap.bundle.min.js"></script>
+</div>
 
-    <!-- Core plugin JavaScript-->
-    <script src="<?= BASEURL ?>/js/jquery-easing/jquery.easing.min.js"></script>
+<!-- Bootstrap core JavaScript-->
+<script src="<?= BASEURL ?>/js/jquery/jquery.min.js"></script>
+<script src="<?= BASEURL ?>/js/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="<?= BASEURL ?>/js/sb-admin-2.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="<?= BASEURL ?>/js/sb-admin-2.min.js"></script>
+<!-- core plugin -->
+<script src="<?= BASEURL ?>/js/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="<?= BASEURL ?>/js/chart.js/Chart.min.js"></script>
+<!-- plugin JavaScript-->
+<?php if(isset($data['script'])) : ?>
+    <?php foreach($data['script'] as $src) : ?>
+        <script src="<?= BASEURL ?>/<?= $src ?>"></script>
+    <?php endforeach ?>
+<?php endif ?>
 
-    <!-- Page level custom scripts -->
-    <script src="<?= BASEURL ?>/js/demo/chart-area-demo.js"></script>
-    <script src="<?= BASEURL ?>/js/demo/chart-pie-demo.js"></script>
-
-    <!-- script admin js -->
-    <script src="<?= BASEURL ?>/js/script-admin.js"></script>
+<!-- script admin js -->
+<script src="<?= BASEURL ?>/js/script-admin.js"></script>
 
 </body>
 

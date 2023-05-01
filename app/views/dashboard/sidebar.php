@@ -20,6 +20,13 @@
     <!-- Custom styles for this template-->
     <link href="<?= BASEURL ?>/css/bootstrap/sb-admin-2.min.css" rel="stylesheet">
 
+    <!-- style plugin -->
+    <?php if(isset($data['css'])) : ?>
+      <?php foreach( $data['css'] as $src ) : ?>
+        <link rel="stylesheet" href="<?= BASEURL ?>/<?= $src ?>">
+      <?php endforeach ?>
+    <?php endif ?>
+
 </head>
 
 <!-- Page Wrapper -->
@@ -58,13 +65,13 @@
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-fw fa-cog"></i>
-        <span>Amil</span>
+        <span>Users</span>
       </a>
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Custom Components:</h6>
-          <a class="collapse-item" href="buttons.html">Buttons</a>
-          <a class="collapse-item" href="cards.html">Cards</a>
+          <a class="collapse-item" href="buttons.html">Amil</a>
+          <a class="collapse-item" href="<?= BASEURL ?>/muzakki">Muzakki</a>
         </div>
       </div>
     </li>
@@ -329,3 +336,6 @@
 
       </nav>
       <!-- End of Topbar -->
+
+      
+<div class="container-fluid">
