@@ -6,7 +6,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">DataTables Muzakki</h6>
+    <h6 class="m-0 font-weight-bold text-dark">DataTables Muzakki</h6>
   </div>
   <div class="card-body">
     <div class="table-responsive">
@@ -14,16 +14,25 @@
         <thead>
           <tr>
             <th>Nama</th>
+            <th>Username</th>
             <th>Email</th>
             <th>No HP</th>
+            <th>Terakhir Login</th>
+            <th>Aksi</th>
           </tr>
         </thead>
         <tbody>
           <?php foreach($data['dataMuzakki'] as $item) : ?>
             <tr>
-              <td><?= $item['nama_lengkap'] ?></td>
+              <td><?= $item['nama'] ?></td>
+              <td><?= $item['username'] ?></td>
               <td><?= $item['email'] ?></td>
               <td><?= $item['nohp'] ?></td>
+              <td><?= $item['waktu_login'] ?></td>
+              <td>
+                  <a href="#" class="btn badge btn-success">Ubah</a>
+                  <a href="#" class="btn badge btn-danger">Hapus</a>
+              </td>
             </tr>
           <?php endforeach ?>
         </tbody>

@@ -1,17 +1,40 @@
-<div class="container md:mt-10 mt-20">
-  <table class="border-spacing-2">
-    <tr>
-      <td>No</td>
-      <td>Nama</td>
-      <td>No Hp</td>
-      <td>Email</td>
-      <td>Alamat</td>
-      <td>Masjid</td>
-    </tr>
-    <tr>
-    </tr>
-    <tr>
-      <td></td>
-    </tr>
-  </table>
+<!-- Page Heading -->
+<h2 class="h3">Amil</h2>
+<!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+  For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-dark">DataTables Amil</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Nama</th>
+            <th>Email</th>
+            <th>No HP</th>
+            <th>Terakhir Login</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach($data['dataAmil'] as $item) : ?>
+            <tr>
+              <td><?= $item['nama'] ?></td>
+              <td><?= $item['email'] ?></td>
+              <td><?= $item['nohp'] ?></td>
+              <td><?= $item['waktu_login'] ?></td>
+              <td>
+                <a href="#" class="btn badge btn-secondary">Detail</a>
+                <?php echo ($item['status_verifikasi'] === '0') ? "<button class='btn badge btn-danger'>Verifikasi</button>" : "<button class='btn badge btn-primary'>Terverifikasi</button>" ?>
+              </td>
+            </tr>
+          <?php endforeach ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
