@@ -26,10 +26,16 @@
 
       <?php Flasher::flash() ?>
         
-      <form action="<?= BASEURL ?>/daftar/aksi_daftar" method="POST" class="flex gap-3 flex-col text-lightgreen">
+      <form action="<?= BASEURL ?>/daftar/aksi_daftar_amil" method="POST" class="flex gap-3 flex-col text-lightgreen">
         <input type="text" class="p-2 border-2 border-darkgreen outline-none rounded-sm focus:shadow-sm focus:shadow-green transition-500 bg-darkgreen placeholder:text-lightgreen" name="name" placeholder="Nama Lengkap" autocomplete="off" required>
         <input type="text" class="p-2 border-2 border-darkgreen outline-none rounded-sm focus:shadow-sm focus:shadow-green transition-500 bg-darkgreen placeholder:text-lightgreen" name="email" placeholder="Email" autocomplete="off" required>
         <input type="tel" class="p-2 border-2 border-darkgreen outline-none rounded-sm focus:shadow-sm focus:shadow-green transition-500 bg-darkgreen placeholder:text-lightgreen" name="nohp" placeholder="No HP" autocomplete="off" required>
+        <input type="text" class="p-2 border-2 border-darkgreen outline-none rounded-sm focus:shadow-sm focus:shadow-green transition-500 bg-darkgreen placeholder:text-lightgreen" name="alamat" placeholder="Alamat" autocomplete="off" required>
+        <select name="masjid" class="p-2 border-2 border-darkgreen outline-none rounded-sm focus:shadow-sm focus:shadow-green transition-500 bg-darkgreen placeholder:text-lightgreen">
+          <?php foreach($data['masjid'] as $data) {?>
+            <option value="<?= $data['id_mesjid'] ?>"><?= $data['nama_mesjid'] ?> | <?= $data['alamat_mesjid'] ?></option>
+          <?php } ?>
+        </select>
         <input type="text" class="p-2 border-2 border-darkgreen outline-none rounded-sm focus:shadow-sm focus:shadow-green transition-500 bg-darkgreen placeholder:text-lightgreen" name="username" placeholder="Username" autocomplete="off" required>
         <input type="password" class="p-2 border-2 border-darkgreen outline-none rounded-sm focus:shadow-sm focus:shadow-green transition-500 bg-darkgreen placeholder:text-lightgreen" name="password" placeholder="Password" autocomplete="off" required>
         <input type="password" class="p-2 border-2 border-darkgreen outline-none rounded-sm focus:shadow-sm focus:shadow-green transition-500 bg-darkgreen placeholder:text-lightgreen" name="passConfirm" placeholder="Konfirmasi Password" autocomplete="off" required>
