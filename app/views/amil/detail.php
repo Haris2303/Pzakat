@@ -6,45 +6,60 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-dark">DataTables Amil</h6>
-  </div>
+    <h6 class="m-0 font-weight-bold text-dark">Detail Amil > <?php echo ($data['detail']['status_verifikasi'] === '0') ? '<a href="'. BASEURL .'/amil/verifikasi/'.$data["detail"]["username"] .'" class="text-danger">Belum Terverifikasi</a>' : 'Telah Terverifikasi' ?></h6>
 
-  <div class="container mt-3">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      Tambah Amil
-    </button>
   </div>
 
   <?php Flasher::flash() ?>
-  
+
   <div class="card-body">
     <div class="table-responsive">
-      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead>
-          <tr>
-            <th>Nama</th>
-            <th>Email</th>
-            <th>No HP</th>
-            <th>Terakhir Login</th>
-            <th>Aksi</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php foreach ($data['dataAmil'] as $item) : ?>
-            <tr>
-              <td><?= $item['nama'] ?></td>
-              <td><?= $item['email'] ?></td>
-              <td><?= $item['nohp'] ?></td>
-              <td><?= $item['waktu_login'] ?></td>
-              <td>
-                <a href="<?= BASEURL ?>/amil/detail/<?= $item['username'] ?>" class="btn badge btn-secondary">Detail</a>
-                <?php echo ($item['status_verifikasi'] === '0') ? "<a href='". BASEURL ."/amil/verifikasi/". $item['username']."' class='btn badge btn-danger'>Verifikasi</a>" : "<span class='btn badge btn-primary'>Terverifikasi</span>" ?>
-              </td>
-            </tr>
-          <?php endforeach ?>
-        </tbody>
+      <table cellpadding="5">
+        <tr>
+          <th>Username</th>
+          <td>: <?= $data['detail']['username'] ?></td>
+        </tr>
+        <tr>
+          <th>Nama Lengkap</th>
+          <td>: <?= $data['detail']['nama'] ?></td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td>: <?= $data['detail']['email'] ?></td>
+        </tr>
+        <tr>
+          <th>No Handphone</th>
+          <td>: <?= $data['detail']['nohp'] ?></td>
+        </tr>
+        <tr>
+          <th>Alamat</th>
+          <td>: <?= $data['detail']['alamat'] ?></td>
+        </tr>
+        <tr>
+          <th></th>
+        </tr>
+        <tr>
+          <th>Nama Masjid</th>
+          <td>: <?= $data['masjid']['nama_mesjid'] ?> </td>
+        </tr>
+        <tr>
+          <th>Alamat Masjid</th>
+          <td>: <?= $data['masjid']['alamat_mesjid'] ?></td>
+        </tr>
+        <tr>
+          <th>RT / RW</th>
+          <td>: <?= $data['masjid']['RT'] ?>/<?= $data['masjid']['RW'] ?></td>
+        </tr>
       </table>
+    </div>
+    <div class="mt-3">
+      <!-- Button trigger modal ubah -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Ubah
+      </button>
+  
+      <a href="#" class="btn btn-danger">Hapus</a>
+      <a href="<?= BASEURL ?>/amil" class="btn btn-secondary">Kembali</a>
     </div>
   </div>
 </div>
@@ -82,7 +97,7 @@
             <label for="masjid" class="form-label">Masjid</label>
             <select name="masjid" id="masjid" class="form-control" required>
               <option disabled selected> -- Pilih Masjid -- </option>
-              <?php foreach ($data['dataMasjid'] as $item): ?>
+              <?php foreach ($data['dataMasjid'] as $item) : ?>
                 <option value="<?= $item['id_mesjid'] ?>"><?= $item['nama_mesjid'] ?></option>
               <?php endforeach ?>
             </select>

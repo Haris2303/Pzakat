@@ -21,4 +21,14 @@ class Masjid_model {
 
   }
 
+  // method get data masjid by id
+  public function getDataMasjidById($id): array {
+
+    $query = "SELECT * FROM $this->table WHERE id_mesjid = :id_mesjid";
+    $this->db->query($query);
+    $this->db->bind('id_mesjid', $id);
+    return $this->db->single();
+
+  }
+
 }
