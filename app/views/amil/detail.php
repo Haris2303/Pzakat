@@ -6,7 +6,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-dark">Detail Amil > <?php echo ($data['detail']['status_verifikasi'] === '0') ? '<a href="'. BASEURL .'/amil/verifikasi/'.$data["detail"]["username"] .'" class="text-danger">Belum Terverifikasi</a>' : 'Telah Terverifikasi' ?></h6>
+    <h6 class="m-0 font-weight-bold text-dark">Detail Amil > <?php echo ($data['detail']['status_verifikasi'] === '0') ? '<a href="'. BASEURL .'/amil/verifikasi/'.$data["detail"]["username"] .'" class="btn badge badge-danger">Belum Terverifikasi</a>' : '<span class="badge badge-primary">Telah Terverifikasi</span>' ?></h6>
 
   </div>
 

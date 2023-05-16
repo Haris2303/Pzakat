@@ -3,29 +3,27 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <title>Yuk Zakat - <?= $data['judul'] ?></title>
+  <title>Yuk Zakat - <?= $data['judul'] ?></title>
 
-    <!-- Custom fonts for this template-->
-    <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/html"> -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/html"> -->
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-    <!-- Custom styles for this template-->
-    <link href="<?= BASEURL ?>/css/bootstrap/sb-admin-2.min.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="<?= BASEURL ?>/css/bootstrap/sb-admin-2.min.css" rel="stylesheet">
 
-    <!-- style plugin -->
-    <?php if(isset($data['css'])) : ?>
-      <?php foreach( $data['css'] as $src ) : ?>
-        <link rel="stylesheet" href="<?= BASEURL ?>/<?= $src ?>">
-      <?php endforeach ?>
-    <?php endif ?>
+  <!-- style plugin -->
+  <?php if (isset($data['css'])) : ?>
+    <?php foreach ($data['css'] as $src) : ?>
+      <link rel="stylesheet" href="<?= BASEURL ?>/<?= $src ?>">
+    <?php endforeach ?>
+  <?php endif ?>
 
 </head>
 
@@ -58,7 +56,7 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-      Interface
+      Datas
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
@@ -77,6 +75,22 @@
       </div>
     </li>
 
+    
+    <div class="nav-item">
+      <a class="nav-link collapsed" href="<?= BASEURL ?>/masjid" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+        <i class="fas fa-fw fa-wrench"></i>
+        <span>Masjid</span>
+      </a>
+    </div>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+    
+    <!-- Heading -->
+    <div class="sidebar-heading">
+      Interfaces
+    </div>
+
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
@@ -91,14 +105,6 @@
         </div>
       </div>
     </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-      Addons
-    </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
@@ -338,5 +344,5 @@
       </nav>
       <!-- End of Topbar -->
 
-      
-<div class="container-fluid">
+
+      <div class="container-fluid">
