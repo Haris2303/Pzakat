@@ -4,6 +4,7 @@ class Daftar_model
 {
 
   private $table = [
+    "user"    => "tb_user",
     "muzakki" => "tb_muzakki",
     "amil"    => "tb_amil"
   ];
@@ -20,32 +21,47 @@ class Daftar_model
   {
     // deklarsi variabel
     $tableMuzakki = $this->table['muzakki'];
+    $tableUser    = $this->table['user'];
 
     // assignment query
-    $queryMuzakki  = "INSERT INTO $tableMuzakki VALUES(NULL, :username, :password, :nama, :email, :nohp, NOW(), :level)";
-    $cekdata       = "SELECT username, email, nohp FROM $tableMuzakki WHERE username = :username AND email = :email AND nohp = :nohp";
+    $queryUser      = "INSERT INTO $tableUser VALUES(NULL, :username, :password, NOW(), '3')";
+    $queryMuzakki   = "INSERT INTO $tableMuzakki VALUES(NULL, :id_user, :nama, :email, :nohp)";
+    $cekdataUser    = "SELECT username FROM $tableUser WHERE username = :username";
+    $cekDataMuzakki = "SELECT email, nohp FROM $tableMuzakki WHERE email = :email OR nohp = :nohp";
 
-    // check if the email and nohp data already exists
-    $this->db->query($cekdata);
+    // cek username
+    $this->db->query($cekdataUser);
     $this->db->bind('username', $data['username']);
+    if(count($this->db->resultSet()) > 0) return 0;
+
+    // cek email dan nohp
+    $this->db->query($cekDataMuzakki);
     $this->db->bind('email', $data['email']);
     $this->db->bind('nohp', $data['nohp']);
-    $this->db->execute();
-    if ($this->db->rowCount() > 0) return 0;
+    if(count($this->db->resultSet()) > 0) return 0;
 
-    // cek password dan konfirmasi password
+    // password konfirmasi
     if($data['password'] === $data['passConfirm']) {
-      // execution muzakki query and binding
-      $this->db->query($queryMuzakki);
+
+      // insert data user
+      $this->db->query($queryUser);
       $this->db->bind('username', htmlspecialchars($data['username']));
       $this->db->bind('password', password_hash($data['password'], PASSWORD_DEFAULT));
+      $this->db->execute();
+      $this->db->query("SELECT id_user FROM $tableUser WHERE username = :username");
+      $this->db->bind('username', $data['username']);
+      $row['id_user'] = $this->db->single()['id_user'];
+
+      // insert data muzakki
+      $this->db->query($queryMuzakki);
+      $this->db->bind('id_user', $row['id_user']);
       $this->db->bind('nama', htmlspecialchars($data['name']));
       $this->db->bind('email', htmlspecialchars($data['email']));
       $this->db->bind('nohp', htmlspecialchars($data['nohp']));
-      $this->db->bind('level', '3');
       $this->db->execute();
 
       return $this->db->rowCount();
+
     }
 
     return 0;
@@ -56,35 +72,52 @@ class Daftar_model
   {
     // deklarsi variabel
     $tableAmil = $this->table['amil'];
+    $tableUser    = $this->table['user'];
 
     // assignment query
-    $query    = "INSERT INTO $tableAmil VALUES(NULL, :id_masjid, :username, :password, :nama, :email, :nohp, :alamat, NOW(), :level, :status_verifikasi)";
-    $cekdata  = "SELECT username, email, nohp FROM $tableAmil WHERE username = :username OR email = :email OR nohp = :nohp";
+    $queryUser   = "INSERT INTO $tableUser VALUES(NULL, :username, :password, NOW(), '2')";
+    $queryAmil   = "INSERT INTO $tableAmil VALUES(NULL, :id_user, :id_masjid, :nama, :email, :nohp, :alamat, :status_verifikasi)";
+    $cekdataUser = "SELECT username FROM $tableUser WHERE username = :username";
+    $cekDataAmil = "SELECT email, nohp FROM $tableAmil WHERE email = :email OR nohp = :nohp";
 
-    // check if the email and nohp data already exists
-    $this->db->query($cekdata); 
+    // cek username
+    $this->db->query($cekdataUser);
     $this->db->bind('username', $data['username']);
+    if(count($this->db->resultSet()) > 0) return 0;
+
+    // cek email dan nohp
+    $this->db->query($cekDataAmil);
     $this->db->bind('email', $data['email']);
     $this->db->bind('nohp', $data['nohp']);
-    $this->db->execute();
-    if($this->db->rowCount() > 0) return 0;
+    if(count($this->db->resultSet()) > 0) return 0;
 
-    // cek password dan konfirmasi password
+    // password konfirmasi
     if($data['password'] === $data['passConfirm']) {
-      // execution muzakki query and binding
-      $this->db->query($query);
-      $this->db->bind('id_masjid', $data['masjid']);
+
+      // insert data user
+      $this->db->query($queryUser);
       $this->db->bind('username', htmlspecialchars($data['username']));
       $this->db->bind('password', password_hash($data['password'], PASSWORD_DEFAULT));
+      $this->db->execute();
+
+      // get id user
+      $this->db->query("SELECT id_user FROM $tableUser WHERE username = :username");
+      $this->db->bind('username', $data['username']);
+      $row['id_user'] = $this->db->single()['id_user'];
+
+      // insert data Amil
+      $this->db->query($queryAmil);
+      $this->db->bind('id_user', $row['id_user']);
+      $this->db->bind('id_masjid', $data['masjid']);
       $this->db->bind('nama', htmlspecialchars($data['name']));
       $this->db->bind('email', htmlspecialchars($data['email']));
       $this->db->bind('nohp', htmlspecialchars($data['nohp']));
       $this->db->bind('alamat', htmlspecialchars($data['alamat']));
-      $this->db->bind('level', '2');
       $this->db->bind('status_verifikasi', '0');
       $this->db->execute();
 
       return $this->db->rowCount();
+
     }
 
     return 0;

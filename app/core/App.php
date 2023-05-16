@@ -43,7 +43,8 @@ class App {
       $url = explode('/', $url);
       return $url;
     } else {
-      return $url[] = 'Web';
+      $url[] = 'Web';
+      return $url;
     }
   }
 
