@@ -3,7 +3,11 @@
 class Useradmin_model
 {
 
-  private $table = 'tb_admin';
+  private $table  = [
+    'admin' => 'tb_admin',
+    'user'  => 'tb_user'
+  ];
+  private $view   = 'vwAllAdmin';
   private $db;
 
   // constructor
@@ -15,24 +19,42 @@ class Useradmin_model
   public function addUserAdmin($data): int
   {
 
-    $querySelect = "SELECT username FROM $this->table WHERE username = :username";
-    $queryInsert = "INSERT INTO $this->table VALUES(NULL, :username, :password, :nama, NOW(), '1')";
+    // deklarsi variabel
+    $tableAdmin = $this->table['admin'];
+    $tableUser    = $this->table['user'];
 
-    // check if the username  data already exists
-    $this->db->query($querySelect);
+    // assignment query
+    $queryUser   = "INSERT INTO $tableUser VALUES(NULL, :username, :password, NOW(), '3')";
+    $queryAmil   = "INSERT INTO $tableAdmin VALUES(NULL, :id_user, :nama)";
+    $cekdataUser = "SELECT username FROM $tableUser WHERE username = :username";
+
+    // cek username
+    $this->db->query($cekdataUser);
     $this->db->bind('username', $data['username']);
-    $this->db->execute();
+    if(count($this->db->resultSet()) > 0) return 0;
 
-    // cek konfirmasi password dan username
-    if ($data['password'] === $data['passwordKonfirmasi'] && $this->db->rowCount() === 0) {
-      // execution muzakki query and binding
-      $this->db->query($queryInsert);
+    // password konfirmasi
+    if($data['password'] === $data['passConfirm']) {
+
+      // insert data user
+      $this->db->query($queryUser);
       $this->db->bind('username', htmlspecialchars($data['username']));
       $this->db->bind('password', password_hash($data['password'], PASSWORD_DEFAULT));
+      $this->db->execute();
+
+      // get id user
+      $this->db->query("SELECT id_user FROM $tableUser WHERE username = :username");
+      $this->db->bind('username', $data['username']);
+      $row['id_user'] = $this->db->single()['id_user'];
+
+      // insert data Amil
+      $this->db->query($queryAmil);
+      $this->db->bind('id_user', $row['id_user']);
       $this->db->bind('nama', htmlspecialchars($data['nama']));
       $this->db->execute();
 
       return $this->db->rowCount();
+
     }
 
     return 0;
@@ -41,7 +63,7 @@ class Useradmin_model
   // method get data admin
   public function getAllDataAdmin(): array {
 
-    $query = "SELECT username, nama, waktu_login FROM $this->table";
+    $query = "SELECT * FROM $this->view";
     $this->db->query($query);
     return $this->db->resultSet();
 

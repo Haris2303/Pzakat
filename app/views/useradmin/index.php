@@ -73,7 +73,7 @@
           </div>
           <div class="mb-3">
             <label for="password2" class="form-label">Konfirmasi Password</label>
-            <input type="password" class="form-control" id="password2" name="passwordKonfirmasi">
+            <input type="password" class="form-control" id="password2" name="passConfirm">
           </div>
 
         </div>

@@ -2,7 +2,11 @@
 
 class Muzakki_model {
 
-  private $table = 'tb_muzakki';
+  private $table = [
+    "muzakki" => "tb_muzakki", 
+    "user"    => "tb_user"
+  ];
+  private $view = 'vwAllMuzakki';
   private $db;
 
   public function __construct()
@@ -11,7 +15,7 @@ class Muzakki_model {
   }
 
   public function getAllDataMuzakki(): array {
-    $query = "SELECT * FROM $this->table";
+    $query = "SELECT * FROM $this->view"; 
     $this->db->query($query);
     return $this->db->resultSet();
   }

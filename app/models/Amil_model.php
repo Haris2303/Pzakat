@@ -1,8 +1,8 @@
 <?php
 
 class Amil_model {
-
-  private $table = 'tb_amil';
+  
+  private $view   = 'vwAllAmill';
   private $db;
 
   // constructor
@@ -14,7 +14,7 @@ class Amil_model {
   // get all data amil
   public function getAllDataAmil(): array {
 
-    $query = "SELECT username, nama, email, nohp, waktu_login, status_verifikasi FROM $this->table";
+    $query = "SELECT * FROM $this->view";
     $this->db->query($query);
     return $this->db->resultSet();
   }
@@ -22,7 +22,7 @@ class Amil_model {
   // get data amil by id
   public function getDataAmilByUsername($username): array {
 
-    $query = "SELECT * FROM $this->table WHERE username = :username";
+    $query = "SELECT * FROM $this->view WHERE username = :username";
     $this->db->query($query);
     $this->db->bind('username', $username);
     return $this->db->single();
@@ -31,7 +31,7 @@ class Amil_model {
   // method verifikasi amil
   public function verifikasi($id): int {
 
-    $query = "UPDATE $this->table SET status_verifikasi = '1' WHERE username = :username";
+    $query = "UPDATE $this->view SET status_verifikasi = '1' WHERE username = :username";
     $this->db->query($query);
     $this->db->bind('username', $id);
     $this->db->execute();
