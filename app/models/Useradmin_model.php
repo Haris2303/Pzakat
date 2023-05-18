@@ -24,7 +24,7 @@ class Useradmin_model
     $tableUser    = $this->table['user'];
 
     // assignment query
-    $queryUser   = "INSERT INTO $tableUser VALUES(NULL, :username, :password, NOW(), '3')";
+    $queryUser   = "INSERT INTO $tableUser VALUES(NULL, :username, :password, NOW(), '1')";
     $queryAmil   = "INSERT INTO $tableAdmin VALUES(NULL, :id_user, :nama)";
     $cekdataUser = "SELECT username FROM $tableUser WHERE username = :username";
 
@@ -45,11 +45,11 @@ class Useradmin_model
       // get id user
       $this->db->query("SELECT id_user FROM $tableUser WHERE username = :username");
       $this->db->bind('username', $data['username']);
-      $row['id_user'] = $this->db->single()['id_user'];
+      $id_user = $this->db->single()['id_user'];
 
-      // insert data Amil
+      // insert data admin
       $this->db->query($queryAmil);
-      $this->db->bind('id_user', $row['id_user']);
+      $this->db->bind('id_user', $id_user);
       $this->db->bind('nama', htmlspecialchars($data['nama']));
       $this->db->execute();
 
