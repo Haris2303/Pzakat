@@ -28,7 +28,9 @@ class Login_model {
       // cek password
       $dbPass = $row['password'];
       if(password_verify($data['password'], $dbPass)) {
-        // set session
+        // initialisasi session
+        session_reset();
+        $_SESSION = [];
         $_SESSION['level'] = $row['level'];
         return $this->db->rowCount();
       }
