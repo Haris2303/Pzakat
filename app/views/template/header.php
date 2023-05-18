@@ -90,7 +90,7 @@
                 <a href="<?= BASEURL ?>/login" class="lg:text-white group-hover:text-lightgreen transition-300 text-green">Masuk</a>
               </li>
               <li class="group lg:bg-green lg:py-2 lg:px-3 lg:hover:bg-darkgreen transition-300 lg:-mr-5">
-                <a href="<?= BASEURL ?>/" class="lg:text-white group-hover:text-lightgreen transition-300 text-green">Daftar</a>
+                <a href="<?= BASEURL ?>/daftar" class="lg:text-white group-hover:text-lightgreen transition-300 text-green">Daftar</a>
               </li>
             </ul>
           </nav>

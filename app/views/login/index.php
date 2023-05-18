@@ -29,7 +29,7 @@
       <form action="<?= BASEURL ?>/login/aksi_login" method="POST" class="flex gap-3 flex-col text-lightgreen">
         <input type="text" class="p-2 border-2 border-darkgreen outline-none rounded-sm focus:shadow-sm focus:shadow-green transition-500 bg-darkgreen placeholder:text-lightgreen" name="username" placeholder="username" autocomplete="off">
         <input type="password" class="p-2 border-2 border-darkgreen outline-none rounded-sm focus:shadow-sm focus:shadow-green transition-500 bg-darkgreen placeholder:text-lightgreen" name="password" placeholder="password" autocomplete="off">
-        <button type="submit" class="btn btn-green hover:shadow-sm hover:shadow-green" name="login">Login</button>
+        <button type="submit" class="btn btn-green hover:shadow-sm hover:shadow-green">Login</button>
       </form>
     </div>
   </div>
