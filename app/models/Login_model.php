@@ -32,6 +32,8 @@ class Login_model {
         session_reset();
         $_SESSION = [];
         $_SESSION['level'] = $row['level'];
+        $_SESSION['status_verifikasi'] = $row['status_verifikasi'];
+        $_SESSION['username'] = $row['username'];
         return $this->db->rowCount();
       }
     }

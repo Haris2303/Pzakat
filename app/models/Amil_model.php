@@ -2,7 +2,7 @@
 
 class Amil_model {
   
-  private $view   = 'vwAllAmill';
+  private $view   = 'vwAllAmil';
   private $db;
 
   // constructor
@@ -26,18 +26,6 @@ class Amil_model {
     $this->db->query($query);
     $this->db->bind('username', $username);
     return $this->db->single();
-  }
-
-  // method verifikasi amil
-  public function verifikasi($id): int {
-
-    $query = "UPDATE $this->view SET status_verifikasi = '1' WHERE username = :username";
-    $this->db->query($query);
-    $this->db->bind('username', $id);
-    $this->db->execute();
-
-    return $this->db->rowCount();
-    
   }
 
 }

@@ -34,7 +34,7 @@
           <input type="password" class="p-2 border-2 border-darkgreen outline-none rounded-sm focus:shadow-sm focus:shadow-green transition-500 bg-darkgreen placeholder:text-lightgreen" name="password" placeholder="Password" autocomplete="off" required>
           <input type="password" class="p-2 border-2 border-darkgreen outline-none rounded-sm focus:shadow-sm focus:shadow-green transition-500 bg-darkgreen placeholder:text-lightgreen" name="passConfirm" placeholder="Konfirmasi Password" autocomplete="off" required>
           <button type="submit" class="btn btn-green hover:shadow-sm hover:shadow-green">Login</button>
-          <a href="<?php echo BASEURL ?>/daftar/amil">Daftar Sebagai Amil</a>
+          <a href="<?php echo BASEURL ?>/login">Sudah punya akun!</a>
         </form>
       </div>
     </div>

@@ -1,4 +1,4 @@
-<script src="<?= BASEURL ?>/js/tinymce/tinymce.min.js"></script>
+<script src="<?= BASEURL ?>/vendor/tinymce/tinymce.min.js"></script>
 
 <script>
   tinymce.init({

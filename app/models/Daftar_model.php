@@ -76,7 +76,7 @@ class Daftar_model
 
     // assignment query
     $queryUser   = "INSERT INTO $tableUser VALUES(NULL, :username, :password, NOW(), '2')";
-    $queryAmil   = "INSERT INTO $tableAmil VALUES(NULL, :id_user, :id_masjid, :nama, :email, :nohp, :alamat, :status_verifikasi)";
+    $queryAmil   = "INSERT INTO $tableAmil VALUES(NULL, :id_user, :id_masjid, :nama, :email, :nohp, :alamat)";
     $cekdataUser = "SELECT username FROM $tableUser WHERE username = :username";
     $cekDataAmil = "SELECT email, nohp FROM $tableAmil WHERE email = :email OR nohp = :nohp";
 
@@ -113,7 +113,6 @@ class Daftar_model
       $this->db->bind('email', htmlspecialchars($data['email']));
       $this->db->bind('nohp', htmlspecialchars($data['nohp']));
       $this->db->bind('alamat', htmlspecialchars($data['alamat']));
-      $this->db->bind('status_verifikasi', '0');
       $this->db->execute();
 
       return $this->db->rowCount();

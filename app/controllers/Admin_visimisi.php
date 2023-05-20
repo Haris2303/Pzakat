@@ -3,7 +3,12 @@
 class Admin_visimisi extends Controller {
 
   public function index(): void {
-    $data['judul'] = 'Visi Misi';
+    $data = [
+      "judul" => "Visi Misi",
+      "css" => [
+        "vendor_fontawesome" => "vendor/fontawesome-free/css/all.min.css"
+      ]
+    ];
     $data['visimisi'] = $this->model('Visimisi_model')->getVisiMisi();
     $this->view('dashboard/sidebar', $data);
     $this->view('admin_visimisi/index', $data);

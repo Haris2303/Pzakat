@@ -8,6 +8,7 @@ class Muzakki extends Controller {
       "judul" => 'Muzakki',
       "css" => [
         "vendor_bootstraptable" => "js/vendor/datatables/dataTables.bootstrap4.min.css",
+        "vendor_fontawesome" => "vendor/fontawesome-free/css/all.min.css"
       ],
       "script" => [
         "vendor_datatables"     => "js/vendor/datatables/jquery.dataTables.min.js",

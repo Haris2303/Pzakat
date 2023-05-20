@@ -3,7 +3,12 @@
 class Admin_latarbelakang extends Controller {
 
   public function index(): void {
-    $data['judul'] = 'Admin Latar Belakang';
+    $data = [
+      "judul" => "View Latar Belakang",
+      "css" => [
+        "vendor_fontawesome" => "vendor/fontawesome-free/css/all.min.css"
+      ]
+    ];
     $data['latar-belakang'] = $this->model('LatarBelakang_model')->getLatarBelakang();
     $this->view('dashboard/sidebar', $data);
     $this->view('admin_latarbelakang/index', $data);

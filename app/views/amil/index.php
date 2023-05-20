@@ -39,7 +39,6 @@
               <td><?= $item['waktu_login'] ?></td>
               <td>
                 <a href="<?= BASEURL ?>/amil/detail/<?= $item['username'] ?>" class="btn badge btn-secondary">Detail</a>
-                <?php echo ($item['status_verifikasi'] === '0') ? "<a href='". BASEURL ."/amil/verifikasi/". $item['username']."' class='btn badge btn-danger'>Verifikasi</a>" : "<span class='btn badge btn-primary'>Terverifikasi</span>" ?>
               </td>
             </tr>
           <?php endforeach ?>

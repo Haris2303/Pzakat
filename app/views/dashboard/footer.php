@@ -1,12 +1,14 @@
 </div>
 
 <!-- Bootstrap core JavaScript-->
-<script src="<?= BASEURL ?>/js/jquery/jquery.min.js"></script>
-<script src="<?= BASEURL ?>/js/bootstrap/bootstrap.bundle.min.js"></script>
-<script src="<?= BASEURL ?>/js/sb-admin-2.min.js"></script>
+<script src="<?= BASEURL ?>/js/jquery/jquery-3.6.4.js"></script>
+<script src="<?= BASEURL ?>/js/bootstrap/bootstrap.js"></script>
 
 <!-- core plugin -->
-<script src="<?= BASEURL ?>/js/jquery-easing/jquery.easing.min.js"></script>
+<script src="<?= BASEURL ?>/js/jquery-easing/easing.js"></script>
+
+<script src="<?= BASEURL ?>/js/sidebar.js"></script>
+
 
 <!-- plugin JavaScript-->
 <?php if(isset($data['script'])) : ?>
@@ -16,7 +18,7 @@
 <?php endif ?>
 
 <!-- script admin js -->
-<script src="<?= BASEURL ?>/js/script-admin.js"></script>
+<!-- <script src="<?= BASEURL ?>/js/script-admin.js"></script> -->
 
 </body>
 

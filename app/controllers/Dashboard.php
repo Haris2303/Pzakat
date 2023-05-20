@@ -9,6 +9,9 @@ class Dashboard extends Controller{
         "vendor_chart"    => "js/chart.js/Chart.min.js",
         "demo_chartArea"  => "js/demo/chart-area-demo.js",
         "demo_chartPie"   => "js/demo/chart-pie-demo.js"
+      ],
+      "css" => [
+        "vendor_fontawesome" => "vendor/fontawesome-free/css/all.min.css"
       ]
     ];
     $this->view('dashboard/sidebar', $data);
