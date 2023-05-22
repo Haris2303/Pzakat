@@ -1,6 +1,6 @@
 <?php
 
-class Berita extends Controller {
+class Pageviews extends Controller {
 
   public function index() {
 
@@ -15,16 +15,16 @@ class Berita extends Controller {
         "vendor_bootstraptable" => "js/vendor/datatables/dataTables.bootstrap4.min.js",
         "demo_datatables"       => "js/demo/datatables-demo.js",
       ],
-      "dataBerita"  => $this->model('Berita_model')->getAllDataBerita()
+      "dataBerita"  => $this->model('Pageviews_model')->getAllDataBerita()
     ];
 
     $this->view('dashboard/sidebar', $data);
-    $this->view('berita/index', $data);
+    $this->view('pageviews/index', $data);
     $this->view('dashboard/footer', $data);
     
   }
   
-  public function upload() {
+  public function uploadberita() {
     
     $data = [
       "judul" => "Upload Berita",
@@ -34,7 +34,7 @@ class Berita extends Controller {
     ];
     
     $this->view('dashboard/sidebar', $data);
-    $this->view('berita/upload', $data);
+    $this->view('pageviews/uploadberita', $data);
     $this->view('tinymce/tinymce', $data);
     $this->view('dashboard/footer', $data);
 
@@ -42,13 +42,13 @@ class Berita extends Controller {
 
   public function aksi_tambah_berita() {
 
-    if($this->model('Berita_model')->tambahBerita($_POST, $_FILES) > 0) {
+    if($this->model('Pageviews_model')->tambahBerita($_POST, $_FILES) > 0) {
       Flasher::setFlash('Upload', 'Berhasil', 'success');
-      header('Location: ' . BASEURL . '/berita');
+      header('Location: ' . BASEURL . '/pageviews/berita');
       exit;
     } else {
       Flasher::setFlash('Upload', 'Gagal', 'danger');
-      header('Location: ' . BASEURL . '/berita');
+      header('Location: ' . BASEURL . '/pageviews/berita');
       exit;
     }
 

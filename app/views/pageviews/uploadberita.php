@@ -1,6 +1,6 @@
 <h2 class="h3">Upload Berita Terkini</h2>
 <?= Flasher::flash() ?>
-<form action="<?= BASEURL ?>/berita/aksi_tambah_berita" method="post" class="mt-3" enctype="multipart/form-data">
+<form action="<?= BASEURL ?>/pageviews/aksi_tambah_berita" method="post" class="mt-3" enctype="multipart/form-data">
   <div class="mb-3">
     <label for="penulis" class="form-label">Penulis</label>
     <input type="text" name="username" id="penulis" class="form-control" value="<?= $_SESSION['username'] ?>" readonly>
@@ -25,5 +25,5 @@
     <label class="form-label">Isi Berita</label>
     <textarea name="content" id="default"></textarea>
   </div>
-  <button type="submit" class="btn btn-primary mt-3">Change</button>
+  <button type="submit" class="btn btn-primary mt-3">Upload</button>
 </form>

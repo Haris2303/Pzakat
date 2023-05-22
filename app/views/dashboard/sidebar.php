@@ -132,8 +132,8 @@ if (!isset($_SESSION['level'])) {
       <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Views</h6>
-          <a class="collapse-item" href="<?= BASEURL ?>/berita">Berita</a>
-          <a class="collapse-item" href="<?= BASEURL ?>/artikel">Artikel</a>
+          <a class="collapse-item" href="<?= BASEURL ?>/pageviews/berita">Berita</a>
+          <a class="collapse-item" href="<?= BASEURL ?>/pageviews/artikel">Artikel</a>
           <div class="collapse-divider"></div>
           <h6 class="collapse-header">Other Pages:</h6>
           <a class="collapse-item" href="404.html">404 Page</a>

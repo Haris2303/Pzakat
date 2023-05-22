@@ -7,7 +7,7 @@ class Page extends Controller {
   public function news() {
     $data = [
       "judul" => "Berita",
-      "dataBerita" => $this->model('Berita_model')->getAllDataBerita()
+      "dataBerita" => $this->model('Pageviews_model')->getAllDataBerita()
     ];
     $this->view('template/header', $data);
     $this->view('page/news', $data);

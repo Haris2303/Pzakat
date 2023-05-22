@@ -2,9 +2,13 @@
 
 class View extends Controller {
 
-  public function index(): void {
+  public function index($slug): void {
 
-    $data['judul'] = 'Judul Artikel';
+    $data = [
+      "dataView" => $this->model('Pageviews_model')->getDataViewBySlug($slug),
+    ];
+    $data['judul'] = $data['dataView']['judul'];
+
     $this->view('template/header', $data);
     $this->view('view/index', $data);
     $this->view('template/footer', $data);

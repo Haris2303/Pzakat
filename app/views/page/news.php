@@ -12,7 +12,7 @@
 
         <?php foreach ($data['dataBerita'] as $item) : ?>
 
-          <div class="lg:w-1/2 px-3">
+          <div class="lg:w-1/3 px-3">
             <div class="shadow-lg pb-1">
               <a href="#">
                 <img src="<?= BASEURL ?>/img/views/<?= $item['gambar'] ?>" alt="" class="lg:h-48 h-64 w-full">
@@ -45,7 +45,7 @@
                     <?= $item['content'] ?>
                   </p>
                 </div>
-                <a href="<?= BASEURL ?>/view" class="btn btn-green">Lihat Selengkapnya...</a>
+                <a href="<?= BASEURL ?>/view/<?= $item['slug'] ?>" class="btn btn-green">Lihat Selengkapnya...</a>
               </div>
             </div>
           </div>
@@ -55,19 +55,19 @@
       </div>
 
       <!-- search and daftar tag -->
-      <div class="w-1/3 pl-2">
+      <!-- <div class="w-1/3 pl-2"> -->
         <!-- search -->
-        <div class="w-full flex items-center gap-2">
+        <!-- <div class="w-full flex items-center gap-2">
           <input type="text" name="keyword" placeholder="Search tag.." class="px-2 py-1 outline-none border-2 border-green text-sm rounded-xl w-full">
           <i>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="curretColor" class="bi bi-search fill-green" viewBox="0 0 16 16">
               <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
             </svg>
           </i>
-        </div>
+        </div> -->
 
         <!-- daftar tag -->
-        <div class="w-full mt-5">
+        <!-- <div class="w-full mt-5">
           <h3 class="border-l-4 border-lightgreen font-semibold pl-3">Daftar Tag</h3>
 
           <div class="flex flex-col text-lightgray mt-3">
@@ -94,7 +94,7 @@
             </a>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

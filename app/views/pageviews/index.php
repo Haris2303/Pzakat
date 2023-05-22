@@ -11,7 +11,7 @@
 
   <div class="container mt-3">
     <!-- Button trigger modal -->
-    <a href="<?= BASEURL ?>/berita/upload" class="btn btn-primary">
+    <a href="<?= BASEURL ?>/pageviews/uploadberita" class="btn btn-primary">
       Tambah Berita
     </a>
   </div>

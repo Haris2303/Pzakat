@@ -1,6 +1,6 @@
 <?php
 
-class Berita_model {
+class Pageviews_model {
 
   private $table = 'tb_views';
   private $db;
@@ -17,6 +17,16 @@ class Berita_model {
     return $this->db->resultSet();
 
   }
+
+  public function getDataViewBySlug($slug): array {
+
+    $query = "SELECT * FROM $this->table WHERE slug = :slug";
+    $this->db->query($query);
+    $this->db->bind('slug', $slug);
+    $result = $this->db->single();
+    return $result;
+
+  } 
 
   public function tambahBerita($dataPost, $dataFile) {
 
@@ -60,8 +70,8 @@ class Berita_model {
       $query = "INSERT INTO $this->table VALUES(NULL, :namaPenulis, :jenisViews, :judul, :slug, :gambar, :content, NOW())";
       $this->db->query($query);
       $this->db->bind('namaPenulis', $namaPenulis);
-      $this->db->bind('jenisViews', $jenis_views);
-      $this->db->bind('judul', $judul);
+      $this->db->bind('jenisViews', 'Berita');
+      $this->db->bind('judul', htmlspecialchars($judul));
       $this->db->bind('slug', $slug);
       $this->db->bind('gambar', $gambar);
       $this->db->bind('content', $content);
