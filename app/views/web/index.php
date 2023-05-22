@@ -436,69 +436,25 @@
           <span class="text-darkgray text-sm font-bold">Artikel</span>
           <div class="flex gap-5 flex-col justify-center mt-2">
 
-            <div class="flex gap-3">
-              <div class="w-20">
-                <a href="<?= BASEURL ?>/view">
-                  <img src="<?= BASEURL ?>/img/banner/banner.jpg" alt="" class="object-cover w-full h-full">
-                </a>
-              </div>
-              <div class="flex-1 flex-col justify-evenly md:w-full lg:w-80">
-                <a href="<?= BASEURL ?>/view">
-                  <div class="text-sm font-normal text-darkgray">
-                    Jadwal Imsakiyah Ramadhan 1444 H Di Seluruh Wilayah Indonesia, Dan Jadwal Imsakiyah Ramadhan 1444 Di Wilayah Waktu Indonesia Timur
-                  </div>
-                </a>
-                <span class="text-xs text-lightgray">20 March 2023</span>
-              </div>
-            </div>
+            <?php foreach ($data['dataArtikel'] as $item) : ?>
 
-            <div class="flex gap-3">
-              <div class="w-20">
-                <a href="">
-                  <img src="<?= BASEURL ?>/img/banner/banner.jpg" alt="" class="object-cover w-full h-full">
-                </a>
-              </div>
-              <div class="flex-1 flex-col justify-evenly md:w-full lg:w-80">
-                <div class="text-sm font-normal text-darkgray">
-                  <a href="">
-                    Lorem ipsum dolor sit amet consectetur.
+              <div class="flex gap-3">
+                <div class="w-20">
+                  <a href="<?= BASEURL ?>/view/<?= $item['slug'] ?>">
+                    <img src="<?= BASEURL ?>/img/views/<?= $item['gambar'] ?>" alt="" class="object-cover w-full h-full">
                   </a>
                 </div>
-                <span class="text-xs text-lightgray">20 March 2023</span>
-              </div>
-            </div>
-
-            <div class="flex gap-3">
-              <div class="w-20">
-                <a href="">
-                  <img src="<?= BASEURL ?>/img/banner/banner.jpg" alt="" class="object-cover w-full h-full">
-                </a>
-              </div>
-              <div class="flex-1 flex-col justify-evenly md:w-full lg:w-80">
-                <div class="text-sm font-normal text-darkgray">
-                  <a href="">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae,
+                <div class="flex-1 flex-col justify-evenly md:w-full lg:w-80">
+                  <a href="<?= BASEURL ?>/view/<?= $item['slug'] ?>">
+                    <div class="text-sm font-normal text-darkgray">
+                      <?= $item['judul'] ?>
+                    </div>
                   </a>
+                  <span class="text-xs text-lightgray"><?= explode(' ', $item['datetime'])[0] ?></span>
                 </div>
-                <span class="text-xs text-lightgray">20 March 2023</span>
               </div>
-            </div>
 
-            <div class="flex gap-3">
-              <div class="w-20">
-                <a href="">
-                  <img src="<?= BASEURL ?>/img/banner/2.jpeg" alt="" class="object-cover w-full h-full">
-                </a>
-              </div>
-              <div class="flex-1 flex-col justify-evenly md:w-full lg:w-80">
-                <div class="text-sm font-normal text-darkgray">
-                  <a href="">
-                    Jadwal Imsakiyah Ramadhan 1444 H Di Seluruh Wilayah Indonesia, Dan Jadwal Imsakiyah Ramadhan 1444 Di Wilayah Waktu Indonesia Timur
-                  </a>
-                </div>
-                <span class="text-xs text-lightgray">20 March 2023</span>
-              </div>
-            </div>
+            <?php endforeach ?>
 
           </div>
 

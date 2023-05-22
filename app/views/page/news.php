@@ -1,6 +1,6 @@
 <div class="container">
   <div class="content">
-    <div class="title mb-20">
+    <div class="title mb-5">
       <h3 class="text-title">Berita</h3>
       <span class="text-sm text-lightgray mt-2 inline-block">News lazismu</span>
     </div>
@@ -14,7 +14,7 @@
 
           <div class="lg:w-1/3 px-3">
             <div class="shadow-lg pb-1">
-              <a href="#">
+              <a href="<?= BASEURL ?>/view/<?= $item['slug'] ?>">
                 <img src="<?= BASEURL ?>/img/views/<?= $item['gambar'] ?>" alt="" class="lg:h-48 h-64 w-full">
               </a>
               <div class="px-4 my-4 flex flex-col gap-1">

@@ -3,7 +3,10 @@
 class Web extends Controller {
   
   public function index(): void {
-    $data['judul'] = 'Home';
+    $data = [
+      "judul" => "Home",
+      "dataArtikel" => $this->model('Pageviews_model')->getAllDataArtikel()
+    ];
     $this->view('template/header', $data);
     $this->view('web/index', $data);
     $this->view('template/footer', $data);

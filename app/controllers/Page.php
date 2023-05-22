@@ -15,7 +15,10 @@ class Page extends Controller {
   }
 
   public function artikel(): void {
-    $data['judul'] = 'Artikel';
+    $data = [
+      "judul" => "Artikel",
+      "dataArtikel" => $this->model('Pageviews_model')->getAllDataArtikel()
+    ];
     $this->view('template/header', $data);
     $this->view('page/artikel', $data);
     $this->view('template/footer', $data);

@@ -7,12 +7,12 @@ class Muzakki extends Controller {
     $data = [
       "judul" => 'Muzakki',
       "css" => [
-        "vendor_bootstraptable" => "js/vendor/datatables/dataTables.bootstrap4.min.css",
+        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
         "vendor_fontawesome" => "vendor/fontawesome-free/css/all.min.css"
       ],
       "script" => [
-        "vendor_datatables"     => "js/vendor/datatables/jquery.dataTables.min.js",
-        "vendor_bootstraptable" => "js/vendor/datatables/dataTables.bootstrap4.min.js",
+        "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
+        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
         "demo_datatables"       => "js/demo/datatables-demo.js",
       ],
       "dataMuzakki" => $this->model('Muzakki_model')->getAllDataMuzakki()

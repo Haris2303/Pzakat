@@ -1,4 +1,4 @@
-<h2 class="h3">Upload Berita Terkini</h2>
+<h2 class="h3">Upload Blog Terkini</h2>
 <?= Flasher::flash() ?>
 <form action="<?= BASEURL ?>/pageviews/aksi_tambah_berita" method="post" class="mt-3" enctype="multipart/form-data">
   <div class="mb-3">
@@ -6,16 +6,12 @@
     <input type="text" name="username" id="penulis" class="form-control" value="<?= $_SESSION['username'] ?>" readonly>
   </div>
   <div class="mb-3">
-    <label for="judul" class="form-label">Judul</label>
-    <input type="text" class="form-control" id="judul" name="judul" required autocomplete="off">
+    <label for="jenis-views" class="form-label">Jenis Blog</label>
+    <input type="text" name="jenis_view" id="jenis-views" class="form-control" value="<?= $data['jenis_view'] ?>" readonly>
   </div>
   <div class="mb-3">
-    <label for="jenis-views" class="form-label">Jenis Views</label>
-    <select name="jenis_views" class="form-control" id="jenis-views">
-      <option selected disabled>-- Pilih Jenis Views --</option>
-      <option value="Berita">Berita</option>
-      <option value="Artikel">Artikel</option>
-    </select>
+    <label for="judul" class="form-label">Judul</label>
+    <input type="text" class="form-control" id="judul" name="judul" required autocomplete="off">
   </div>
   <div class="mb-3">
     <label for="gambar" class="form-label">Upload Gambar</label>

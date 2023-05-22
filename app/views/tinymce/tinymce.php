@@ -19,9 +19,14 @@
       'visualblocks', 
       'code', 
       'fullscreen', 
-      'media'
+      'media',
+      'nonbreaking',
+      'emoticons',
+      'outdent',
+      'indent'
     ],
-    toolbar: 'undo redo | styles | bold italic underline | alignleft aligncenter alignright',
+    toolbar: 'undo redo | code | styles | bold italic underline | alignleft aligncenter alignright | numlist bullist | outdent indent | emoticons | nonbreaking',
+    lists_indent_on_tab: false,
     menu: {
       favs: {
         title: 'menu',

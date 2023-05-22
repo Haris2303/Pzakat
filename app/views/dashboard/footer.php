@@ -3,7 +3,6 @@
 <!-- Bootstrap core JavaScript-->
 <script src="<?= BASEURL ?>/js/jquery/jquery-3.6.4.js"></script>
 <script src="<?= BASEURL ?>/js/bootstrap.bundle.js"></script>
-<script src="<?= BASEURL ?>/js/bootstrap.min.js"></script>
 
 <!-- core plugin -->
 <script src="<?= BASEURL ?>/js/jquery-easing/jquery.easing.min.js"></script>
