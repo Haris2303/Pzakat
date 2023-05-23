@@ -5,7 +5,8 @@ class Web extends Controller {
   public function index(): void {
     $data = [
       "judul" => "Home",
-      "dataArtikel" => $this->model('Pageviews_model')->getAllDataArtikel()
+      "dataBerita"  => $this->model('Pageviews_model')->getAllDataBeritaLimit(3),
+      "dataArtikel" => $this->model('Pageviews_model')->getAllDataArtikelLimit(4)
     ];
     $this->view('template/header', $data);
     $this->view('web/index', $data);
