@@ -15,7 +15,6 @@ class Masjid_model {
   public function getDataMasjid(): array {
 
     $query = "SELECT * FROM $this->table";
-
     $this->db->query($query);
     return $this->db->resultSet();
 
@@ -27,7 +26,8 @@ class Masjid_model {
     $query = "SELECT * FROM $this->table WHERE id_mesjid = :id_mesjid";
     $this->db->query($query);
     $this->db->bind('id_mesjid', $id);
-    return $this->db->single();
+    $result = $this->db->single();
+    return $result;
 
   }
 

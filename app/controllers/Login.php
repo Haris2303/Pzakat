@@ -11,7 +11,6 @@ class Login extends Controller {
     // pengecekkan login valid
     if( $this->model('Login_model')->login($_POST) > 0) {
       Flasher::setFlash('Login', 'berhasil', 'success');
-
       switch ($_SESSION['level']) {
         case '3':
           header('Location: ' . BASEURL . '/');
@@ -23,7 +22,6 @@ class Login extends Controller {
           header('Location: ' . BASEURL . '/dashboard');
           break;
       }
-      
       exit;
     } else {
       Flasher::setFlash('Login', 'gagal', 'danger');

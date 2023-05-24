@@ -1,3 +1,12 @@
+<?php
+
+if(isset($_SESSION['level']) && $_SESSION['level'] !== '3') {
+  header('Location: ' . BASEURL . '/dashboard');
+  exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 

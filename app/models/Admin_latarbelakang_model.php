@@ -22,12 +22,13 @@ class Admin_latarbelakang_model {
       $queryInsert = "INSERT INTO $this->table VALUES(NULL, :username, :content, NOW());";
       $this->db->query($queryInsert);
       $this->db->bind('content', $data['textarea']);
-      $this->db->bind('username', 'Admin');
+      $this->db->bind('username', $data['username']);
       $this->db->execute();
       return $this->db->rowCount();
     } else {
-      $queryChange = "UPDATE $this->table SET content = :content, datetime = NOW()";
+      $queryChange = "UPDATE $this->table SET username = :username, content = :content, datetime = NOW()";
       $this->db->query($queryChange);
+      $this->db->bind('username', $data['username']);
       $this->db->bind('content', $data['textarea']);
       $this->db->execute();
       return $this->db->rowCount();

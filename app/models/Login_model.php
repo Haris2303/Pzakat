@@ -10,7 +10,7 @@ class Login_model {
     $this->db = new Database();
   }
 
-  public function login($data): int {
+  public function login($data) {
     
     // QUERY
     $query = "SELECT * FROM $this->table WHERE username = :username";
@@ -18,13 +18,12 @@ class Login_model {
     // cek username data query muzakki
     $this->db->query($query);
     $this->db->bind('username', $data['username']);
-    $this->db->execute();
-
-    // initialisasi data result 
-    $row = $this->db->single();
 
     // cek username
-    if(count($row) > 0) {
+    if(count($this->db->resultSet()) > 0) {
+      // initialisasi data pada row
+      $row = $this->db->resultSet()[0];
+
       // cek password
       $dbPass = $row['password'];
       if(password_verify($data['password'], $dbPass)) {
@@ -32,9 +31,8 @@ class Login_model {
         session_reset();
         $_SESSION = [];
         $_SESSION['level'] = $row['level'];
-        $_SESSION['status_verifikasi'] = $row['status_verifikasi'];
         $_SESSION['username'] = $row['username'];
-        return $this->db->rowCount();
+        return 1;
       }
     }
 

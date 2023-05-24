@@ -55,8 +55,8 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah User Admin</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Masjid</h1>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">x</button>
       </div>
 
       <form action="<?= BASEURL ?>/useradmin/aksi_tambah_amil" method="post">

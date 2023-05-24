@@ -85,7 +85,7 @@ if (!isset($_SESSION['level'])) {
           <?php if ($_SESSION['level'] === '1') : ?>
             <a class="collapse-item" href="<?= BASEURL ?>/amil">Amil</a>
             <a class="collapse-item" href="<?= BASEURL ?>/useradmin">Admin</a>
-          <?php endif ?>
+            <?php endif ?>
           <a class="collapse-item" href="<?= BASEURL ?>/muzakki">Muzakki</a>
         </div>
       </div>

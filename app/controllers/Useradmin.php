@@ -17,9 +17,14 @@ class Useradmin extends Controller {
       ],
       "dataAdmin" => $this->model('Useradmin_model')->getAllDataAdmin()
     ];
-    $this->view('dashboard/sidebar', $data);
-    $this->view('useradmin/index', $data);
-    $this->view('dashboard/footer', $data);
+
+    // if($_SESSION['level'] === '3') {
+      $this->view('dashboard/sidebar', $data);
+      $this->view('useradmin/index', $data);
+      $this->view('dashboard/footer', $data);
+    // } else {
+    //   header('Location: ' . BASEURL . '/');
+    // }
     
   }
 
