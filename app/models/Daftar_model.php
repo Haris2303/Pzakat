@@ -91,8 +91,8 @@ class Daftar_model
     $this->db->bind('nohp', $data['nohp']);
     if(count($this->db->resultSet()) > 0) return 0;
 
-    // password konfirmasi
-    if($data['password'] === $data['passConfirm']) {
+    // password konfirmasi dan panjang password
+    if($data['password'] === $data['passConfirm'] || strlen($data['password']) < 8) {
 
       // insert data user
       $this->db->query($queryUser);
