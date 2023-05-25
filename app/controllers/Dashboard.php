@@ -6,7 +6,7 @@ class Dashboard extends Controller{
     $data = [
       "judul" => 'Dashboard',
       "script" => [
-        "vendor_chart"    => "js/chart.js/Chart.min.js",
+        "vendor_chart"    => "vendor/chart.js/Chart.min.js",
         "demo_chartArea"  => "js/demo/chart-area-demo.js",
         "demo_chartPie"   => "js/demo/chart-pie-demo.js"
       ],

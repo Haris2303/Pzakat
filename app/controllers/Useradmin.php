@@ -42,11 +42,11 @@ class Useradmin extends Controller {
 
   public function aksi_tambah_amil(): void {
     if($this->model('Daftar_model')->daftarAmil($_POST) > 0) {
-      Flasher::setFlash('Daftar', 'Berhasil', 'success');
+      Flasher::setFlash('Ditambahkan', 'Berhasil', 'success');
       header('Location: ' . BASEURL . '/amil');
       exit;
     } else {
-      Flasher::setFlash('Daftar', 'Gagal', 'success');
+      Flasher::setFlash('Ditambahkan', 'Gagal', 'danger');
       header('Location: ' . BASEURL . '/amil');
       exit;
     }

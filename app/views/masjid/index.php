@@ -11,14 +11,14 @@
 
   <div class="container mt-3">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-primary btn-add-data-masjid" data-toggle="modal" data-target="#formModal">
       Tambah Masjid
     </button>
   </div>
-
-  <?php Flasher::flash() ?>
+  
   
   <div class="card-body">
+    <?php Flasher::flash() ?>
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
@@ -38,8 +38,8 @@
               <td><?= $item['RT'] ?></td>
               <td><?= $item['RW'] ?></td>
               <td>
-                <a href="<?= BASEURL ?>/amil/ubah/<?= $item['id_mesjid'] ?>" class="btn badge btn-success">Ubah</a>
-                <a href="<?= BASEURL ?>/amil/hapus/<?= $item['id_mesjid'] ?>" class="btn badge btn-danger">Hapus</a>
+                <a href="<?= BASEURL ?>/masjid/ubah/<?= $item['id_mesjid'] ?>" class="btn badge btn-success btn-update-data-masjid" data-id="<?= $item['id_mesjid'] ?>" data-toggle="modal" data-target="#formModal">Ubah</a>
+                <a href="<?= BASEURL ?>/masjid/aksi_hapus_mesjid/<?= $item['id_mesjid'] ?>" class="btn badge btn-danger">Hapus</a>
               </td>
             </tr>
           <?php endforeach ?>
@@ -51,60 +51,38 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Masjid</h1>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">x</button>
+        <h1 class="modal-title fs-5" id="formModalLabel">Tambah Data Masjid</h1>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
       </div>
 
-      <form action="<?= BASEURL ?>/useradmin/aksi_tambah_amil" method="post">
+      <form action="<?= BASEURL ?>/masjid/aksi_tambah_mesjid" method="post">
 
         <div class="modal-body">
-          
+          <input type="hidden" name="id" id="id">
           <div class="mb-3">
-            <label for="nama" class="form-label">Nama Amil</label>
-            <input type="text" class="form-control" id="nama" name="name" required autocomplete="off">
+            <label for="nama_mesjid" class="form-label">Nama Masjid</label>
+            <input type="text" class="form-control" id="nama_mesjid" name="nama_mesjid" required autocomplete="off">
           </div>
           <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" required autocomplete="off">
+            <label for="alamat_mesjid" class="form-label">Alamat Masjid</label>
+            <textarea name="alamat_mesjid" id="alamat_mesjid" class="form-control" rows="5"></textarea>
           </div>
           <div class="mb-3">
-            <label for="nohp" class="form-label">No Handphone</label>
-            <input type="tel" class="form-control" id="nohp" name="nohp" required autocomplete="off">
+            <label for="RT" class="form-label">RT</label>
+            <input type="text" class="form-control" id="RT" name="RT" required autocomplete="off">
           </div>
           <div class="mb-3">
-            <label for="alamat" class="form-label">Alamat</label>
-            <input type="tel" class="form-control" id="alamat" name="alamat" required autocomplete="off">
+            <label for="RW" class="form-label">RW</label>
+            <input type="text" class="form-control" id="RW" name="RW" required autocomplete="off">
           </div>
-          <div class="mb-3">
-            <label for="masjid" class="form-label">Masjid</label>
-            <select name="masjid" id="masjid" class="form-control" required>
-              <option disabled selected> -- Pilih Masjid -- </option>
-              <?php foreach ($data['dataMasjid'] as $item): ?>
-                <option value="<?= $item['id_mesjid'] ?>"><?= $item['nama_mesjid'] ?></option>
-              <?php endforeach ?>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" name="username" required autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" required autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="password2" class="form-label">Konfirmasi Password</label>
-            <input type="password" class="form-control" id="password2" name="passConfirm" required autocomplete="off">
-          </div>
-
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
           <button type="submit" class="btn btn-primary">Tambah</button>
         </div>
       </form>

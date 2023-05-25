@@ -12,7 +12,7 @@
   <div class="container mt-3">
     <!-- Button trigger modal -->
     <?php Flasher::flash() ?>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
       Tambah Amil
     </button>
   </div>
@@ -55,7 +55,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah User Amil</h1>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">x</button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
       </div>
 
       <form action="<?= BASEURL ?>/useradmin/aksi_tambah_amil" method="post">
@@ -101,7 +101,7 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
           <button type="submit" class="btn btn-primary">Tambah</button>
         </div>
       </form>
