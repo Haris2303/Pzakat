@@ -1,45 +1,48 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<div class="container mt-3">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zakat | <?= $data['judul'] ?></title>
-
-  <!-- icon shorcut -->
-  <link rel="shortcut icon" href="<?= BASEURL ?>/img/logo/logo.png" type="image/x-icon">
-  <!-- my css -->
-  <link rel="stylesheet" href="<?= BASEURL ?>/css/app.css">
-</head>
-
-<body class="bg-white">
-
-
-  <div class="container h-screen flex justify-center items-center">
-    <div class="content">
-
-      <div class="flex justify-center items-center p-14 bg-green border-green shadow-xl shadow-green flex-col gap-5 text-darkgreen rounded-lg">
-        <div class="text-3xl font-bold">
-          Daftar
-        </div>
-
-        <?php Flasher::flash() ?>
-
-        <form action="<?= BASEURL ?>/daftar/aksi_daftar_muzakki" method="POST" class="flex gap-3 flex-col text-lightgreen">
-          <input type="text" class="p-2 border-2 border-darkgreen outline-none rounded-sm focus:shadow-sm focus:shadow-green transition-500 bg-darkgreen placeholder:text-lightgreen" name="name" placeholder="Nama Lengkap" autocomplete="off" required>
-          <input type="text" class="p-2 border-2 border-darkgreen outline-none rounded-sm focus:shadow-sm focus:shadow-green transition-500 bg-darkgreen placeholder:text-lightgreen" name="email" placeholder="Email" autocomplete="off" required>
-          <input type="tel" class="p-2 border-2 border-darkgreen outline-none rounded-sm focus:shadow-sm focus:shadow-green transition-500 bg-darkgreen placeholder:text-lightgreen" name="nohp" placeholder="No HP" autocomplete="off" required>
-          <input type="text" class="p-2 border-2 border-darkgreen outline-none rounded-sm focus:shadow-sm focus:shadow-green transition-500 bg-darkgreen placeholder:text-lightgreen" name="username" placeholder="Username" autocomplete="off" required>
-          <input type="password" class="p-2 border-2 border-darkgreen outline-none rounded-sm focus:shadow-sm focus:shadow-green transition-500 bg-darkgreen placeholder:text-lightgreen" name="password" placeholder="Password" autocomplete="off" required>
-          <input type="password" class="p-2 border-2 border-darkgreen outline-none rounded-sm focus:shadow-sm focus:shadow-green transition-500 bg-darkgreen placeholder:text-lightgreen" name="passConfirm" placeholder="Konfirmasi Password" autocomplete="off" required>
-          <button type="submit" class="btn btn-green hover:shadow-sm hover:shadow-green">Login</button>
-          <a href="<?php echo BASEURL ?>/login">Sudah punya akun!</a>
-        </form>
+  <div class="row justify-content-center">
+    <div class="col-lg-4 border-bottom shadow-lg py-5 px-4">
+      <div class="mb-4 text-center">
+        <h3 class="text-dark">Daftar</h3>
+        <hr class="border border-warning" width="100">
       </div>
+
+      <?php Flasher::flash() ?>
+
+      <form action="<?= BASEURL ?>/daftar/aksi_daftar_muzakki" method="POST" class="form-group">
+        <div class="mb-3">
+          <label for="nama" class="form-label">Nama Lengkap</label>
+          <input type="text" class="form-control" id="nama" name="name" autocomplete="off" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="text" class="form-control" id="email" name="email" placeholder="example@gmail.com" autocomplete="off" required>
+        </div>
+        <div class="mb-3">
+          <label for="nohop" class="form-label">No Handphone</label>
+          <input type="tel" class="form-control" name="nohp" placeholder="No HP" autocomplete="off" required>
+        </div>
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" class="form-control" name="username" placeholder="Username" autocomplete="off" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password" autocomplete="off" required>
+        </div>
+        <div class="mb-4">
+          <label for="passwordConfirm" class="form-label">Konfirmasi Password</label>
+          <input type="password" class="form-control" id="passwordConfirm" name="passConfirm" autocomplete="off" required>
+        </div>
+        <div class="mb-3">
+          <button type="submit" class="btn btn-secondary form-control">Daftar</button>
+        </div>
+      </form>
+
+      <div class="text-center">
+        <a href="<?php echo BASEURL ?>/login" class="text-dark">Sudah punya akun!</a>
+      </div>
+
     </div>
   </div>
-
-</body>
-
-</html>
+</div>

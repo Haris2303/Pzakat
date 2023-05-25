@@ -5,7 +5,9 @@ class Daftar extends Controller {
   // control view index muzakki
   public function index(): void {
     $data['judul'] = "Daftar Muzaqqi";
+    $this->view('template/normalheader', $data);
     $this->view('daftar/index', $data);
+    $this->view('template/normalfooter', $data);
   }
 
   // aksi daftar muzakki

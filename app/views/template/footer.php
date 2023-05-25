@@ -71,6 +71,11 @@
         </a>
       </div>
     </div>
+
+    <div class="flex text-lightgray">
+      <p>&copy;Copyright design with <span class="text-green">Lazismu</span></p>
+    </div>
+
   </div>
 </div>
 

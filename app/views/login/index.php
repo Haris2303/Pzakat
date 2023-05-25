@@ -1,43 +1,32 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<div class="container mt-5">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zakat | <?= $data['judul'] ?></title>
+  <div class="row justify-content-center">
+    <div class="col-lg-4 border-bottom shadow-lg py-5 px-4">
 
-  <!-- icon shorcut -->
-  <link rel="shortcut icon" href="<?= BASEURL ?>/img/logo/logo.png" type="image/x-icon">
-  <!-- my css -->
-  <link rel="stylesheet" href="<?= BASEURL ?>/css/app.css">
-</head>
-
-<body class="bg-white">
-
-  
-  <div class="container h-screen flex justify-center items-center">
-    <div class="content">
-      
-      <div class="flex justify-center items-center p-14 bg-green border-green shadow-xl shadow-green flex-col gap-5 text-darkgreen rounded-lg">
-        <div class="text-3xl font-bold">
-          Login
-        </div>
-
-        <?php Flasher::flash() ?>
-        
-      <form action="<?= BASEURL ?>/login/aksi_login" method="POST" class="flex gap-3 flex-col text-lightgreen">
-        <input type="text" class="p-2 border-2 border-darkgreen outline-none rounded-sm focus:shadow-sm focus:shadow-green transition-500 bg-darkgreen placeholder:text-lightgreen" name="username" placeholder="username" autocomplete="off">
-        <input type="password" class="p-2 border-2 border-darkgreen outline-none rounded-sm focus:shadow-sm focus:shadow-green transition-500 bg-darkgreen placeholder:text-lightgreen" name="password" placeholder="password" autocomplete="off">
-        <button type="submit" class="btn btn-green hover:shadow-sm hover:shadow-green">Login</button>
-      </form>
-
-      <div class="text-lightgreen">
-        <a href="<?= BASEURL ?>/daftar">Belum Punya Akun?</a>
+      <div class="mb-4 text-center">
+        <h3 class="text-dark">Login</h3>
+        <hr class="border border-warning" width="100">
       </div>
+
+      <?php Flasher::flash() ?>
+      <form action="<?= BASEURL ?>/login/aksi_login" method="POST" class="form-group">
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" name="username" id="username" class="form-control" placeholder="username" autocomplete="off">
+        </div>
+        <div class="mb-4">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" class="form-control" name="password" placeholder="password" autocomplete="off">
+        </div>
+        <div class="mb-3">
+          <button type="submit" class="btn btn-dark form-control">Login</button>
+        </div>
+      </form>
+      <div class="mt-3 text-center">
+        <a href="<?= BASEURL ?>/daftar" class="text-secondary">Belum Punya Akun?</a>
+      </div>
+
     </div>
   </div>
-</div>
 
-</body>
-</html>
+</div>

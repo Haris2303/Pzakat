@@ -4,7 +4,9 @@ class Login extends Controller {
 
   public function index(): void {
     $data['judul'] = 'Login';
+    $this->view('template/normalheader', $data);
     $this->view('login/index', $data);
+    $this->view('template/normalfooter', $data);
   }
 
   public function aksi_login(): void {
