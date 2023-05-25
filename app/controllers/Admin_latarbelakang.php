@@ -20,11 +20,11 @@ class Admin_latarbelakang extends Controller {
     // var_dump($_POST);
     // var_dump($this->model('Admin_latarbelakang_model')->changeLatarBelakang($_POST));
      if( $this->model('Admin_latarbelakang_model')->changeLatarBelakang($_POST) > 0) {
-      Flasher::setFlash('Change', 'berhasil', 'success');
+      Flasher::setFlash('Data Latar Belakang Berhasil Diubah', 'success');
       header('Location: ' . BASEURL . '/admin_latarbelakang');
       exit;
     } else {
-      Flasher::setFlash('Change', 'gagal', 'danger');
+      Flasher::setFlash('Data Latar Belakang Gagal Diubah', 'danger');
       header('Location: ' . BASEURL . '/admin_latarbelakang');
       exit;
     }

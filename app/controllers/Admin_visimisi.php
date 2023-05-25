@@ -20,11 +20,11 @@ class Admin_visimisi extends Controller {
     // var_dump($_POST);
     // var_dump($this->model('Admin_latarbelakang_model')->changeLatarBelakang($_POST));
      if( $this->model('Admin_visimisi_model')->changeVisiMisi($_POST) > 0) {
-      Flasher::setFlash('Change', 'berhasil', 'success');
+      Flasher::setFlash('Data Visi Misi Berhasil Diubah', 'success');
       header('Location: ' . BASEURL . '/admin_visimisi');
       exit;
     } else {
-      Flasher::setFlash('Change', 'gagal', 'danger');
+      Flasher::setFlash('Data Visi Misi Gagal Diubah', 'danger');
       header('Location: ' . BASEURL . '/admin_vismisi');
       exit;
     }

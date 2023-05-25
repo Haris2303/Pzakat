@@ -47,11 +47,11 @@ class Amil extends Controller
   public function aksi_ubah_amil(): void 
   {
     if($this->model('Amil_model')->ubahAmil($_POST) > 0) {
-      Flasher::setFlash('Diubah', 'Berhasil', 'success');
+      Flasher::setFlash('Data Amil Berhasil Diubah', 'success');
       header('Location: ' . BASEURL . '/amil/detail/' . $_POST['username']);
       exit;
     } else {
-      Flasher::setFlash('Diubah', 'Gagal', 'danger');
+      Flasher::setFlash('Data Amil Gagal Diubah', 'danger');
       header('Location: ' . BASEURL . '/amil/detail/' . $_POST['username']);
       exit;
     }
@@ -61,25 +61,11 @@ class Amil extends Controller
   public function aksi_hapus_amil($username): void 
   {
     if($this->model('Amil_model')->hapusAmil($username) > 0) {
-      Flasher::setFlash('Dihapus', 'Berhasil', 'success');
+      Flasher::setFlash('Data Amil Berhasil Dihapus', 'success');
       header('Location: ' . BASEURL . '/amil');
       exit;
     } else {
-      Flasher::setFlash('Dihapus', 'Gagal', 'danger');
-      header('Location: ' . BASEURL . '/amil');
-      exit;
-    }
-  }
-
-  // verifikasi amil
-  public function verifikasi($id): void
-  {
-    if ($this->model('Amil_model')->verifikasi($id) > 0) {
-      Flasher::setFlash('Verifikasi', 'Berhasil', 'success');
-      header('Location: ' . BASEURL . '/amil');
-      exit;
-    } else {
-      Flasher::setFlash('Verifikasi', 'Gagal', 'success');
+      Flasher::setFlash('Data Amil Gagal Diubah', 'danger');
       header('Location: ' . BASEURL . '/amil');
       exit;
     }

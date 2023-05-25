@@ -11,11 +11,11 @@ class Daftar extends Controller {
   // aksi daftar muzakki
   public function aksi_daftar_muzakki(): void {
     if($this->model('Daftar_model')->daftarMuzakki($_POST) > 0) {
-      Flasher::setFlash('Daftar', 'Berhasil', 'success');
-      header('Location: ' . BASEURL . '/daftar');
+      Flasher::setFlash('Anda Berhasil Terdaftar Silahkan Login!', 'success');
+      header('Location: ' . BASEURL . '/login');
       exit;
     } else {
-      Flasher::setFlash('Daftar', 'Gagal', 'danger');
+      Flasher::setFlash('Gagal Daftar', 'danger');
       header('Location: ' . BASEURL . '/daftar');
       exit;
     }
