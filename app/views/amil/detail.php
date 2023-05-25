@@ -10,9 +10,9 @@
 
   </div>
 
-  <?php Flasher::flash() ?>
 
   <div class="card-body">
+    <?php Flasher::flash() ?>
     <div class="table-responsive">
       <table cellpadding="5">
         <tr>
@@ -54,12 +54,12 @@
     </div>
     <div class="mt-3">
       <!-- Button trigger modal ubah -->
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Ubah
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        <i class="fas fa-edit"></i> Ubah Password
       </button>
-  
-      <a href="#" class="btn btn-danger">Hapus</a>
-      <a href="<?= BASEURL ?>/amil" class="btn btn-secondary">Kembali</a>
+
+      <a href="<?= BASEURL ?>/amil/aksi_hapus_amil/<?= $data['detail']['id_user'] ?>" class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</a>
+      <a href="<?= BASEURL ?>/amil" class="btn btn-secondary"><i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
     </div>
   </div>
 </div>
@@ -70,44 +70,16 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah User Admin</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Ubah Password Amil</h1>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
       </div>
 
-      <form action="<?= BASEURL ?>/useradmin/aksi_tambah_amil" method="post">
+      <form action="<?= BASEURL ?>/amil/aksi_ubah_amil" method="post">
 
         <div class="modal-body">
+          <input type="hidden" class="form-control" id="username" name="username" value="<?= $data['detail']['username'] ?>" required autocomplete="off">
           <div class="mb-3">
-            <label for="nama" class="form-label">Nama Amil</label>
-            <input type="text" class="form-control" id="nama" name="name" required autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" required autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="nohp" class="form-label">No Handphone</label>
-            <input type="tel" class="form-control" id="nohp" name="nohp" required autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="alamat" class="form-label">Alamat</label>
-            <input type="tel" class="form-control" id="alamat" name="alamat" required autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="masjid" class="form-label">Masjid</label>
-            <select name="masjid" id="masjid" class="form-control" required>
-              <option disabled selected> -- Pilih Masjid -- </option>
-              <?php foreach ($data['dataMasjid'] as $item) : ?>
-                <option value="<?= $item['id_mesjid'] ?>"><?= $item['nama_mesjid'] ?></option>
-              <?php endforeach ?>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" name="username" required autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
+            <label for="password" class="form-label">Password Baru</label>
             <input type="password" class="form-control" id="password" name="password" required autocomplete="off">
           </div>
           <div class="mb-3">
@@ -117,8 +89,8 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
-          <button type="submit" class="btn btn-primary">Tambah</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-window-close"></i> Keluar</button>
+          <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Ubah</button>
         </div>
       </form>
 

@@ -29,13 +29,46 @@ class Amil extends Controller
   {
     $data = [
       "judul" => "Detail Amil",
+      "css" => [
+        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
+        "vendor_fontawesome"    => "vendor/fontawesome-free/css/all.min.css"
+      ],
       "detail" => $this->model('Amil_model')->getDataAmilByUsername($username),
+      "allMasjid" => $this->model('Masjid_model')->getDataMasjid()
     ];
     $data['masjid'] = $this->model('Masjid_model')->getDataMasjidById($data['detail']['id_mesjid']);
 
     $this->view('dashboard/sidebar', $data);
     $this->view('amil/detail', $data);
     $this->view('dashboard/footer', $data);
+  }
+  
+  // method aksi ubah amil
+  public function aksi_ubah_amil(): void 
+  {
+    if($this->model('Amil_model')->ubahAmil($_POST) > 0) {
+      Flasher::setFlash('Diubah', 'Berhasil', 'success');
+      header('Location: ' . BASEURL . '/amil/detail/' . $_POST['username']);
+      exit;
+    } else {
+      Flasher::setFlash('Diubah', 'Gagal', 'danger');
+      header('Location: ' . BASEURL . '/amil/detail/' . $_POST['username']);
+      exit;
+    }
+  }
+
+  // method aksi hapus amil
+  public function aksi_hapus_amil($username): void 
+  {
+    if($this->model('Amil_model')->hapusAmil($username) > 0) {
+      Flasher::setFlash('Dihapus', 'Berhasil', 'success');
+      header('Location: ' . BASEURL . '/amil');
+      exit;
+    } else {
+      Flasher::setFlash('Dihapus', 'Gagal', 'danger');
+      header('Location: ' . BASEURL . '/amil');
+      exit;
+    }
   }
 
   // verifikasi amil
