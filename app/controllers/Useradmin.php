@@ -29,24 +29,26 @@ class Useradmin extends Controller {
   }
 
   public function aksi_tambah_admin(): void {
-    if($this->model('Useradmin_model')->addUserAdmin($_POST) > 0) {
-      Flasher::setFlash('Daftar', 'Berhasil', 'success');
+    $result = $this->model('Useradmin_model')->addUserAdmin($_POST);
+    if($result > 0) {
+      Flasher::setFlash('Data Admin Berhasil Ditambahkan', 'success');
       header('Location: ' . BASEURL . '/useradmin');
       exit;
     } else {
-      Flasher::setFlash('Daftar', 'Gagal', 'success');
+      Flasher::setFlash($result ,'danger');
       header('Location: ' . BASEURL . '/useradmin');
       exit;
     }
   }
 
   public function aksi_tambah_amil(): void {
-    if($this->model('Daftar_model')->daftarAmil($_POST) > 0) {
-      Flasher::setFlash('Ditambahkan', 'Berhasil', 'success');
+    $result = $this->model('Daftar_model')->daftarAmil($_POST);
+    if($result > 0) {
+      Flasher::setFlash('Data Amil Berhasil Ditambahkan!', 'success');
       header('Location: ' . BASEURL . '/amil');
       exit;
     } else {
-      Flasher::setFlash('Ditambahkan', 'Gagal', 'danger');
+      Flasher::setFlash($result, 'danger');
       header('Location: ' . BASEURL . '/amil');
       exit;
     }

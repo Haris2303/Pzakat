@@ -64,7 +64,7 @@ class Pageviews_model
     $gambar = $this->upload($dataFile);
 
     // cek jika gambar gagal terupload
-    if(!is_string($gambar)) return 0;
+    if(!is_string($gambar)) return 'Gagal Upload Gambar! Mohon untuk memeriksa <strong>format gambar</strong> dan ukuran gambar kurang dari <strong>2mb</strong>';
 
     // buat slug dari judul
     $slug = join('-', explode(' ', strtolower($dataPost['judul'])));
@@ -80,7 +80,7 @@ class Pageviews_model
     $this->db->bind('content', $content);
     $this->db->execute();
 
-    return $this->db->rowCount();
+    return ($this->db->rowCount() > 0) ? $this->db->rowCount() : 'Gagal Upload Berita!';
   }
 
   public function ubahView($dataPost, $dataFiles): int

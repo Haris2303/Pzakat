@@ -31,14 +31,14 @@ class Masjid extends Controller
 
   // method tambah masjid
   public function aksi_tambah_mesjid(): void {
-    
-    if($this->model('Masjid_model')->tambahMesjid($_POST) > 0) {
-      Flasher::setFlash('Ditambahkan', 'Berhasil', 'success');
+    $result = $this->model('Masjid_model')->tambahMesjid($_POST);
+    if($result > 0) {
+      Flasher::setFlash('Data Masjid Berhasil Ditambahkan!', 'success');
       header("Location: " . BASEURL . '/Masjid');
       exit;
     } else {
+      Flasher::setFlash('Data Masjid Gagal Ditambahkan!' ,'danger');
       header("Location: " . BASEURL . '/Masjid');
-      Flasher::setFlash('Ditambahkan', 'Gagal', 'danger');
       exit;
     }
   
@@ -46,13 +46,14 @@ class Masjid extends Controller
 
   // method ubah data masjid
   public function aksi_ubah_mesjid(): void {
-    if($this->model('Masjid_model')->ubahMesjid($_POST) > 0) {
-      Flasher::setFlash('Diubah', 'Berhasil', 'success');
+    $result = $this->model('Masjid_model')->ubahMesjid($_POST);
+    if($result > 0) {
+      Flasher::setFlash('Data Masjid Berhasil Diubah!' ,'success');
       header("Location: " . BASEURL . '/Masjid');
       exit;
     } else {
       header("Location: " . BASEURL . '/Masjid');
-      Flasher::setFlash('Diubah', 'Gagal', 'danger');
+      Flasher::setFlash('Data Masjid Gagal Diubah', 'danger');
       exit;
     }
   }
@@ -60,11 +61,11 @@ class Masjid extends Controller
   // method hapus data mesjid
   public function aksi_hapus_mesjid($id): void {
     if($this->model('Masjid_model')->hapusMesjid($id) > 0) {
-      Flasher::setFlash('Dihapus', 'Berhasil', 'success');
+      Flasher::setFlash('Data Masjid Berhasil Dihapus!', 'success');
       header("Location: " . BASEURL . '/Masjid');
       exit;
     } else {
-      Flasher::setFlash('Dihapus', 'Gagal', 'danger');
+      Flasher::setFlash('Data Masjid Gagal Dihapus', 'danger');
       header("Location: " . BASEURL . '/Masjid');
       exit;
     }

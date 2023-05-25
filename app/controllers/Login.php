@@ -8,9 +8,10 @@ class Login extends Controller {
   }
 
   public function aksi_login(): void {
+    $result = $this->model('Login_model')->login($_POST);
     // pengecekkan login valid
-    if( $this->model('Login_model')->login($_POST) > 0) {
-      Flasher::setFlash('Login', 'berhasil', 'success');
+    if( $result > 0) {
+      Flasher::setFlash('Login Berhasil :)', 'success');
       switch ($_SESSION['level']) {
         case '3':
           header('Location: ' . BASEURL . '/');
@@ -24,7 +25,7 @@ class Login extends Controller {
       }
       exit;
     } else {
-      Flasher::setFlash('Login', 'gagal', 'danger');
+      Flasher::setFlash($result ,'danger');
       header('Location: ' . BASEURL . '/login');
       exit;
     }

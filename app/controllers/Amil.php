@@ -46,12 +46,13 @@ class Amil extends Controller
   // method aksi ubah amil
   public function aksi_ubah_amil(): void 
   {
-    if($this->model('Amil_model')->ubahAmil($_POST) > 0) {
+    $result = $this->model('Amil_model')->ubahAmil($_POST);
+    if($result > 0) {
       Flasher::setFlash('Data Amil Berhasil Diubah', 'success');
       header('Location: ' . BASEURL . '/amil/detail/' . $_POST['username']);
       exit;
     } else {
-      Flasher::setFlash('Data Amil Gagal Diubah', 'danger');
+      Flasher::setFlash($result, 'danger');
       header('Location: ' . BASEURL . '/amil/detail/' . $_POST['username']);
       exit;
     }

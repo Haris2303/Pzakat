@@ -17,7 +17,7 @@ class Daftar_model
   }
 
   // method daftar muzakki
-  public function daftarMuzakki($data): int
+  public function daftarMuzakki($data)
   {
     // deklarsi variabel
     $tableMuzakki = $this->table['muzakki'];
@@ -32,13 +32,16 @@ class Daftar_model
     // cek username
     $this->db->query($cekdataUser);
     $this->db->bind('username', $data['username']);
-    if(count($this->db->resultSet()) > 0) return 0;
+    if(count($this->db->resultSet()) > 0) return 'Usename is already available!';
 
     // cek email dan nohp
     $this->db->query($cekDataMuzakki);
     $this->db->bind('email', $data['email']);
     $this->db->bind('nohp', $data['nohp']);
-    if(count($this->db->resultSet()) > 0) return 0;
+    if(count($this->db->resultSet()) > 0) return 'Email or NoHP is already available!';
+
+    // cek panjang password
+    if(strlen($data['password'] < 8)) return 'Password Terlalu Lemah!';
 
     // password konfirmasi
     if($data['password'] === $data['passConfirm']) {
@@ -64,11 +67,11 @@ class Daftar_model
 
     }
 
-    return 0;
+    return 'Konfirmasi Password Tidak Sama!';
   }
 
   // method daftar amil
-  public function daftarAmil($data): int
+  public function daftarAmil($data)
   {
     // deklarsi variabel
     $tableAmil = $this->table['amil'];
@@ -83,16 +86,18 @@ class Daftar_model
     // cek username
     $this->db->query($cekdataUser);
     $this->db->bind('username', $data['username']);
-    if(count($this->db->resultSet()) > 0) return 0;
+    if(count($this->db->resultSet()) > 0) return 'Username Sudah Ada!';
 
     // cek email dan nohp
     $this->db->query($cekDataAmil);
     $this->db->bind('email', $data['email']);
     $this->db->bind('nohp', $data['nohp']);
-    if(count($this->db->resultSet()) > 0) return 0;
+    if(count($this->db->resultSet()) > 0) return 'Email Atau No HP Sudah Ada!';
 
+    if(strlen($data['password']) < 8) return 'Password Terlalu Lemah';
+    
     // password konfirmasi dan panjang password
-    if($data['password'] === $data['passConfirm'] || strlen($data['password']) < 8) {
+    if($data['password'] === $data['passConfirm']) {
 
       // insert data user
       $this->db->query($queryUser);
@@ -119,6 +124,6 @@ class Daftar_model
 
     }
 
-    return 0;
+    return 'Konfirmasi Password Tidak Sama!';
   }
 }

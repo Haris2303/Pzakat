@@ -79,13 +79,15 @@ class Pageviews extends Controller {
   }
 
   public function aksi_tambah_berita() {
-    $href = ($_POST['jenis_view'] === 'Berita') ? '/Berita' : '/Artikel';
-    if($this->model('Pageviews_model')->tambahBerita($_POST, $_FILES) > 0) {
-      Flasher::setFlash('Upload', 'Berhasil', 'success');
+    $jenis_view = $_POST['jenis_view'];
+    $href = ($jenis_view === 'Berita') ? '/Berita' : '/Artikel';
+    $result = $this->model('Pageviews_model')->tambahBerita($_POST, $_FILES);
+    if($result > 0) {
+      Flasher::setFlash($jenis_view . ' Berhasil Diupload!', 'success');
       header('Location: ' . BASEURL . '/pageviews' . $href);
       exit;
     } else {
-      Flasher::setFlash('Upload', 'Gagal', 'danger');
+      Flasher::setFlash($result, 'danger');
       header('Location: ' . BASEURL . '/pageviews' . $href);
       exit;
     }
@@ -93,26 +95,30 @@ class Pageviews extends Controller {
   }
 
   public function aksi_ubah_view() {
-    $href = ($_POST['jenis_view'] === 'Berita') ? '/Berita' : '/Artikel';
-    if($this->model('Pageviews_model')->ubahView($_POST, $_FILES) > 0) {
-      Flasher::setFlash('Diubah', 'Berhasil', 'success');
+    $jenis_view = $_POST['jenis_view'];
+    $href = ($jenis_view === 'Berita') ? '/Berita' : '/Artikel';
+    $result = $this->model('Pageviews_model')->ubahView($_POST, $_FILES);
+    if($result > 0) {
+      Flasher::setFlash($jenis_view . ' Berhasil Diupload', 'success');
       header('Location: ' . BASEURL . '/pageviews' . $href);
       exit;
     } else {
-      Flasher::setFlash('Diubah', 'Gagal', 'success');
+      Flasher::setFlash($jenis_view . ' Gagal Diubah!', 'success');
       header('Location: ' . BASEURL . '/pageviews' . $href);
       exit;
     }
   }
 
   public function aksi_hapus_view($slug) {
-    $href = ($_POST['jenis_view'] === 'Berita') ? '/Berita' : '/Artikel';
+    $dataView = $this->model('Pageviews_model')->getDataViewBySlug($slug);
+    $jenis_view = $dataView['jenis_views'];
+    $href = ($jenis_view === 'Berita') ? '/Berita' : '/Artikel';
     if($this->model('Pageviews_model')->hapusView($slug) > 0) {
-      Flasher::setFlash('Hapus', 'Berhasil', 'success');
+      Flasher::setFlash('Berhasil Dihapus', 'success');
       header('Location: ' . BASEURL . '/pageviews' . $href);
       exit;
     } else {
-      Flasher::setFlash('Hapus', 'Gagal', 'success');
+      Flasher::setFlash('Gagal Dihapus', 'danger');
       header('Location: ' . BASEURL . '/pageviews' . $href);
       exit;
     }

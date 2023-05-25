@@ -31,6 +31,10 @@
         <input type="password" class="p-2 border-2 border-darkgreen outline-none rounded-sm focus:shadow-sm focus:shadow-green transition-500 bg-darkgreen placeholder:text-lightgreen" name="password" placeholder="password" autocomplete="off">
         <button type="submit" class="btn btn-green hover:shadow-sm hover:shadow-green">Login</button>
       </form>
+
+      <div class="text-lightgreen">
+        <a href="<?= BASEURL ?>/daftar">Belum Punya Akun?</a>
+      </div>
     </div>
   </div>
 </div>

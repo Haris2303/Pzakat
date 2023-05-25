@@ -11,14 +11,14 @@
   
   <div class="container mt-3">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
       Tambah Admin
     </button>
   </div>
 
-  <?php Flasher::flash() ?>
-
+  
   <div class="card-body">
+    <?php Flasher::flash() ?>
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
@@ -36,7 +36,7 @@
               <td><?= $item['username'] ?></td>
               <td><?= $item['waktu_login'] ?></td>
               <td>
-                <a href="#" class="btn badge btn-danger">Hapus</a>
+                <a href="<?= BASEURL ?>/useradmin/aksi_hapus_admin/<?= $item['id_user'] ?>" class="btn badge btn-danger">Hapus</a>
               </td>
             </tr>
           <?php endforeach ?>
@@ -53,7 +53,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah User Admin</h1>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">x</button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
       </div>
 
       <form action="<?= BASEURL ?>/useradmin/aksi_tambah_admin" method="post">
@@ -78,7 +78,7 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
           <button type="submit" class="btn btn-primary">Tambah</button>
         </div>
       </form>

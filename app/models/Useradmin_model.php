@@ -16,7 +16,7 @@ class Useradmin_model
     $this->db = new Database();
   }
 
-  public function addUserAdmin($data): int
+  public function addUserAdmin($data)
   {
 
     // deklarsi variabel
@@ -31,7 +31,10 @@ class Useradmin_model
     // cek username
     $this->db->query($cekdataUser);
     $this->db->bind('username', $data['username']);
-    if(count($this->db->resultSet()) > 0) return 0;
+    if(count($this->db->resultSet()) > 0) return 'Username Sudah Ada!';
+
+    // cek panjang password
+    if(strlen($data['password']) < 8) return 'Password Terlalu Lemah!';
 
     // password konfirmasi
     if($data['password'] === $data['passConfirm']) {
@@ -57,7 +60,7 @@ class Useradmin_model
 
     }
 
-    return 0;
+    return "Konfirmasi Password Tidak Sama!";
   }
 
   // method get data admin

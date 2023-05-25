@@ -30,7 +30,7 @@ class Amil_model {
   }
 
   // method ubah data amil
-  public function ubahAmil($data): int {
+  public function ubahAmil($data) {
     // initial data
     $username     = $data['username'];
     $password     = $data['password'];
@@ -41,8 +41,11 @@ class Amil_model {
     $this->db->bind('username', $username);
     $dataUser = $this->db->single();
 
+    // cek panjang password
+    if(strlen($password) < 8) return 'Password Terlalu Lemah';
+
     // cek konfirmasi password
-    if(strlen($password) < 8 || $password !== $passConfirm) return 0;
+    if($password !== $passConfirm) return 'Konfirmasi Password Tidak Sama!';
     
     // encrypt password
     $password = password_hash($password, PASSWORD_DEFAULT);

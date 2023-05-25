@@ -36,7 +36,7 @@ class Login_model {
       }
     }
 
-    return 0;
+    return 'Username atau Password Salah!';
 
   }
 }
