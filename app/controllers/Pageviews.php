@@ -79,14 +79,14 @@ class Pageviews extends Controller {
   }
 
   public function aksi_tambah_berita() {
-
+    $href = ($_POST['jenis_view'] === 'Berita') ? '/Berita' : '/Artikel';
     if($this->model('Pageviews_model')->tambahBerita($_POST, $_FILES) > 0) {
       Flasher::setFlash('Upload', 'Berhasil', 'success');
-      header('Location: ' . BASEURL . '/pageviews/berita');
+      header('Location: ' . BASEURL . '/pageviews' . $href);
       exit;
     } else {
       Flasher::setFlash('Upload', 'Gagal', 'danger');
-      header('Location: ' . BASEURL . '/pageviews/berita');
+      header('Location: ' . BASEURL . '/pageviews' . $href);
       exit;
     }
 

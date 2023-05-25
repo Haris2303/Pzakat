@@ -266,7 +266,7 @@
 
 
   <!-- konsultasi -->
-  <div class="py-20 w-full bg-darkgreen mt-20">
+  <div class="py-20 w-full bg-darkgray mt-20">
     <div class="container">
       <div class="content text-center">
         <h3 class="font-medium text-lightgreen text-3xl mb-2">Masih Bingung Berzakat?</h3>
@@ -497,7 +497,7 @@
 
 
   <!-- laporan -->
-  <div class="w-full bg-darkgreen mt-20">
+  <div class="w-full bg-darkgray mt-20">
     <div class="container p-14">
       <div class="content">
         <!-- Slider main container -->
