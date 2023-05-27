@@ -1,3 +1,7 @@
+<!-- lib vue -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js" defer></script>
+<script src="http://localhost/Pzakat/public/static/js/app.js" defer></script>
+
 <!-- Page Heading -->
 <h2 class="h3">Masjid</h2>
 <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
@@ -50,6 +54,7 @@
 </div>
 
 
+
 <!-- Modal -->
 <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -78,6 +83,26 @@
           <div class="mb-3">
             <label for="RW" class="form-label">RW</label>
             <input type="text" class="form-control" id="RW" name="RW" required autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label for="provinsi" class="form-label">Provinsi</label>
+            <select id="browsers" name="provinsi" class="form-control">
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="provinsi" class="form-label">Kabupaten</label>
+            <select id="browsers_regencies" name="kabupaten" class="form-control">
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="provinsi" class="form-label">Disrik</label>
+            <select id="browsers_districts" name="diskrik" class="form-control">
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="provinsi" class="form-label">Kecamatan</label>
+            <select id="browsers_villages" name="kecamatan" class="form-control">
+            </select>
           </div>
         </div>
 
