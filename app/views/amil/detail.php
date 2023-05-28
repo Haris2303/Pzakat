@@ -50,6 +50,22 @@
           <th>RT / RW</th>
           <td>: <?= $data['masjid']['RT'] ?>/<?= $data['masjid']['RW'] ?></td>
         </tr>
+        <tr>
+          <th>Provinsi</th>
+          <td>: <?= ucwords(strtolower($data['masjid']['provinsi'])) ?></td>
+        </tr>
+        <tr>
+          <th>Kabupaten</th>
+          <td>: <?= ucwords(strtolower($data['masjid']['kabupaten'])) ?></td>
+        </tr>
+        <tr>
+          <th>Kecamatan</th>
+          <td>: <?= ucwords(strtolower($data['masjid']['kecamatan'])) ?></td>
+        </tr>
+        <tr>
+          <th>Kelurahan</th>
+          <td>: <?= ucwords(strtolower($data['masjid']['kelurahan'])) ?></td>
+        </tr>
       </table>
     </div>
     <div class="mt-3">

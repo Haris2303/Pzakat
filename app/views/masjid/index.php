@@ -74,7 +74,7 @@
           </div>
           <div class="mb-3">
             <label for="alamat_mesjid" class="form-label">Alamat Masjid</label>
-            <textarea name="alamat_mesjid" id="alamat_mesjid" class="form-control" rows="5"></textarea>
+            <textarea name="alamat_mesjid" id="alamat_mesjid" class="form-control" rows="1"></textarea>
           </div>
           <div class="mb-3">
             <label for="RT" class="form-label">RT</label>
@@ -90,18 +90,18 @@
             </select>
           </div>
           <div class="mb-3">
-            <label for="provinsi" class="form-label">Kabupaten</label>
+            <label for="provinsi" class="form-label">Kota/Kab</label>
             <select id="browsers_regencies" name="kabupaten" class="form-control">
             </select>
           </div>
           <div class="mb-3">
-            <label for="provinsi" class="form-label">Disrik</label>
-            <select id="browsers_districts" name="diskrik" class="form-control">
+            <label for="provinsi" class="form-label">Kecamatan</label>
+            <select id="browsers_districts" name="kecamatan" class="form-control">
             </select>
           </div>
           <div class="mb-3">
-            <label for="provinsi" class="form-label">Kecamatan</label>
-            <select id="browsers_villages" name="kecamatan" class="form-control">
+            <label for="provinsi" class="form-label">Kelurahan</label>
+            <select id="browsers_villages" name="kelurahan" class="form-control">
             </select>
           </div>
         </div>

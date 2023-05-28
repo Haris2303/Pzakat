@@ -39,9 +39,13 @@ class Masjid_model {
     $alamat_mesjid  = $data['alamat_mesjid'];
     $rt             = $data['RT'];
     $rw             = $data['RW'];
+    $provinsi       = $data['provinsi'];
+    $kabupaten      = $data['kabupaten'];
+    $kecamatan      = $data['kecamatan'];
+    $kelurahan      = $data['kelurahan'];
 
     // intial query
-    $query = "INSERT INTO $this->table VALUES(NULL, :nama_mesjid, :alamat_mesjid, :rt, :rw)";
+    $query = "INSERT INTO $this->table VALUES(NULL, :nama_mesjid, :alamat_mesjid, :rt, :rw, :provinsi, :kabupaten, :kecamatan, :kelurahan)";
 
     // execute and binding
     $this->db->query($query);
@@ -49,6 +53,10 @@ class Masjid_model {
     $this->db->bind('alamat_mesjid', $alamat_mesjid);
     $this->db->bind('rt', $rt);
     $this->db->bind('rw', $rw);
+    $this->db->bind('provinsi', $provinsi);
+    $this->db->bind('kabupaten', $kabupaten);
+    $this->db->bind('kecamatan', $kecamatan);
+    $this->db->bind('kelurahan', $kelurahan);
     $this->db->execute();
 
     return $this->db->rowCount();
@@ -58,13 +66,17 @@ class Masjid_model {
   // method ubah data mesjid
   public function ubahMesjid($data): int {
     // initial query
-    $query = "UPDATE $this->table SET nama_mesjid = :nama_mesjid, alamat_mesjid = :alamat_mesjid, RT = :RT, RW = :RW WHERE id_mesjid = :id_mesjid";
+    $query = "UPDATE $this->table SET nama_mesjid = :nama_mesjid, alamat_mesjid = :alamat_mesjid, RT = :RT, RW = :RW, provinsi = :provinsi, kabupaten = :kabupaten, kecamatan = :kecamatan, kelurahan = :kelurahan WHERE id_mesjid = :id_mesjid";
     $this->db->query($query);
     $this->db->bind('id_mesjid', $data['id']);
     $this->db->bind('nama_mesjid', $data['nama_mesjid']);
     $this->db->bind('alamat_mesjid', $data['alamat_mesjid']);
     $this->db->bind('RT', $data['RT']);
     $this->db->bind('RW', $data['RW']);
+    $this->db->bind('provinsi', $data['provinsi']);
+    $this->db->bind('kabupaten', $data['kabupaten']);
+    $this->db->bind('kecamatan', $data['kecamatan']);
+    $this->db->bind('kelurahan', $data['kelurahan']);
     $this->db->execute();
 
     return $this->db->rowCount();
