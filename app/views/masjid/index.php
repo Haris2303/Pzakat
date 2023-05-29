@@ -86,22 +86,22 @@
           </div>
           <div class="mb-3">
             <label for="provinsi" class="form-label">Provinsi</label>
-            <select id="browsers" name="provinsi" class="form-control">
+            <select id="browsers" name="provinsi" class="form-control" required>
             </select>
           </div>
           <div class="mb-3">
             <label for="provinsi" class="form-label">Kota/Kab</label>
-            <select id="browsers_regencies" name="kabupaten" class="form-control">
+            <select id="browsers_regencies" name="kabupaten" class="form-control" required>
             </select>
           </div>
           <div class="mb-3">
             <label for="provinsi" class="form-label">Kecamatan</label>
-            <select id="browsers_districts" name="kecamatan" class="form-control">
+            <select id="browsers_districts" name="kecamatan" class="form-control" required>
             </select>
           </div>
           <div class="mb-3">
             <label for="provinsi" class="form-label">Kelurahan</label>
-            <select id="browsers_villages" name="kelurahan" class="form-control">
+            <select id="browsers_villages" name="kelurahan" class="form-control" required>
             </select>
           </div>
         </div>

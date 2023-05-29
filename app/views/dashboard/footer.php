@@ -11,7 +11,7 @@
 <script src="<?= BASEURL ?>/js/sb-admin-2.min.js"></script>
 
 <!-- my javascript -->
-<script src="<?= BASEURL ?>/js/dashboard.js"></script>
+<script src="<?= BASEURL ?>/js/admin.js"></script>
 
 
 <!-- plugin JavaScript-->
