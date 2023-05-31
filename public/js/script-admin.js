@@ -23,11 +23,6 @@
     $('#RT').val('');
     $('#RW').val('');
 
-    // hide element kota, kecamatan, kelurahan
-    kab_kota.hide();
-    district.hide();
-    villages.hide();
-
     // get api wilayah provinsi
     $.getJSON("http://localhost/Pzakat/public/static/api/provinces.json", function (data) {
       // reset select option
@@ -42,14 +37,12 @@
       $('.modal-body #browsers option').on('click', function () {
         // get id data
         const id = $(this).data('id');
-
-        // show element kab_kota
-        kab_kota.show();
+        kab_kota.html('')
+        district.html('')
+        villages.html('')
 
         // get api wilayah kabupaten berdasarkan id
         $.getJSON(`http://localhost/Pzakat/public/static/api/regencies/${id}.json`, function (data) {
-          // reset select option
-          kab_kota.html('');
 
           // looping setiap data dan tambahkan elemen option
           $.each(data, function (i, data) {
@@ -60,13 +53,11 @@
           $('.modal-body #browsers_regencies option').on('click', function () {
             // get id data
             const id = $(this).data('id');
-
-            // show element district
-            district.show();
+            // reset select option
+            district.html('')
+            villages.html('')
 
             $.getJSON(`http://localhost/Pzakat/public/static/api/districts/${id}.json`, function (data) {
-              // reset select option
-              district.html('');
 
               // looping setiap data dan tambahkan elemen option
               $.each(data, function (i, data) {
@@ -77,9 +68,6 @@
               $('.modal-body #browsers_districts option').on('click', function () {
                 // get id data
                 const id = $(this).data('id');
-
-                // show element kelurahan
-                villages.show();
 
                 $.getJSON(`http://localhost/Pzakat/public/static/api/villages/${id}.json`, function (data) {
                   // reset select option
@@ -138,7 +126,7 @@
   
           let id_provinsi = provinsi.find('option:selected').data('id');
   
-          provinsi.on('change', function() {
+          provinsi.on('click', function() {
             id_provinsi = $(this).find('option:selected').data('id');
             kab_kota.html('');
             district.html('');
@@ -152,7 +140,7 @@
   
               let id_kabupaten = kab_kota.find('option:selected').data('id');
   
-              kab_kota.on('change', function() {
+              kab_kota.on('click', function() {
                 id_kabupaten = $(this).find('option:selected').data('id');
                 district.html('');
                 villages.html('');
@@ -165,7 +153,7 @@
   
                   let id_kecamatan = district.find('option:selected').data('id');
   
-                  district.on('change', function() {
+                  district.on('click', function() {
                     id_kecamatan = $(this).find('option:selected').data('id');
                     villages.html('');
   
