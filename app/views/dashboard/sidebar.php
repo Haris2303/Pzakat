@@ -102,6 +102,13 @@ if (!isset($_SESSION['level'])) {
         <span>Masjid</span></a>
     </li>
 
+    <!-- Nav Item - Norek -->
+    <li class="nav-item">
+      <a class="nav-link" href="<?= BASEURL ?>/norek">
+        <i class="fas fa-fw fa-credit-card"></i>
+        <span>Nomor Rekening</span></a>
+    </li>
+
 
 
     <!-- Divider -->
@@ -112,6 +119,12 @@ if (!isset($_SESSION['level'])) {
       Interfaces
     </div>
 
+    <!-- Nav Item - Banner -->
+    <li class="nav-item">
+      <a class="nav-link" href="">
+        <i class="fas fa-fw fa-file-image"></i>
+        <span>Banner</span></a>
+    </li>
 
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">

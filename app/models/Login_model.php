@@ -2,7 +2,8 @@
 
 class Login_model {
 
-  private $table = 'tb_user';
+  private $tableUser = 'tb_user';
+  private $tableAmil = 'tb_amil';
   private $db;
 
   public function __construct()
@@ -11,9 +12,12 @@ class Login_model {
   }
 
   public function login($data) {
+
+    $tb_user = $this->tableUser;
+    $tb_amil = $this->tableAmil;
     
     // QUERY
-    $query = "SELECT * FROM $this->table WHERE username = :username";
+    $query = "SELECT *,-password FROM $tb_user INNER JOIN $tb_amil ON $tb_user.id_user = $tb_amil.id_user WHERE username = :username";
 
     // cek username data query muzakki
     $this->db->query($query);
@@ -30,7 +34,8 @@ class Login_model {
         // initialisasi session
         session_reset();
         $_SESSION = [];
-        $_SESSION['level'] = $row['level'];
+        $_SESSION['id_amil']  = $row['id_amil'];
+        $_SESSION['level']    = $row['level'];
         $_SESSION['username'] = $row['username'];
         return 1;
       }
