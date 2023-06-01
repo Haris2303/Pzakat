@@ -38,7 +38,7 @@
                             <td><img src="<?= BASEURL ?>/img/norek/<?= $item['gambar'] ?>" alt="<?= $item['gambar'] ?>" width="100px"></td>
                             <td>
                                 <a href="<?= BASEURL ?>/norek/detail/<?= $item['id_norek'] ?>" class="btn badge btn-success">Ubah</a>
-                                <a href="#" class="btn badge btn-danger">Hapus</a>
+                                <a href="<?= BASEURL ?>/norek/aksi_hapus_norek/<?= $item['id_norek'] ?>" class="btn badge btn-danger" onclick="return confirm('Anda yakin ingin menghapus norek tersebut?')">Hapus</a>
                             </td>
                         </tr>
                     <?php endforeach ?>
