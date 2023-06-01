@@ -96,10 +96,12 @@ class Pageviews_model
     $slugbaru     = strtolower(join('-', explode(' ', $judul)));
 
     // cek gambar
-    if(!is_string($gambarBaru)) $gambarBaru = $gambarLama;
-
-    // hapus gambar lama
-    unlink('/var/www/html/Pzakat/public/img/views/'.$gambarLama);
+    if(!is_string($gambarBaru)) {
+      $gambarBaru = $gambarLama;
+    } else {
+      // hapus gambar lama
+      unlink('/var/www/html/Pzakat/public/img/views/'.$gambarLama);
+    }
 
     // update data
     $query = "UPDATE $this->table SET nama_penulis = :nama_penulis, judul = :judul, slug = :slugbaru, gambar = :gambar, content = :content, datetime = NOW() WHERE slug = :slug";

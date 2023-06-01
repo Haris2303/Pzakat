@@ -20,7 +20,10 @@ class Norek_model
 
     public function getDataNorekById($id)
     {
-        $query = "SELECT vwAllNorek FROM $this->table ";
+        $query = "SELECT * FROM $this->table WHERE id_norek = :id_norek";
+        $this->db->query($query);
+        $this->db->bind('id_norek', $id);
+        return $this->db->single();
     }
 
     public function tambahDataNorek($dataPost, $dataFile)
@@ -30,6 +33,9 @@ class Norek_model
         $nama_bank  = $dataPost['nama-bank'];
         $norek      = $dataPost['norek'];
         $gambar     = Utility::uploadImage($dataFile, 'norek');
+
+        // cek gambar error
+        if($dataFile['gambar']['error'] === 4) return 'Mohon untuk upload gambar!';
 
         // cek gambar diupload
         if (!is_string($gambar)) return 'Gagal Upload Gambar!';
@@ -50,6 +56,44 @@ class Norek_model
         $this->db->execute();
 
         return $this->db->rowCount();
+    }
+
+    public function ubahDataNorek($dataPost, $dataFiles) {
+        
+        $id_norek    = $dataPost['id'];
+        $namabank    = $dataPost['nama-bank'];
+        $namapemilik = $dataPost['nama-pemilik'];
+        $norek       = $dataPost['norek'];
+        $gambarLama  = $dataPost['gambar-lama'];
+        $gambarBaru  = Utility::uploadImage($dataFiles, 'norek');
+
+        // cek gambar diupload
+        if(!is_string($gambarBaru)) {
+            $gambarBaru = $gambarLama;
+        } else {
+            // hapus gambar lama
+            unlink('/var/www/html/Pzakat/public/img/norek/'.$gambarLama);
+        }
+
+
+        // update data
+        $query = " UPDATE $this->table SET 
+                        nama_bank = :nama_bank,
+                        nama_pemilik = :nama_pemilik,
+                        norek = :norek,
+                        gambar = :gambar
+                    WHERE id_norek = :id_norek";
+        
+        $this->db->query($query);
+        $this->db->bind('id_norek', $id_norek);
+        $this->db->bind('nama_bank', $namabank);
+        $this->db->bind('nama_pemilik', $namapemilik);
+        $this->db->bind('norek', $norek);
+        $this->db->bind('gambar', $gambarBaru);
+        $this->db->execute();
+
+        return $this->db->rowCount();
+
     }
 
     public function hapusDataNorekById($id)

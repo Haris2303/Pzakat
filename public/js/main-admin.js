@@ -172,6 +172,102 @@
       });
     });
   });
+
+
+  // form modal tambah norek
+  $('.btn-add-norek').on('click', function() {
+
+    // assignment variabel DOM
+    const formLabel   = $('#formNorekModalLabel')
+    const action      = 'http://localhost/Pzakat/public/norek/aksi_tambah_norek'
+    const btnForm     = $('.modal-footer button[type=submit]')
+    const namabank    = $('#nama-bank')
+    const namapemilik = $('#nama-pemilik')
+    const norek       = $('#norek')
+
+    // remove img
+    $('.img-bank').remove()
+
+    // remove input hidden
+    $('.modal-body').find('input[type="hidden"]').remove()
+
+    // set name modal 
+    formLabel.html('Tambah Data Norek')
+
+    // set name button
+    btnForm.html('<i class="fas fa-save"></i> Tambah')
+
+    // reset action data
+    $('.modal-content form').attr('action', action)
+
+    // reset value ke kosong
+    namabank.val('')
+    namapemilik.val('')
+    norek.val('')
+
+  })
+
+  // form modal ubah norek
+  $('.btn-ubah-norek').on('click', function() {
+
+    // assignment variabel DOM
+    const formLabel   = $('#formNorekModalLabel')
+    const formUrl     = 'http://localhost/Pzakat/public/norek/ubah'
+    const action      = 'http://localhost/Pzakat/public/norek/aksi_ubah_norek'
+    const btnForm     = $('.modal-footer button[type=submit]')
+    const namabank    = $('#nama-bank')
+    const namapemilik = $('#nama-pemilik')
+    const norek       = $('#norek')
+    const elemenImg   = $('.modal-body .img')
+
+    // remove img lama
+    $('.img-bank').remove()
+
+    // remove input hidden dan required input
+    $('.modal-body').find('input[name="id"]').remove()
+
+    // set name modal 
+    formLabel.html('Ubah Data Norek')
+
+    // set name button
+    btnForm.html('<i class="fas fa-save"></i> Ubah')
+
+    // reset action data
+    $('.modal-content form').attr('action', action)
+    
+    // reset value ke kosong
+    namabank.val('')
+    namapemilik.val('')
+    norek.val('')
+    
+    // get id
+    const id = $(this).data('id')
+
+    // add input hidden value id
+    $('.modal-body').append(`<input type="hidden" name="id" value="${id}">`)
+
+    // request data berdasarkan id
+    $.ajax({
+      url: formUrl,
+      data: { id },
+      method: 'post',
+      dataType: 'json',
+      success: function(data){
+        console.log(data);
+        namabank.val(data.nama_bank)
+        namapemilik.val(data.nama_pemilik)
+        norek.val(data.norek)
+        elemenImg.append(`
+          <div class="mt-3 img-bank">
+            <label>Gambar Bank Lama</label><br>
+            <input type="hidden" name="gambar-lama" value="${data.gambar}">
+            <img src="http://localhost/Pzakat/public/img/norek/${data.gambar}" alt="Gambar Bank" width="100">
+          </div>
+        `)
+      }
+    })
+
+  })
   
 
 })(jQuery); // akhir strict

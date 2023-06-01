@@ -12,7 +12,7 @@
     <div class="container mt-3">
         <!-- Button trigger modal -->
         <?php Flasher::flash() ?>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        <button type="button" class="btn btn-primary btn-add-norek" data-toggle="modal" data-target="#formNorekModal">
             <i class="fas fa-plus"></i> Norek
         </button>
     </div>
@@ -37,7 +37,7 @@
                             <td><?= $item['nama_pemilik'] ?></td>
                             <td><img src="<?= BASEURL ?>/img/norek/<?= $item['gambar'] ?>" alt="<?= $item['gambar'] ?>" width="100px"></td>
                             <td>
-                                <a href="<?= BASEURL ?>/norek/detail/<?= $item['id_norek'] ?>" class="btn badge btn-success">Ubah</a>
+                                <button type="submit" class="btn badge btn-success btn-ubah-norek" data-toggle="modal" data-target="#formNorekModal" data-id="<?= $item['id_norek'] ?>">Ubah</button>
                                 <a href="<?= BASEURL ?>/norek/aksi_hapus_norek/<?= $item['id_norek'] ?>" class="btn badge btn-danger" onclick="return confirm('Anda yakin ingin menghapus norek tersebut?')">Hapus</a>
                             </td>
                         </tr>
@@ -51,11 +51,11 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="formNorekModal" tabindex="-1" aria-labelledby="formNorekModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title fs-5" id="exampleModalLabel">Tambah Nomor Rekening</h2>
+                <h2 class="modal-title fs-5" id="formNorekModalLabel">Tambah Nomor Rekening</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
             </div>
 
@@ -63,8 +63,8 @@
 
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="nama" class="form-label">Nama Bank</label>
-                        <input type="text" class="form-control" id="nama" name="nama-bank" required autocomplete="off">
+                        <label for="nama-bank" class="form-label">Nama Bank</label>
+                        <input type="text" class="form-control" id="nama-bank" name="nama-bank" required autocomplete="off">
                     </div>
                     <div class="mb-3">
                         <label for="nama-pemilik" class="form-label">Nama Pemilikk Rekening</label>
@@ -74,15 +74,15 @@
                         <label for="norek" class="form-label">Norek</label>
                         <input type="tel" class="form-control" id="norek" name="norek" required autocomplete="off">
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 img">
                         <label for="gambar" class="form-label">Gambar Bank</label>
-                        <input type="file" class="form-control" id="gambar" name="gambar" required autocomplete="off">
+                        <input type="file" class="form-control" id="gambar" name="gambar" autocomplete="off">
                     </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-arrow-alt-circle-left"></i> Keluar</button>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Tambah</button>
+                    <button type="submit" class="btn btn-primary">Tambah</button>
                 </div>
             </form>
 
