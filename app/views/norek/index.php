@@ -62,10 +62,13 @@
             <form action="<?= BASEURL ?>/norek/aksi_tambah_norek" method="post" enctype="multipart/form-data">
 
                 <div class="modal-body">
-                    <input type="hidden" name="id-amil" value="<?= $_SESSION['id_amil'] ?>">
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama Bank</label>
                         <input type="text" class="form-control" id="nama" name="nama-bank" required autocomplete="off">
+                    </div>
+                    <div class="mb-3">
+                        <label for="nama-pemilik" class="form-label">Nama Pemilikk Rekening</label>
+                        <input type="text" class="form-control" id="nama-pemilik" name="nama-pemilik" required autocomplete="off">
                     </div>
                     <div class="mb-3">
                         <label for="norek" class="form-label">Norek</label>

@@ -15,8 +15,8 @@
 
 
 <!-- plugin JavaScript-->
-<?php if(isset($data['script'])) : ?>
-    <?php foreach($data['script'] as $src) : ?>
+<?php if (isset($data['script'])) : ?>
+    <?php foreach ($data['script'] as $src) : ?>
         <script src="<?= BASEURL ?>/<?= $src ?>"></script>
     <?php endforeach ?>
 <?php endif ?>

@@ -27,7 +27,7 @@ class Norek_model
     public function tambahDataNorek($dataPost, $dataFile)
     {
         // initialisasi variabel
-        $id_amil    = $dataPost['id-amil'];
+        $nama_pemilik    = $dataPost['nama-pemilik'];
         $nama_bank  = $dataPost['nama-bank'];
         $norek      = $dataPost['norek'];
         $gambar     = $this->upload($dataFile);
@@ -42,9 +42,9 @@ class Norek_model
         if(count($resultCek) > 0) return 'Norek sudah tersedia!';
 
         // insert norek
-        $query = "INSERT INTO $this->table VALUES(NULL, :id_amil, :nama_bank, :norek, :gambar)";
+        $query = "INSERT INTO $this->table VALUES(NULL, :nama_pemilik, :nama_bank, :norek, :gambar)";
         $this->db->query($query);
-        $this->db->bind('id_amil', $id_amil);
+        $this->db->bind('nama_pemilik', $nama_pemilik);
         $this->db->bind('nama_bank', $nama_bank);
         $this->db->bind('norek', $norek);
         $this->db->bind('gambar', $gambar);
