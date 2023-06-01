@@ -5,7 +5,7 @@ class Norek_model
 
     private $table  = 'tb_norek';
     private $db;
-
+    
     public function __construct()
     {
         $this->db = new Database();
@@ -49,6 +49,23 @@ class Norek_model
         $this->db->bind('gambar', $gambar);
         $this->db->execute();
 
+        return $this->db->rowCount();
+    }
+
+    public function hapusDataNorekById($id)
+    {
+        // hapus gambar lama
+        $querySelect = "SELECT gambar FROM $this->table WHERE id_norek = :id_norek";
+        $this->db->query($querySelect);
+        $this->db->bind('id_norek', $id);
+        $getImageName = $this->db->single();
+        unlink('/var/www/html/Pzakat/public/img/norek/' . $getImageName['gambar']);
+
+        // delete data
+        $query = "DELETE FROM $this->table WHERE id_norek = :id_norek";
+        $this->db->query($query);
+        $this->db->bind('id_norek', $id);
+        $this->db->execute();
         return $this->db->rowCount();
     }
 }

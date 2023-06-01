@@ -20,12 +20,17 @@ class Amil extends Controller
       "dataMasjid" => $this->model('Masjid_model')->getDataMasjid()
     ];
 
-    $this->view('dashboard/sidebar', $data);
-    $this->view('amil/index', $data);
-    $this->view('dashboard/footer', $data);
+    if($_SESSION['level'] === "1") {
+      $this->view('dashboard/sidebar', $data);
+      $this->view('amil/index', $data);
+      $this->view('dashboard/footer', $data);
+    } else {
+      header('Location: ' . BASEURL . '/');
+      exit;
+    }
   }
 
-  public function detail($username): void 
+  public function detail($username = false): void 
   {
     $data = [
       "judul" => "Detail Amil",
@@ -38,9 +43,14 @@ class Amil extends Controller
     ];
     $data['masjid'] = $this->model('Masjid_model')->getDataMasjidById($data['detail']['id_mesjid']);
 
-    $this->view('dashboard/sidebar', $data);
-    $this->view('amil/detail', $data);
-    $this->view('dashboard/footer', $data);
+    if($_SESSION['level'] === "1") {
+      $this->view('dashboard/sidebar', $data);
+      $this->view('amil/detail', $data);
+      $this->view('dashboard/footer', $data);
+    } else {
+      header('Location: ' . BASEURL . '/');
+      exit;
+    }
   }
   
   // method aksi ubah amil

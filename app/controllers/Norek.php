@@ -58,4 +58,18 @@ class Norek extends Controller
             exit;
         }
     }
+
+    public function aksi_hapus_norek($id): void
+    {
+        $result = $this->model('Norek_model')->hapusDataNorekById($id);
+        if($result > 0){
+            Flasher::setFlash('Data Nomor Rekening <strong>Berhasil</strong> dihapus!', 'success');
+            header('Location: ' . BASEURL . '/norek');
+            exit;
+        } else {
+            Flasher::setFlash('Data Nomor Rekening <strong>Gagal</strong> dihapus!', 'danger');
+            header('Location: ' . BASEURL . '/norek');
+            exit;
+        }
+    }
 }
