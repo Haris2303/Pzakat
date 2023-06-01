@@ -61,7 +61,7 @@ class Pageviews_model
     $content      = $dataPost['content'];
 
     // initialisasi nama file baru ke variabel gambar
-    $gambar = $this->upload($dataFile);
+    $gambar = Utility::uploadImage($dataFile, 'views');
 
     // cek jika gambar gagal terupload
     if(!is_string($gambar)) return 'Gagal Upload Gambar! Mohon untuk memeriksa <strong>format gambar</strong> dan ukuran gambar kurang dari <strong>2mb</strong>';
@@ -92,11 +92,14 @@ class Pageviews_model
     $judul        = $dataPost['judul'];
     $gambarLama   = $dataPost['gambarlama'];
     $content      = $dataPost['content'];
-    $gambarBaru   = $this->upload($dataFiles);
+    $gambarBaru   = Utility::uploadImage($dataFiles, 'views');
     $slugbaru     = strtolower(join('-', explode(' ', $judul)));
 
     // cek gambar
     if(!is_string($gambarBaru)) $gambarBaru = $gambarLama;
+
+    // hapus gambar lama
+    unlink('/var/www/html/Pzakat/public/img/views/'.$gambarLama);
 
     // update data
     $query = "UPDATE $this->table SET nama_penulis = :nama_penulis, judul = :judul, slug = :slugbaru, gambar = :gambar, content = :content, datetime = NOW() WHERE slug = :slug";
@@ -115,40 +118,19 @@ class Pageviews_model
 
   public function hapusView($slug): int {
 
+    // hapus gambar lama
+    $querySelect = "SELECT gambar FROM $this->table WHERE slug = :slug";
+    $this->db->query($querySelect);
+    $this->db->bind('slug', $slug);
+    $getImageName = $this->db->single();
+    unlink('/var/www/html/Pzakat/public/img/views/'. $getImageName['gambar']);
+
+    // delete data
     $query = "DELETE FROM $this->table WHERE slug = :slug";
     $this->db->query($query);
     $this->db->bind('slug', $slug);
     $this->db->execute();
     return $this->db->rowCount();
-
-  }
-
-  private function upload($dataFile)
-  {
-    // initialisasi file gambar
-    $namaFile   = $dataFile['gambar']['name'];
-    $ukuran     = $dataFile['gambar']['size'];
-    $errorFile  = $dataFile['gambar']['error'];
-    $tmpName    = $dataFile['gambar']['tmp_name'];
-
-    // cek gambar di upload atau tidak
-    if ($errorFile === 4) return 0;
-
-    // cek ekstensi gambar
-    $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
-    $ekstensiGambar = explode('.', $namaFile);
-    $ekstensiGambar = strtolower(end($ekstensiGambar));
-    if (!in_array($ekstensiGambar, $ekstensiGambarValid)) return 0;
-
-    // cek ukuran gambar > 2mb
-    if ($ukuran === 2000000) return 0;
-
-    // generate nama file baru 
-    $namaFileBaru = uniqid();
-    $namaFileBaru .= '.' . $ekstensiGambar;
-
-    // gambar siap upload
-    if(move_uploaded_file($tmpName, '/var/www/html/Pzakat/public/img/views/' . $namaFileBaru)) return $namaFileBaru; else return 0;
 
   }
 }

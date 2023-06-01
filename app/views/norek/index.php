@@ -34,7 +34,7 @@
                         <tr>
                             <td><?= $item['nama_bank'] ?></td>
                             <td><?= $item['norek'] ?></td>
-                            <td><?= $item['nama'] ?></td>
+                            <td><?= $item['nama_pemilik'] ?></td>
                             <td><img src="<?= BASEURL ?>/img/norek/<?= $item['gambar'] ?>" alt="<?= $item['gambar'] ?>" width="100px"></td>
                             <td>
                                 <a href="<?= BASEURL ?>/norek/detail/<?= $item['id_norek'] ?>" class="btn badge btn-success">Ubah</a>
