@@ -2,6 +2,13 @@
 
   "use strict"; // mulai dengan menggunakan strict
 
+
+  /* ====================
+  
+          @Masjid
+  
+  =====================*/
+
   // tangkap elemen modal browsers
   const provinsi = $('.modal-body #browsers')
   const kab_kota = $('.modal-body #browsers_regencies')
@@ -174,6 +181,12 @@
   });
 
 
+  /* ====================
+  
+          @Norek
+  
+  =====================*/
+
   // form modal tambah norek
   $('.btn-add-norek').on('click', function() {
 
@@ -268,6 +281,33 @@
     })
 
   })
+
+
+  /* ====================
   
+    Kategori Program
+  
+  =====================*/
+  // form tambah data kategori program
+  $('.btn-add-kategori-program').on('click', function() {
+    // assignment variabel DOM
+    const formLabel     = $('#formNorekModalLabel')
+    const action        = 'http://localhost/Pzakat/public/kategoriprogram/aksi_tambah_kategori'
+    const btnForm       = $('.modal-footer button[type=submit]')
+    const namaKategori  = $('#nama-bank')
+
+    // set name form label
+    formLabel.html('Tambah Data Kategori Program')
+
+    // set name button form
+    btnForm.html('<i class="fas fa-save"></i> Tambah')
+
+    // set action
+    $('.modal-content form').attr('action', action)
+
+    // reset value ke kosong
+    namaKategori.val('')
+
+  })
 
 })(jQuery); // akhir strict
