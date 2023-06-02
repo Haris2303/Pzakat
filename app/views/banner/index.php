@@ -16,7 +16,7 @@
   <div class="container mt-3">
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary btn-add-data-banner" data-toggle="modal" data-target="#formModal">
-      Tambah Banner
+      <i class="fas fa-plus"></i> Banner
     </button>
   </div>
   
@@ -40,8 +40,7 @@
               <td><?= $item['username'] ?></td>
               <td><?= $item['datetime'] ?></td>
               <td>
-                <a href="<?= BASEURL ?>/masjid/ubah/<?= $item['id_mesjid'] ?>" class="btn badge btn-success btn-update-data-masjid" data-id="<?= $item['id_mesjid'] ?>" data-toggle="modal" data-target="#formModal">Ubah</a>
-                <a href="<?= BASEURL ?>/masjid/aksi_hapus_mesjid/<?= $item['id_mesjid'] ?>" class="btn badge btn-danger">Hapus</a>
+                <a href="<?= BASEURL ?>/banner/aksi_hapus_banner/<?= $item['id_banner'] ?>" class="btn badge btn-danger" onclick="return confirm('Yakin ingin menghapus?')"><i class="fas fa-trash"></i> Hapus</a>
               </td>
             </tr>
           <?php endforeach ?>

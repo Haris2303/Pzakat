@@ -316,6 +316,7 @@
     Banner
   
   =====================*/
+  // form add data banner
   $('.btn-add-data-banner').on('click', function(){
     // assignment variabel DOM
     const formLabel   = $('#formModalLabel')
