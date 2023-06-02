@@ -310,4 +310,31 @@
 
   })
 
+
+  /* ====================
+  
+    Banner
+  
+  =====================*/
+  $('.btn-add-data-banner').on('click', function(){
+    // assignment variabel DOM
+    const formLabel   = $('#formModalLabel')
+    const action      = 'http://localhost/Pzakat/public/banner/aksi_tambah_banner'
+    const btnForm     = $('.modal-footer button[type=submit]')
+    const gambar      = $('#gambar');
+
+    // set value kosong
+    gambar.val('');
+
+    // set name form label
+    formLabel.html('Tambah Data Banner')
+
+    // set button name
+    btnForm.html('Tambah')
+
+    // set action
+    $('.modal-content form').attr('action', action)
+  })
+
+
 })(jQuery); // akhir strict

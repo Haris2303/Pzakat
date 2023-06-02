@@ -8,15 +8,11 @@
           <!-- Additional required wrapper -->
           <div class="swiper-wrapper">
             <!-- Slides -->
-            <div class="swiper-slide">
-              <img src="<?= BASEURL ?>/img/banner/banner.jpg" alt="" class="h-[200px] img-slide">
-            </div>
-            <div class="swiper-slide">
-              <img src="<?= BASEURL ?>/img/banner/2.jpeg" alt="" class="h-[200px] img-slide">
-            </div>
-            <div class="swiper-slide">
-              <img src="<?= BASEURL ?>/img/banner/3.jpeg" alt="" class="h-[200px] img-slide">
-            </div>
+            <?php foreach ($data['dataBanner'] as $item) : ?>
+              <div class="swiper-slide">
+                <img src="<?= BASEURL ?>/img/banner/<?= $item['gambar'] ?>" alt="" class="h-[200px] img-slide">
+              </div>
+            <?php endforeach ?>
           </div>
           <!-- pagination -->
           <div class="swiper-pagination"></div>

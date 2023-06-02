@@ -142,7 +142,7 @@ if (!isset($_SESSION['level'])) {
 
     <!-- Nav Item - Banner -->
     <li class="nav-item">
-      <a class="nav-link" href="">
+      <a class="nav-link" href="<?= BASEURL ?>/banner">
         <i class="fas fa-fw fa-file-image"></i>
         <span>Banner</span></a>
     </li>
