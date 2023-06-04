@@ -12,15 +12,15 @@
         <p class="text-lightgray text-sm mb-3">Silahkan diisi dengan pendapatan bulanan Anda. Perhitungan Nisab tetap didasarkan pada nisab emas 85 gr yang dihitung bulanan</p>
         <label for="gajibulanan" class="block">
           <h5 class="block text-sm">Pendapatan Gaji Bulanan</h5>
-          <input type="text" id="gajibulanan" class="border-2 w-full px-2 py-1 mb-3 outline-none" onkeypress="return countOnly(event)" value="0">
+          <input type="text" id="gajibulanan" class="border-2 w-full px-2 py-1 mb-3 outline-none" onkeydown="return countOnly(event)" value="" placeholder="Rp. 0">
         </label>
         <label for="gajilain" class="block">
           <h5 class="block text-sm">Pendapatan Lain Bulanan</h5>
-          <input type="text" id="gajilain" class="border-2 w-full px-2 py-1 mb-3 outline-none" onkeypress="return countOnly(event)" value="0">
+          <input type="text" id="gajilain" class="border-2 w-full px-2 py-1 mb-3 outline-none" onkeydown="return countOnly(event)" value="" placeholder="Rp. 0">
         </label>
         <label for="cicilan" class="block">
           <h5 class="block text-sm">Hutang/Cicilan Bulanan</h5>
-          <input type="text" id="cicilan" class="border-2 w-full px-2 py-1 mb-3 outline-none" onkeypress="return countOnly(event)" value="0">
+          <input type="text" id="cicilan" class="border-2 w-full px-2 py-1 mb-3 outline-none" onkeydown="return countOnly(event)" value="" placeholder="Rp. 0">
         </label>
       </div>
 

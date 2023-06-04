@@ -102,13 +102,6 @@ if (!isset($_SESSION['level'])) {
         <span>Masjid</span></a>
     </li>
 
-    <!-- Nav Item - Kategori program -->
-    <li class="nav-item">
-      <a class="nav-link" href="<?= BASEURL ?>/kategoriprogram">
-        <i class="fas fa-fw fa-list"></i>
-        <span>Kategori Program</span></a>
-    </li>
-
     <!-- nav item - Program -->
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#callapsePrograms" aria-expanded="true" aria-controls="callapsePrograms">
@@ -118,9 +111,9 @@ if (!isset($_SESSION['level'])) {
       <div id="callapsePrograms" class="collapse" aria-labelledby="headingPrograms" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Kategori program:</h6>
-          <?php foreach($data['dataKategoriProgram'] as $item): ?>
-            <a class="collapse-item" href="<?= BASEURL ?>/amil_program/<?= $item['nama_kategori_program'] ?>"><?= $item['nama_kategori_program'] ?></a>
-          <?php endforeach ?>
+            <a class="collapse-item" href="<?= BASEURL ?>/amil_program/zakat">Zakat</a>
+            <a class="collapse-item" href="<?= BASEURL ?>/amil_program/zakat">Infaq</a>
+            <a class="collapse-item" href="<?= BASEURL ?>/amil_program/zakat">Qurban</a>
         </div>
       </div>
     </li>

@@ -99,8 +99,8 @@
     },
   });
 </script>
-<script src="<?= BASEURL ?>/js/jquery/jquery-3.6.4.js"></script>
-<script type="text/javascript" src="<?= BASEURL ?>/js/main.js"></script>
+<script src="<?= BASEURL ?>/vendor/jquery/jquery.js"></script>
+<script type="text/javascript" src="<?= BASEURL ?>/js/app.js"></script>
 </body>
 
 </html>

@@ -13,7 +13,6 @@ class Dashboard extends Controller{
       "css" => [
         "vendor_fontawesome" => "vendor/fontawesome-free/css/all.min.css"
       ],
-      "dataKategoriProgram" => $this->model('Kategoriprogram_model')->getAllDataKategoriProgram()
     ];
     $this->view('dashboard/sidebar', $data);
     $this->view('dashboard/index', $data);

@@ -1,9 +1,9 @@
 // navbar fixed 
-window.onscroll = function() {
+window.onscroll = function () {
   const navbar = document.querySelector('navbar');
   const fixedNav = navbar.offsetTop;
 
-  if( window.pageYOffset > fixedNav ) {
+  if (window.pageYOffset > fixedNav) {
     navbar.classList.add('navbar-fixed')
     navbar.style.transition = '1s'
   } else {
@@ -34,22 +34,27 @@ btn_dropdown.addEventListener('click', () => {
   |   PERHITUNGAN ZAKAT
   ==========================
 */
-const gajibulanan = document.querySelector('#gajibulanan')
-const gajilain = document.querySelector('#gajilain')
-const cicilan = document.querySelector('#cicilan')
-// function count only
-const countOnly = (event) => {
-  const count = (event.which) ? event.which : event.keyCode
-  if(event.keyCode === 8 || event.keyCode === 46) return true
-  else if (count < 48 || count > 57) return false
 
-  // format currency
-  $(document).ready(function() {
-    $(event.target).on('input', function() {
+
+const countOnly = (event) => {
+  // // function count only
+  const count = (event.which) ? event.which : event.keyCode
+  if (count >= 48 && count <= 57) String.fromCharCode(count);
+  else if (count === 8) String.fromCharCode(count);
+  else event.preventDefault()
+
+  $(document).ready(function () {
+
+    const gajibulanan = $('#gajibulanan')
+    const gajilain    = $('#gajilain')
+    const cicilan     = $('#cicilan')
+    const etotaluang  = $('#totaluang')
+    const enilaizakat = $('#nilaizakat')
+
+    $(event.target).on('input', function () {
       const value = this.value.replace(/,/g, '');
-      const etotaluang = $('#totaluang')
-      const enilaizakat = $('#nilaizakat')
-      if(this.value) {
+      if(this.value){
+        // format currency
         this.value = parseInt(value).toLocaleString('en-US', {
           style: 'decimal',
           maximumFractionDigits: 0,
@@ -57,28 +62,34 @@ const countOnly = (event) => {
         });
   
         // cek value komponen zakat
-        let a = (gajibulanan.value) ? gajibulanan.value : '0'
-        let b = (gajilain.value) ? gajilain.value : '0'
-        let c = (cicilan.value) ? cicilan.value : '0'
+        const a = (gajibulanan.val()) ? gajibulanan.val() : '0'
+        const b = (gajilain.val()) ? gajilain.val() : '0'
+        const c = (cicilan.val()) ? cicilan.val() : '0'
   
         // convert currency to number
-        let num1 = parseInt(a.replace(/\D/g, ''));
-        let num2 = parseInt(b.replace(/\D/g, ''));
-        let num3 = parseInt(c.replace(/\D/g, ''));
-        let result = num1 + num2 - num3;
+        const num1 = parseInt(a.replace(/\D/g, ''));
+        const num2 = parseInt(b.replace(/\D/g, ''));
+        const num3 = parseInt(c.replace(/\D/g, ''));
+  
+        // hitung nilai
+        const hitung = num1 + num2 - num3
+        const result = (hitung > 0) ? hitung : 0;
   
         // hitung nilai zakat
-        const nilaizakat = (result > 6131333) ? result * 2.5 / 100 : 0
+        const nilaizakat = Math.floor((result > 6131333) ? result * 2.5 / 100 : 0)
   
         // set value total dan nilai
         etotaluang.attr('value', 'Rp. ' + result.toLocaleString('id-ID'))
         enilaizakat.attr('value', 'Rp. ' + nilaizakat.toLocaleString('id-ID'))
+  
+        return true
+      } else {
+        this.value = 0
       }
     })
   })
-
-  return true
 }
+
 /* =========================
   | END  PERHITUNGAN ZAKAT
   ==========================
@@ -96,10 +107,10 @@ const program = document.querySelectorAll('.program')
 for (let i = 0; i < program_kategori.length; i++) {
   program_kategori[i].addEventListener('click', () => {
     for (let j = 0; j < program_kategori.length; j++) {
-      if(i == j){
+      if (i == j) {
         program[j].classList.remove('hidden')
         program[j].classList.add('flex')
-      } else if(i != j){
+      } else if (i != j) {
         program[j].classList.remove('flex')
         program[j].classList.add('hidden')
       }
