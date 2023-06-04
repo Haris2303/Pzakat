@@ -52,15 +52,15 @@ const countOnly = (event) => {
     const enilaizakat = $('#nilaizakat')
 
     $(event.target).on('input', function () {
-      const value = this.value.replace(/,/g, '');
       if(this.value){
+        const value = parseInt(this.value.replace(/\D/g, ''));
+
         // format currency
-        this.value = parseInt(value).toLocaleString('en-US', {
+        this.value = value.toLocaleString('id-ID', {
           style: 'decimal',
-          maximumFractionDigits: 0,
-          minimumFractionDigits: 0
-        });
-  
+          currency: 'USD'
+        })
+
         // cek value komponen zakat
         const a = (gajibulanan.val()) ? gajibulanan.val() : '0'
         const b = (gajilain.val()) ? gajilain.val() : '0'
