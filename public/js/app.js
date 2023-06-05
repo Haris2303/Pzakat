@@ -83,9 +83,9 @@ const countOnly = (event) => {
         enilaizakat.attr('value', 'Rp. ' + nilaizakat.toLocaleString('id-ID'))
   
         return true
-      } else {
-        this.value = 0
-      }
+
+      } else this.value = 0
+      
     })
   })
 }
