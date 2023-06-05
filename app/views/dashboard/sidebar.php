@@ -111,8 +111,9 @@ if (!isset($_SESSION['level'])) {
       <div id="callapsePrograms" class="collapse" aria-labelledby="headingPrograms" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Kategori program:</h6>
-            <a class="collapse-item" href="<?= BASEURL ?>/amil_program/zakat">Zakat</a>
-            <a class="collapse-item" href="<?= BASEURL ?>/amil_program/zakat">Infaq</a>
+            <a class="collapse-item" href="<?= BASEURL ?>/kelola_program">Kelola Program</a>
+            <a class="collapse-item" href="<?= BASEURL ?>/kelola_program/zakat">Zakat</a>
+            <a class="collapse-item" href="<?= BASEURL ?>/kelola_program/infaq">Infaq</a>
             <a class="collapse-item" href="<?= BASEURL ?>/amil_program/zakat">Qurban</a>
         </div>
       </div>
