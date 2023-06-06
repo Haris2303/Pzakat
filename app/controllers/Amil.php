@@ -17,7 +17,8 @@ class Amil extends Controller
         "demo_datatables"       => "js/demo/datatables-demo.js",
       ],
       "dataAmil" => $this->model('Amil_model')->getAllDataAmil(),
-      "dataMasjid" => $this->model('Masjid_model')->getDataMasjid()
+      "dataMasjid" => $this->model('Masjid_model')->getDataMasjid(),
+      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
 
     if($_SESSION['level'] === "1") {
@@ -39,7 +40,8 @@ class Amil extends Controller
         "vendor_fontawesome"    => "vendor/fontawesome-free/css/all.min.css"
       ],
       "detail" => $this->model('Amil_model')->getDataAmilByUsername($username),
-      "allMasjid" => $this->model('Masjid_model')->getDataMasjid()
+      "allMasjid" => $this->model('Masjid_model')->getDataMasjid(),
+      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
     $data['masjid'] = $this->model('Masjid_model')->getDataMasjidById($data['detail']['id_mesjid']);
 

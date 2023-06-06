@@ -15,7 +15,8 @@ class Muzakki extends Controller {
         "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
         "demo_datatables"       => "js/demo/datatables-demo.js",
       ],
-      "dataMuzakki" => $this->model('Muzakki_model')->getAllDataMuzakki()
+      "dataMuzakki" => $this->model('Muzakki_model')->getAllDataMuzakki(),
+      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
 
     $this->view('dashboard/sidebar', $data);

@@ -7,7 +7,8 @@ class Admin_visimisi extends Controller {
       "judul" => "Visi Misi",
       "css" => [
         "vendor_fontawesome" => "vendor/fontawesome-free/css/all.min.css"
-      ]
+      ],
+      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
     $data['visimisi'] = $this->model('Visimisi_model')->getVisiMisi();
     $this->view('dashboard/sidebar', $data);

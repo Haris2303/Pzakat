@@ -7,7 +7,8 @@ class Admin_latarbelakang extends Controller {
       "judul" => "View Latar Belakang",
       "css" => [
         "vendor_fontawesome" => "vendor/fontawesome-free/css/all.min.css"
-      ]
+      ],
+      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
     $data['latar-belakang'] = $this->model('LatarBelakang_model')->getLatarBelakang();
     $this->view('dashboard/sidebar', $data);

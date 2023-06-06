@@ -54,7 +54,7 @@
       </table>
     </div>
     <div class="mt-3">
-      <a href="<?= BASEURL ?>/kelola_program/<?= $data['dataProgram']['jenis_program'] ?>" class="btn btn-secondary"><i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
+      <a href="<?= BASEURL ?>/kelola_program/<?= strtolower($data['dataProgram']['jenis_program']) ?>" class="btn btn-secondary"><i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
     </div>
   </div>
 </div>

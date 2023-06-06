@@ -22,6 +22,7 @@ class Kelola_program extends Controller
                 "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
                 "demo_datatables"       => "js/demo/datatables-demo.js",
             ],
+            "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
         ];
 
         $this->view('dashboard/sidebar', $data);
@@ -42,7 +43,8 @@ class Kelola_program extends Controller
                 "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
                 "demo_datatables"       => "js/demo/datatables-demo.js",
             ],
-            "dataZakat" => $this->model('Kelolaprogram_model')->getAllDataProgramZakat()
+            "dataZakat" => $this->model('Kelolaprogram_model')->getAllDataProgramZakat(),
+            "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
         ];
 
         $this->view('dashboard/sidebar', $data);
@@ -64,7 +66,8 @@ class Kelola_program extends Controller
                 "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
                 "demo_datatables"       => "js/demo/datatables-demo.js",
             ],
-            "dataInfaq" => $this->model('Kelolaprogram_model')->getAllDataProgramInfaq()
+            "dataInfaq" => $this->model('Kelolaprogram_model')->getAllDataProgramInfaq(),
+            "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
         ];
 
         $this->view('dashboard/sidebar', $data);
@@ -86,7 +89,8 @@ class Kelola_program extends Controller
                 "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
                 "demo_datatables"       => "js/demo/datatables-demo.js",
             ],
-            "dataProgram" => $this->model('Kelolaprogram_model')->getDataProgramBySlug($slug)
+            "dataProgram" => $this->model('Kelolaprogram_model')->getDataProgramBySlug($slug),
+            "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
         ];
 
         $this->view('dashboard/sidebar', $data);

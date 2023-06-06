@@ -15,7 +15,8 @@ class Useradmin extends Controller {
         "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
         "demo_datatables"       => "js/demo/datatables-demo.js",
       ],
-      "dataAdmin" => $this->model('Useradmin_model')->getAllDataAdmin()
+      "dataAdmin" => $this->model('Useradmin_model')->getAllDataAdmin(),
+      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
 
     if($_SESSION['level'] === '1') {

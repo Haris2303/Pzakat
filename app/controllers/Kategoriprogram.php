@@ -16,7 +16,8 @@ class Kategoriprogram extends Controller
                 "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
                 "demo_datatables"       => "js/demo/datatables-demo.js",
             ],
-            "dataKategoriProgram" => $this->model('Kategoriprogram_model')->getAllDataKategoriProgram()
+            "dataKategoriProgram" => $this->model('Kategoriprogram_model')->getAllDataKategoriProgram(),
+            "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
         ];
 
         $this->view('dashboard/sidebar', $data);

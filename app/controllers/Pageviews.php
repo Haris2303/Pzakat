@@ -15,7 +15,8 @@ class Pageviews extends Controller {
         "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
         "demo_datatables"       => "js/demo/datatables-demo.js",
       ],
-      "dataBerita"  => $this->model('Pageviews_model')->getAllDataBerita()
+      "dataBerita"  => $this->model('Pageviews_model')->getAllDataBerita(),
+      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
 
     $this->view('dashboard/sidebar', $data);
@@ -36,7 +37,8 @@ class Pageviews extends Controller {
         "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
         "demo_datatables"       => "js/demo/datatables-demo.js",
       ],
-      "dataArtikel" => $this->model('Pageviews_model')->getAllDataArtikel()
+      "dataArtikel" => $this->model('Pageviews_model')->getAllDataArtikel(),
+      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
 
     $this->view('dashboard/sidebar', $data);
@@ -52,7 +54,8 @@ class Pageviews extends Controller {
         "vendor_bootstraptable" => "js/vendor/datatables/dataTables.bootstrap4.min.css",
         "vendor_fontawesome"    => "vendor/fontawesome-free/css/all.min.css"
       ],
-      "dataView" => $this->model('Pageviews_model')->getDataViewBySlug($slug)
+      "dataView" => $this->model('Pageviews_model')->getDataViewBySlug($slug),
+      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
 
     $this->view('dashboard/sidebar', $data);
@@ -68,7 +71,8 @@ class Pageviews extends Controller {
       "css" => [
         "vendor_fontawesome" => "vendor/fontawesome-free/css/all.min.css"
       ],
-      "jenis_view" => $jenis_view
+      "jenis_view" => $jenis_view,
+      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
     
     $this->view('dashboard/sidebar', $data);

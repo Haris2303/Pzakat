@@ -16,7 +16,8 @@ class Norek extends Controller
                 "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
                 "demo_datatables"       => "js/demo/datatables-demo.js",
             ],
-            "dataNorek" => $this->model('Norek_model')->getAllDataNorek()
+            "dataNorek" => $this->model('Norek_model')->getAllDataNorek(),
+            "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
         ];
 
         $this->view('dashboard/sidebar', $data);
@@ -37,7 +38,8 @@ class Norek extends Controller
                 "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
                 "demo_datatables"       => "js/demo/datatables-demo.js",
             ],
-            "dataNorek" => $this->model('Norek_model')->getDataNorekById($id)
+            "dataNorek" => $this->model('Norek_model')->getDataNorekById($id),
+            "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
         ];
 
         $this->view('dashboard/sidebar', $data);

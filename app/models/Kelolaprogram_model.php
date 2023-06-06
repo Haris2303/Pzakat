@@ -5,7 +5,9 @@ class Kelolaprogram_model {
     private $table = 'tb_program';
     private $view = [
         "allZakat" => "vwAllDataZakat",
-        "allInfaq" => "vwAllDataInfaq"
+        "allInfaq" => "vwAllDataInfaq",
+        "allProgramNameAktif" => "vwAllProgramNameAktif",
+        "allDataProgramAktif" => "vwAllDataProgramAktif"
     ];
     private $db;
 
@@ -27,7 +29,10 @@ class Kelolaprogram_model {
 
     public function getAllDataProgramAktif(): array
     {
-        return [];
+        $view = $this->view['vwAllDataProgramAktif'];
+        $query = "SELECT * FROM $view ORDER BY id_program DESC";
+        $this->db->query($query);
+        return $this->db->resultSet();
     }
 
     public function getAllDataProgramZakat(): array
@@ -61,10 +66,39 @@ class Kelolaprogram_model {
         return [];
     }
 
+    public function getAllProgramNameAktif(): array 
+    {
+        $view = $this->view['allProgramNameAktif'];
+        $query = "SELECT * FROM $view";
+        $this->db->query($query);
+        return $this->db->resultSet();
+    }
 
     /**
      * 
-     * @param Get Data By Slug
+     * @param Limit
+     * 
+     */
+    public function getDataProgramLimitByJenisProgram($limit, $jenisprogram): array
+    {
+        $query = "SELECT * FROM $this->table WHERE jenis_program = :jenis_program ORDER BY id_program DESC LIMIT $limit";
+        $this->db->query($query);
+        $this->db->bind('jenis_program', $jenisprogram);
+        return $this->db->resultSet();
+    }
+
+    public function getDataProgramZakatLimit($limit): array 
+    {
+        $view = $this->view['allZakat'];
+        $query = "SELECT * FROM $view ORDER BY id_program DESC LIMIT $limit";
+        $this->db->query($query);
+        return $this->db->resultSet();
+    }
+
+
+    /**
+     * 
+     * @param Get Data By
      * 
     */
     public function getDataProgramBySlug($slug): array

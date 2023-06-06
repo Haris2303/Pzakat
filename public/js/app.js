@@ -35,7 +35,6 @@ btn_dropdown.addEventListener('click', () => {
   ==========================
 */
 
-
 const countOnly = (event) => {
   // // function count only
   const count = (event.which) ? event.which : event.keyCode
@@ -101,19 +100,57 @@ const countOnly = (event) => {
   |   PROGRAM PAGINATION
   ==========================
 */
-const program_kategori = document.querySelectorAll('.program-kategori a')
-const program = document.querySelectorAll('.program')
+/**
+ * 
+ * @public jquery
+ * 
+ */
+$(document).ready(function() {
+  $('.program-kategori a').on('click', function() {
+    const name = $(this).data('name')
 
-for (let i = 0; i < program_kategori.length; i++) {
-  program_kategori[i].addEventListener('click', () => {
-    for (let j = 0; j < program_kategori.length; j++) {
-      if (i == j) {
-        program[j].classList.remove('hidden')
-        program[j].classList.add('flex')
-      } else if (i != j) {
-        program[j].classList.remove('flex')
-        program[j].classList.add('hidden')
+    // get kosongkan isi content
+    $('.program').html('');
+
+    // get data menggunakan ajax
+    const url = 'http://localhost/Pzakat/public';
+    const cardContent = (imageSource, programSlug, programName, programDescription, dana, donatur) => { 
+      return `
+        <div class="lg:w-1/3 shadow-md">
+          <a href="${url}/program/${programSlug}">
+            <img src="${url}/img/program/${imageSource}" alt="Gambar Program ${programName}" class="lg:h-48 h-64 lg:w-full w-screen">
+          </a>
+          <div class="px-4 my-4 flex flex-col gap-1">
+            <a href=""><span class="category text-lightgray text-xs">${programName}</span></a>
+            <a href="">
+              <h4 class="text-md text-darkgray">${programDescription}</h4>
+            </a>
+            <span class="garis-progress my-1 after:w-8"></span>
+            <div class="flex justify-between text-xs text-lightgray">
+              <div>Donasi Terkumpul</div>
+              <div>Donatur</div>
+            </div>
+            <div class="flex justify-between text-md text">
+              <div class="font-bold text-darkgray">Rp ${dana}</div>
+              <div class="text-darkgray">${donatur}</div>
+            </div>
+          </div>
+        </div>`
       }
-    }
+    $.ajax({
+      url: url + '/web/getdataprogram',
+      data: { name },
+      method: 'post', 
+      dataType: 'json',
+      success: function(data) {
+        $.each(data, function(i, item) {
+          $('.program').append(cardContent(item.gambar, item.slug, item.jenis_program, item.deskripsi_program, item.total_dana, item.jumlah_donatur))
+          // console.log(item);
+        })
+      }
+    })
+
+    // ambil elemen pada class program
+    // console.log($('.program div').html())
   })
-}
+})
