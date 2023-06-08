@@ -57,7 +57,7 @@
           </div>
 
           <!-- program -->
-          <div class="w-full flex gap-5 flex-col lg:flex-row md:gap-5 mt-5 text-sm program">
+          <div class="w-full flex gap-5 flex-col lg:flex-row md:gap-5 mt-5 hover:shadow-lg transition-500 text-sm program">
             <div class="lg:w-1/3 shadow-md">
               <a href="#">
                 <img src="<?= BASEURL ?>/img/banner/2.jpeg" alt="" class="lg:h-48 h-64 lg:w-full w-screen">
