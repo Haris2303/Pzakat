@@ -2,10 +2,11 @@
 
 class Transaksi extends Controller {
 
-    public function index(): void 
+    public function index($slug): void 
     {
         $data = [
-            "judul" => "Form Donasi"
+            "judul" => "Form Donasi",
+            "dataProgram" => $this->model('Kelolaprogram_model')->getDataProgramBySlug($slug)
         ];
 
         $this->view('template/normalheader', $data);

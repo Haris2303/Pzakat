@@ -82,7 +82,7 @@ if(isset($_SESSION['level']) && $_SESSION['level'] !== '3') {
                 <a href="<?= BASEURL ?>/page/news" class="text-lightgray group-hover:text-green transition-300">Berita</a>
               </li>
               <li class="group lg:pb-0 pb-2">
-                <a href="<?= BASEURL ?>/program" class="text-lightgray group-hover:text-green transition-300">Program</a>
+                <a href="<?= BASEURL ?>/programs" class="text-lightgray group-hover:text-green transition-300">Program</a>
               </li>
               <li class="lg:block hidden">
                 <!-- search -->

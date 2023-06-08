@@ -18,7 +18,9 @@
                         <span><span class="text-darkgray text-sm font-medium"><?= $data['dataProgram']['jumlah_donatur'] ?></span> Donatur</span>
                         <!-- <span>Hari Lagi</span> -->
                     </div>
-                    <button class="btn btn-lightgreen">Tunaikan Sekarang</button>
+                    <div class="flex">
+                        <a href="<?= BASEURL ?>/transaksi/<?= $data['dataProgram']['slug'] ?>" class="btn btn-lightgreen">Tunaikan Sekarang</a>
+                    </div>
                 </div>
             </div>
         </div>
