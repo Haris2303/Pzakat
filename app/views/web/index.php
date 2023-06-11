@@ -113,7 +113,7 @@
                   <div>Donatur</div>
                 </div>
                 <div class="flex justify-between text-md text">
-                  <div class="font-bold text-darkgray">Rp 123.456.789</div>
+                  <div class="font-bold text-darkgray">Rp 123.456.789</div>"
                   <div class="text-darkgray">23</div>
                 </div>
               </div>
