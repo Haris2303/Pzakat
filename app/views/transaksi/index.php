@@ -16,13 +16,15 @@
                     <label for="nominal-donasi">Nominal Donasi</label>
                     <div class="position-relative">
                         <p class="position-absolute mt-2 mx-3">Rp. </p>
-                        <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi fw-light" value="0">
+                        <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi fw-light" placeholder="0" onkeydown="return currency(event)">
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="bank">Pilih Bank</label>
                     <select name="bank" id="bank" class="form-control">
-                        <option value="bri">Bank Rakyat Indonesia</option>
+                        <?php foreach ($data['dataNorek'] as $item): ?>
+                            <option value="<?= $item['id_norek'] ?>"><?= $item['nama_bank'] ?></option>
+                        <?php endforeach ?>
                     </select>
                 </div>
                 <div class="mb-3">
