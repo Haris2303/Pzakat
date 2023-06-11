@@ -120,7 +120,7 @@
             </div>
           </div>
 
-          <a href="<?= BASEURL ?>/program">
+          <a href="<?= BASEURL ?>/programs">
             <div class="w-40 m-auto">
               <button class="mt-10 btn btn-lightgreen">Lihat Semua</button>
             </div>
