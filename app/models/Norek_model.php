@@ -26,19 +26,28 @@ class Norek_model
         return $this->db->single();
     }
 
-    public function tambahDataNorek($dataPost, $dataFile)
+    /**
+     * 
+     * @param getJSON
+     * 
+     */
+
+    public function getDataBankJsonDecode() 
+    {
+        $url = BASEURL . "/static/api/bank/bank.json";
+        $result = file_get_contents($url);
+        return json_decode($result, true);
+    }
+
+
+    public function tambahDataNorek($dataPost)
     {
         // initialisasi variabel
-        $nama_pemilik    = $dataPost['nama-pemilik'];
-        $nama_bank  = $dataPost['nama-bank'];
-        $norek      = $dataPost['norek'];
-        $gambar     = Utility::uploadImage($dataFile, 'norek');
-
-        // cek gambar error
-        if($dataFile['gambar']['error'] === 4) return 'Mohon untuk upload gambar!';
-
-        // cek gambar diupload
-        if (!is_string($gambar)) return 'Gagal Upload Gambar!';
+        $nama_pemilik   = ucwords(strtolower($dataPost['nama-pemilik']));
+        $nama_bank      = strtoupper($dataPost['nama-bank']);
+        $norek          = $dataPost['norek'];
+        $jenis_program  = ucwords($dataPost['jenis-program']);
+        $gambar         = strtolower(join('-', explode(' ', $nama_bank))) . '.jpeg';
 
         // cek norek 
         $cek = "SELECT norek FROM $this->table WHERE norek = $norek";
@@ -47,49 +56,34 @@ class Norek_model
         if (count($resultCek) > 0) return 'Norek sudah tersedia!';
 
         // insert norek
-        $query = "INSERT INTO $this->table VALUES(NULL, :nama_pemilik, :nama_bank, :norek, :gambar)";
+        $query = "INSERT INTO $this->table VALUES(NULL, :nama_pemilik, :nama_bank, :norek, :jenis_program, :gambar)";
         $this->db->query($query);
         $this->db->bind('nama_pemilik', $nama_pemilik);
         $this->db->bind('nama_bank', $nama_bank);
         $this->db->bind('norek', $norek);
+        $this->db->bind('jenis_program', $jenis_program);
         $this->db->bind('gambar', $gambar);
         $this->db->execute();
 
         return $this->db->rowCount();
     }
 
-    public function ubahDataNorek($dataPost, $dataFiles) {
+    public function ubahDataNorek($dataPost) {
         
         $id_norek    = $dataPost['id'];
-        $namabank    = $dataPost['nama-bank'];
-        $namapemilik = $dataPost['nama-pemilik'];
+        $namapemilik = ucwords(strtolower($dataPost['nama-pemilik']));
         $norek       = $dataPost['norek'];
-        $gambarLama  = $dataPost['gambar-lama'];
-        $gambarBaru  = Utility::uploadImage($dataFiles, 'norek');
-
-        // cek gambar diupload
-        if(!is_string($gambarBaru)) {
-            $gambarBaru = $gambarLama;
-        } else {
-            // hapus gambar lama
-            unlink('/var/www/html/Pzakat/public/img/norek/'.$gambarLama);
-        }
-
 
         // update data
         $query = " UPDATE $this->table SET 
-                        nama_bank = :nama_bank,
                         nama_pemilik = :nama_pemilik,
-                        norek = :norek,
-                        gambar = :gambar
+                        norek = :norek
                     WHERE id_norek = :id_norek";
         
         $this->db->query($query);
         $this->db->bind('id_norek', $id_norek);
-        $this->db->bind('nama_bank', $namabank);
         $this->db->bind('nama_pemilik', $namapemilik);
         $this->db->bind('norek', $norek);
-        $this->db->bind('gambar', $gambarBaru);
         $this->db->execute();
 
         return $this->db->rowCount();
@@ -98,13 +92,6 @@ class Norek_model
 
     public function hapusDataNorekById($id)
     {
-        // hapus gambar lama
-        $querySelect = "SELECT gambar FROM $this->table WHERE id_norek = :id_norek";
-        $this->db->query($querySelect);
-        $this->db->bind('id_norek', $id);
-        $getImageName = $this->db->single();
-        unlink('/var/www/html/Pzakat/public/img/norek/' . $getImageName['gambar']);
-
         // delete data
         $query = "DELETE FROM $this->table WHERE id_norek = :id_norek";
         $this->db->query($query);

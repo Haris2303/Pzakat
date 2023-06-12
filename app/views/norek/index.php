@@ -25,6 +25,7 @@
                         <th>Nama Bank</th>
                         <th>Norek</th>
                         <th>Nama Pemilik</th>
+                        <th>Jenis Program</th>
                         <th>Gambar</th>
                         <th>Aksi</th>
                     </tr>
@@ -35,6 +36,7 @@
                             <td><?= $item['nama_bank'] ?></td>
                             <td><?= $item['norek'] ?></td>
                             <td><?= $item['nama_pemilik'] ?></td>
+                            <td><?= $item['jenis_program'] ?></td>
                             <td><img src="<?= BASEURL ?>/img/norek/<?= $item['gambar'] ?>" alt="<?= $item['gambar'] ?>" width="100px"></td>
                             <td>
                                 <button type="submit" class="btn badge btn-success btn-ubah-norek" data-toggle="modal" data-target="#formNorekModal" data-id="<?= $item['id_norek'] ?>">Ubah</button>
@@ -59,12 +61,18 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
             </div>
 
-            <form action="<?= BASEURL ?>/norek/aksi_tambah_norek" method="post" enctype="multipart/form-data">
+            <form action="<?= BASEURL ?>/norek/aksi_tambah_norek" method="post">
 
                 <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="nama-bank" class="form-label">Nama Bank</label>
-                        <input type="text" class="form-control" id="nama-bank" name="nama-bank" required autocomplete="off">
+
+                    <div class="mb-3 bank">
+                        <label for="browser">Pilh Nama Bank Pada List:</label>
+                        <input list="browsers" name="nama-bank" id="browser" class="form-control">
+                        <datalist id="browsers">
+                            <?php foreach ($data['dataBank'] as $item) : ?>
+                                <option value="<?= $item['name'] ?>">
+                            <?php endforeach ?>
+                        </datalist>
                     </div>
                     <div class="mb-3">
                         <label for="nama-pemilik" class="form-label">Nama Pemilikk Rekening</label>
@@ -74,9 +82,14 @@
                         <label for="norek" class="form-label">Norek</label>
                         <input type="tel" class="form-control" id="norek" name="norek" required autocomplete="off">
                     </div>
-                    <div class="mb-3 img">
-                        <label for="gambar" class="form-label">Gambar Bank</label>
-                        <input type="file" class="form-control" id="gambar" name="gambar" autocomplete="off">
+                    <div class="mb-3">
+                        <label for="jenis-program" class="form-label">Jenis Program</label>
+                        <select name="jenis-program" id="jenis-program" class="form-control">
+                            <option selected disabled> -- Pilih Jenis Program -- </option>
+                            <?php foreach( $data['programNameAktif'] as $item): ?>
+                                <option value="<?= $item['nama_kategoriprogram'] ?>"><?= $item['nama_kategoriprogram'] ?></option>
+                            <?php endforeach ?>
+                        </select>
                     </div>
 
                 </div>

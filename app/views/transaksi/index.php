@@ -11,7 +11,7 @@
 
     <div class="row justify-content-center mt-2 mb-5">
         <div class="col-lg-6 border-bottom shadow-lg py-4 px-3">
-            <form action="<?= BASEURL ?>" method="POST">
+            <form action="<?= BASEURL ?>/transaksi/summary" method="POST">
                 <div class="mb-3">
                     <label for="nominal-donasi">Nominal Donasi</label>
                     <div class="position-relative">

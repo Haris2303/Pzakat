@@ -187,9 +187,19 @@
   
   =====================*/
 
+  // input norek count
+  const countInput = (e) => {
+    const count = (e.which) ? e.which : e.keyCode
+    if (count >= 48 && count <= 57) String.fromCharCode(count)
+    else if (count === 8) String.fromCharCode(count)
+    else e.preventDefault()
+    console.log(count);
+  }
+
+  
   // form modal tambah norek
   $('.btn-add-norek').on('click', function() {
-
+    
     // assignment variabel DOM
     const formLabel   = $('#formNorekModalLabel')
     const action      = 'http://localhost/Pzakat/public/norek/aksi_tambah_norek'
@@ -197,12 +207,18 @@
     const namabank    = $('#nama-bank')
     const namapemilik = $('#nama-pemilik')
     const norek       = $('#norek')
+    
+    // input count
+    norek.on('keydown', countInput)
 
     // remove img
     $('.img-bank').remove()
 
     // remove input hidden
     $('.modal-body').find('input[type="hidden"]').remove()
+
+    // show input nama bank
+    $('.modal-body .mb-3.bank').show()
 
     // set name modal 
     formLabel.html('Tambah Data Norek')
@@ -228,16 +244,17 @@
     const formUrl     = 'http://localhost/Pzakat/public/norek/ubah'
     const action      = 'http://localhost/Pzakat/public/norek/aksi_ubah_norek'
     const btnForm     = $('.modal-footer button[type=submit]')
-    const namabank    = $('#nama-bank')
     const namapemilik = $('#nama-pemilik')
     const norek       = $('#norek')
-    const elemenImg   = $('.modal-body .img')
-
-    // remove img lama
-    $('.img-bank').remove()
 
     // remove input hidden dan required input
     $('.modal-body').find('input[name="id"]').remove()
+
+    // remove input nama bank
+    $('.modal-body .mb-3.bank').hide()
+
+    // input count
+    norek.on('keydown', countInput)
 
     // set name modal 
     formLabel.html('Ubah Data Norek')
@@ -249,7 +266,6 @@
     $('.modal-content form').attr('action', action)
     
     // reset value ke kosong
-    namabank.val('')
     namapemilik.val('')
     norek.val('')
     
@@ -266,17 +282,8 @@
       method: 'post',
       dataType: 'json',
       success: function(data){
-        console.log(data);
-        namabank.val(data.nama_bank)
         namapemilik.val(data.nama_pemilik)
         norek.val(data.norek)
-        elemenImg.append(`
-          <div class="mt-3 img-bank">
-            <label>Gambar Bank Lama</label><br>
-            <input type="hidden" name="gambar-lama" value="${data.gambar}">
-            <img src="http://localhost/Pzakat/public/img/norek/${data.gambar}" alt="Gambar Bank" width="100">
-          </div>
-        `)
       }
     })
 

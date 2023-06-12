@@ -17,7 +17,8 @@ class Norek extends Controller
                 "demo_datatables"       => "js/demo/datatables-demo.js",
             ],
             "dataNorek" => $this->model('Norek_model')->getAllDataNorek(),
-            "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
+            "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif(),
+            "dataBank"  => $this->model('Norek_model')->getDataBankJsonDecode()
         ];
 
         $this->view('dashboard/sidebar', $data);
