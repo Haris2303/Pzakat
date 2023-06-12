@@ -11,12 +11,13 @@
 
     <div class="row justify-content-center mt-2 mb-5">
         <div class="col-lg-6 border-bottom shadow-lg py-4 px-3">
-            <form action="<?= BASEURL ?>/transaksi/summary" method="POST">
+            <form action="<?= BASEURL ?>/transaksi/aksi_tambah_donatur" method="POST">
+                <input type="hidden" name="slug_program" value="<?= $data['dataProgram']['slug'] ?>">
                 <div class="mb-3">
                     <label for="nominal-donasi">Nominal Donasi</label>
                     <div class="position-relative">
                         <p class="position-absolute mt-2 mx-3">Rp. </p>
-                        <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi fw-light" placeholder="0" onkeydown="return currency(event)">
+                        <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi" placeholder="0" onkeydown="return currency(event)">
                     </div>
                 </div>
                 <div class="mb-3">

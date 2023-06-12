@@ -46,6 +46,7 @@
         <!-- program donasi -->
         <section id="program-donasi">
           <div class="title">
+            <?= Flasher::flash() ?>
             <h3 class="text-title">Salurkan donasimu disini</h3>
             <span class="text-sm text-lightgray mt-2 inline-block">Silahkan pilih program donasi yang anda inginkan</span>
           </div>

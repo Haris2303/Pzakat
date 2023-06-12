@@ -1,9 +1,11 @@
 <div class="container mt-3">
     <div class="row justify-content-center">
+        <?= Flasher::flash() ?>
         <div class="col-lg-6 border-bottom shadow-sm py-3 px-3 d-flex gap-3">
             <div class="mb-3 m-auto text-center">
                 <span>No Pembayaran</span>
                 <h3 class="h3">KADS-2343214</h3>
+                <?= $_COOKIE['kode-pembayaran'] ?>
             </div>
         </div>
     </div>
@@ -13,12 +15,13 @@
             <div class="mb-3 border-bottom">
                 <h4>Data Konfirmasi Donasi</h4>
             </div>
-            <form action="<?= BASEURL ?>" method="POST">
+            <form action="<?= BASEURL ?>/transaksi/aksi_tambah_transaksi" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="nomor-pembayaran" value="<?= $_COOKIE['kode-pembayaran'] ?>">
                 <div class="mb-3">
                     <label for="nominal-donasi">Nominal Donasi</label>
                     <div class="position-relative">
                         <p class="position-absolute mt-2 mx-3">Rp. </p>
-                        <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi fw-light" value="0" readonly>
+                        <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi" value="<?= $_COOKIE['nominal-donasi'] ?>" readonly>
                     </div>
                 </div>
                 <div class="mb-3">
@@ -26,7 +29,7 @@
                     <div class="border p-4">
                         <div class="row text-center">
                             <div class="col-lg-12">
-                                <img src="<?= BASEURL ?>/img/logo-bri.png" alt="Gambar Bank" width="200">
+                                <img src="<?= BASEURL ?>/img/norek/<?= $data['dataBank']['gambar'] ?>" alt="Gambar Bank" width="200">
                             </div>
                             <div class="col-lg-12 text-left">
                                 <div class="row mt-4">
@@ -35,8 +38,8 @@
                                         <span>Nomor Akun Tujuan: </span>
                                     </div>
                                     <div class="col-lg-7">
-                                        <span class="d-block"><strong>Alimudin</strong></span>
-                                        <span><strong>24513413341</strong></span>
+                                        <span class="d-block"><strong><?= $data['dataBank']['nama_pemilik'] ?></strong></span>
+                                        <span><strong><?= $data['dataBank']['norek'] ?></strong></span>
                                     </div>
                                 </div>
                             </div>

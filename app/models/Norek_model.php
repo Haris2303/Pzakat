@@ -90,7 +90,7 @@ class Norek_model
 
     }
 
-    public function hapusDataNorekById($id)
+    public function hapusDataNorekById($id): int
     {
         // delete data
         $query = "DELETE FROM $this->table WHERE id_norek = :id_norek";

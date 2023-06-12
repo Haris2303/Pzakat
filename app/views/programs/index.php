@@ -7,6 +7,8 @@
         <span class="text-sm text-lightgray mt-2 inline-block">Pilih dan salurkan donasi yang berarti untuk Anda dan mereka</span>
       </div>
 
+      <?= Flasher::flash() ?>
+
       <div class="w-full flex text-center mt-10 text-sm">
         <a href="" class="w-1/3 bg-lightgreen py-2 md:mx-3 mx-1 hover:bg-green hover:text-white transition-300 shadow-md">Zakat</a>
         <a href="" class="w-1/3 bg-lightgreen py-2 md:mx-3 mx-1 hover:bg-green hover:text-white transition-300 shadow-md">Qurban</a>
