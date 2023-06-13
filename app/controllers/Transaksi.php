@@ -7,7 +7,8 @@ class Transaksi extends Controller {
         $data = [
             "judul" => "Form Donasi",
             "dataProgram" => $this->model('Kelolaprogram_model')->getDataProgramBySlug($slug),
-            "dataNorek" => $this->model('Norek_model')->getAllDataNorek()
+            "dataNorek" => $this->model('Norek_model')->getAllDataNorek(),
+            "dataKey" => Utility::getKeyRandom()
         ];
 
         $this->view('template/normalheader', $data);
@@ -22,7 +23,7 @@ class Transaksi extends Controller {
             "dataBank" => $this->model('Norek_model')->getDataNorekById($_COOKIE['id-bank'])
         ];
 
-        if(isset($_COOKIE['kode-pembayaran'])) {
+        if($kode === $_COOKIE['keyRandom']) {
             $this->view('template/normalheader', $data);
             $this->view('transaksi/summary', $data);
             $this->view('template/normalfooter', $data);
@@ -42,10 +43,11 @@ class Transaksi extends Controller {
     public function aksi_tambah_donatur()
     {
         $this->model('Transaksi_model')->setCookieKodePembayaran();
+        $key = $_POST['key'];
         $result = $this->model('Donatur_model')->tambahDataDonatur($_POST);
         if($result > 0) {
             Flasher::setFlash('Berhasil', 'success');
-            header("Location: " . BASEURL . '/transaksi/summary/' . uniqid());
+            header("Location: " . BASEURL . '/transaksi/summary/' . $key);
             exit;
         } else {
             Flasher::setFlash('Gagal', 'danger');
@@ -57,16 +59,15 @@ class Transaksi extends Controller {
     public function aksi_tambah_transaksi(): void
     {
         $result = $this->model('Transaksi_model')->konfirmasiDataTransaksi($_POST, $_FILES);
-        var_dump($result);
-        // if($result > 0){
-        //     Flasher::setFlash('Transaksi <strong>Berhasil</strong> Dikonfirmasi!', 'success');
-        //     header("Location: " . BASEURL . "/programs");
-        //     exit;
-        // } else {
-        //     Flasher::setFlash('Transaksi <strong>Gagal</strong> Dikonfirmasi!', 'danger');
-        //     header("Location: " . BASEURL . "/programs");
-        //     exit;
-        // }
+        if($result > 0){
+            Flasher::setFlash('Transaksi <strong>Berhasil</strong> Dikonfirmasi!', 'success');
+            header("Location: " . BASEURL . "/programs");
+            exit;
+        } else {
+            Flasher::setFlash('Transaksi <strong>Gagal</strong> Dikonfirmasi!', 'danger');
+            header("Location: " . BASEURL . "/programs");
+            exit;
+        }
     }
 
 }

@@ -15,6 +15,7 @@ class Donatur_model {
         // initial variabel
         $slug_program   = $data['slug_program'];
         $id_bank        = $data['bank'];
+        $key            = $data['key'];
         $nama_donatur   = ucwords(strtolower($data['nama-lengkap']));
         $email          = strtolower($data['email']);
         $nohp           = $data['nohp'];
@@ -22,10 +23,11 @@ class Donatur_model {
         $pesan          = htmlspecialchars($data['pesan']);
 
         // insert data
-        $query = "INSERT INTO $this->table VALUES(NULL, :id_bank, :slug_program, :nama_donatur, :email, :nohp, :donasi, :pesan, NOW())";
+        $query = "INSERT INTO $this->table VALUES(NULL, :id_bank, :slug_program, :key, :nama_donatur, :email, :nohp, :donasi, :pesan, NOW())";
         $this->db->query($query);
         $this->db->bind("id_bank", $id_bank);
         $this->db->bind("slug_program", $slug_program);
+        $this->db->bind("key", $key);
         $this->db->bind('nama_donatur', $nama_donatur);
         $this->db->bind('email', $email);
         $this->db->bind('nohp', $nohp);

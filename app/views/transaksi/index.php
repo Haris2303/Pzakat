@@ -13,6 +13,7 @@
         <div class="col-lg-6 border-bottom shadow-lg py-4 px-3">
             <form action="<?= BASEURL ?>/transaksi/aksi_tambah_donatur" method="POST">
                 <input type="hidden" name="slug_program" value="<?= $data['dataProgram']['slug'] ?>">
+                <input type="hidden" name="key" value="<?= $data['dataKey'] ?>">
                 <div class="mb-3">
                     <label for="nominal-donasi">Nominal Donasi</label>
                     <div class="position-relative">

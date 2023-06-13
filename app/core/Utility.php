@@ -103,4 +103,15 @@ class Utility
         }
         return false;
     }
+
+    public static function getKeyRandom(): string
+    {
+        $length = 16;
+        $key = bin2hex(random_bytes($length));
+
+        // setcookie
+        setcookie('keyRandom', $key, time() + (24 * 3600));
+        
+        return $key;
+    }
 }
