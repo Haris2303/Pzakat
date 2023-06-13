@@ -50,12 +50,6 @@ class Transaksi_model {
         $this->db->bind('status_pembayaran', 'konfirmasi');
         $this->db->execute();
 
-        // hapus cookie
-        setcookie('nominal-donasi', 0, time() - 3600);
-        setcookie('id-bank', 0, time() - 3600);
-        setcookie('kode-pembayaran', '', time() - 3600);
-        setcookie('keyRandom', '', time() - 3600);
-
         return $this->db->rowCount();
 
     }

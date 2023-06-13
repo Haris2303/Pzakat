@@ -18,7 +18,11 @@
                     <label for="nominal-donasi">Nominal Donasi</label>
                     <div class="position-relative">
                         <p class="position-absolute mt-2 mx-3">Rp. </p>
-                        <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi" placeholder="0" onkeydown="return currency(event)">
+                        <?php if(isset($_COOKIE['qtyfidyah'])): ?>
+                            <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi" value="<?= $_COOKIE['qtyfidyah'] ?>" readonly>
+                        <?php else: ?>
+                            <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi" placeholder="0" onkeydown="return currency(event)">
+                        <?php endif ?>
                     </div>
                 </div>
                 <div class="mb-3">

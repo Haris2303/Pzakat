@@ -4,8 +4,7 @@
         <div class="col-lg-6 border-bottom shadow-sm py-3 px-3 d-flex gap-3">
             <div class="mb-3 m-auto text-center">
                 <span>No Pembayaran</span>
-                <h3 class="h3">KADS-2343214</h3>
-                <?= $_COOKIE['kode-pembayaran'] ?>
+                <h3 class="h3"><?= $_COOKIE['kode-pembayaran'] ?></h3>
             </div>
         </div>
     </div>

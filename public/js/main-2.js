@@ -1,5 +1,6 @@
+
 const currency = (event) => {
-    // // function count only
+  // // function count only
   const count = (event.which) ? event.which : event.keyCode
   if (count >= 48 && count <= 57) String.fromCharCode(count);
   else if (count === 8) String.fromCharCode(count);
@@ -18,6 +19,23 @@ const currency = (event) => {
 
       } else this.value = 0
       
+    })
+  })
+}
+
+const calcFidyah = (event) => {
+  const count = (event.which) ? event.which : event.keyCode
+  if (count >= 48 && count <= 57) String.fromCharCode(count);
+  else if (count === 8) String.fromCharCode(count);
+  else event.preventDefault()
+
+  $(document).ready(function () {
+
+    $(event.target).on('keyup', function () {
+      if(this.value){
+        const result = this.value * 45000
+        $('input[name=qtyfidyah]').attr('value', result);
+      }
     })
   })
 }
