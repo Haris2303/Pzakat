@@ -29,7 +29,7 @@ class Kelolaprogram_model {
 
     public function getAllDataProgramAktif(): array
     {
-        $view = $this->view['vwAllDataProgramAktif'];
+        $view = $this->view['allDataProgramAktif'];
         $query = "SELECT * FROM $view ORDER BY id_program DESC";
         $this->db->query($query);
         return $this->db->resultSet();

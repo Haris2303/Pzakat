@@ -17,7 +17,7 @@
 
       <div class="w-full flex gap-y-5 flex-wrap mt-5 text-sm">
 
-      <?php foreach ($data['dataProgram'] as $item): ?>
+      <?php foreach ($data['dataProgramZakat'] as $item): ?>
         <div class="lg:w-1/3 sm:w-1/2 lg:px-3 px-2">
           <div class="shadow-md pb-3">
             <a href="<?= BASEURL ?>/program/<?= $item['slug'] ?>">
