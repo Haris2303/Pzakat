@@ -119,11 +119,21 @@ if (!isset($_SESSION['level'])) {
       </div>
     </li>
 
-    <!-- Nav Item - Pembayaran -->
+    <!-- nav item - Pembayaran -->
     <li class="nav-item">
-      <a class="nav-link" href="<?= BASEURL ?>/norek">
-        <i class="fas fa-fw"></i>
-        <span>Pembayaran</span></a>
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#callapsePembayaran" aria-expanded="true" aria-controls="callapsePembayaran">
+        <i class="fas fa-fw fa-folder"></i>
+        <span>Pembayaran</span>
+      </a>
+      <div id="callapsePembayaran" class="collapse" aria-labelledby="headingPembayaran" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Kelola Pembayaran</h6>
+              <a class="collapse-item" href="<?= BASEURL ?>/kelola_pembayaran/pending">Pending</a>
+              <a class="collapse-item" href="<?= BASEURL ?>/">Konfirmasi</a>
+              <a class="collapse-item" href="<?= BASEURL ?>/">Berhasil</a>
+              <a class="collapse-item" href="<?= BASEURL ?>/">Gagal</a>
+        </div>
+      </div>
     </li>
 
     <!-- Nav Item - Norek -->
