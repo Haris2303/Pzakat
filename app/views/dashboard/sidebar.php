@@ -129,9 +129,9 @@ if (!isset($_SESSION['level'])) {
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Kelola Pembayaran</h6>
               <a class="collapse-item" href="<?= BASEURL ?>/kelola_pembayaran/pending">Pending</a>
-              <a class="collapse-item" href="<?= BASEURL ?>/">Konfirmasi</a>
-              <a class="collapse-item" href="<?= BASEURL ?>/">Berhasil</a>
-              <a class="collapse-item" href="<?= BASEURL ?>/">Gagal</a>
+              <a class="collapse-item" href="<?= BASEURL ?>/kelola_pembayaran/konfirmasi">Konfirmasi</a>
+              <a class="collapse-item" href="<?= BASEURL ?>/kelola_pembayaran/berhasil">Berhasil</a>
+              <a class="collapse-item" href="<?= BASEURL ?>/kelola_pembayaran/gagal">Gagal</a>
         </div>
       </div>
     </li>
