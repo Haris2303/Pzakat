@@ -80,7 +80,7 @@ class Kelola_pembayaran extends Controller {
 
   }
 
-  public function berhasil(): void
+  public function success(): void
   {
       $data = [
           "judul" => "Pembayaran Berhasil",
@@ -97,7 +97,28 @@ class Kelola_pembayaran extends Controller {
       ];
 
       $this->view('dashboard/sidebar', $data);
-      $this->view('kelola_pembayaran/berhasil', $data);
+      $this->view('kelola_pembayaran/success', $data);
+      $this->view('dashboard/footer', $data);
+  }
+
+  public function failed(): void
+  {
+      $data = [
+          "judul" => "Pembayaran Gagal",
+          "css" => [
+              "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
+              "vendor_fontawesome"    => "vendor/fontawesome-free/css/all.min.css"
+            ],
+            "script" => [
+              "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
+              "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
+              "demo_datatables"       => "js/demo/datatables-demo.js",
+            ],
+            "dataGagal" => $this->model("Kelolapembayaran_model")->getAllDataPembayaranGagal()
+      ];
+
+      $this->view('dashboard/sidebar', $data);
+      $this->view('kelola_pembayaran/failed', $data);
       $this->view('dashboard/footer', $data);
   }
 
@@ -117,7 +138,16 @@ class Kelola_pembayaran extends Controller {
 
   public function aksi_batal_pembayaran($id, $username): void
   {
-    $result = $this->model('Kelolapembayaran_model');
+    $result = $this->model('Kelolapembayaran_model')->batalkanPembayaran($id, $username);
+    if($result > 0) {
+      Flasher::setFlash('Pembayaran <strong>Berhasil</strong> Dibatalkan!', 'success');
+      header('Location: ' . BASEURL . '/kelola_pembayaran');
+      exit;
+    } else {
+      Flasher::setFlash('Pembayaran <strong>Gagal</strong> Dibatalkan!', 'danger');
+      header('Location: ' . BASEURL . '/kelola_pembayaran');
+      exit;
+    }
   }
 
 }

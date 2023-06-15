@@ -9,6 +9,7 @@ class Kelolapembayaran_model {
         "dataSukses"     => "vwPembayaranSukses",
         "dataGagal"      => "vwPembayaranGagal"
     ];
+    private $table = 'tb_pembayaran';
     private $db;
 
     public function __construct()
@@ -57,6 +58,14 @@ class Kelolapembayaran_model {
         return $this->db->resultSet();
     }
 
+    public function getAllDataPembayaranGagal(): array
+    {
+        $vw = $this->view['dataGagal'];
+        $query = "SELECT * FROM $vw";
+        $this->db->query($query);
+        return $this->db->resultSet();
+    }
+
     /**
      * 
      * @param Aksi
@@ -65,8 +74,25 @@ class Kelolapembayaran_model {
 
     public function konfirmasiPembayaran($id, $username): int
     {
-        // $id 
-        return 0;
+        $query = "UPDATE $this->table SET username_amil = :username_amil, status_pembayaran = :status_pembayaran WHERE id_donatur = :id_donatur";
+        $this->db->query($query);
+        $this->db->bind('username_amil', $username);
+        $this->db->bind('status_pembayaran', 'success');
+        $this->db->bind('id_donatur', $id);
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
+
+    public function batalkanPembayaran($id, $username): int
+    {
+        $query = "UPDATE $this->table SET username_amil = :username_amil, status_pembayaran = :status_pembayaran WHERE id_donatur = :id_donatur";
+        $this->db->query($query);
+        $this->db->bind('username_amil', $username);
+        $this->db->bind('status_pembayaran', 'failed');
+        $this->db->bind('id_donatur', $id);
+        $this->db->execute();
+
+        return $this->db->rowCount();
     }
 
 }

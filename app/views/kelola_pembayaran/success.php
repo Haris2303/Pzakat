@@ -35,7 +35,7 @@
               <td><?= $item['jumlah_pembayaran'] ?></td>
               <td><?= $item['tanggal_pembayaran'] ?></td>
               <td>
-                <a href="<?= BASEURL ?>/masjid/aksi_hapus_mesjid/<?= $item['id_donatur'] ?>" class="btn badge btn-secondary">Detail</a>
+                <a href="<?= BASEURL ?>/kelola_pembayaran/detail/<?= $item['id_donatur'] ?>" class="btn badge btn-secondary">Detail</a>
               </td>
             </tr>
           <?php endforeach ?>

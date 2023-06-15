@@ -28,15 +28,14 @@
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($data['dataKonfirmasi'] as $item) : ?>
+          <?php foreach ($data['dataGagal'] as $item) : ?>
             <tr>
               <td><?= $item['nama_donatur'] ?></td>
               <td><?= $item['nama_bank'] ?></td>
               <td><?= $item['jumlah_pembayaran'] ?></td>
               <td><?= $item['tanggal_pembayaran'] ?></td>
               <td>
-                <a href="<?= BASEURL ?>/masjid/aksi_hapus_mesjid/<?= $item['id_donatur'] ?>" class="btn badge btn-warning">Konfirmasi</a>
-                <a href="<?= BASEURL ?>/masjid/aksi_hapus_mesjid/<?= $item['id_donatur'] ?>" class="btn badge btn-secondary">Detail</a>
+                <a href="<?= BASEURL ?>/kelola_pembayaran/detail/<?= $item['id_donatur'] ?>" class="btn badge btn-secondary">Detail</a>
               </td>
             </tr>
           <?php endforeach ?>

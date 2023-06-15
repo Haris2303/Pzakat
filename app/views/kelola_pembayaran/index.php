@@ -16,9 +16,13 @@
         </div>
         <div class="position-relative">
             <!-- Button trigger modal -->
-            <a href="<?= BASEURL ?>/kelola_pembayaran/konfirmasi" class="btn btn-primary mr-3"><span>Konfirmasi</span><span class="badge badge-danger badge-counter position-absolute"><?= ($data['countKonfirmasi'] <= 99) ? $data['countKonfirmasi'] : '99'?>+</span></a>
-            <a href="<?= BASEURL ?>/kelola_pembayaran/berhasil" class="btn btn-success">Berhasil</a>
-            <a href="<?= BASEURL ?>/kelola_pembayaran/gagal" class="btn btn-danger">Gagal</a>
+            <a href="<?= BASEURL ?>/kelola_pembayaran/konfirmasi" class="btn btn-primary mr-2"><span>Konfirmasi</span>
+                <?php if($data['countKonfirmasi'] > 0): ?>
+                    <span class="badge badge-danger badge-counter position-absolute"><?= ($data['countKonfirmasi'] <= 99) ? $data['countKonfirmasi'] : '99'?>+</span>
+                <?php endif ?>
+            </a>
+            <a href="<?= BASEURL ?>/kelola_pembayaran/success" class="btn btn-success mr-2">Berhasil</a>
+            <a href="<?= BASEURL ?>/kelola_pembayaran/failed" class="btn btn-danger">Gagal</a>
         </div>
     </div>
   </div>
