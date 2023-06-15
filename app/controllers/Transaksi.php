@@ -3,21 +3,15 @@
 class Transaksi extends Controller
 {
 
-    public function index($slug): void
+    public function index($slug, $qty = null): void
     {
-
-        // cek apakah ada post yang dikirimkan
-        if (isset($_POST['qtyfidyah'])) {
-            setcookie('qtyfidyah', $_POST['qtyfidyah'], time() + (24 * 3600));
-        } else {
-            setcookie('qtyfidyah', '', time() - 3600);
-        }
 
         $data = [
             "judul" => "Form Donasi",
             "dataProgram" => $this->model('Kelolaprogram_model')->getDataProgramBySlug($slug),
             "dataNorek" => $this->model('Norek_model')->getAllDataNorek(),
-            "dataKey" => Utility::getKeyRandom()
+            "dataKey" => Utility::getKeyRandom(),
+            "qtyFidyah" => $qty * 45000
         ];
 
         $this->view('template/normalheader', $data);
@@ -71,6 +65,7 @@ class Transaksi extends Controller
     {
         $this->model('Transaksi_model')->setCookieKodePembayaran();
         $key = $_POST['key'];
+        setcookie('keyRandom', $key, time() + (24 * 3600));
         $result = $this->model('Donatur_model')->tambahDataDonatur($_POST);
         if ($result > 0) {
             Flasher::setFlash('Berhasil', 'success');

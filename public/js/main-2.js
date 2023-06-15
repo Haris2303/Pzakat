@@ -24,6 +24,11 @@ const currency = (event) => {
 }
 
 const calcFidyah = (event) => {
+  // reset href
+  const hrefValue = $('.next-btn').prop('href')
+  const lastString = hrefValue.lastIndexOf('/')
+  const newHref = hrefValue.substring(0, lastString)
+
   const count = (event.which) ? event.which : event.keyCode
   if (count >= 48 && count <= 57) String.fromCharCode(count);
   else if (count === 8) String.fromCharCode(count);
@@ -33,8 +38,8 @@ const calcFidyah = (event) => {
 
     $(event.target).on('keyup', function () {
       if(this.value){
-        const result = this.value * 45000
-        $('input[name=qtyfidyah]').attr('value', result);
+        // set href baru
+        $('.next-btn').attr('href', newHref + '/' + this.value)
       }
     })
   })

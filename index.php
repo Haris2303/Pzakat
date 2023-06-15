@@ -1,1 +1,2 @@
-<?php header('location: http://localhost/Pzakat/public');
+<?php 
+header('location: http://localhost/Pzakat/public');

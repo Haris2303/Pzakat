@@ -17,9 +17,13 @@
                 <div class="mb-3">
                     <label for="nominal-donasi">Nominal Donasi</label>
                     <div class="position-relative">
-                        <p class="position-absolute mt-2 mx-3">Rp. </p>
-                        <?php if(isset($_COOKIE['qtyfidyah'])): ?>
-                            <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi" value="<?= $_COOKIE['qtyfidyah'] ?>" readonly>
+                        <p class="position-absolute mt-2 mx-3">Rp </p>
+                        <?php if($data['dataProgram']['jenis_pembayaran'] === 'fidyah'): ?>
+                            <?php if(($data['qtyFidyah'] <= 0)): ?>
+                                <?php header('Location: ' . BASEURL . '/transaksi/qty/' . $data['dataProgram']['jenis_pembayaran'] . '/' . $data['dataProgram']['slug']) ?>
+                            <?php else: ?>
+                                <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi" value="<?= number_format($data['qtyFidyah'], 0, ',', '.') ?>" readonly>
+                            <?php endif ?>
                         <?php else: ?>
                             <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi" placeholder="0" onkeydown="return currency(event)">
                         <?php endif ?>

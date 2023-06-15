@@ -21,7 +21,7 @@
                     <label for="nominal-donasi">Nominal Donasi</label>
                     <div class="position-relative">
                         <p class="position-absolute mt-2 mx-3">Rp. </p>
-                        <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi" value="<?= $_COOKIE['nominal-donasi'] ?>" readonly>
+                        <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi" value="<?= number_format($_COOKIE['nominal-donasi'], 0, ',', '.') ?>" readonly>
                     </div>
                 </div>
                 <div class="mb-3">
