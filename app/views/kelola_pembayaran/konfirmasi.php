@@ -3,7 +3,7 @@
 <script src="http://localhost/Pzakat/public/static/js/app.js" defer></script>
 
 <!-- Page Heading -->
-<h2 class="h3">Pembayaran Konfirmasi Admin</h2>
+<h2 class="h3">Pembayaran <span class="text-primary">Konfirmasi Admin</span></h2>
 <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
   For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
 

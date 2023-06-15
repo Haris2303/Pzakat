@@ -24,7 +24,7 @@
         </tr>
         <tr>
           <th>Jumlah Donasi</th>
-          <td>: <?= $data['detail']['jumlah_pembayaran'] ?></td>
+          <td>: Rp <?= number_format($data['detail']['jumlah_pembayaran'],0,',', '.') ?></td>
         </tr>
         <tr>
           <th>No Handphone</th>

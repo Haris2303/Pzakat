@@ -95,4 +95,13 @@ class Kelolapembayaran_model {
         return $this->db->rowCount();
     }
 
+    public function hapusPembayaran($id): int
+    {
+        $query = "DELETE FROM $this->table WHERE id_donatur = :id_donatur";
+        $this->db->query($query);
+        $this->db->bind('id_donatur', $id);
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
+
 }

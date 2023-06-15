@@ -3,7 +3,7 @@
 <script src="http://localhost/Pzakat/public/static/js/app.js" defer></script>
 
 <!-- Page Heading -->
-<h2 class="h3">Pembayaran Gagal</h2>
+<h2 class="h3">Pembayaran <span class="text-danger">Gagal</span></h2>
 <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
   For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
@@ -36,6 +36,7 @@
               <td><?= $item['tanggal_pembayaran'] ?></td>
               <td>
                 <a href="<?= BASEURL ?>/kelola_pembayaran/detail/<?= $item['id_donatur'] ?>" class="btn badge btn-secondary">Detail</a>
+                <a href="<?= BASEURL ?>/kelola_pembayaran/aksi_hapus_pembayaran/<?= $item['id_donatur'] ?>" class="btn badge btn-danger" onclick="return confirm('Anda akan menghapus data <?= $item['nama_donatur'] ?>?')">hapus</a>
               </td>
             </tr>
           <?php endforeach ?>

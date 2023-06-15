@@ -16,7 +16,8 @@ class Kelola_pembayaran extends Controller {
           "demo_datatables"       => "js/demo/datatables-demo.js",
       ],
       "dataPembayaran" => $this->model('Kelolapembayaran_model')->getAllDataPembayaran(),
-      "countKonfirmasi" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranKonfirmasi())
+      "countKonfirmasi" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranKonfirmasi()),
+      "countPending" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranPending())
     ];
 
     $this->view('dashboard/sidebar', $data);
@@ -145,6 +146,20 @@ class Kelola_pembayaran extends Controller {
       exit;
     } else {
       Flasher::setFlash('Pembayaran <strong>Gagal</strong> Dibatalkan!', 'danger');
+      header('Location: ' . BASEURL . '/kelola_pembayaran');
+      exit;
+    }
+  }
+
+  public function aksi_hapus_pembayaran($id): void
+  {
+    $result = $this->model('Kelolapembayaran_model')->hapusPembayaran($id);
+    if( $result > 0 ) {
+      Flasher::setFlash('Pembayaran <strong>Berhasil</strong> Dihapus!', 'success');
+      header('Location: ' . BASEURL . '/kelola_pembayaran');
+      exit;
+    } else {
+      Flasher::setFlash('Pembayaran <strong>Gagal</strong> Dihapus!', 'danger');
       header('Location: ' . BASEURL . '/kelola_pembayaran');
       exit;
     }
