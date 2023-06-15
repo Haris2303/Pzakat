@@ -57,4 +57,16 @@ class Kelolapembayaran_model {
         return $this->db->resultSet();
     }
 
+    /**
+     * 
+     * @param Aksi
+     * 
+     */
+
+    public function konfirmasiPembayaran($id, $username): int
+    {
+        // $id 
+        return 0;
+    }
+
 }
