@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5deb2
+-- version 5.2.1deb1+jammy2
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 07, 2023 at 09:53 PM
--- Server version: 8.0.33-0ubuntu0.20.04.2
--- PHP Version: 7.4.3-4ubuntu2.18
+-- Generation Time: Jun 16, 2023 at 08:37 AM
+-- Server version: 8.0.33
+-- PHP Version: 8.1.2-1ubuntu2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -96,12 +95,55 @@ INSERT INTO `tb_banner` (`id_banner`, `username`, `gambar`, `datetime`) VALUES
 
 CREATE TABLE `tb_donatur` (
   `id_donatur` int NOT NULL,
-  `id_program` int NOT NULL,
+  `id_bank` int NOT NULL,
+  `slug_program` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `nama_donatur` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `nohp` varchar(13) NOT NULL,
   `donasi` int NOT NULL,
   `pesan` text NOT NULL,
   `datetime` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tb_donatur`
+--
+
+INSERT INTO `tb_donatur` (`id_donatur`, `id_bank`, `slug_program`, `key`, `nama_donatur`, `email`, `nohp`, `donasi`, `pesan`, `datetime`) VALUES
+(2, 14, 'zakatumum', 'f9aec24592d46ff0416f03f84ff3936a', '', '', '', 0, '', '2023-06-13'),
+(3, 15, 'zakatfidyah', 'be85cffe21a9bbd8a165e543ae86a55b', 'Asdfads', 'asdfa@gmail.com', '08934143', 58888, 'adfadsf', '2023-06-13'),
+(4, 16, 'zakatfidyah', 'f88349f2d4a6df71681446226494f738', 'Ilham Cool', 'ilham@gmail.com', '1241234', 59923, 'asdfas', '2023-06-13'),
+(5, 14, 'ZakatMaal', '2128b06c1c5df35dc81ebd48a86e322b', 'Arya', 'asdfa@gmail.com', '08934143', 50000, 'asdfasdf', '2023-06-13'),
+(6, 15, 'infaqumum', 'dd9526e1a883aae2f897050a9178f379', 'Hamba Allah', 'asdfa@gmail.com', '1241234', 79999, 'adfadsf', '2023-06-13'),
+(7, 14, 'zakatfidyah', 'fc22b245ffb79b218fe7feab8957ec56', 'Ahmad Ilham', 'hamz@gmail.com', '9812413342', 0, 'asdfdssd', '2023-06-13'),
+(8, 16, 'ZakatMaal', '1a18469faceca1833182ec63f6b4444a', 'Ilham Cool', 'ilham@gmail.com', '9812413342', 50000, 'ASF', '2023-06-13'),
+(9, 16, 'ZakatMaal', '7ecec470b706ee049f8e57c53bc80e81', 'Adsfads', 'hamz@gmail.com', '9812413342', 50000, 'ADFDASF', '2023-06-13'),
+(10, 15, 'zakatfidyah', '7f69c3c32f9fa717ba4be63ab9fbc11f', 'John', 'john@gmail.com', '2314123413', 0, 'asdfs', '2023-06-13'),
+(11, 15, 'zakatfidyah', '6571fe211ccc2232743932edb1448801', 'Ilham Cool', 'hamz@gmail.com', '2314123413', 0, 'aadfads', '2023-06-13'),
+(12, 14, 'zakatfidyah', '48b39251a3e8f54aeb45b7c4df1dd27b', 'Ilham Cool', 'ilham@gmail.com', '08934143', 90000, 'adf', '2023-06-13'),
+(13, 14, 'zakatfidyah', 'baf9ee35264268cb6b092741c3033a66', 'Fulan', 'fulan@gmai.com', '234213432', 135000, 'adfadsfs', '2023-06-13'),
+(14, 15, 'ZakatMaal', '731a277ecaf3662a8c5e9dafd845592c', 'Arya', 'fulan@gmai.com', '2314123413', 59923, 'efasdfa', '2023-06-13'),
+(15, 15, 'ZakatMaal', 'e7a6e33be34ef72930bba1abe34bc99c', 'Geri', 'geri@gmail.com', '23423134', 1000, 'asddsfa', '2023-06-13'),
+(16, 16, 'ZakatMaal', 'b40d92454d006a5ee8d2023e6f018800', 'Suryanto', 'suryanto@gmail.id', '082312232323', 80000, 'adsfdassd', '2023-06-14'),
+(17, 15, 'infaqumum', '4f860a41c2b3e9a56a5c9dc211a1cca8', 'Suryanto', 'suryanto@gmail.id', '234123413', 70000, 'adsfads', '2023-06-14'),
+(18, 14, 'zakatfidyah', '4a5bddadf6ab6690a39af1baac3faeb3', 'Ilham Cool', 'hamz@gmail.com', '9812413342', 45000, 'dasdfdsdsa', '2023-06-15'),
+(19, 16, 'ZakatMaal', '08dffa98dcfb7bc6a218c07aa96e1405', 'Arya', 'ilham@gmail.com', '2314123413', 50000, 'adfadsf', '2023-06-15'),
+(20, 16, 'zakatfidyah', '63832d7ad4d3612ca43968a0d2fefb34', 'Ilham Cool', 'fulan@gmai.com', '1241234', 135000, 'SEmoga jaisd', '2023-06-15'),
+(21, 14, 'zakatfidyah', '2f3d0e9086c236f24e396a89fd5e3259', 'Ilham Cool', 'ilham@gmail.com', '1241234', 135000, 'adsfsdafds', '2023-06-15'),
+(22, 14, 'zakatfidyah', 'b2a3697da4242241bd474c2de09898e6', 'Arya', 'fulan@gmai.com', '2314123413', 45000, 'adfasdf', '2023-06-15'),
+(23, 14, 'zakatfidyah', 'cc20c58030fd52babdabaa6dffcecd97', 'Ilham Cool', 'john@gmail.com', '9812413342', 225000, 'adfasd', '2023-06-15'),
+(24, 14, 'zakatfidyah', '45276d17240b2a2e96ffdf4f54acca56', 'Ilham Cool', 'john@gmail.com', '9812413342', 225000, 'adfasd', '2023-06-15'),
+(25, 14, 'zakatfidyah', 'fe3c8652f8b0a96ab2ab9241672c4e68', 'Ilham Cool', 'fulan@gmai.com', '08934143', 225000, 'asdfd', '2023-06-15'),
+(26, 15, 'zakatumum', '082b0372eda7f8c028f0789cb35b658b', 'Asdfads', 'hamz@gmail.com', '2314123413', 69999, 'asdfasdfasd', '2023-06-15');
+
+--
+-- Triggers `tb_donatur`
+--
+DELIMITER $$
+CREATE TRIGGER `donaturTransaksi` AFTER INSERT ON `tb_donatur` FOR EACH ROW INSERT INTO tb_pembayaran VALUES(NULL, NEW.id_donatur, NULL, NEW.key, NEW.donasi, '', NOW(), 'pending')
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -144,7 +186,7 @@ CREATE TABLE `tb_latarbelakang` (
 --
 
 INSERT INTO `tb_latarbelakang` (`id_latarbelakang`, `username`, `content`, `datetime`) VALUES
-(1, 'admin', '<div class=\"flex flex-grow flex-col gap-3\">\r\n<div class=\"min-h-[20px] flex flex-col items-start gap-4 whitespace-pre-wrap break-words\">\r\n<div class=\"markdown prose w-full break-words dark:prose-invert light\">\r\n<p><span style=\"color: rgb(126, 140, 141);\">Aplikasi zakat merupakan sebuah aplikasi yang dirancang untuk memfasilitasi proses pengumpulan, pengelolaan, dan distribusi zakat. Latar belakang dari aplikasi zakat berkaitan dengan tujuan untuk mempermudah dan mempercepat proses zakat, serta meningkatkan efisiensi, transparansi, dan akurasi dalam pengelolaan dana zakat.</span></p>\r\n<p><span style=\"color: rgb(126, 140, 141);\">Berikut adalah beberapa latar belakang penting dari aplikasi lazismu unamin:</span></p>\r\n<ol style=\"list-style: initial; margin-left: 20px;\">\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span style=\"color: rgb(126, 140, 141);\">Kemudahan dan Keterjangkauan: Aplikasi zakat memberikan kemudahan bagi masyarakat untuk melakukan pembayaran zakat secara online, tanpa harus datang ke lembaga zakat secara fisik. Ini memudahkan individu atau organisasi untuk membayar zakat dengan cepat dan nyaman, menggunakan berbagai metode pembayaran yang tersedia.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span style=\"color: rgb(126, 140, 141);\">Transparansi: Aplikasi zakat dapat memberikan tingkat transparansi yang lebih tinggi dalam pengelolaan dana zakat. Masyarakat dapat melihat secara jelas bagaimana dana zakat mereka digunakan dan didistribusikan. Informasi mengenai jumlah yang terkumpul, program yang didukung, dan bantuan yang diberikan dapat diakses dengan mudah melalui aplikasi.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span style=\"color: rgb(126, 140, 141);\">Akurasi dan Rekam Jejak: Dengan menggunakan aplikasi zakat, data mengenai penerima dan penggunaan dana zakat dapat direkam dengan akurat. Aplikasi dapat mencatat setiap transaksi zakat, menyimpan data historis, dan menghasilkan laporan yang berguna untuk audit dan evaluasi.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span style=\"color: rgb(126, 140, 141);\">Efisiensi dan Skalabilitas: Aplikasi zakat memungkinkan lembaga zakat untuk mengelola dana dengan lebih efisien. Proses administratif seperti verifikasi data penerima, pengolahan pembayaran, dan penyaluran dana dapat dipercepat dan diotomatisasi melalui aplikasi. Aplikasi juga dapat mempermudah manajemen dana zakat yang besar dan memungkinkan skala operasional yang lebih besar.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span style=\"color: rgb(126, 140, 141);\">Peningkatan Partisipasi: Aplikasi zakat dapat meningkatkan partisipasi masyarakat dalam membayar zakat. Dengan kemudahan akses dan transparansi yang diberikan oleh aplikasi, diharapkan lebih banyak orang yang termotivasi untuk melaksanakan kewajiban zakat mereka.</span></p>\r\n</li>\r\n</ol>\r\n<p><span style=\"color: rgb(126, 140, 141);\">Dalam keseluruhan, aplikasi zakat bertujuan untuk mengoptimalkan pengelolaan zakat, meningkatkan partisipasi masyarakat, dan memperkuat kepercayaan masyarakat terhadap lembaga zakat melalui penerapan teknologi informasi yang canggih.</span></p>\r\n</div>\r\n</div>\r\n</div>', '2023-05-25 23:31:03');
+(1, 'Sutoyo', '<div class=\"flex flex-grow flex-col gap-3\">\r\n<div class=\"min-h-[20px] flex flex-col items-start gap-4 whitespace-pre-wrap break-words\">\r\n<div class=\"markdown prose w-full break-words dark:prose-invert light\">\r\n<p><span style=\"color: rgb(126, 140, 141);\">Aplikasi zakat merupakan sebuah aplikasi yang dirancang untuk memfasilitasi proses pengumpulan, pengelolaan, dan distribusi zakat. Latar belakang dari aplikasi zakat berkaitan dengan tujuan untuk mempermudah dan mempercepat proses zakat, serta meningkatkan efisiensi, transparansi, dan akurasi dalam pengelolaan dana zakat.</span></p>\r\n<p><span style=\"color: rgb(126, 140, 141);\">Berikut adalah beberapa latar belakang penting dari aplikasi lazismu unamin:</span></p>\r\n<ol style=\"list-style: initial; margin-left: 20px;\">\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span style=\"color: rgb(126, 140, 141);\">Kemudahan dan Keterjangkauan: Aplikasi zakat memberikan kemudahan bagi masyarakat untuk melakukan pembayaran zakat secara online, tanpa harus datang ke lembaga zakat secara fisik. Ini memudahkan individu atau organisasi untuk membayar zakat dengan cepat dan nyaman, menggunakan berbagai metode pembayaran yang tersedia.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span style=\"color: rgb(126, 140, 141);\">Transparansi: Aplikasi zakat dapat memberikan tingkat transparansi yang lebih tinggi dalam pengelolaan dana zakat. Masyarakat dapat melihat secara jelas bagaimana dana zakat mereka digunakan dan didistribusikan. Informasi mengenai jumlah yang terkumpul, program yang didukung, dan bantuan yang diberikan dapat diakses dengan mudah melalui aplikasi.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span style=\"color: rgb(126, 140, 141);\">Akurasi dan Rekam Jejak: Dengan menggunakan aplikasi zakat, data mengenai penerima dan penggunaan dana zakat dapat direkam dengan akurat. Aplikasi dapat mencatat setiap transaksi zakat, menyimpan data historis, dan menghasilkan laporan yang berguna untuk audit dan evaluasi.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span style=\"color: rgb(126, 140, 141);\">Efisiensi dan Skalabilitas: Aplikasi zakat memungkinkan lembaga zakat untuk mengelola dana dengan lebih efisien. Proses administratif seperti verifikasi data penerima, pengolahan pembayaran, dan penyaluran dana dapat dipercepat dan diotomatisasi melalui aplikasi. Aplikasi juga dapat mempermudah manajemen dana zakat yang besar dan memungkinkan skala operasional yang lebih besar.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span style=\"color: rgb(126, 140, 141);\">Peningkatan Partisipasi: Aplikasi zakat dapat meningkatkan partisipasi masyarakat dalam membayar zakat. Dengan kemudahan akses dan transparansi yang diberikan oleh aplikasi, diharapkan lebih banyak orang yang termotivasi untuk melaksanakan kewajiban zakat mereka.</span></p>\r\n</li>\r\n</ol>\r\n<p><span style=\"color: rgb(126, 140, 141);\">Dalam keseluruhan, aplikasi zakat bertujuan untuk mengoptimalkan pengelolaan zakat, meningkatkan partisipasi masyarakat, dan memperkuat kepercayaan masyarakat terhadap lembaga zakat melalui penerapan teknologi informasi yang canggih.</span></p>\r\n</div>\r\n</div>\r\n</div>', '2023-06-12 09:18:49');
 
 -- --------------------------------------------------------
 
@@ -199,6 +241,7 @@ CREATE TABLE `tb_norek` (
   `nama_pemilik` varchar(50) NOT NULL,
   `nama_bank` varchar(50) NOT NULL,
   `norek` varchar(20) NOT NULL,
+  `jenis_program` varchar(50) NOT NULL,
   `gambar` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -206,12 +249,26 @@ CREATE TABLE `tb_norek` (
 -- Dumping data for table `tb_norek`
 --
 
-INSERT INTO `tb_norek` (`id_norek`, `nama_pemilik`, `nama_bank`, `norek`, `gambar`) VALUES
-(3, 'Ilham Cool', 'Bank Negara Indonesia', '5343112341343', '647886106a421.webp'),
-(4, 'Andi Rahmat', 'Mandiri', '532123421233', '6478874ded607.webp'),
-(5, 'Ahmad Ilham', 'Bank Papua', '56134113241324', '647890b0d6f99.webp'),
-(8, 'Siapa Aja', 'Bank Rakyat Indonesia', '514231234341', '647894b31600c.webp'),
-(10, 'Arya Chandra', 'BCA', '151341288888', '64792bc6f3065.webp');
+INSERT INTO `tb_norek` (`id_norek`, `nama_pemilik`, `nama_bank`, `norek`, `jenis_program`, `gambar`) VALUES
+(14, 'Salahudin', 'BANK BCA', '513413411', 'Infaq', 'bank-bca.jpeg'),
+(15, 'Jalaludin Syukurudin', 'BANK BRI', '132412351233', 'Zakat', 'bank-bri.jpeg'),
+(16, 'Sotoyo Maryo', 'BANK MUAMALAT', '1234234123432', 'Zakat', 'bank-muamalat.jpeg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_pemasukkan`
+--
+
+CREATE TABLE `tb_pemasukkan` (
+  `id_pemasukkan` int NOT NULL,
+  `id_pembayaran` int NOT NULL,
+  `id_norek` int NOT NULL,
+  `pemasukkan_harian` int NOT NULL,
+  `pemasukkan_mingguan` int NOT NULL,
+  `pemasukkan_bulanan` int NOT NULL,
+  `datetime` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -221,15 +278,41 @@ INSERT INTO `tb_norek` (`id_norek`, `nama_pemilik`, `nama_bank`, `norek`, `gamba
 
 CREATE TABLE `tb_pembayaran` (
   `id_pembayaran` int NOT NULL,
-  `id_muzakki` int NOT NULL,
-  `id_amil` int DEFAULT NULL,
-  `id_bank` int NOT NULL,
+  `id_donatur` int NOT NULL,
+  `username_amil` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `nomor_pembayaran` varchar(100) NOT NULL,
   `jumlah_pembayaran` int NOT NULL,
   `bukti_pembayaran` varchar(100) NOT NULL,
   `tanggal_pembayaran` datetime NOT NULL,
-  `status_pembayaran` enum('failed','pending','konfirmasi','success') NOT NULL,
-  `nomor_pembayaran` varchar(100) NOT NULL
+  `status_pembayaran` enum('failed','pending','konfirmasi','success') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tb_pembayaran`
+--
+
+INSERT INTO `tb_pembayaran` (`id_pembayaran`, `id_donatur`, `username_amil`, `nomor_pembayaran`, `jumlah_pembayaran`, `bukti_pembayaran`, `tanggal_pembayaran`, `status_pembayaran`) VALUES
+(2, 3, NULL, 'be85cffe21a9bbd8a165e543ae86a55b', 58888, '', '2023-06-13 15:09:15', 'pending'),
+(3, 4, 'ilham', 'KDA-1686637200', 59923, '64880ac2907fd.webp', '2023-06-13 15:20:50', 'success'),
+(4, 5, 'ilham', 'KDA-1686637497', 50000, '64880bf91d42d.webp', '2023-06-13 15:26:01', 'success'),
+(5, 6, 'ilham', 'KDA-1686637618', 79999, '64880c4947681.webp', '2023-06-13 15:27:21', 'success'),
+(7, 8, NULL, '1a18469faceca1833182ec63f6b4444a', 50000, '', '2023-06-13 22:31:12', 'pending'),
+(9, 10, NULL, '7f69c3c32f9fa717ba4be63ab9fbc11f', 0, '', '2023-06-13 22:37:49', 'pending'),
+(10, 11, NULL, '6571fe211ccc2232743932edb1448801', 0, '', '2023-06-13 22:42:31', 'pending'),
+(11, 12, NULL, '48b39251a3e8f54aeb45b7c4df1dd27b', 90000, '', '2023-06-13 22:45:07', 'pending'),
+(12, 13, NULL, 'baf9ee35264268cb6b092741c3033a66', 135000, '', '2023-06-13 22:49:10', 'pending'),
+(13, 14, NULL, '731a277ecaf3662a8c5e9dafd845592c', 59923, '', '2023-06-13 22:52:14', 'pending'),
+(15, 16, 'ilham', 'KDA-1686710338', 80000, '64892851a26f1.webp', '2023-06-14 11:39:13', 'success'),
+(16, 17, 'ilham', 'KDA-1686711615', 70000, '64892d50448ca.webp', '2023-06-14 12:00:32', 'success'),
+(17, 18, NULL, '4a5bddadf6ab6690a39af1baac3faeb3', 45000, '', '2023-06-15 09:06:16', 'pending'),
+(18, 19, 'ilham', 'KDA-1686788523', 50, '648a59c9da3ff.webp', '2023-06-15 09:22:34', 'failed'),
+(19, 20, NULL, '63832d7ad4d3612ca43968a0d2fefb34', 135000, '', '2023-06-15 09:23:08', 'pending'),
+(20, 21, NULL, '2f3d0e9086c236f24e396a89fd5e3259', 135000, '', '2023-06-15 09:26:03', 'pending'),
+(21, 22, NULL, 'b2a3697da4242241bd474c2de09898e6', 45000, '', '2023-06-15 09:29:46', 'pending'),
+(22, 23, NULL, 'cc20c58030fd52babdabaa6dffcecd97', 225000, '', '2023-06-15 09:33:14', 'pending'),
+(23, 24, NULL, '45276d17240b2a2e96ffdf4f54acca56', 225000, '', '2023-06-15 09:33:22', 'pending'),
+(24, 25, 'ilham', 'KDA-1686789384', 225, '648a5d2d1801b.webp', '2023-06-15 09:37:01', 'failed'),
+(25, 26, 'ilham', 'KDA-1686789433', 70, '648a5d44cf661.webp', '2023-06-15 09:37:24', 'failed');
 
 -- --------------------------------------------------------
 
@@ -331,7 +414,7 @@ CREATE TABLE `tb_visimisi` (
 --
 
 INSERT INTO `tb_visimisi` (`id_visimisi`, `username`, `content`, `datetime`) VALUES
-(2, 'admin', '<p><span style=\"color: rgb(126, 140, 141);\"><strong>Visi</strong></span></p>\r\n<p><span style=\"color: rgb(126, 140, 141);\">Visi adalah visi<br></span></p>\r\n<p><strong><span style=\"color: rgb(126, 140, 141);\">Misi</span></strong></p>\r\n<p><span style=\"color: rgb(126, 140, 141);\">Misi adalah misi<br></span></p>', '2023-05-26 10:13:28');
+(2, 'admin', '<p><span style=\"color: rgb(126, 140, 141);\"><strong>Visi</strong></span></p>\r\n<p><span style=\"color: rgb(126, 140, 141);\">Visi adalah visi<br></span></p>\r\n<p><strong><span style=\"color: rgb(126, 140, 141);\">Misi</span></strong></p>\r\n<p><span style=\"color: rgb(126, 140, 141);\">Misi adalah misi<br></span></p>', '2023-06-12 09:18:57');
 
 -- --------------------------------------------------------
 
@@ -445,6 +528,30 @@ CREATE TABLE `vwAllMuzakki` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `vwAllPembayaran`
+-- (See below for the actual view)
+--
+CREATE TABLE `vwAllPembayaran` (
+`id_bank` int
+,`id_donatur` int
+,`nama_donatur` varchar(50)
+,`email` varchar(100)
+,`nohp` varchar(13)
+,`pesan` text
+,`nama_pemilik` varchar(50)
+,`nama_bank` varchar(50)
+,`norek` varchar(20)
+,`jenis_program` varchar(50)
+,`jumlah_pembayaran` int
+,`nomor_pembayaran` varchar(100)
+,`bukti_pembayaran` varchar(100)
+,`status_pembayaran` enum('failed','pending','konfirmasi','success')
+,`tanggal_pembayaran` datetime
+);
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `vwAllProgramAktif`
 -- (See below for the actual view)
 --
@@ -492,11 +599,109 @@ CREATE TABLE `vwAllProgramTidakAktif` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `vwPemasukkanBulanan`
+-- (See below for the actual view)
+--
+CREATE TABLE `vwPemasukkanBulanan` (
+`tahun` int
+,`bulan` int
+,`total_pemasukkan` decimal(32,0)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vwPemasukkanHarian`
+-- (See below for the actual view)
+--
+CREATE TABLE `vwPemasukkanHarian` (
+`tanggal_pembayaran` datetime
+,`total_pemasukkan` decimal(32,0)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vwPembayaranGagal`
+-- (See below for the actual view)
+--
+CREATE TABLE `vwPembayaranGagal` (
+`id_bank` int
+,`id_donatur` int
+,`nama_donatur` varchar(50)
+,`nama_pemilik` varchar(50)
+,`nama_bank` varchar(50)
+,`norek` varchar(20)
+,`jenis_program` varchar(50)
+,`jumlah_pembayaran` int
+,`bukti_pembayaran` varchar(100)
+,`tanggal_pembayaran` datetime
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vwPembayaranKonfirmasi`
+-- (See below for the actual view)
+--
+CREATE TABLE `vwPembayaranKonfirmasi` (
+`id_bank` int
+,`id_donatur` int
+,`nama_donatur` varchar(50)
+,`nama_pemilik` varchar(50)
+,`nama_bank` varchar(50)
+,`norek` varchar(20)
+,`jenis_program` varchar(50)
+,`jumlah_pembayaran` int
+,`bukti_pembayaran` varchar(100)
+,`tanggal_pembayaran` datetime
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vwPembayaranPending`
+-- (See below for the actual view)
+--
+CREATE TABLE `vwPembayaranPending` (
+`id_bank` int
+,`id_donatur` int
+,`nama_donatur` varchar(50)
+,`nama_pemilik` varchar(50)
+,`nama_bank` varchar(50)
+,`norek` varchar(20)
+,`jenis_program` varchar(50)
+,`jumlah_pembayaran` int
+,`tanggal_pembayaran` datetime
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vwPembayaranSukses`
+-- (See below for the actual view)
+--
+CREATE TABLE `vwPembayaranSukses` (
+`id_bank` int
+,`id_donatur` int
+,`nama_donatur` varchar(50)
+,`nama_pemilik` varchar(50)
+,`nama_bank` varchar(50)
+,`norek` varchar(20)
+,`jenis_program` varchar(50)
+,`jumlah_pembayaran` int
+,`bukti_pembayaran` varchar(100)
+,`tanggal_pembayaran` datetime
+);
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `vwAllAdmin`
 --
 DROP TABLE IF EXISTS `vwAllAdmin`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllAdmin`  AS  select `tb_admin`.`id_admin` AS `id_admin`,`tb_admin`.`nama` AS `nama`,`tb_user`.`username` AS `username`,`tb_user`.`waktu_login` AS `waktu_login` from (`tb_admin` join `tb_user` on((`tb_admin`.`id_user` = `tb_user`.`id_user`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllAdmin`  AS SELECT `tb_admin`.`id_admin` AS `id_admin`, `tb_admin`.`nama` AS `nama`, `tb_user`.`username` AS `username`, `tb_user`.`waktu_login` AS `waktu_login` FROM (`tb_admin` join `tb_user` on((`tb_admin`.`id_user` = `tb_user`.`id_user`))) ;
 
 -- --------------------------------------------------------
 
@@ -505,7 +710,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vwAllAmil`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllAmil`  AS  select `tb_amil`.`id_amil` AS `id_amil`,`tb_amil`.`id_mesjid` AS `id_mesjid`,`tb_amil`.`nama` AS `nama`,`tb_amil`.`email` AS `email`,`tb_amil`.`alamat` AS `alamat`,`tb_amil`.`nohp` AS `nohp`,`tb_user`.`id_user` AS `id_user`,`tb_user`.`username` AS `username`,`tb_user`.`waktu_login` AS `waktu_login` from (`tb_amil` join `tb_user` on((`tb_amil`.`id_user` = `tb_user`.`id_user`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllAmil`  AS SELECT `tb_amil`.`id_amil` AS `id_amil`, `tb_amil`.`id_mesjid` AS `id_mesjid`, `tb_amil`.`nama` AS `nama`, `tb_amil`.`email` AS `email`, `tb_amil`.`alamat` AS `alamat`, `tb_amil`.`nohp` AS `nohp`, `tb_user`.`id_user` AS `id_user`, `tb_user`.`username` AS `username`, `tb_user`.`waktu_login` AS `waktu_login` FROM (`tb_amil` join `tb_user` on((`tb_amil`.`id_user` = `tb_user`.`id_user`))) ;
 
 -- --------------------------------------------------------
 
@@ -514,7 +719,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vwAllDataInfaq`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllDataInfaq`  AS  select `tb_program`.`id_program` AS `id_program`,`tb_program`.`nama_program` AS `nama_program`,`tb_program`.`slug` AS `slug`,`tb_program`.`jenis_program` AS `jenis_program`,`tb_program`.`jenis_pembayaran` AS `jenis_pembayaran`,`tb_program`.`deskripsi_program` AS `deskripsi_program`,`tb_program`.`total_dana` AS `total_dana`,`tb_program`.`jumlah_donatur` AS `jumlah_donatur`,`tb_program`.`gambar` AS `gambar`,`tb_program`.`content` AS `content`,`tb_program`.`datetime` AS `datetime` from `tb_program` where (`tb_program`.`jenis_program` = 'Infaq') ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllDataInfaq`  AS SELECT `tb_program`.`id_program` AS `id_program`, `tb_program`.`nama_program` AS `nama_program`, `tb_program`.`slug` AS `slug`, `tb_program`.`jenis_program` AS `jenis_program`, `tb_program`.`jenis_pembayaran` AS `jenis_pembayaran`, `tb_program`.`deskripsi_program` AS `deskripsi_program`, `tb_program`.`total_dana` AS `total_dana`, `tb_program`.`jumlah_donatur` AS `jumlah_donatur`, `tb_program`.`gambar` AS `gambar`, `tb_program`.`content` AS `content`, `tb_program`.`datetime` AS `datetime` FROM `tb_program` WHERE (`tb_program`.`jenis_program` = 'Infaq') ;
 
 -- --------------------------------------------------------
 
@@ -523,7 +728,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vwAllDataProgramAktif`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllDataProgramAktif`  AS  select `tb_program`.`id_program` AS `id_program`,`tb_program`.`nama_program` AS `nama_program`,`tb_program`.`slug` AS `slug`,`tb_program`.`jenis_program` AS `jenis_program`,`tb_program`.`jenis_pembayaran` AS `jenis_pembayaran`,`tb_program`.`deskripsi_program` AS `deskripsi_program`,`tb_program`.`total_dana` AS `total_dana`,`tb_program`.`jumlah_donatur` AS `jumlah_donatur`,`tb_program`.`gambar` AS `gambar`,`tb_program`.`content` AS `content`,`tb_program`.`datetime` AS `datetime`,`tb_kategoriprogram`.`id_kategoriprogram` AS `id_kategoriprogram`,`tb_kategoriprogram`.`nama_kategoriprogram` AS `nama_kategoriprogram`,`tb_kategoriprogram`.`status` AS `status` from (`tb_program` join `tb_kategoriprogram` on((`tb_program`.`jenis_program` = `tb_kategoriprogram`.`nama_kategoriprogram`))) where (`tb_kategoriprogram`.`status` = 'aktif') ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllDataProgramAktif`  AS SELECT `tb_program`.`id_program` AS `id_program`, `tb_program`.`nama_program` AS `nama_program`, `tb_program`.`slug` AS `slug`, `tb_program`.`jenis_program` AS `jenis_program`, `tb_program`.`jenis_pembayaran` AS `jenis_pembayaran`, `tb_program`.`deskripsi_program` AS `deskripsi_program`, `tb_program`.`total_dana` AS `total_dana`, `tb_program`.`jumlah_donatur` AS `jumlah_donatur`, `tb_program`.`gambar` AS `gambar`, `tb_program`.`content` AS `content`, `tb_program`.`datetime` AS `datetime`, `tb_kategoriprogram`.`id_kategoriprogram` AS `id_kategoriprogram`, `tb_kategoriprogram`.`nama_kategoriprogram` AS `nama_kategoriprogram`, `tb_kategoriprogram`.`status` AS `status` FROM (`tb_program` join `tb_kategoriprogram` on((`tb_program`.`jenis_program` = `tb_kategoriprogram`.`nama_kategoriprogram`))) WHERE (`tb_kategoriprogram`.`status` = 'aktif') ;
 
 -- --------------------------------------------------------
 
@@ -532,7 +737,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vwAllDataZakat`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllDataZakat`  AS  select `tb_program`.`id_program` AS `id_program`,`tb_program`.`nama_program` AS `nama_program`,`tb_program`.`slug` AS `slug`,`tb_program`.`jenis_program` AS `jenis_program`,`tb_program`.`jenis_pembayaran` AS `jenis_pembayaran`,`tb_program`.`deskripsi_program` AS `deskripsi_program`,`tb_program`.`total_dana` AS `total_dana`,`tb_program`.`jumlah_donatur` AS `jumlah_donatur`,`tb_program`.`gambar` AS `gambar`,`tb_program`.`content` AS `content`,`tb_program`.`datetime` AS `datetime` from `tb_program` where (`tb_program`.`jenis_program` = 'Zakat') ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllDataZakat`  AS SELECT `tb_program`.`id_program` AS `id_program`, `tb_program`.`nama_program` AS `nama_program`, `tb_program`.`slug` AS `slug`, `tb_program`.`jenis_program` AS `jenis_program`, `tb_program`.`jenis_pembayaran` AS `jenis_pembayaran`, `tb_program`.`deskripsi_program` AS `deskripsi_program`, `tb_program`.`total_dana` AS `total_dana`, `tb_program`.`jumlah_donatur` AS `jumlah_donatur`, `tb_program`.`gambar` AS `gambar`, `tb_program`.`content` AS `content`, `tb_program`.`datetime` AS `datetime` FROM `tb_program` WHERE (`tb_program`.`jenis_program` = 'Zakat') ;
 
 -- --------------------------------------------------------
 
@@ -541,7 +746,16 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vwAllMuzakki`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllMuzakki`  AS  select `tb_muzakki`.`id_muzakki` AS `id_muzakki`,`tb_muzakki`.`nama` AS `nama`,`tb_muzakki`.`email` AS `email`,`tb_muzakki`.`nohp` AS `nohp`,`tb_user`.`username` AS `username`,`tb_user`.`waktu_login` AS `waktu_login` from (`tb_muzakki` join `tb_user` on((`tb_muzakki`.`id_user` = `tb_user`.`id_user`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllMuzakki`  AS SELECT `tb_muzakki`.`id_muzakki` AS `id_muzakki`, `tb_muzakki`.`nama` AS `nama`, `tb_muzakki`.`email` AS `email`, `tb_muzakki`.`nohp` AS `nohp`, `tb_user`.`username` AS `username`, `tb_user`.`waktu_login` AS `waktu_login` FROM (`tb_muzakki` join `tb_user` on((`tb_muzakki`.`id_user` = `tb_user`.`id_user`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vwAllPembayaran`
+--
+DROP TABLE IF EXISTS `vwAllPembayaran`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllPembayaran`  AS SELECT `tb_donatur`.`id_bank` AS `id_bank`, `tb_donatur`.`id_donatur` AS `id_donatur`, `tb_donatur`.`nama_donatur` AS `nama_donatur`, `tb_donatur`.`email` AS `email`, `tb_donatur`.`nohp` AS `nohp`, `tb_donatur`.`pesan` AS `pesan`, `tb_norek`.`nama_pemilik` AS `nama_pemilik`, `tb_norek`.`nama_bank` AS `nama_bank`, `tb_norek`.`norek` AS `norek`, `tb_norek`.`jenis_program` AS `jenis_program`, `tb_pembayaran`.`jumlah_pembayaran` AS `jumlah_pembayaran`, `tb_pembayaran`.`nomor_pembayaran` AS `nomor_pembayaran`, `tb_pembayaran`.`bukti_pembayaran` AS `bukti_pembayaran`, `tb_pembayaran`.`status_pembayaran` AS `status_pembayaran`, `tb_pembayaran`.`tanggal_pembayaran` AS `tanggal_pembayaran` FROM ((`tb_norek` join `tb_donatur` on((`tb_norek`.`id_norek` = `tb_donatur`.`id_bank`))) join `tb_pembayaran` on((`tb_pembayaran`.`id_donatur` = `tb_donatur`.`id_donatur`))) ;
 
 -- --------------------------------------------------------
 
@@ -550,7 +764,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vwAllProgramAktif`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllProgramAktif`  AS  select `tb_program`.`id_program` AS `id_program`,`tb_program`.`nama_program` AS `nama_program`,`tb_program`.`slug` AS `slug`,`tb_program`.`jenis_program` AS `jenis_program`,`tb_program`.`jenis_pembayaran` AS `jenis_pembayaran`,`tb_program`.`deskripsi_program` AS `deskripsi_program`,`tb_program`.`total_dana` AS `total_dana`,`tb_program`.`jumlah_donatur` AS `jumlah_donatur`,`tb_program`.`gambar` AS `gambar`,`tb_program`.`content` AS `content`,`tb_program`.`datetime` AS `datetime`,`tb_kategoriprogram`.`id_kategoriprogram` AS `id_kategoriprogram`,`tb_kategoriprogram`.`nama_kategoriprogram` AS `nama_kategoriprogram`,`tb_kategoriprogram`.`status` AS `status` from (`tb_program` join `tb_kategoriprogram` on((`tb_program`.`jenis_program` = `tb_kategoriprogram`.`nama_kategoriprogram`))) where (`tb_kategoriprogram`.`status` = 'aktif') ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllProgramAktif`  AS SELECT `tb_program`.`id_program` AS `id_program`, `tb_program`.`nama_program` AS `nama_program`, `tb_program`.`slug` AS `slug`, `tb_program`.`jenis_program` AS `jenis_program`, `tb_program`.`jenis_pembayaran` AS `jenis_pembayaran`, `tb_program`.`deskripsi_program` AS `deskripsi_program`, `tb_program`.`total_dana` AS `total_dana`, `tb_program`.`jumlah_donatur` AS `jumlah_donatur`, `tb_program`.`gambar` AS `gambar`, `tb_program`.`content` AS `content`, `tb_program`.`datetime` AS `datetime`, `tb_kategoriprogram`.`id_kategoriprogram` AS `id_kategoriprogram`, `tb_kategoriprogram`.`nama_kategoriprogram` AS `nama_kategoriprogram`, `tb_kategoriprogram`.`status` AS `status` FROM (`tb_program` join `tb_kategoriprogram` on((`tb_program`.`jenis_program` = `tb_kategoriprogram`.`nama_kategoriprogram`))) WHERE (`tb_kategoriprogram`.`status` = 'aktif') ;
 
 -- --------------------------------------------------------
 
@@ -559,7 +773,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vwAllProgramNameAktif`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllProgramNameAktif`  AS  select `tb_kategoriprogram`.`id_kategoriprogram` AS `id_kategoriprogram`,`tb_kategoriprogram`.`nama_kategoriprogram` AS `nama_kategoriprogram`,`tb_kategoriprogram`.`status` AS `status` from `tb_kategoriprogram` where (`tb_kategoriprogram`.`status` = 'aktif') ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllProgramNameAktif`  AS SELECT `tb_kategoriprogram`.`id_kategoriprogram` AS `id_kategoriprogram`, `tb_kategoriprogram`.`nama_kategoriprogram` AS `nama_kategoriprogram`, `tb_kategoriprogram`.`status` AS `status` FROM `tb_kategoriprogram` WHERE (`tb_kategoriprogram`.`status` = 'aktif') ;
 
 -- --------------------------------------------------------
 
@@ -568,7 +782,61 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vwAllProgramTidakAktif`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllProgramTidakAktif`  AS  select `tb_kategoriprogram`.`id_kategoriprogram` AS `id_kategoriprogram`,`tb_kategoriprogram`.`nama_kategoriprogram` AS `nama_kategoriprogram`,`tb_kategoriprogram`.`status` AS `status` from `tb_kategoriprogram` where (`tb_kategoriprogram`.`status` = 'pasif') ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllProgramTidakAktif`  AS SELECT `tb_kategoriprogram`.`id_kategoriprogram` AS `id_kategoriprogram`, `tb_kategoriprogram`.`nama_kategoriprogram` AS `nama_kategoriprogram`, `tb_kategoriprogram`.`status` AS `status` FROM `tb_kategoriprogram` WHERE (`tb_kategoriprogram`.`status` = 'pasif') ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vwPemasukkanBulanan`
+--
+DROP TABLE IF EXISTS `vwPemasukkanBulanan`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwPemasukkanBulanan`  AS SELECT year(`tb_pembayaran`.`tanggal_pembayaran`) AS `tahun`, month(`tb_pembayaran`.`tanggal_pembayaran`) AS `bulan`, sum(`tb_pembayaran`.`jumlah_pembayaran`) AS `total_pemasukkan` FROM `tb_pembayaran` WHERE (`tb_pembayaran`.`status_pembayaran` = 'success') GROUP BY year(`tb_pembayaran`.`tanggal_pembayaran`), month(`tb_pembayaran`.`tanggal_pembayaran`) ORDER BY year(`tb_pembayaran`.`tanggal_pembayaran`) ASC, month(`tb_pembayaran`.`tanggal_pembayaran`) ASC ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vwPemasukkanHarian`
+--
+DROP TABLE IF EXISTS `vwPemasukkanHarian`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwPemasukkanHarian`  AS SELECT `tb_pembayaran`.`tanggal_pembayaran` AS `tanggal_pembayaran`, sum(`tb_pembayaran`.`jumlah_pembayaran`) AS `total_pemasukkan` FROM `tb_pembayaran` WHERE (`tb_pembayaran`.`status_pembayaran` = 'success') GROUP BY `tb_pembayaran`.`tanggal_pembayaran` ORDER BY `tb_pembayaran`.`tanggal_pembayaran` ASC ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vwPembayaranGagal`
+--
+DROP TABLE IF EXISTS `vwPembayaranGagal`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwPembayaranGagal`  AS SELECT `tb_donatur`.`id_bank` AS `id_bank`, `tb_donatur`.`id_donatur` AS `id_donatur`, `tb_donatur`.`nama_donatur` AS `nama_donatur`, `tb_norek`.`nama_pemilik` AS `nama_pemilik`, `tb_norek`.`nama_bank` AS `nama_bank`, `tb_norek`.`norek` AS `norek`, `tb_norek`.`jenis_program` AS `jenis_program`, `tb_pembayaran`.`jumlah_pembayaran` AS `jumlah_pembayaran`, `tb_pembayaran`.`bukti_pembayaran` AS `bukti_pembayaran`, `tb_pembayaran`.`tanggal_pembayaran` AS `tanggal_pembayaran` FROM ((`tb_norek` join `tb_donatur` on((`tb_norek`.`id_norek` = `tb_donatur`.`id_bank`))) join `tb_pembayaran` on((`tb_pembayaran`.`id_donatur` = `tb_donatur`.`id_donatur`))) WHERE (`tb_pembayaran`.`status_pembayaran` = 'failed') ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vwPembayaranKonfirmasi`
+--
+DROP TABLE IF EXISTS `vwPembayaranKonfirmasi`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwPembayaranKonfirmasi`  AS SELECT `tb_donatur`.`id_bank` AS `id_bank`, `tb_donatur`.`id_donatur` AS `id_donatur`, `tb_donatur`.`nama_donatur` AS `nama_donatur`, `tb_norek`.`nama_pemilik` AS `nama_pemilik`, `tb_norek`.`nama_bank` AS `nama_bank`, `tb_norek`.`norek` AS `norek`, `tb_norek`.`jenis_program` AS `jenis_program`, `tb_pembayaran`.`jumlah_pembayaran` AS `jumlah_pembayaran`, `tb_pembayaran`.`bukti_pembayaran` AS `bukti_pembayaran`, `tb_pembayaran`.`tanggal_pembayaran` AS `tanggal_pembayaran` FROM ((`tb_norek` join `tb_donatur` on((`tb_norek`.`id_norek` = `tb_donatur`.`id_bank`))) join `tb_pembayaran` on((`tb_pembayaran`.`id_donatur` = `tb_donatur`.`id_donatur`))) WHERE (`tb_pembayaran`.`status_pembayaran` = 'konfirmasi') ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vwPembayaranPending`
+--
+DROP TABLE IF EXISTS `vwPembayaranPending`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwPembayaranPending`  AS SELECT `tb_donatur`.`id_bank` AS `id_bank`, `tb_donatur`.`id_donatur` AS `id_donatur`, `tb_donatur`.`nama_donatur` AS `nama_donatur`, `tb_norek`.`nama_pemilik` AS `nama_pemilik`, `tb_norek`.`nama_bank` AS `nama_bank`, `tb_norek`.`norek` AS `norek`, `tb_norek`.`jenis_program` AS `jenis_program`, `tb_pembayaran`.`jumlah_pembayaran` AS `jumlah_pembayaran`, `tb_pembayaran`.`tanggal_pembayaran` AS `tanggal_pembayaran` FROM ((`tb_norek` join `tb_donatur` on((`tb_norek`.`id_norek` = `tb_donatur`.`id_bank`))) join `tb_pembayaran` on((`tb_pembayaran`.`id_donatur` = `tb_donatur`.`id_donatur`))) WHERE (`tb_pembayaran`.`status_pembayaran` = 'pending') ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vwPembayaranSukses`
+--
+DROP TABLE IF EXISTS `vwPembayaranSukses`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwPembayaranSukses`  AS SELECT `tb_donatur`.`id_bank` AS `id_bank`, `tb_donatur`.`id_donatur` AS `id_donatur`, `tb_donatur`.`nama_donatur` AS `nama_donatur`, `tb_norek`.`nama_pemilik` AS `nama_pemilik`, `tb_norek`.`nama_bank` AS `nama_bank`, `tb_norek`.`norek` AS `norek`, `tb_norek`.`jenis_program` AS `jenis_program`, `tb_pembayaran`.`jumlah_pembayaran` AS `jumlah_pembayaran`, `tb_pembayaran`.`bukti_pembayaran` AS `bukti_pembayaran`, `tb_pembayaran`.`tanggal_pembayaran` AS `tanggal_pembayaran` FROM ((`tb_norek` join `tb_donatur` on((`tb_norek`.`id_norek` = `tb_donatur`.`id_bank`))) join `tb_pembayaran` on((`tb_pembayaran`.`id_donatur` = `tb_donatur`.`id_donatur`))) WHERE (`tb_pembayaran`.`status_pembayaran` = 'success') ;
 
 --
 -- Indexes for dumped tables
@@ -600,8 +868,7 @@ ALTER TABLE `tb_banner`
 -- Indexes for table `tb_donatur`
 --
 ALTER TABLE `tb_donatur`
-  ADD PRIMARY KEY (`id_donatur`),
-  ADD KEY `INDEX` (`id_program`);
+  ADD PRIMARY KEY (`id_donatur`);
 
 --
 -- Indexes for table `tb_kategoriprogram`
@@ -639,12 +906,19 @@ ALTER TABLE `tb_norek`
   ADD UNIQUE KEY `UNIQUE` (`norek`);
 
 --
+-- Indexes for table `tb_pemasukkan`
+--
+ALTER TABLE `tb_pemasukkan`
+  ADD PRIMARY KEY (`id_pemasukkan`),
+  ADD KEY `INDEX` (`id_pembayaran`,`id_norek`);
+
+--
 -- Indexes for table `tb_pembayaran`
 --
 ALTER TABLE `tb_pembayaran`
   ADD PRIMARY KEY (`id_pembayaran`),
   ADD UNIQUE KEY `UNIQUE` (`nomor_pembayaran`),
-  ADD KEY `INDEX` (`id_muzakki`,`id_amil`,`id_bank`);
+  ADD KEY `INDEX` (`id_donatur`,`username_amil`);
 
 --
 -- Indexes for table `tb_program`
@@ -700,7 +974,7 @@ ALTER TABLE `tb_banner`
 -- AUTO_INCREMENT for table `tb_donatur`
 --
 ALTER TABLE `tb_donatur`
-  MODIFY `id_donatur` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_donatur` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `tb_kategoriprogram`
@@ -730,13 +1004,19 @@ ALTER TABLE `tb_muzakki`
 -- AUTO_INCREMENT for table `tb_norek`
 --
 ALTER TABLE `tb_norek`
-  MODIFY `id_norek` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_norek` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `tb_pemasukkan`
+--
+ALTER TABLE `tb_pemasukkan`
+  MODIFY `id_pemasukkan` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_pembayaran`
 --
 ALTER TABLE `tb_pembayaran`
-  MODIFY `id_pembayaran` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pembayaran` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `tb_program`
@@ -784,6 +1064,12 @@ ALTER TABLE `tb_amil`
 --
 ALTER TABLE `tb_muzakki`
   ADD CONSTRAINT `tb_muzakki_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `tb_user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_pembayaran`
+--
+ALTER TABLE `tb_pembayaran`
+  ADD CONSTRAINT `tb_pembayaran_ibfk_1` FOREIGN KEY (`id_donatur`) REFERENCES `tb_donatur` (`id_donatur`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
