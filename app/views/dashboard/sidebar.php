@@ -9,6 +9,11 @@ if (!isset($_SESSION['level'])) {
   exit;
 }
 
+$controller = New Controller();
+
+$countKonfirmasi = count($controller->model('Kelolapembayaran_model')->getAllDataPembayaranKonfirmasi());
+$programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif();
+
 ?>
 
 <!DOCTYPE html>
@@ -112,7 +117,7 @@ if (!isset($_SESSION['level'])) {
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Kategori program:</h6>
             <a class="collapse-item" href="<?= BASEURL ?>/kelola_program">Kelola Program</a>
-            <?php foreach ($data['programNameAktif'] as $item): ?>
+            <?php foreach ($programNameAktif as $item): ?>
               <a class="collapse-item" href="<?= BASEURL ?>/kelola_program/<?= strtolower($item['nama_kategoriprogram']) ?>"><?= $item['nama_kategoriprogram'] ?></a>
             <?php endforeach ?>
         </div>
@@ -121,19 +126,9 @@ if (!isset($_SESSION['level'])) {
 
     <!-- nav item - Pembayaran -->
     <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#callapsePembayaran" aria-expanded="true" aria-controls="callapsePembayaran">
-        <i class="fas fa-fw fa-folder"></i>
-        <span>Pembayaran</span>
-      </a>
-      <div id="callapsePembayaran" class="collapse" aria-labelledby="headingPembayaran" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Kelola Pembayaran</h6>
-              <a class="collapse-item" href="<?= BASEURL ?>/kelola_pembayaran/pending">Pending</a>
-              <a class="collapse-item" href="<?= BASEURL ?>/kelola_pembayaran/konfirmasi">Konfirmasi</a>
-              <a class="collapse-item" href="<?= BASEURL ?>/kelola_pembayaran/berhasil">Berhasil</a>
-              <a class="collapse-item" href="<?= BASEURL ?>/kelola_pembayaran/gagal">Gagal</a>
-        </div>
-      </div>
+      <a class="nav-link" href="<?= BASEURL ?>/kelola_pembayaran">
+        <i class="fas fa-fw fa-credit-card"></i>
+        <span>Pembayaran</span><?php if($countKonfirmasi > 0): ?><span class="badge badge-danger badge-counter mr-3"><?= $countKonfirmasi ?>+</span><?php endif ?></a>
     </li>
 
     <!-- Nav Item - Norek -->

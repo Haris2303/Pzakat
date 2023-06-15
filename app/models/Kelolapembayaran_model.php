@@ -16,6 +16,14 @@ class Kelolapembayaran_model {
         $this->db = new Database();
     }
 
+    public function getAllDataPembayaran()
+    {
+        $vw = $this->view['dataAll'];
+        $query = "SELECT * FROM $vw";
+        $this->db->query($query);
+        return $this->db->resultSet();
+    }
+
     public function getDataPembayaranById($id) 
     {
         $vw = $this->view['dataAll'];

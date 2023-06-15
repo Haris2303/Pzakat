@@ -56,8 +56,7 @@
       </table>
     </div>
     <div class="mt-3">
-
-      <a href="<?= BASEURL ?>/kelola_pembayaran/konfirmasi" class="btn btn-secondary"><i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
+      <a href="<?= BASEURL ?>/kelola_pembayaran/<?= $data['detail']['status_pembayaran'] ?>" class="btn btn-secondary"><i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
     </div>
   </div>
 </div>

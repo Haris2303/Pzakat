@@ -43,8 +43,7 @@ class Kelola_program extends Controller
                 "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
                 "demo_datatables"       => "js/demo/datatables-demo.js",
             ],
-            "dataZakat" => $this->model('Kelolaprogram_model')->getAllDataProgramZakat(),
-            "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
+            "dataZakat" => $this->model('Kelolaprogram_model')->getAllDataProgramZakat()
         ];
 
         $this->view('dashboard/sidebar', $data);
