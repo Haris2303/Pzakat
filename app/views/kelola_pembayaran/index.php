@@ -23,7 +23,7 @@
             </a>
             <a href="<?= BASEURL ?>/kelola_pembayaran/konfirmasi" class="btn btn-primary mr-2"><span>Konfirmasi</span>
                 <?php if($data['countKonfirmasi'] > 0): ?>
-                    <span class="badge badge-danger badge-counter position-absolute ml-5 d-block"><?= ($data['countKonfirmasi'] <= 99) ? $data['countKonfirmasi'] : '99'?>+</span>
+                    <span class="badge badge-danger badge-counter position-absolute"><?= ($data['countKonfirmasi'] <= 99) ? $data['countKonfirmasi'] : '99'?>+</span>
                 <?php endif ?>
             </a>
             <a href="<?= BASEURL ?>/kelola_pembayaran/success" class="btn btn-success mr-2">Berhasil</a>
