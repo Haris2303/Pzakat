@@ -12,7 +12,7 @@
                     <p class="text-darkgray text-md font-medium"><?= $data['dataProgram']['deskripsi_program'] ?></p>
                 </div>
                 <div>
-                    <p class="font-medium text-darkgray text-2xl">Rp. <?= $data['dataProgram']['total_dana'] ?></p>
+                    <p class="font-medium text-darkgray text-2xl">Rp <?= number_format($data['dataProgram']['total_dana'], 0, ',', '.') ?></p>
                     <span class="text-lightgray text-sm">Dana Terus Dikumpul</span>
                     <div class="flex text-lightgray justify-between text-xs pt-2 mb-3 border-t mt-2">
                         <span><span class="text-darkgray text-sm font-medium"><?= $data['dataProgram']['jumlah_donatur'] ?></span> Donatur</span>

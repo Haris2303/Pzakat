@@ -75,7 +75,7 @@ class Kelolapembayaran_model {
      * 
      */
 
-    public function konfirmasiPembayaran($id, $username): int
+    public function konfirmasiPembayaran($slug, $id, $username, $jumlah_dana): int
     {
         $tb_pembayaran = $this->table['pembayaran'];
         $query = "UPDATE $tb_pembayaran SET username_amil = :username_amil, status_pembayaran = :status_pembayaran WHERE id_donatur = :id_donatur";
@@ -84,7 +84,16 @@ class Kelolapembayaran_model {
         $this->db->bind('status_pembayaran', 'success');
         $this->db->bind('id_donatur', $id);
         $this->db->execute();
-        return $this->db->rowCount();
+        $rowCount = $this->db->rowCount();
+
+        // sum jumlah donasi
+        $tb_program = 'tb_program';
+        $query = "UPDATE $tb_program SET total_dana = total_dana + $jumlah_dana, jumlah_donatur = jumlah_donatur + 1 WHERE slug = :slug";
+        $this->db->query($query);
+        $this->db->bind('slug', $slug);
+        $this->db->execute();
+
+        return $rowCount;
     }
 
     public function batalkanPembayaran($id, $username): int
