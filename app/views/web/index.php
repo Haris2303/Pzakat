@@ -225,11 +225,11 @@
   <!-- artkel -->
   <div class="container mt-20">
     <div class="content">
-      <div class="w-full flex flex-wrap gap-10 justify-center">
+      <div class="w-full flex flex-wrap gap-5 justify-center">
 
         <div class="lg:w-1/2 relative">
-          <span class="text-sm font-bold text-darkgray">Video</span>
-          <iframe class="lg:w-full scale-75 sm:scale-100" width="560" height="315" src="https://www.youtube.com/embed/bUkp-Tv4T0o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <p class="text-sm font-bold text-darkgray block sm:pl-0 pl-16 sm:-mb-0 -mb-10">Video</p>
+          <iframe class="scale-75 sm:scale-100" width="480" height="315" src="https://www.youtube.com/embed/bUkp-Tv4T0o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
 
         <div class="flex flex-col lg:w-1/3">
