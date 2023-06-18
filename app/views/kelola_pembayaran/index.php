@@ -70,7 +70,6 @@
                   }
                 ?>
                   <a href="<?= BASEURL ?>/kelola_pembayaran/detail/<?= $item['id_donatur'] ?>" class="btn badge btn-<?= $btnColor ?>"><?= $item['status_pembayaran'] ?></a>
-                  <a href="<?= BASEURL ?>/kelola_pembayaran/detail/<?= $item['id_donatur'] ?>" class="btn badge btn-secondary">Detail</a>
               </td>
             </tr>
           <?php endforeach ?>

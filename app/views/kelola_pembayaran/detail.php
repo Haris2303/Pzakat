@@ -6,8 +6,12 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-dark">Detail Kode Pembayaran <?= $data['detail']['nomor_pembayaran'] ?></h6>
-
+    <div class="row justify-content-between align-items-center mx-1">
+      <h6 class="m-0 font-weight-bold text-dark">Detail Kode Pembayaran <?= $data['detail']['nomor_pembayaran'] ?></h6>
+      <?php if($data['detail']['status_pembayaran'] !== 'success'): ?>
+        <a href="<?= BASEURL ?>/kelola_pembayaran/aksi_hapus_pembayaran/<?= $data['detail']['status_pembayaran'] ?>/<?= $data['detail']['id_donatur'] ?>" class="btn btn-danger" onclick="return confirm('Anda akan menghapus data <?= $data['detail']['nomor_pembayaran'] ?>?')"><i class="fas fa-trash"></i> Hapus</a>
+      <?php endif ?>
+    </div>
   </div>
 
   <div class="card-body">
@@ -48,7 +52,7 @@
         </tr>
         <tr>
             <th>Bukti Pembayaran</th>
-            <td><img src="<?= BASEURL ?>/img/bukti_pembayaran/<?= $data['detail']['bukti_pembayaran'] ?>" alt="Gambar Bukti Pembayaran" width="350px"></td>
+            <td><a href="#"><img src="<?= BASEURL ?>/img/bukti_pembayaran/<?= $data['detail']['bukti_pembayaran'] ?>" alt="Gambar Bukti Pembayaran" width="150px" data-target="#exampleModal" data-toggle="modal"></a></td>
         </tr>
         <tr>
             
@@ -57,6 +61,9 @@
     </div>
     <div class="mt-3">
       <a href="<?= BASEURL ?>/kelola_pembayaran/<?= $data['detail']['status_pembayaran'] ?>" class="btn btn-secondary"><i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
+      <?php if($data['detail']['status_pembayaran'] === 'konfirmasi'):?>
+        <a href="<?= BASEURL ?>/kelola_pembayaran/aksi_konfirmasi_pembayaran/<?= $data['detail']['status_pembayaran'] ?>/<?= $data['detail']['id_donatur'] ?>/<?= $_SESSION['username'] ?>" class="btn btn-primary"><i class="fas fa-arrow-alt-circle-left"></i> Konfirmasi</a>
+      <?php endif ?>
     </div>
   </div>
 </div>
@@ -64,32 +71,16 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Ubah Password Amil</h1>
+        <h3 class="modal-title fs-5" id="exampleModalLabel">Bukti Pembayaran</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
       </div>
-
-      <form action="<?= BASEURL ?>/amil/aksi_ubah_amil" method="post">
-
-        <div class="modal-body">
-          <input type="hidden" class="form-control" id="username" name="username" value="<?= $data['detail']['username'] ?>" required autocomplete="off">
-          <div class="mb-3">
-            <label for="password" class="form-label">Password Baru</label>
-            <input type="password" class="form-control" id="password" name="password" required autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="password2" class="form-label">Konfirmasi Password</label>
-            <input type="password" class="form-control" id="password2" name="passConfirm" required autocomplete="off">
-          </div>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-window-close"></i> Keluar</button>
-          <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Ubah</button>
-        </div>
-      </form>
+      
+      <div class="p-3">
+        <img src="<?= BASEURL ?>/img/bukti_pembayaran/<?= $data['detail']['bukti_pembayaran'] ?>" alt="Gambar Bukti Pembayaran" width="100%">
+      </div>
 
     </div>
   </div>

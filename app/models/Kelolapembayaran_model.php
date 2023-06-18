@@ -9,7 +9,10 @@ class Kelolapembayaran_model {
         "dataSukses"     => "vwPembayaranSukses",
         "dataGagal"      => "vwPembayaranGagal"
     ];
-    private $table = 'tb_pembayaran';
+    private $table = [
+        'pembayaran' => 'tb_pembayaran',
+        'donatur'    => 'tb_donatur'
+    ];
     private $db;
 
     public function __construct()
@@ -74,7 +77,8 @@ class Kelolapembayaran_model {
 
     public function konfirmasiPembayaran($id, $username): int
     {
-        $query = "UPDATE $this->table SET username_amil = :username_amil, status_pembayaran = :status_pembayaran WHERE id_donatur = :id_donatur";
+        $tb_pembayaran = $this->table['pembayaran'];
+        $query = "UPDATE $tb_pembayaran SET username_amil = :username_amil, status_pembayaran = :status_pembayaran WHERE id_donatur = :id_donatur";
         $this->db->query($query);
         $this->db->bind('username_amil', $username);
         $this->db->bind('status_pembayaran', 'success');
@@ -85,7 +89,8 @@ class Kelolapembayaran_model {
 
     public function batalkanPembayaran($id, $username): int
     {
-        $query = "UPDATE $this->table SET username_amil = :username_amil, status_pembayaran = :status_pembayaran WHERE id_donatur = :id_donatur";
+        $tb_pembayaran = $this->table['pembayaran'];
+        $query = "UPDATE $tb_pembayaran SET username_amil = :username_amil, status_pembayaran = :status_pembayaran WHERE id_donatur = :id_donatur";
         $this->db->query($query);
         $this->db->bind('username_amil', $username);
         $this->db->bind('status_pembayaran', 'failed');
@@ -97,10 +102,20 @@ class Kelolapembayaran_model {
 
     public function hapusPembayaran($id): int
     {
-        $query = "DELETE FROM $this->table WHERE id_donatur = :id_donatur";
+
+        $tb_pembayaran = $this->table['pembayaran'];
+        $tb_donatur    = $this->table['donatur'];
+
+        $query = "DELETE FROM $tb_pembayaran WHERE id_donatur = :id_donatur";
         $this->db->query($query);
         $this->db->bind('id_donatur', $id);
         $this->db->execute();
+
+        $query = "DELETE FROM $tb_donatur WHERE id_donatur = :id_donatur";
+        $this->db->query($query);
+        $this->db->bind('id_donatur', $id);
+        $this->db->execute();
+        
         return $this->db->rowCount();
     }
 

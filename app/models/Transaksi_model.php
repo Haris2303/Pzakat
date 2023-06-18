@@ -22,7 +22,7 @@ class Transaksi_model {
     {
         $nomor_pembayaran   = $dataPost['nomor-pembayaran'];
         $key                = $dataPost['key'];
-        $jumlah_pembayaran  = $dataPost['nominal-donasi'];
+        $jumlah_pembayaran  = str_replace('.', '', $dataPost['nominal-donasi']);
         $gambar             = Utility::uploadImage($dataFile, 'bukti_pembayaran');
 
         // // cek gambar

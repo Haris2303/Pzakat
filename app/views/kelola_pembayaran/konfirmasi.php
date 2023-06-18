@@ -10,10 +10,24 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-dark">Data Tabel Pembayaran Konfirmasi</h6>
+    <div class="row justify-content-between align-items-center px-2">
+      <div>
+        <h6 class="m-0 font-weight-bold text-dark">Data Pembayaran Konfirmasi</h6>
+      </div>
+      <div class="position-relative">
+        <!-- Button trigger modal -->
+        <a href="<?= BASEURL ?>/kelola_pembayaran/pending" class="btn btn-secondary mr-2"><span>Pending</span>
+          <?php if ($data['countPending'] > 0) : ?>
+            <span class="badge badge-danger badge-counter position-absolute ml-5 d-block"><?= ($data['countPending'] <= 99) ? $data['countPending'] : '99' ?>+</span>
+          <?php endif ?>
+        </a>
+        <a href="<?= BASEURL ?>/kelola_pembayaran/success" class="btn btn-success mr-2">Berhasil</a>
+        <a href="<?= BASEURL ?>/kelola_pembayaran/failed" class="btn btn-danger">Gagal</a>
+      </div>
+    </div>
   </div>
-  
-  
+
+
   <div class="card-body">
     <?php Flasher::flash() ?>
     <div class="table-responsive">
@@ -35,8 +49,8 @@
               <td><?= $item['jumlah_pembayaran'] ?></td>
               <td><?= $item['tanggal_pembayaran'] ?></td>
               <td>
-                <a href="<?= BASEURL ?>/kelola_pembayaran/aksi_konfirmasi_pembayaran/<?= $item['id_donatur'] ?>/<?= $_SESSION['username']?>" class="btn badge btn-warning">Konfirmasi</a>
-                <a href="<?= BASEURL ?>/kelola_pembayaran/aksi_batal_pembayaran/<?= $item['id_donatur'] ?>/<?= $_SESSION['username']?>" class="btn badge btn-danger">Batal</a>
+                <a href="<?= BASEURL ?>/kelola_pembayaran/aksi_konfirmasi_pembayaran/<?= $item['status_pembayaran'] ?>/<?= $item['id_donatur'] ?>/<?= $_SESSION['username'] ?>" class="btn badge btn-primary">Konfirmasi</a>
+                <a href="<?= BASEURL ?>/kelola_pembayaran/aksi_batal_pembayaran/<?= $item['id_donatur'] ?>/<?= $_SESSION['username'] ?>" class="btn badge btn-danger">Batal</a>
                 <a href="<?= BASEURL ?>/kelola_pembayaran/detail/<?= $item['id_donatur'] ?>" class="btn badge btn-secondary">Detail</a>
               </td>
             </tr>

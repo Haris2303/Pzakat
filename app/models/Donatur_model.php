@@ -19,7 +19,7 @@ class Donatur_model {
         $nama_donatur   = ucwords(strtolower($data['nama-lengkap']));
         $email          = strtolower($data['email']);
         $nohp           = $data['nohp'];
-        $donasi         = $data['nominal-donasi'];
+        $donasi         = str_replace('.', '', $data['nominal-donasi']);
         $pesan          = htmlspecialchars($data['pesan']);
 
         // insert data
