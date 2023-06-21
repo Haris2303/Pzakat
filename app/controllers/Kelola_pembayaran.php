@@ -7,15 +7,8 @@ class Kelola_pembayaran extends Controller
   {
     $data = [
       "judul" => "Kelola Data Pembayaran",
-      "css" => [
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-        "vendor_fontawesome"    => "vendor/fontawesome-free/css/all.min.css"
-      ],
-      "script" => [
-        "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
-        "demo_datatables"       => "js/demo/datatables-demo.js",
-      ],
+      "css" => VENDOR_TABLES_CSS,
+      "script" => VENDOR_TABLES,
       "dataPembayaran" => $this->model('Kelolapembayaran_model')->getAllDataPembayaran(),
       "countKonfirmasi" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranKonfirmasi()),
       "countPending" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranPending())
@@ -30,10 +23,7 @@ class Kelola_pembayaran extends Controller
   {
     $data = [
       "judul" => "Detail Pembayaran",
-      "css" => [
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-        "vendor_fontawesome"    => "vendor/fontawesome-free/css/all.min.css"
-      ],
+      "css" => VENDOR_TABLES_CSS,
       "detail" => $this->model('Kelolapembayaran_model')->getDataPembayaranById($id)
     ];
 
@@ -46,15 +36,8 @@ class Kelola_pembayaran extends Controller
   {
     $data = [
       "judul" => "Pembayaran Pending",
-      "css" => [
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-        "vendor_fontawesome"    => "vendor/fontawesome-free/css/all.min.css"
-      ],
-      "script" => [
-        "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
-        "demo_datatables"       => "js/demo/datatables-demo.js",
-      ],
+      "css" => VENDOR_TABLES_CSS,
+      "script" => VENDOR_TABLES,
       "dataPending" => $this->model("Kelolapembayaran_model")->getAllDataPembayaranPending(),
       "countKonfirmasi" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranKonfirmasi()),
     ];
@@ -68,15 +51,8 @@ class Kelola_pembayaran extends Controller
   {
     $data = [
       "judul" => "Pembayaran Konfirmasi",
-      "css" => [
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-        "vendor_fontawesome"    => "vendor/fontawesome-free/css/all.min.css"
-      ],
-      "script" => [
-        "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
-        "demo_datatables"       => "js/demo/datatables-demo.js",
-      ],
+      "css" => VENDOR_TABLES_CSS,
+      "script" => VENDOR_TABLES,
       "dataKonfirmasi" => $this->model("Kelolapembayaran_model")->getAllDataPembayaranKonfirmasi(),
       "countPending" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranPending())
     ];
@@ -90,15 +66,8 @@ class Kelola_pembayaran extends Controller
   {
     $data = [
       "judul" => "Pembayaran Berhasil",
-      "css" => [
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-        "vendor_fontawesome"    => "vendor/fontawesome-free/css/all.min.css"
-      ],
-      "script" => [
-        "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
-        "demo_datatables"       => "js/demo/datatables-demo.js",
-      ],
+      "css" => VENDOR_TABLES_CSS,
+      "script" => VENDOR_TABLES,
       "dataSukses" => $this->model("Kelolapembayaran_model")->getAllDataPembayaranSukses(),
       "countKonfirmasi" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranKonfirmasi()),
       "countPending" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranPending())
@@ -113,15 +82,8 @@ class Kelola_pembayaran extends Controller
   {
     $data = [
       "judul" => "Pembayaran Gagal",
-      "css" => [
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-        "vendor_fontawesome"    => "vendor/fontawesome-free/css/all.min.css"
-      ],
-      "script" => [
-        "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
-        "demo_datatables"       => "js/demo/datatables-demo.js",
-      ],
+      "css" => VENDOR_TABLES_CSS,
+      "script" => VENDOR_TABLES,
       "dataGagal" => $this->model("Kelolapembayaran_model")->getAllDataPembayaranGagal(),
       "countKonfirmasi" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranKonfirmasi()),
       "countPending" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranPending())

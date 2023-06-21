@@ -7,15 +7,8 @@ class Banner extends Controller
     {
         $data = [
             "judul" => "Banner",
-            "css" => [
-                "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-                "vendor_fontawesome"    => "vendor/fontawesome-free/css/all.min.css"
-            ],
-            "script" => [
-                "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
-                "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
-                "demo_datatables"       => "js/demo/datatables-demo.js",
-            ],
+            "css" => VENDOR_TABLES_CSS,
+            "script" => VENDOR_TABLES,
             "dataBanner" => $this->model('Banner_model')->getAllDataBanner(),
             "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
         ];

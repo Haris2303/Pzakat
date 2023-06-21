@@ -8,13 +8,8 @@ class Pageviews extends Controller {
       "judul" => "Berita",
       "css" => [
         "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-        "vendor_fontawesome"    => "vendor/fontawesome-free/css/all.min.css"
       ],
-      "script" => [
-        "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
-        "demo_datatables"       => "js/demo/datatables-demo.js",
-      ],
+      "script" => VENDOR_TABLES,
       "dataBerita"  => $this->model('Pageviews_model')->getAllDataBerita(),
       "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
@@ -30,13 +25,8 @@ class Pageviews extends Controller {
       "judul" => 'Muzakki',
       "css" => [
         "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-        "vendor_fontawesome"    => "vendor/fontawesome-free/css/all.min.css"
       ],
-      "script" => [
-        "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
-        "demo_datatables"       => "js/demo/datatables-demo.js",
-      ],
+      "script" => VENDOR_TABLES,
       "dataArtikel" => $this->model('Pageviews_model')->getAllDataArtikel(),
       "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
@@ -52,7 +42,6 @@ class Pageviews extends Controller {
       "judul" => 'Muzakki',
       "css" => [
         "vendor_bootstraptable" => "js/vendor/datatables/dataTables.bootstrap4.min.css",
-        "vendor_fontawesome"    => "vendor/fontawesome-free/css/all.min.css"
       ],
       "dataView" => $this->model('Pageviews_model')->getDataViewBySlug($slug),
       "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
@@ -68,9 +57,6 @@ class Pageviews extends Controller {
     
     $data = [
       "judul" => "Upload Berita",
-      "css" => [
-        "vendor_fontawesome" => "vendor/fontawesome-free/css/all.min.css"
-      ],
       "jenis_view" => $jenis_view,
       "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];

@@ -10,9 +10,6 @@ class Dashboard extends Controller{
         "demo_chartArea"  => "js/demo/chart-area-demo.js",
         "demo_chartPie"   => "js/demo/chart-pie-demo.js"
       ],
-      "css" => [
-        "vendor_fontawesome" => "vendor/fontawesome-free/css/all.min.css",
-      ],
       "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
     $this->view('dashboard/sidebar', $data);

@@ -13,15 +13,8 @@ class Kelola_program extends Controller
     {
         $data = [
             "judul" => "Kelola Programs",
-            "css" => [
-                "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-                "vendor_fontawesome"    => "vendor/fontawesome-free/css/all.min.css"
-            ],
-            "script" => [
-                "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
-                "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
-                "demo_datatables"       => "js/demo/datatables-demo.js",
-            ],
+            "css" => VENDOR_TABLES_CSS,
+            "script" => VENDOR_TABLES,
             "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
         ];
 
@@ -34,15 +27,8 @@ class Kelola_program extends Controller
     {
         $data = [
             "judul" => "Kelola Zakat",
-            "css" => [
-                "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-                "vendor_fontawesome"    => "vendor/fontawesome-free/css/all.min.css"
-            ],
-            "script" => [
-                "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
-                "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
-                "demo_datatables"       => "js/demo/datatables-demo.js",
-            ],
+            "css" => VENDOR_TABLES_CSS,
+            "script" => VENDOR_TABLES,
             "dataZakat" => $this->model('Kelolaprogram_model')->getAllDataProgramZakat()
         ];
 
@@ -56,15 +42,8 @@ class Kelola_program extends Controller
     {
         $data = [
             "judul" => "Kelola Infaq",
-            "css" => [
-                "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-                "vendor_fontawesome"    => "vendor/fontawesome-free/css/all.min.css"
-            ],
-            "script" => [
-                "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
-                "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
-                "demo_datatables"       => "js/demo/datatables-demo.js",
-            ],
+            "css" => VENDOR_TABLES_CSS,
+            "script" => VENDOR_TABLES,
             "dataInfaq" => $this->model('Kelolaprogram_model')->getAllDataProgramInfaq(),
             "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
         ];
@@ -79,15 +58,8 @@ class Kelola_program extends Controller
     {
         $data = [
             "judul" => "Detail Program",
-            "css" => [
-                "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-                "vendor_fontawesome"    => "vendor/fontawesome-free/css/all.min.css"
-            ],
-            "script" => [
-                "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
-                "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
-                "demo_datatables"       => "js/demo/datatables-demo.js",
-            ],
+            "css" => VENDOR_TABLES_CSS,
+            "script" => VENDOR_TABLES,
             "dataProgram" => $this->model('Kelolaprogram_model')->getDataProgramBySlug($slug),
             "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
         ];

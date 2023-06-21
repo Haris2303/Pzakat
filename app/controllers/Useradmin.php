@@ -8,13 +8,8 @@ class Useradmin extends Controller {
       "judul" => 'User Admin',
       "css" => [
         "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-        "vendor_fontawesome" => "vendor/fontawesome-free/css/all.min.css"
       ],
-      "script" => [
-        "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
-        "demo_datatables"       => "js/demo/datatables-demo.js",
-      ],
+      "script" => VENDOR_TABLES,
       "dataAdmin" => $this->model('Useradmin_model')->getAllDataAdmin(),
       "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];

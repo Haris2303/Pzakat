@@ -39,6 +39,7 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
 
   <!-- Custom styles for this template-->
   <link href="<?= BASEURL ?>/css/bootstrap/sb-admin-2.min.css" rel="stylesheet">
+  <link href="<?= BASEURL ?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
 
   <!-- style plugin -->
   <?php if (isset($data['css'])) : ?>
@@ -133,7 +134,7 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
 
     <!-- Nav Item - Pembayaran -->
     <li class="nav-item">
-      <a class="nav-link" href="<?= BASEURL ?>/norek">
+      <a class="nav-link" href="<?= BASEURL ?>/pembayaranbarang">
         <i class="fas fa-fw fa-credit-card"></i>
         <span>Pembayaran Barang</span></a>
     </li>

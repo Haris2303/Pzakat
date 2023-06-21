@@ -9,13 +9,8 @@ class Masjid extends Controller
       "judul" => 'Masjid',
       "css" => [
         "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-        "vendor_fontawesome"    => "vendor/fontawesome-free/css/all.min.css"
       ],
-      "script" => [
-        "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
-        "demo_datatables"       => "js/demo/datatables-demo.js",
-      ],
+      "script" => VENDOR_TABLES,
       "dataMasjid" => $this->model('Masjid_model')->getDataMasjid(),
       "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];

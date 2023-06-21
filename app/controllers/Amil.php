@@ -7,15 +7,8 @@ class Amil extends Controller
   {
     $data = [
       "judul" => 'Amil',
-      "css" => [
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-        "vendor_fontawesome"    => "vendor/fontawesome-free/css/all.min.css"
-      ],
-      "script" => [
-        "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
-        "demo_datatables"       => "js/demo/datatables-demo.js",
-      ],
+      "css" => VENDOR_TABLES_CSS,
+      "script" => VENDOR_TABLES,
       "dataAmil" => $this->model('Amil_model')->getAllDataAmil(),
       "dataMasjid" => $this->model('Masjid_model')->getDataMasjid(),
       "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
@@ -35,10 +28,7 @@ class Amil extends Controller
   {
     $data = [
       "judul" => "Detail Amil",
-      "css" => [
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-        "vendor_fontawesome"    => "vendor/fontawesome-free/css/all.min.css"
-      ],
+      "css" => VENDOR_TABLES_CSS,
       "detail" => $this->model('Amil_model')->getDataAmilByUsername($username),
       "allMasjid" => $this->model('Masjid_model')->getDataMasjid(),
       "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
