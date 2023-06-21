@@ -124,11 +124,18 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
       </div>
     </li>
 
-    <!-- nav item - Pembayaran -->
+    <!-- nav item - Kelola Pembayaran -->
     <li class="nav-item">
       <a class="nav-link" href="<?= BASEURL ?>/kelola_pembayaran">
         <i class="fas fa-fw fa-credit-card"></i>
-        <span>Pembayaran</span><?php if($countKonfirmasi > 0): ?><span class="badge badge-danger badge-counter mr-3"><?= $countKonfirmasi ?>+</span><?php endif ?></a>
+        <span>Kelola Pembayaran</span><?php if($countKonfirmasi > 0): ?><span class="badge badge-danger badge-counter mr-3"><?= $countKonfirmasi ?>+</span><?php endif ?></a>
+    </li>
+
+    <!-- Nav Item - Pembayaran -->
+    <li class="nav-item">
+      <a class="nav-link" href="<?= BASEURL ?>/norek">
+        <i class="fas fa-fw fa-credit-card"></i>
+        <span>Pembayaran Barang</span></a>
     </li>
 
     <!-- Nav Item - Norek -->
