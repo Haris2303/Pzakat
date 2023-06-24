@@ -16,11 +16,13 @@ class Kelolaprogram_model {
         $this->db = new Database();
     }
 
-    /* =================
-    
-        @Get All Data
-    
-    ====================*/
+    /**
+     * 
+     * @method GetAllData
+     * 
+     * @param NULL
+     * 
+     */
 
     public function getAllDataProgram(): array
     {
@@ -76,7 +78,9 @@ class Kelolaprogram_model {
 
     /**
      * 
-     * @param Limit
+     * @method Limit
+     * 
+     * @param Limit|JenisProgram
      * 
      */
     public function getDataProgramLimitByJenisProgram($limit, $jenisprogram): array
@@ -98,7 +102,8 @@ class Kelolaprogram_model {
 
     /**
      * 
-     * @param Get Data By
+     * @method Get Data By
+     * @param Slug
      * 
     */
     public function getDataProgramBySlug($slug): array
@@ -109,16 +114,11 @@ class Kelolaprogram_model {
         return $this->db->single();
     }
 
-
-     /* =================
-    
-        @Aksi CRUD Data
-    
-    ====================*/
-
     /**
      * 
-     * @param Infaq
+     * @method CRUD
+     * 
+     * @param POST|FILES
      * 
      */
     public function tambahDataZakat($dataPost, $dataFiles) {
@@ -169,6 +169,53 @@ class Kelolaprogram_model {
 
         return $this->db->rowCount();
 
+    }
+
+    public function tambahDataZakatBarang($dataPost) {
+        // initial variabel
+        $nama_zakat         = $dataPost['nama-zakat'];
+        $deskripsi          = $dataPost['deskripsi'];
+        $jenis_program      = 'Zakat';
+        $jenis_pembayaran   = 'barang';
+        $berat_barang       = 0;
+        $jumlah_donatur     = 0;
+        $gambar             = NULL;
+        $content            = NULL;
+        
+        // buat slug
+        $slug = strtolower(join('', explode(' ', $nama_zakat)));
+
+        // cek slug
+        $cek = "SELECT slug FROM $this->table WHERE slug = :slug";
+        $this->db->query($cek);
+        $this->db->bind('slug', $slug);
+        if(count($this->db->resultSet()) > 0) return 'Nama Zakat Telah Tersedia';
+
+        // insert data
+        $query = "INSERT INTO $this->table VALUES(NULL, 
+                                                :nama_zakat, 
+                                                :slug, 
+                                                :jenis_program, 
+                                                :jenis_pembayaran, 
+                                                :deskripsi_program, 
+                                                :berat_barang, 
+                                                :jumlah_donatur, 
+                                                :gambar, 
+                                                :content, 
+                                                NOW())";
+        $this->db->query($query);
+        $this->db->bind('nama_zakat', $nama_zakat);
+        $this->db->bind('slug', $slug);
+        $this->db->bind('jenis_program', $jenis_program);
+        $this->db->bind('jenis_pembayaran', $jenis_pembayaran);
+        $this->db->bind('deskripsi_program', $deskripsi);
+        $this->db->bind('berat_barang', $berat_barang);
+        $this->db->bind('jumlah_donatur', $jumlah_donatur);
+        $this->db->bind('gambar', $gambar);
+        $this->db->bind('content', $content);
+        $this->db->execute();
+
+        return $this->db->rowCount();
     }
 
     public function tambahDataInfaq($dataPost, $dataFiles) {

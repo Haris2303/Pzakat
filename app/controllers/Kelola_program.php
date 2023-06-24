@@ -5,7 +5,7 @@ class Kelola_program extends Controller
 
     /**
      * 
-     * @View Data
+     * @method View
      * 
     */
 
@@ -86,7 +86,9 @@ class Kelola_program extends Controller
 
     /**
      * 
-     * @Aksi Data
+     * @method aksi
+     * 
+     * @param NULL
      * 
     */
 
@@ -95,11 +97,25 @@ class Kelola_program extends Controller
         $result = $this->model('Kelolaprogram_model')->tambahDataZakat($_POST, $_FILES);
         if($result > 0) {
             Flasher::setFlash('Data Zakat <strong>Berhasil</strong> Ditambahkan!', 'success');
-            header('Location: ' . BASEURL . '/kelola_program/zakatuang');
+            header('Location: ' . BASEURL . '/kelola_program/zakat');
             exit;
         } else {
             Flasher::setFlash($result, 'danger');
-            header('Location: ' . BASEURL . '/kelola_program/zakatuang');
+            header('Location: ' . BASEURL . '/kelola_program/zakat');
+            exit;
+        }
+    }
+
+    public function aksi_tambah_zakatbarang(): void
+    {
+        $result = $this->model('Kelolaprogram_model')->tambahDataZakatBarang($_POST);
+        if($result > 0) {
+            Flasher::setFlash('Data Barang <strong>Berhasil</strong> Ditambahkan!', 'success');
+            header('Location: ' . BASEURL . '/kelola_program/zakatbarang');
+            exit;
+        } else {
+            Flasher::setFlash($result, 'danger');
+            header('Location: ' . BASEURL . '/kelola_program/zakatbarang');
             exit;
         }
     }
