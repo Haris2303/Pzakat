@@ -127,16 +127,17 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
 
     <!-- nav item - Kelola Pembayaran -->
     <li class="nav-item">
-      <a class="nav-link" href="<?= BASEURL ?>/kelola_pembayaran">
-        <i class="fas fa-fw fa-credit-card"></i>
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#callapsePembayaran" aria-expanded="true" aria-controls="callapsePembayaran">
+        <i class="fas fa-fw fa-folder"></i>
         <span>Kelola Pembayaran</span><?php if($countKonfirmasi > 0): ?><span class="badge badge-danger badge-counter mr-3"><?= $countKonfirmasi ?>+</span><?php endif ?></a>
-    </li>
-
-    <!-- Nav Item - Pembayaran -->
-    <li class="nav-item">
-      <a class="nav-link" href="<?= BASEURL ?>/pembayaranbarang">
-        <i class="fas fa-fw fa-credit-card"></i>
-        <span>Pembayaran Barang</span></a>
+      </a>
+      <div id="callapsePembayaran" class="collapse" aria-labelledby="headingPrograms" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Kategori program:</h6>
+            <a class="collapse-item" href="<?= BASEURL ?>/kelola_pembayaran/">Pembayaran Tunai</a>
+            <a class="collapse-item" href="<?= BASEURL ?>/kelola_pembayaran/barang">Pembayaran Barang</a>
+        </div>
+      </div>
     </li>
 
     <!-- Nav Item - Norek -->

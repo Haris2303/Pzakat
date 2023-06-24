@@ -345,4 +345,36 @@
   })
 
 
+  /**
+   * 
+   * @TambahDataZakat Bentuk Barang
+   * 
+   */
+  
+  $('.btn-zakat').on('click', function() {
+    // get option beras value on click
+    const gambarZakat = $('.gambar-zakat')
+    const contentZakat = $('.content-zakat')
+    $('#browsers option[value="beras"]').on('click', function() {
+      // hide gambar dan content
+      gambarZakat.hide()
+      contentZakat.hide()
+    })
+
+    // get option fidyah value on click
+    $('#browsers option[value="fidyah"]').on('click', function() {
+      // show gambar dan content
+      gambarZakat.show()
+      contentZakat.show()
+    })
+
+    // get option uang value on click
+    $('#browsers option[value="uang"]').on('click', function() {
+      // show gambar dan content
+      gambarZakat.show()
+      contentZakat.show()
+    })
+  })
+
+
 })(jQuery); // akhir strict

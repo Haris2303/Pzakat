@@ -26,7 +26,7 @@ class Kelola_program extends Controller
     public function zakat(): void
     {
         $data = [
-            "judul" => "Kelola Zakat",
+            "judul" => "Kelola Zakat Uang",
             "css" => VENDOR_TABLES_CSS,
             "script" => VENDOR_TABLES,
             "dataZakat" => $this->model('Kelolaprogram_model')->getAllDataProgramZakat()
@@ -35,6 +35,19 @@ class Kelola_program extends Controller
         $this->view('dashboard/sidebar', $data);
         $this->view('kelola_program/zakat', $data);
         $this->view('tinymce/tinymce');
+        $this->view('dashboard/footer', $data);
+    }
+    
+    public function zakatbarang(): void
+    {
+        $data = [
+            "judul" => "Kelola Zakat Barang",
+            "css" => VENDOR_TABLES_CSS,
+            "script" => VENDOR_TABLES
+        ];
+
+        $this->view('dashboard/sidebar', $data);
+        $this->view('kelola_program/zakatbarang', $data);
         $this->view('dashboard/footer', $data);
     }
 
@@ -77,16 +90,16 @@ class Kelola_program extends Controller
      * 
     */
 
-    public function aksi_tambah_zakat(): void
+    public function aksi_tambah_zakatuang(): void
     {
         $result = $this->model('Kelolaprogram_model')->tambahDataZakat($_POST, $_FILES);
         if($result > 0) {
             Flasher::setFlash('Data Zakat <strong>Berhasil</strong> Ditambahkan!', 'success');
-            header('Location: ' . BASEURL . '/kelola_program/zakat');
+            header('Location: ' . BASEURL . '/kelola_program/zakatuang');
             exit;
         } else {
             Flasher::setFlash($result, 'danger');
-            header('Location: ' . BASEURL . '/kelola_program/zakat');
+            header('Location: ' . BASEURL . '/kelola_program/zakatuang');
             exit;
         }
     }

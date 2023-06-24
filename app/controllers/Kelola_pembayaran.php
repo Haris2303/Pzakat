@@ -94,6 +94,18 @@ class Kelola_pembayaran extends Controller
     $this->view('dashboard/footer', $data);
   }
 
+  public function barang(): void {
+    $data = [
+      "judul" => "Kelola Pembayaran Barang",
+      "css" => VENDOR_TABLES_CSS,
+      "script" => VENDOR_TABLES,
+    ];
+
+    $this->view('dashboard/sidebar', $data);
+    $this->view('kelola_pembayaran/barang', $data);
+    $this->view('dashboard/footer', $data);
+  }
+
   public function aksi_konfirmasi_pembayaran($slug, $location, $id, $username, $jumlah_dana): void
   {
     $result = $this->model('Kelolapembayaran_model')->konfirmasiPembayaran($slug, $id, $username, $jumlah_dana);
