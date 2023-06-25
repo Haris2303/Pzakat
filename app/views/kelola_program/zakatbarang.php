@@ -29,7 +29,6 @@
         <thead>
           <tr>
             <th>Nama Program Zakat</th>
-            <th>Jenis Barang</th>
             <th>Berat Barang</th>
             <th>Jumlah Donatur</th>
             <th>Aksi</th>

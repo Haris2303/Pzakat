@@ -99,12 +99,21 @@ class Kelola_pembayaran extends Controller
       "judul" => "Kelola Pembayaran Barang",
       "css" => VENDOR_TABLES_CSS,
       "script" => VENDOR_TABLES,
+      "namaBarang" => $this->model('Kelolaprogram_model')->getAllDataProgramBarang(),
+      "dataBarang" => $this->model('Kelolapembayaran_model')->getAllDataPembayaranBarang()
     ];
 
     $this->view('dashboard/sidebar', $data);
     $this->view('kelola_pembayaran/barang', $data);
     $this->view('dashboard/footer', $data);
   }
+
+
+  /**
+   * 
+   * @method aksi
+   * 
+   */
 
   public function aksi_konfirmasi_pembayaran($slug, $location, $id, $username, $jumlah_dana): void
   {
@@ -144,6 +153,26 @@ class Kelola_pembayaran extends Controller
     } else {
       Flasher::setFlash('Pembayaran <strong>Gagal</strong> Dihapus!', 'danger');
       header('Location: ' . BASEURL . "/kelola_pembayaran/$location");
+      exit;
+    }
+  }
+
+  /**
+   * 
+   * @method Aksi pembayaran barang
+   * 
+   */
+  
+  public function aksi_pembayaran_barang(): void
+  {
+    $result = $this->model('Kelolapembayaran_model')->tambahPembayaranBarang($_POST);
+    if ($result > 0) {
+      Flasher::setFlash('Barang <strong>Berhasil</strong> Ditambahkan!', 'success');
+      header('Location: ' . BASEURL . "/kelola_pembayaran/summary");
+      exit;
+    } else {
+      Flasher::setFlash('Barang <strong>Gagal</strong> Ditambahkan!', 'danger');
+      header('Location: ' . BASEURL . "/kelola_pembayaran/summary");
       exit;
     }
   }

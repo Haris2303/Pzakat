@@ -7,7 +7,8 @@ class Kelolapembayaran_model {
         "dataPending"    => "vwPembayaranPending",
         "dataKonfirmasi" => "vwPembayaranKonfirmasi",
         "dataSukses"     => "vwPembayaranSukses",
-        "dataGagal"      => "vwPembayaranGagal"
+        "dataGagal"      => "vwPembayaranGagal",
+        "dataBarang"     => "vwPembayaranBarang"
     ];
     private $table = [
         'pembayaran' => 'tb_pembayaran',
@@ -19,6 +20,26 @@ class Kelolapembayaran_model {
     {
         $this->db = new Database();
     }
+
+    /**
+     * 
+     * @method Pembayaran Barang
+     * 
+     */
+
+    public function getAllDataPembayaranBarang()
+    {
+        $vw = $this->view['dataBarang'];
+        $query = "SELECT * FROM $vw";
+        $this->db->query($query);
+        return $this->db->resultSet();
+    }
+
+    /**
+     * 
+     * @method Pembayaran Tunai
+     * 
+     */
 
     public function getAllDataPembayaran()
     {
@@ -71,7 +92,7 @@ class Kelolapembayaran_model {
 
     /**
      * 
-     * @param Aksi
+     * @method Aksi Pembayaran Tunai
      * 
      */
 
@@ -125,6 +146,40 @@ class Kelolapembayaran_model {
         $this->db->bind('id_donatur', $id);
         $this->db->execute();
         
+        return $this->db->rowCount();
+    }
+
+    /**
+     * 
+     * @method CRUD pembayaran barang
+     * 
+     */
+    public function tambahPembayaranBarang($data): int 
+    {
+        // donatur
+        $slug_program   = $data['slug-program'];
+        $nama_donatur   = $data['nama-donatur'];
+        $email          = $data['email'];
+        $nohp           = $data['nohp'];
+        $pesan          = $data['pesan'];
+        $donasi         = $data['berat-barang'];
+        $key            = NULL;
+        $id_bank        = NULL;
+
+        // insert data
+        $tb_donatur = $this->table['donatur'];
+        $query = "INSERT INTO $tb_donatur VALUES(NULL, :id_bank, :slug_program, :key, :nama_donatur, :email, :nohp, :donasi, :pesan, NOW())";
+        $this->db->query($query);
+        $this->db->bind('id_bank', $id_bank);
+        $this->db->bind('slug_program', $slug_program);
+        $this->db->bind('key', $key);
+        $this->db->bind('nama_donatur', $nama_donatur);
+        $this->db->bind('email', $email);
+        $this->db->bind('nohp', $nohp);
+        $this->db->bind('donasi', $donasi);
+        $this->db->bind('pesan', $pesan);
+        $this->db->execute();
+
         return $this->db->rowCount();
     }
 

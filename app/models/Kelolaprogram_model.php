@@ -6,6 +6,7 @@ class Kelolaprogram_model {
     private $view = [
         "allZakat" => "vwAllDataZakat",
         "allInfaq" => "vwAllDataInfaq",
+        "allDataProgramBarang" => "vwAllProgramBarangAktif",
         "allProgramNameAktif" => "vwAllProgramNameAktif",
         "allDataProgramAktif" => "vwAllDataProgramAktif"
     ];
@@ -76,6 +77,14 @@ class Kelolaprogram_model {
         return $this->db->resultSet();
     }
 
+    public function getAllDataProgramBarang(): array
+    {
+        $view = $this->view['allDataProgramBarang'];
+        $query = "SELECT * FROM $view";
+        $this->db->query($query);
+        return $this->db->resultSet();
+    }
+
     /**
      * 
      * @method Limit
@@ -85,7 +94,8 @@ class Kelolaprogram_model {
      */
     public function getDataProgramLimitByJenisProgram($limit, $jenisprogram): array
     {
-        $query = "SELECT * FROM $this->table WHERE jenis_program = :jenis_program ORDER BY id_program DESC LIMIT $limit";
+        $view = $this->view['allDataProgramAktif'];
+        $query = "SELECT * FROM $view WHERE jenis_program = :jenis_program AND jenis_pembayaran <> 'barang' ORDER BY id_program DESC LIMIT $limit";
         $this->db->query($query);
         $this->db->bind('jenis_program', $jenisprogram);
         return $this->db->resultSet();

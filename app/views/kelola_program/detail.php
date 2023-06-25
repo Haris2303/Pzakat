@@ -30,7 +30,7 @@
         </tr>
         <tr>
           <th>Total Dana Saat ini</th>
-          <td>: Rp. <?= $data['dataProgram']['total_dana'] ?></td>
+          <td>: Rp <?= number_format($data['dataProgram']['total_dana'], 0, ',', '.') ?></td>
         </tr>
         <tr>
           <th>Jumlah Donatur</th>
