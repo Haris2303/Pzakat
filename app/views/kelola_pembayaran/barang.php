@@ -13,9 +13,8 @@
       <div class="position-relative">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#formModal">
-          Tambah <i class="ml-1 fas fa-plus-circle"></i>
+          Tambah Barang <i class="ml-1 fas fa-plus-circle"></i>
         </button>
-        <a href="<?= BASEURL ?>/kelola_program/zakat" class="btn btn-secondary">Tunai <i class="ml-1 fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
 
@@ -32,19 +31,18 @@
             <th>Nama Program</th>
             <th>Jenis Barang</th>
             <th>Berat Barang</th>
-            <th>Jumlah Donatur</th>
             <th>Aksi</th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($data['dataBarang'] as $item) : ?>
             <tr>
-              <td><?= $item['nama_donatur'] ?></td>
+              <td><?= ucwords($item['nama_donatur']) ?></td>
               <td><?= $item['nama_program'] ?></td>
-              <td><?= $item['total_dana'] ?></td>
-              <td><?= $item['jumlah_donatur'] ?></td>
+              <td><?= ucwords($item['jenis_barang']) ?></td>
+              <td><?= Utility::convertGramToKilogram((int)$item['berat_barang']) ?>kg</td>
               <td>
-                <a href="<?= BASEURL ?>/kelola_program/detail/<?= $item['slug'] ?>" class="btn badge btn-secondary">Detail</a>
+                <a href="<?= BASEURL ?>/kelola_pembayaran/detailbarang/<?= $item['id_donasibarang'] ?>" class="btn badge btn-secondary">Detail</a>
               </td>
             </tr>
           <?php endforeach ?>
@@ -103,6 +101,10 @@
           <div class="mb-3">
             <label for="pesan" class="form-label">Pesan</label>
             <textarea name="pesan" id="pesan" class="form-control" rows="3" placeholder="(optional)"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="gambar" class="form-label">Bukti Barang</label>
+            <input type="file" name="gambar" id="gambar" class="form-control">
           </div>
         </div>
 

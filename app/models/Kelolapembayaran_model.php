@@ -12,7 +12,8 @@ class Kelolapembayaran_model {
     ];
     private $table = [
         'pembayaran' => 'tb_pembayaran',
-        'donatur'    => 'tb_donatur'
+        'donatur'    => 'tb_donatur',
+        'donasibarang' => 'tb_donasibarang'
     ];
     private $db;
 
@@ -49,15 +50,6 @@ class Kelolapembayaran_model {
         return $this->db->resultSet();
     }
 
-    public function getDataPembayaranById($id) 
-    {
-        $vw = $this->view['dataAll'];
-        $query = "SELECT * FROM $vw WHERE id_donatur = :id_donatur";
-        $this->db->query($query);
-        $this->db->bind("id_donatur", $id);
-        return $this->db->single();
-    }
-
     public function getAllDataPembayaranPending(): array
     {
         $vw = $this->view['dataPending'];
@@ -88,6 +80,30 @@ class Kelolapembayaran_model {
         $query = "SELECT * FROM $vw";
         $this->db->query($query);
         return $this->db->resultSet();
+    }
+
+    /**
+     * 
+     * @method GetDataBy
+     * 
+     */
+
+    public function getDataPembayaranById($id): array
+    {
+        $vw = $this->view['dataAll'];
+        $query = "SELECT * FROM $vw WHERE id_donatur = :id_donatur";
+        $this->db->query($query);
+        $this->db->bind("id_donatur", $id);
+        return $this->db->single();
+    }
+
+    public function getDataPembayaranBarangById($id): array
+    {
+        $vw = $this->view['dataBarang'];
+        $query = "SELECT * FROM $vw WHERE id_donasibarang = :id_donasibarang";
+        $this->db->query($query);
+        $this->db->bind('id_donasibarang', $id);
+        return $this->db->single();
     }
 
     /**
@@ -154,31 +170,45 @@ class Kelolapembayaran_model {
      * @method CRUD pembayaran barang
      * 
      */
-    public function tambahPembayaranBarang($data): int 
+    public function tambahPembayaranBarang($dataPost, $dataFile): int 
     {
         // donatur
-        $slug_program   = $data['slug-program'];
-        $nama_donatur   = $data['nama-donatur'];
-        $email          = $data['email'];
-        $nohp           = $data['nohp'];
-        $pesan          = $data['pesan'];
-        $donasi         = $data['berat-barang'];
-        $key            = NULL;
-        $id_bank        = NULL;
+        $slug_program   = $dataPost['slug-program'];
+        $nama_donatur   = $dataPost['nama-donatur'];
+        $email          = $dataPost['email'];
+        $nohp           = $dataPost['nohp'];
+        $pesan          = $dataPost['pesan'];
+        $berat_barang   = (int)$dataPost['berat-barang'];
+        $jenis_barang   = $dataPost['jenis-barang'];
+        $gambar         = Utility::uploadImage($dataFile, 'bukti_barang');
+
+        // cek gambar
+        if(!is_string($gambar)) return 'Gagal Upload Gambar, Periksa ekstensi file!';
 
         // insert data
-        $tb_donatur = $this->table['donatur'];
-        $query = "INSERT INTO $tb_donatur VALUES(NULL, :id_bank, :slug_program, :key, :nama_donatur, :email, :nohp, :donasi, :pesan, NOW())";
+        $tb_donatur = $this->table['donasibarang'];
+        $query = "INSERT INTO $tb_donatur VALUES(NULL, :slug_program, :nama_donatur, :email, :nohp, :pesan, :jenis_barang, :berat_barang, :bukti_barang, NOW())";
         $this->db->query($query);
-        $this->db->bind('id_bank', $id_bank);
         $this->db->bind('slug_program', $slug_program);
-        $this->db->bind('key', $key);
         $this->db->bind('nama_donatur', $nama_donatur);
         $this->db->bind('email', $email);
         $this->db->bind('nohp', $nohp);
-        $this->db->bind('donasi', $donasi);
         $this->db->bind('pesan', $pesan);
+        $this->db->bind('jenis_barang', $jenis_barang);
+        $this->db->bind('berat_barang', $berat_barang);
+        $this->db->bind('bukti_barang', $gambar);
         $this->db->execute();
+
+        // jika data berhasil ditambahkan
+        if($this->db->rowCount() > 0) {
+            // update data program barang
+            $query = "UPDATE tb_program SET total_dana = total_dana + :berat_barang, jumlah_donatur = jumlah_donatur + 1 WHERE slug = :slug AND jenis_pembayaran = :jenis_pembayaran";
+            $this->db->query($query);
+            $this->db->bind('berat_barang', $berat_barang);
+            $this->db->bind('slug', $slug_program);
+            $this->db->bind('jenis_pembayaran', 'barang');
+            $this->db->execute();
+        }
 
         return $this->db->rowCount();
     }

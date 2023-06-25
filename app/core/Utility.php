@@ -114,4 +114,10 @@ class Utility
         
         return $key;
     }
+
+    public static function convertGramToKilogram($gram): float
+    {
+        $kilogram = $gram / 1000;
+        return $kilogram;
+    }
 }

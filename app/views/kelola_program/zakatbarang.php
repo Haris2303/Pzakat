@@ -38,7 +38,7 @@
           <?php foreach ($data['dataBarang'] as $item) : ?>
             <tr>
               <td><?= $item['nama_program'] ?></td>
-              <td><?= $item['total_dana'] ?></td>
+              <td><?= Utility::convertGramToKilogram((int)$item['total_dana']) ?>kg</td>
               <td><?= $item['jumlah_donatur'] ?></td>
               <td>
                 <a href="<?= BASEURL ?>/kelola_program/detail/<?= $item['slug'] ?>" class="btn badge btn-secondary">Detail</a>

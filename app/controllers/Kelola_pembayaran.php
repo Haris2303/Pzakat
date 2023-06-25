@@ -108,6 +108,17 @@ class Kelola_pembayaran extends Controller
     $this->view('dashboard/footer', $data);
   }
 
+  public function detailbarang($id): void {
+    $data = [
+      "judul" => "Detail Barang",
+      "detail" => $this->model('Kelolapembayaran_model')->getDataPembayaranBarangById($id)
+    ];
+
+    $this->view('dashboard/sidebar', $data);
+    $this->view('kelola_pembayaran/detailbarang', $data);
+    $this->view('dashboard/footer', $data);
+  }
+
 
   /**
    * 
@@ -165,14 +176,14 @@ class Kelola_pembayaran extends Controller
   
   public function aksi_pembayaran_barang(): void
   {
-    $result = $this->model('Kelolapembayaran_model')->tambahPembayaranBarang($_POST);
+    $result = $this->model('Kelolapembayaran_model')->tambahPembayaranBarang($_POST, $_FILES);
     if ($result > 0) {
       Flasher::setFlash('Barang <strong>Berhasil</strong> Ditambahkan!', 'success');
-      header('Location: ' . BASEURL . "/kelola_pembayaran/summary");
+      header('Location: ' . BASEURL . "/kelola_pembayaran/barang");
       exit;
     } else {
       Flasher::setFlash('Barang <strong>Gagal</strong> Ditambahkan!', 'danger');
-      header('Location: ' . BASEURL . "/kelola_pembayaran/summary");
+      header('Location: ' . BASEURL . "/kelola_pembayaran/barang");
       exit;
     }
   }
