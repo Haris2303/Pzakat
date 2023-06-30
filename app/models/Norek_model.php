@@ -18,6 +18,14 @@ class Norek_model
         return $this->db->resultSet();
     }
 
+    public function getAllDataNorekByProgram($jenis_program)
+    {
+        $query = "SELECT * FROM $this->table WHERE jenis_program = :jenis_program";
+        $this->db->query($query);
+        $this->db->bind('jenis_program', $jenis_program);
+        return $this->db->resultSet();
+    }
+
     public function getDataNorekById($id)
     {
         $query = "SELECT * FROM $this->table WHERE id_norek = :id_norek";

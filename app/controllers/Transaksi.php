@@ -3,13 +3,13 @@
 class Transaksi extends Controller
 {
 
-    public function index($slug, $qty = null): void
+    public function index($program, $slug, $qty = null): void
     {
 
         $data = [
             "judul" => "Form Donasi",
             "dataProgram" => $this->model('Kelolaprogram_model')->getDataProgramBySlug($slug),
-            "dataNorek" => $this->model('Norek_model')->getAllDataNorek(),
+            "dataNorek" => $this->model('Norek_model')->getAllDataNorekByProgram($program),
             "dataKey" => Utility::getKeyRandom(),
             "qtyFidyah" => $qty * 45000
         ];
