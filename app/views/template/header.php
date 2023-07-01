@@ -17,7 +17,7 @@ if(isset($_SESSION['level']) && $_SESSION['level'] !== '3') {
   <title>Zakat | <?= $data['judul'] ?></title>
 
   <!-- icon shorcut -->
-  <link rel="shortcut icon" href="<?= BASEURL ?>/img/logo/logo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="<?= BASEURL ?>/img/logo/unamin.png" type="image/x-icon">
   <!-- cdn swiperjs -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
   <!-- my css -->
@@ -30,7 +30,7 @@ if(isset($_SESSION['level']) && $_SESSION['level'] !== '3') {
     <div class="container">
       <div class="content flex item-center justify-between relative">
         <div class="logo">
-          <a href="<?= BASEURL ?>/" class="font-bold text-2xl text-green block py-6">Yuk Zakat</a>
+          <a href="<?= BASEURL ?>/" class="font-bold text-2xl text-green block py-2"><img src="<?= BASEURL ?>/img/logo/unamin.png" alt="logo unamin" width="120"></a>
         </div>
 
         <!-- search -->

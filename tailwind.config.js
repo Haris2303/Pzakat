@@ -11,10 +11,10 @@ module.exports = {
         '2xl': '1320px'
       },
       colors: {
-        'green': '#b3903e',
-        'lightgreen': '#efd26e',
-        'darkgreen': '#004d47',
-        'darkgray': '#042036',
+        'green': '#006401',
+        'lightgreen': '#D8C11E',
+        'darkgreen': '#072E33',
+        'darkgray': '#05161A',
         'lightgray': 'rgb(107 114 128)'
       }
     },
