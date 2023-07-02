@@ -8,7 +8,8 @@ class Kelolaprogram_model {
         "allInfaq" => "vwAllDataInfaq",
         "allDataProgramBarang" => "vwAllProgramBarangAktif",
         "allProgramNameAktif" => "vwAllProgramNameAktif",
-        "allDataProgramAktif" => "vwAllDataProgramAktif"
+        "allDataProgramAktif" => "vwAllDataProgramAktif",
+        "allDataProgramAktifTunai" => "vwAllProgramAktifTunai"
     ];
     private $db;
 
@@ -33,6 +34,14 @@ class Kelolaprogram_model {
     public function getAllDataProgramAktif(): array
     {
         $view = $this->view['allDataProgramAktif'];
+        $query = "SELECT * FROM $view ORDER BY id_program DESC";
+        $this->db->query($query);
+        return $this->db->resultSet();
+    }
+
+    public function getAllDataProgramAktifTunai(): array
+    {
+        $view = $this->view['allDataProgramAktifTunai'];
         $query = "SELECT * FROM $view ORDER BY id_program DESC";
         $this->db->query($query);
         return $this->db->resultSet();

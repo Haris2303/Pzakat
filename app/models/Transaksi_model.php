@@ -28,6 +28,7 @@ class Transaksi_model {
         // // cek gambar
         if(!is_string($gambar)) return 'Gagal upload gambar!';
 
+        // get id pembayaran
         $getIDPembayaran = "SELECT id_pembayaran FROM tb_pembayaran WHERE nomor_pembayaran = :key";
         $this->db->query($getIDPembayaran);
         $this->db->bind('key', $key);

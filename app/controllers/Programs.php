@@ -6,7 +6,7 @@ class Programs extends Controller {
   {
     $data = [
       "judul" => "Programs",
-      "dataProgram" => $this->model('Kelolaprogram_model')->getAllDataProgramAktif(),
+      "dataProgram" => $this->model('Kelolaprogram_model')->getAllDataProgramAktifTunai(),
       "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
     $this->view('template/header', $data);
