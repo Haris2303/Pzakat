@@ -50,10 +50,11 @@
             <h3 class="text-title">Salurkan donasimu disini</h3>
             <span class="text-sm text-lightgray mt-2 inline-block">Silahkan pilih program donasi yang anda inginkan</span>
           </div>
-
+          
+          <!-- Kategori program -->
           <div class="w-full flex gap-2 md:gap-5 text-center mt-10 text-sm program-kategori">
             <?php foreach( $data['programNameAktif'] as $item ): ?>
-              <a class="w-1/3 bg-lightgreen py-2 hover:bg-green hover:text-white transition-300 shadow-md" data-name="<?= $item['nama_kategoriprogram'] ?>"><?= $item['nama_kategoriprogram'] ?></a>
+              <a class="w-1/3 bg-lightgreen py-2 hover:bg-green hover:text-white transition-300 shadow-md text-darkgreen" data-name="<?= $item['nama_kategoriprogram'] ?>"><?= $item['nama_kategoriprogram'] ?></a>
             <?php endforeach ?>
           </div>
 
