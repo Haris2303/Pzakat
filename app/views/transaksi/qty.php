@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <a href="<?= BASEURL ?>/transaksi/<?= $data['dataProgram']['slug'] ?>/" class="btn btn-warning form-control next-btn">Selanjutnya</a>
+                    <a href="<?= BASEURL ?>/transaksi/Zakat/<?= $data['dataProgram']['slug'] ?>/" class="btn btn-warning form-control next-btn">Selanjutnya</a>
                 </div>
             </form>
         </div>
