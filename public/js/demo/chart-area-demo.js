@@ -27,6 +27,18 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
+// get data pemasukkan bulanan
+$(document).ready(function() {
+  $.ajax({
+    url: "localhost://Pzakat/public/dashboard/getdatapemasukkan",
+    // data: "data",
+    dataType: "json",
+    success: function (response) {
+      console.log(response);
+    }
+  });
+})
+
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {

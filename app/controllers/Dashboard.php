@@ -20,4 +20,9 @@ class Dashboard extends Controller{
     $this->view('dashboard/footer', $data);
   }
 
+  public function getdatapemasukkan(): void 
+  {
+    echo json_encode($this->model('Dashboard_model')->getDataPemasukkan());
+  }
+
 }
