@@ -10,6 +10,9 @@ class Dashboard extends Controller{
         "demo_chartArea"  => "js/demo/chart-area-demo.js",
         "demo_chartPie"   => "js/demo/chart-pie-demo.js"
       ],
+      "countKonfirmasi" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranKonfirmasi()),
+      "sumDanaZakat"  => number_format($this->model('Kelolaprogram_model')->getSumProgramZakat()['total_dana'], 0, ',', '.'),
+      "sumDanaInfaq"  => number_format($this->model('Kelolaprogram_model')->getSumProgramInfaq()['total_dana'], 0, ',', '.'),
       "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
     $this->view('dashboard/sidebar', $data);

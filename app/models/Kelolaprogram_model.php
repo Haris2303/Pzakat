@@ -9,7 +9,9 @@ class Kelolaprogram_model {
         "allDataProgramBarang" => "vwAllProgramBarangAktif",
         "allProgramNameAktif" => "vwAllProgramNameAktif",
         "allDataProgramAktif" => "vwAllDataProgramAktif",
-        "allDataProgramAktifTunai" => "vwAllProgramAktifTunai"
+        "allDataProgramAktifTunai" => "vwAllProgramAktifTunai",
+        "sumZakat" => "vwSumProgramZakat",
+        "sumInfaq" => "vwSumProgramInfaq",
     ];
     private $db;
 
@@ -17,6 +19,28 @@ class Kelolaprogram_model {
     {
         $this->db = new Database();
     }
+
+    /**
+     * 
+     * @method Sum
+     * 
+     * @param NULL
+     * 
+     */
+    public function getSumProgramZakat() {
+        $view = $this->view['sumZakat'];
+        $query = "SELECT * FROM $view";
+        $this->db->query($query);
+        return $this->db->single();
+    }
+
+    public function getSumProgramInfaq() {
+        $view = $this->view['sumInfaq'];
+        $query = "SELECT * FROM $view";
+        $this->db->query($query);
+        return $this->db->single();
+    }
+
 
     /**
      * 
