@@ -25,6 +25,7 @@
                         <th>Nama Bank</th>
                         <th>Norek</th>
                         <th>Nama Pemilik</th>
+                        <th>Saldo Donasi</th>
                         <th>Jenis Program</th>
                         <th>Gambar</th>
                         <th>Aksi</th>
@@ -36,6 +37,7 @@
                             <td><?= $item['nama_bank'] ?></td>
                             <td><?= $item['norek'] ?></td>
                             <td><?= $item['nama_pemilik'] ?></td>
+                            <td><?= number_format($item['saldo_donasi'], 0, ',', '.') ?></td>
                             <td><?= $item['jenis_program'] ?></td>
                             <td><img src="<?= BASEURL ?>/img/norek/<?= $item['gambar'] ?>" alt="<?= $item['gambar'] ?>" width="100px"></td>
                             <td>

@@ -6,6 +6,13 @@ class Pengeluaran extends Controller {
     {
         $data = [
             "judul" => "Pengeluaran Donasi",
+            "css" => VENDOR_TABLES_CSS,
+            "script" => [
+                "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
+                "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
+                "demo_datatables"       => "js/demo/datatables-demo.js",
+                "util" => "js/util/script.js"
+            ],
             "dataPengeluaran" => $this->model('Pengeluaran_model')->getAllDataPengeluaranTunai(),
             "dataProgram" => $this->model('Kelolaprogram_model')->getAllDataProgramAktifTunai()
         ];

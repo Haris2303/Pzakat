@@ -399,8 +399,43 @@
       dataType: "json",
       success: function (response) {
         $.each(response, function (i, item) { 
-           $('#rekening-bank').append(`<option value="${item.id_bank}">${item.nama_bank}</option>`)
+           $('#rekening-bank').append(`<option value="${item.id_norek}" data-saldo="${item.saldo_donasi}">${item.nama_bank}</option>`)
         });
+
+        $('.btn-tambah').prop('disabled', true) // munculkan disabled pada button
+
+        let selectRekening = $('#rekening-bank').find('option')
+        selectRekening.on('click', function() {
+          $('.btn-tambah').prop('disabled', false) // hilangkan disabled pada button
+          let saldo = $(this).data('saldo')
+          // jika saldo kurang dari 0
+          if(saldo <= 0) $('#batasDonasi').html(`<span class="text-danger">Tidak ada saldo donasi!</span>`);
+          else $('#batasDonasi').html(`<span class="text-primary">Nominal pengeluaran tidak lebih dari <strong>${saldo}</strong></span>`)
+
+          // nominal yang dimasukkan tidak sesuai
+          $('#nominal').on('keyup', function() {
+            let saldoInput = parseInt($(this).val()) 
+            // jika lebih dari nol dan kurang dari saldo
+            if(saldoInput > 0 && saldoInput <= saldo) {
+              $('#batasDonasi').html(`<span class="text-primary">Nominal pengeluaran tidak lebih dari <strong>${saldo}</strong></span>`)
+              $('.btn-tambah').prop('disabled', false) // hilangkan disabled pada button
+            }
+            // jika kurang dari 0 atau lebih dari saldo
+            else if(saldoInput > saldo) { 
+              $('#batasDonasi').html(`<span class="text-danger">Nominal lebih dari ${saldo}!</span>`)
+              $('.btn-tambah').prop('disabled', true) // munculkan disabled pada button
+            }
+            else if(saldoInput <= 0) {
+              $('#batasDonasi').html(`<span class="text-danger">Nominal yang anda masukkan 0!</span>`)
+              $('.btn-tambah').prop('disabled', true) // munculkan disabled pada button
+            }
+            else {
+              if(saldo <= 0) $('#batasDonasi').html(`<span class="text-danger">Tidak ada saldo donasi!</span>`);
+              else $('#batasDonasi').html(`<span class="text-primary">Nominal pengeluaran tidak lebih dari <strong>${saldo}</strong></span>`)
+            }
+          })
+        })
+        
       }
     });
   })

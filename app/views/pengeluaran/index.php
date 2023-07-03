@@ -29,20 +29,18 @@
                     <tr>
                         <th>Nama Penerima</th>
                         <th>Nama Program</th>
-                        <th>Jenis Program</th>
-                        <th>Nominal/Berat</th>
+                        <th>Nominal (Rp)</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($data['dataPengeluaran'] as $item) : ?>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td><?= $item['nama_penerima'] ?></td>
+                            <td><?= $item['id_program'] ?></td>
+                            <td><?= number_format($item['nominal'], 0, ',', '.') ?></td>
                             <td>
-                                <a href="<?= BASEURL ?>/kelola_pembayaran/detailbarang/<?= $item['id_donasibarang'] ?>" class="btn badge btn-secondary">Detail</a>
+                                <a href="<?= BASEURL ?>/pengeluaran/detail/<?= $item['id_pengeluaran'] ?>" class="btn badge btn-secondary">Detail</a>
                             </td>
                         </tr>
                     <?php endforeach ?>
@@ -64,15 +62,14 @@
             </div>
 
             <form action="<?= BASEURL ?>/pengeluaran/aksi_tambah_pengeluaran_tunai" method="post" enctype="multipart/form-data">
-
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="nama-penerima" class="form-label">Nama Penerima</label>
-                        <input type="text" name="nama-penerima" id="nama-penerima" class="form-control">
+                        <input type="text" name="nama-penerima" id="nama-penerima" class="form-control" autocomplete="off" required>
                     </div>
                     <div class="mb-3">
                         <label for="nama-program" class="form-label">Nama Program</label>
-                        <select name="id-program" id="nama-program" class="form-control">
+                        <select name="id-program" id="nama-program" class="form-control" required>
                             <option selected disabled>-- Pilih Nama Program --</option>
                             <?php foreach ($data['dataProgram'] as $item) : ?>
                                 <option value="<?= $item['id_program'] ?>" data-jenis="<?= $item['jenis_program'] ?>"><?= $item['jenis_program'] ?> | <?= $item['nama_program'] ?></option>
@@ -81,20 +78,21 @@
                     </div>
                     <div class="mb-3">
                         <label for="rekening-bank" class="form-label">Rekening Bank</label>
-                        <select name="id-bank" id="rekening-bank" class="form-control">
+                        <select name="id-bank" id="rekening-bank" class="form-control" required>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="nominal" class="form-label">Nominal</label>
-                        <input type="text" name="nominal" id="nominal" class="form-control" placeholder="nominal pengeluaran" required>
+                        <input type="text" name="nominal" id="nominal" class="form-control" placeholder="nominal pengeluaran" required onkeydown="return countInput(event)" autocomplete="off">
+                        <div id="batasDonasi" class="form-text"></div>
                     </div>
                     <div class="mb-3">
                         <label for="nohp" class="form-label">Nomor Telepon</label>
-                        <input type="text" name="nohp" id="nohp" class="form-control" required>
+                        <input type="text" name="nohp" id="nohp" class="form-control" autocomplete="off" required onkeydown="return countInput(event)">
                     </div>
                     <div class="mb-3">
                         <label for="alamat" class="form-label">Alamat</label>
-                        <textarea name="alamat" id="alamat" class="form-control" rows="3" placeholder="alamat penerima"></textarea>
+                        <textarea name="alamat" id="alamat" class="form-control" rows="3" placeholder="alamat penerima" required></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="keterangan" class="form-label">Keterangan</label>
@@ -104,7 +102,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-arrow-circle-left"></i> Keluar</button>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Tambah</button>
+                    <button type="submit" class="btn btn-primary btn-tambah"><i class="fas fa-plus-circle"></i> Tambah</button>
                 </div>
             </form>
 

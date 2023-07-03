@@ -49,7 +49,7 @@
               <td><?= $item['jumlah_pembayaran'] ?></td>
               <td><?= $item['tanggal_pembayaran'] ?></td>
               <td>
-                <a href="<?= BASEURL ?>/kelola_pembayaran/aksi_konfirmasi_pembayaran/<?= $item['slug_program'] ?>/<?= $item['status_pembayaran'] ?>/<?= $item['id_donatur'] ?>/<?= $_SESSION['username'] ?>/<?= $item['jumlah_pembayaran'] ?>" class="btn badge btn-primary">Konfirmasi</a>
+                <a href="<?= BASEURL ?>/kelola_pembayaran/aksi_konfirmasi_pembayaran/<?= $item['slug_program'] ?>/<?= $item['status_pembayaran'] ?>/<?= $item['id_donatur'] ?>/<?= $_SESSION['username'] ?>/<?= $item['jumlah_pembayaran'] ?>/<?= join('-', explode(' ',$item['nama_bank'])) ?>" class="btn badge btn-primary">Konfirmasi</a>
                 <a href="<?= BASEURL ?>/kelola_pembayaran/aksi_batal_pembayaran/<?= $item['id_donatur'] ?>/<?= $_SESSION['username'] ?>" class="btn badge btn-danger">Batal</a>
                 <a href="<?= BASEURL ?>/kelola_pembayaran/detail/<?= $item['id_donatur'] ?>" class="btn badge btn-secondary">Detail</a>
               </td>

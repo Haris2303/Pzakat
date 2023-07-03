@@ -112,7 +112,7 @@ class Kelolapembayaran_model {
      * 
      */
 
-    public function konfirmasiPembayaran($slug, $id, $username, $jumlah_dana): int
+    public function konfirmasiPembayaran($slug, $id, $username, $jumlah_dana, $nama_bank): int
     {
         $tb_pembayaran = $this->table['pembayaran'];
         $query = "UPDATE $tb_pembayaran SET username_amil = :username_amil, status_pembayaran = :status_pembayaran WHERE id_donatur = :id_donatur";
@@ -123,11 +123,19 @@ class Kelolapembayaran_model {
         $this->db->execute();
         $rowCount = $this->db->rowCount();
 
-        // sum jumlah donasi
+        // tambah jumlah donasi
         $tb_program = 'tb_program';
         $query = "UPDATE $tb_program SET total_dana = total_dana + $jumlah_dana, jumlah_donatur = jumlah_donatur + 1 WHERE slug = :slug";
         $this->db->query($query);
         $this->db->bind('slug', $slug);
+        $this->db->execute();
+
+        // tambah jumlah saldo_donasi pada rekening
+        $tb_norek = 'tb_norek';
+        $nama_bank = join(' ', explode('-', $nama_bank));
+        $query = "UPDATE $tb_norek SET saldo_donasi = saldo_donasi + $jumlah_dana WHERE nama_bank = :nama_bank";
+        $this->db->query($query);
+        $this->db->bind('nama_bank', $nama_bank);
         $this->db->execute();
 
         return $rowCount;

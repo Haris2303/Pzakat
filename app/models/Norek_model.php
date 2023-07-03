@@ -55,6 +55,7 @@ class Norek_model
         $nama_bank      = strtoupper($dataPost['nama-bank']);
         $norek          = $dataPost['norek'];
         $jenis_program  = ucwords($dataPost['jenis-program']);
+        $saldo_donasi   = 0;
         $gambar         = strtolower(join('-', explode(' ', $nama_bank))) . '.jpeg';
 
         // cek norek 
@@ -64,12 +65,13 @@ class Norek_model
         if (count($resultCek) > 0) return 'Norek sudah tersedia!';
 
         // insert norek
-        $query = "INSERT INTO $this->table VALUES(NULL, :nama_pemilik, :nama_bank, :norek, :jenis_program, :gambar)";
+        $query = "INSERT INTO $this->table VALUES(NULL, :nama_pemilik, :nama_bank, :norek, :jenis_program, :saldo_donasi, :gambar)";
         $this->db->query($query);
         $this->db->bind('nama_pemilik', $nama_pemilik);
         $this->db->bind('nama_bank', $nama_bank);
         $this->db->bind('norek', $norek);
         $this->db->bind('jenis_program', $jenis_program);
+        $this->db->bind('saldo_donasi', $saldo_donasi);
         $this->db->bind('gambar', $gambar);
         $this->db->execute();
 

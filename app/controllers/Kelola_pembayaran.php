@@ -126,9 +126,9 @@ class Kelola_pembayaran extends Controller
    * 
    */
 
-  public function aksi_konfirmasi_pembayaran($slug, $location, $id, $username, $jumlah_dana): void
+  public function aksi_konfirmasi_pembayaran($slug, $location, $id, $username, $jumlah_dana, $nama_bank): void
   {
-    $result = $this->model('Kelolapembayaran_model')->konfirmasiPembayaran($slug, $id, $username, $jumlah_dana);
+    $result = $this->model('Kelolapembayaran_model')->konfirmasiPembayaran($slug, $id, $username, $jumlah_dana, $nama_bank);
     if ($result > 0) {
       Flasher::setFlash('Pembayaran <strong>Berhasil</strong> Dikonfirmasi!', 'success');
       header('Location: ' . BASEURL . "/kelola_pembayaran/$location");
