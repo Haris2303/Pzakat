@@ -142,6 +142,13 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
 
     <!-- Nav Item - Norek -->
     <li class="nav-item">
+      <a class="nav-link" href="<?= BASEURL ?>/pengeluaran">
+        <i class="fas fa-fw fa-credit-card"></i>
+        <span>Pengeluaran</span></a>
+    </li>
+
+    <!-- Nav Item - Norek -->
+    <li class="nav-item">
       <a class="nav-link" href="<?= BASEURL ?>/norek">
         <i class="fas fa-fw fa-credit-card"></i>
         <span>Nomor Rekening</span></a>

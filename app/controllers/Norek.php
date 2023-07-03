@@ -7,9 +7,7 @@ class Norek extends Controller
     {
         $data = [
             "judul" => "Nomor Rekening",
-            "css" => [
-                "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-            ],
+            "css" => VENDOR_TABLES_CSS,
             "script" => VENDOR_TABLES,
             "dataNorek" => $this->model('Norek_model')->getAllDataNorek(),
             "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif(),
@@ -25,9 +23,7 @@ class Norek extends Controller
     {
         $data = [
             "judul" => "Edit Nomor Rekening",
-            "css" => [
-                "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-            ],
+            "css" => VENDOR_TABLES_CSS,
             "script" => VENDOR_TABLES,
             "dataNorek" => $this->model('Norek_model')->getDataNorekById($id),
             "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()

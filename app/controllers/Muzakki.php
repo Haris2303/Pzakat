@@ -6,9 +6,7 @@ class Muzakki extends Controller {
 
     $data = [
       "judul" => 'Muzakki',
-      "css" => [
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-      ],
+      "css" => VENDOR_TABLES_CSS,
       "script" => VENDOR_TABLES,
       "dataMuzakki" => $this->model('Muzakki_model')->getAllDataMuzakki(),
       "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()

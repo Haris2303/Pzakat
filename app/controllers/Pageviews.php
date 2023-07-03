@@ -6,9 +6,7 @@ class Pageviews extends Controller {
 
     $data = [
       "judul" => "Berita",
-      "css" => [
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-      ],
+      "css" => VENDOR_TABLES_CSS,
       "script" => VENDOR_TABLES,
       "dataBerita"  => $this->model('Pageviews_model')->getAllDataBerita(),
       "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
@@ -23,9 +21,7 @@ class Pageviews extends Controller {
   public function artikel() {
     $data = [
       "judul" => 'Muzakki',
-      "css" => [
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-      ],
+      "css" => VENDOR_TABLES_CSS,
       "script" => VENDOR_TABLES,
       "dataArtikel" => $this->model('Pageviews_model')->getAllDataArtikel(),
       "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
@@ -40,9 +36,7 @@ class Pageviews extends Controller {
 
     $data = [
       "judul" => 'Muzakki',
-      "css" => [
-        "vendor_bootstraptable" => "js/vendor/datatables/dataTables.bootstrap4.min.css",
-      ],
+      "css" => VENDOR_TABLES_CSS,
       "dataView" => $this->model('Pageviews_model')->getDataViewBySlug($slug),
       "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];

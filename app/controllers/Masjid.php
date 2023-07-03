@@ -7,9 +7,7 @@ class Masjid extends Controller
   {
     $data = [
       "judul" => 'Masjid',
-      "css" => [
-        "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.css",
-      ],
+      "css" => VENDOR_TABLES_CSS,
       "script" => VENDOR_TABLES,
       "dataMasjid" => $this->model('Masjid_model')->getDataMasjid(),
       "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
