@@ -6,11 +6,33 @@ class Pengeluaran extends Controller {
     {
         $data = [
             "judul" => "Pengeluaran Donasi",
+            "dataPengeluaran" => $this->model('Pengeluaran_model')->getAllDataPengeluaranTunai(),
+            "dataProgram" => $this->model('Kelolaprogram_model')->getAllDataProgramAktifTunai()
         ];
 
         $this->view('dashboard/sidebar', $data);
         $this->view('pengeluaran/index', $data);
         $this->view('dashboard/footer', $data);
+    }
+
+    /**
+     * 
+     * @method Aksi
+     * 
+     */
+
+    public function aksi_tambah_pengeluaran_tunai()
+    {
+        $result = $this->model('Pengeluaran_model')->tambahDataPengeluaranTunai($_POST);
+        if($result > 0) {
+            Flasher::setFlash('Data Pengeluaran <strong>Berhasil</strong> Ditambahkan!', 'success');
+            header('Location: ' . BASEURL . '/pengeluaran/index');
+            exit;
+        } else {
+            Flasher::setFlash('Data Pengeluaran <strong>Gagal</strong> Ditambahkan!', 'danger');
+            header('Location: ' . BASEURL . '/pengeluaran/index');
+            exit;
+        }
     }
 
 }

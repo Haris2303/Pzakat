@@ -39,6 +39,11 @@ class Norek extends Controller
         echo json_encode($this->model('Norek_model')->getDataNorekById($_POST['id']));
     }
 
+    public function getRekeningByJenisProgram(): void
+    {
+        echo json_encode($this->model('Norek_model')->getAllDataNorekByProgram($_POST['jenisProgram']));
+    }
+
     public function aksi_tambah_norek(): void
     {
         $result = $this->model('Norek_model')->tambahDataNorek($_POST, $_FILES);

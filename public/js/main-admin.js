@@ -377,4 +377,32 @@
   })
 
 
+  /**
+   * 
+   * @Pengeluaran
+   * 
+   * @Rekening Selected
+   * 
+   */
+  // ketika option pada nama-progarm di klik
+  $('#nama-program option').on('click', function() {
+    // set option rekening null
+    $('#rekening-bank').html('');
+    
+    const urlData = 'http://localhost/Pzakat/public/norek/getRekeningByJenisProgram';
+    let jenisProgram = $(this).data('jenis');
+    // request data rekening berdasarkan jenis program
+    $.ajax({
+      url: urlData,
+      method: 'post',
+      data: { jenisProgram },
+      dataType: "json",
+      success: function (response) {
+        $.each(response, function (i, item) { 
+           $('#rekening-bank').append(`<option value="${item.id_bank}">${item.nama_bank}</option>`)
+        });
+      }
+    });
+  })
+
 })(jQuery); // akhir strict
