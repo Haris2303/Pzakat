@@ -4,11 +4,20 @@ class Norek_model
 {
 
     private $table  = 'tb_norek';
+    private $view = ["allNorekHaveSaldo" => "vwAllNorekHaveSaldo"];
     private $db;
     
     public function __construct()
     {
         $this->db = new Database();
+    }
+
+    public function getAllDataNorekHaveSaldo()
+    {
+        $view = $this->view['allNorekHaveSaldo'];
+        $query = "SELECT * FROM $view";
+        $this->db->query($query);
+        return $this->db->resultSet();
     }
 
     public function getAllDataNorek()

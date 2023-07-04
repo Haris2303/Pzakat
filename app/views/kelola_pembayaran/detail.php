@@ -23,6 +23,10 @@
           <td>: <?= $data['detail']['nama_donatur'] ?></td>
         </tr>
         <tr>
+          <th>Nama Program</th>
+          <td>: <?= $data['detail']['nama_program'] ?></td>
+        </tr>
+        <tr>
           <th>Jenis Program</th>
           <td>: <?= $data['detail']['jenis_program'] ?></td>
         </tr>
@@ -62,7 +66,7 @@
     <div class="mt-3">
       <a href="<?= BASEURL ?>/kelola_pembayaran/<?= $data['detail']['status_pembayaran'] ?>" class="btn btn-secondary"><i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
       <?php if($data['detail']['status_pembayaran'] === 'konfirmasi'):?>
-        <a href="<?= BASEURL ?>/kelola_pembayaran/aksi_konfirmasi_pembayaran/<?= $data['detail']['slug_program'] ?>/<?= $data['detail']['status_pembayaran'] ?>/<?= $data['detail']['id_donatur'] ?>/<?= $_SESSION['username'] ?>/<?= $data['detail']['jumlah_pembayaran'] ?>" class="btn btn-primary"><i class="fas fa-arrow-alt-circle-left"></i> Konfirmasi</a>
+        <a href="<?= BASEURL ?>/kelola_pembayaran/aksi_konfirmasi_pembayaran/<?= $data['detail']['slug_program'] ?>/<?= $data['detail']['status_pembayaran'] ?>/<?= $data['detail']['id_donatur'] ?>/<?= $_SESSION['username'] ?>/<?= $data['detail']['jumlah_pembayaran'] ?>/<?= join('-', explode(' ',$data['detail']['nama_bank'])) ?>" class="btn btn-primary"><i class="fas fa-arrow-alt-circle-left"></i> Konfirmasi</a>
       <?php endif ?>
     </div>
   </div>

@@ -5,7 +5,7 @@ class Pengeluaran_model {
     private $table = "tb_pengeluaran";
     private $view = [
         "allDataPengeluaran"        => "vwAllDataPengeluaran",
-        "allDataPengeluaranTunai"   => "vwAllDataPengeluaranTunai"
+        "allDataPengeluaranTunai"   => "vwAllDataPengeluaranTunai",
     ];
     private $db;
 
@@ -50,10 +50,11 @@ class Pengeluaran_model {
     public function tambahDataPengeluaranTunai($data)
     {
         // initial variabel
-        $nama_penerima      = htmlspecialchars($data['nama-penerima']);
+        $nama_penerima      = ucwords(htmlspecialchars($data['nama-penerima']));
         $id_program         = $data['id-program'];
         $id_bank            = $data['id-bank'];
-        $nominal            = $data['nominal'];
+        $username_amil      = $data['username_amil'];
+        $nominal            = str_replace('.', '', $data['nominal']);
         $alamat             = $data['alamat'];
         $nohp               = $data['nohp'];
         $jenis_pengeluaran  = 'uang';
@@ -74,10 +75,11 @@ class Pengeluaran_model {
         $this->db->execute();
         
         // insert data pengeluaran
-        $query = "INSERT INTO $this->table VALUES(NULL, :id_program, :id_bank, :nama_penerima, :alamat, :nohp, :jenis_pengeluaran, :nominal, :keterangan, NOW())";
+        $query = "INSERT INTO $this->table VALUES(NULL, :id_program, :id_bank, :username_amil, :nama_penerima, :alamat, :nohp, :jenis_pengeluaran, :nominal, :keterangan, NOW())";
         $this->db->query($query);
         $this->db->bind('id_program', $id_program);
         $this->db->bind('id_bank', $id_bank);
+        $this->db->bind('username_amil', $username_amil);
         $this->db->bind('nama_penerima', $nama_penerima);
         $this->db->bind('alamat', $alamat);
         $this->db->bind('nohp', $nohp);

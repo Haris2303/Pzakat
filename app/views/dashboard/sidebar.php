@@ -129,7 +129,7 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#callapsePembayaran" aria-expanded="true" aria-controls="callapsePembayaran">
         <i class="fas fa-fw fa-folder"></i>
-        <span>Kelola Pembayaran</span><?php if($countKonfirmasi > 0): ?><span class="badge badge-danger badge-counter mr-3"><?= $countKonfirmasi ?>+</span><?php endif ?></a>
+        <span>Kelola Pembayaran</span><?php if($countKonfirmasi > 0): ?><span class="badge badge-danger badge-counter mr-3"><?= $countKonfirmasi ?>+</span><?php endif ?>
       </a>
       <div id="callapsePembayaran" class="collapse" aria-labelledby="headingPrograms" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
@@ -140,11 +140,11 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
       </div>
     </li>
 
-    <!-- nav item - Kelola Pembayaran -->
+    <!-- nav item - Pengeluaran -->
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePengeluaran" aria-expanded="true" aria-controls="collapsePengeluaran">
         <i class="fas fa-fw fa-folder"></i>
-        <span>Pengeluaran</span><?php if($countKonfirmasi > 0): ?><span class="badge badge-danger badge-counter mr-3"><?= $countKonfirmasi ?>+</span><?php endif ?></a>
+        <span>Pengeluaran</span>
       </a>
       <div id="collapsePengeluaran" class="collapse" aria-labelledby="headingPrograms" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">

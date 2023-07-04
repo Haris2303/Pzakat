@@ -48,7 +48,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="bukti" class="form-label">Upload Bukti Transfer</label>
-                    <input type="file" name="gambar" id="bukti" class="form-control">
+                    <input type="file" name="gambar" id="bukti" class="form-control" required>
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-warning form-control">Konfirmasi</button>

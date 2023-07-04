@@ -84,6 +84,16 @@ class Kelola_program extends Controller
         $this->view('dashboard/footer', $data);
     }
 
+    public function getDataProgramHaveMoneyById()
+    {
+        echo json_encode($this->model('Kelolaprogram_model')->getAllDataProgramHaveMoneyById($_POST['id_program']));
+    }
+
+    public function getDataProgramByJenisProgram()
+    {
+        echo json_encode($this->model('Kelolaprogram_model')->getAllDataProgramAktifByJenisProgram($_POST['jenis_program']));
+    }
+
 
     /**
      * 

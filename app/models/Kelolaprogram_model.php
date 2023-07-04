@@ -10,6 +10,7 @@ class Kelolaprogram_model {
         "allProgramNameAktif" => "vwAllProgramNameAktif",
         "allDataProgramAktif" => "vwAllDataProgramAktif",
         "allDataProgramAktifTunai" => "vwAllProgramAktifTunai",
+        "allDataProgramHaveMoney"   => "vwAllProgramHaveMoney",
         "sumZakat" => "vwSumProgramZakat",
         "sumInfaq" => "vwSumProgramInfaq",
     ];
@@ -49,6 +50,14 @@ class Kelolaprogram_model {
      * @param NULL
      * 
      */
+
+    public function getAllDataProgramHaveMoney(): array
+    {
+        $view = $this->view['allDataProgramHaveMoney'];
+        $query = "SELECT * FROM $view";
+        $this->db->query($query);
+        return $this->db->resultSet();
+    }
 
     public function getAllDataProgram(): array
     {
@@ -149,6 +158,24 @@ class Kelolaprogram_model {
      * @param Slug
      * 
     */
+    public function getAllDataProgramAktifByJenisProgram($jenis_program)
+    {
+        $view = $this->view['allDataProgramAktifTunai'];
+        $query = "SELECT * FROM $view WHERE jenis_program = :jenis_program";
+        $this->db->query($query);
+        $this->db->bind('jenis_program', $jenis_program);
+        return $this->db->resultSet();
+    }
+
+    public function getAllDataProgramHaveMoneyById($id): array
+    {
+        $view = $this->view['allDataProgramHaveMoney'];
+        $query = "SELECT * FROM $view WHERE id_program = :id_program";
+        $this->db->query($query);
+        $this->db->bind('id_program', $id);
+        return $this->db->resultSet();
+    }
+
     public function getDataProgramBySlug($slug): array
     {
         $query = "SELECT * FROM $this->table WHERE slug = :slug";

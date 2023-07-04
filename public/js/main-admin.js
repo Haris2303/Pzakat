@@ -385,57 +385,89 @@
    * 
    */
   // ketika option pada nama-progarm di klik
-  $('#nama-program option').on('click', function() {
-    // set option rekening null
-    $('#rekening-bank').html('');
+  $('#rekening-bank option').on('click', function() {
+
+    let saldoRekening = $(this).data('saldo')
+    let dataJenisProgram = $(this).data('jenis')
     
-    const urlData = 'http://localhost/Pzakat/public/norek/getRekeningByJenisProgram';
-    let jenisProgram = $(this).data('jenis');
-    // request data rekening berdasarkan jenis program
+    const url = 'http://localhost/Pzakat/public/kelola_program/getDataProgramByJenisProgram'
+    const component = {
+      elementOption: (textContent, attrValue, dataSaldo) => {
+        return `
+          <option value="${attrValue}" data-saldo="${dataSaldo}">${textContent}</option>
+        `
+      },
+      msgNominalInput: (saldo) => `<span class="text-primary">Masukkan nominal tidak lebih dari <strong>${saldo.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</strong></span>`,
+      msgAwal: '<span class="text-primary">Masukkan nominal!</span>',
+      msgNonValid: (saldo) => `<span class="text-danger">Nominal harus lebih dari Rp 500.000 kurang dari <strong>${saldo.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</strong></span>`,
+      msgSaldoKosong: `<span class="text-danger">Saldo Kosong!</span>`
+    }
+
+    // destruct component
+    const { elementOption, msgNominalInput, msgAwal, msgNonValid, msgSaldoKosong} = component
+
+    // get nominal value
+    let nominal = $('#nominal').val()
+    
+    // set option pada selection program jadi kosong
+    $('#nama-program').html('');
+
+    // request data
     $.ajax({
-      url: urlData,
+      type: "method",
+      url: url,
       method: 'post',
-      data: { jenisProgram },
+      data: { jenis_program: dataJenisProgram },
       dataType: "json",
       success: function (response) {
         $.each(response, function (i, item) { 
-           $('#rekening-bank').append(`<option value="${item.id_norek}" data-saldo="${item.saldo_donasi}">${item.nama_bank}</option>`)
+          console.log(item.total_dana);
+          if(saldoRekening >= item.total_dana && item.total_dana > 0) $('#nama-program').append(elementOption(item.nama_program, item.id_program, item.total_dana))
         });
 
-        $('.btn-tambah').prop('disabled', true) // munculkan disabled pada button
-
-        let selectRekening = $('#rekening-bank').find('option')
-        selectRekening.on('click', function() {
-          $('.btn-tambah').prop('disabled', false) // hilangkan disabled pada button
-          let saldo = $(this).data('saldo')
-          // jika saldo kurang dari 0
-          if(saldo <= 0) $('#batasDonasi').html(`<span class="text-danger">Tidak ada saldo donasi!</span>`);
-          else $('#batasDonasi').html(`<span class="text-primary">Nominal pengeluaran tidak lebih dari <strong>${saldo}</strong></span>`)
-
-          // nominal yang dimasukkan tidak sesuai
-          $('#nominal').on('keyup', function() {
-            let saldoInput = parseInt($(this).val()) 
-            // jika lebih dari nol dan kurang dari saldo
-            if(saldoInput > 0 && saldoInput <= saldo) {
-              $('#batasDonasi').html(`<span class="text-primary">Nominal pengeluaran tidak lebih dari <strong>${saldo}</strong></span>`)
-              $('.btn-tambah').prop('disabled', false) // hilangkan disabled pada button
-            }
-            // jika kurang dari 0 atau lebih dari saldo
-            else if(saldoInput > saldo) { 
-              $('#batasDonasi').html(`<span class="text-danger">Nominal lebih dari ${saldo}!</span>`)
-              $('.btn-tambah').prop('disabled', true) // munculkan disabled pada button
-            }
-            else if(saldoInput <= 0) {
-              $('#batasDonasi').html(`<span class="text-danger">Nominal yang anda masukkan 0!</span>`)
-              $('.btn-tambah').prop('disabled', true) // munculkan disabled pada button
-            }
-            else {
-              if(saldo <= 0) $('#batasDonasi').html(`<span class="text-danger">Tidak ada saldo donasi!</span>`);
-              else $('#batasDonasi').html(`<span class="text-primary">Nominal pengeluaran tidak lebih dari <strong>${saldo}</strong></span>`)
-            }
-          })
+        let saldoProgram = 0;
+        // get saldo program option
+        $('#nama-program option').on('click', function() {
+          saldoProgram = $(this).data('saldo')
+          if(nominal === '') {
+            $('#pesan-nominal').html(msgAwal)
+            $('.btn-tambah').prop('disabled', true)
+          }      
         })
-        
+
+        $('#nominal').on('keyup', function() {
+          // set text content pesan nominal jadi kosong
+          $('#pesan-nominal').html('')
+
+          // replace currency ke format angka biasa
+          nominal = parseInt($(this).val().replace(/\D/g, ''));
+
+          if(saldoProgram === 0) {
+            $('#pesan-nominal').html(msgSaldoKosong)
+            $('.btn-tambah').prop('disabled', true)
+          } else {
+            // jika nominal empty
+            if((nominal >= 500000) && (nominal <= saldoProgram)) {
+              $('#pesan-nominal').html(msgNominalInput(saldoProgram))
+              $('.btn-tambah').prop('disabled', false)
+            }
+  
+            // jika nominal <= 0
+            if(nominal < 500000) {
+              $('#pesan-nominal').html(msgNonValid(saldoProgram))
+              $('.btn-tambah').prop('disabled', true)
+            }
+
+            // jika nominal > saldoProgram
+            if(nominal > saldoProgram) {
+              $('#pesan-nominal').html(msgNonValid(saldoProgram))
+              $('.btn-tambah').prop('disabled', true)
+            }
+          }
+
+        })
+
+
       }
     });
   })

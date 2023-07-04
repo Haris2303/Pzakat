@@ -14,7 +14,8 @@ class Pengeluaran extends Controller {
                 "util" => "js/util/script.js"
             ],
             "dataPengeluaran" => $this->model('Pengeluaran_model')->getAllDataPengeluaranTunai(),
-            "dataProgram" => $this->model('Kelolaprogram_model')->getAllDataProgramAktifTunai()
+            "dataProgram" => $this->model('Kelolaprogram_model')->getAllDataProgramHaveMoney(),
+            "dataRekening" => $this->model('Norek_model')->getAllDataNorekHaveSaldo()
         ];
 
         $this->view('dashboard/sidebar', $data);
@@ -22,7 +23,7 @@ class Pengeluaran extends Controller {
         $this->view('dashboard/footer', $data);
     }
 
-    public function detail($id): void
+    public function detailTunai($id): void
     {
         $data = [
             "judul" => "Detail Pengeluaran",
@@ -30,7 +31,7 @@ class Pengeluaran extends Controller {
         ];
 
         $this->view('dashboard/sidebar', $data);
-        $this->view('pengeluaran/detail', $data);
+        $this->view('pengeluaran/detailTunai', $data);
         $this->view('dashboard/footer', $data);
     }
 
