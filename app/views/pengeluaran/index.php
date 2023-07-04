@@ -30,6 +30,7 @@
                         <th>Nama Penerima</th>
                         <th>Nama Program</th>
                         <th>Nominal (Rp)</th>
+                        <th>Tanggal</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -37,8 +38,9 @@
                     <?php foreach ($data['dataPengeluaran'] as $item) : ?>
                         <tr>
                             <td><?= $item['nama_penerima'] ?></td>
-                            <td><?= $item['id_program'] ?></td>
+                            <td><?= $item['nama_program'] ?></td>
                             <td><?= number_format($item['nominal'], 0, ',', '.') ?></td>
+                            <td><?= $item['tanggal'] ?></td>
                             <td>
                                 <a href="<?= BASEURL ?>/pengeluaran/detail/<?= $item['id_pengeluaran'] ?>" class="btn badge btn-secondary">Detail</a>
                             </td>

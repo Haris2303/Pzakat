@@ -27,6 +27,20 @@ class Pengeluaran_model {
         return $this->db->resultSet();
     }
 
+    /**
+     * 
+     * @method GetData WHERE
+     * 
+     */
+    public function getDataPengeluaranById($id): array
+    {
+        $view = $this->view['allDataPengeluaran'];
+        $query = "SELECT * FROM $view WHERE id_pengeluaran = :id_pengeluaran";
+        $this->db->query($query);
+        $this->db->bind('id_pengeluaran', $id);
+        return $this->db->single();
+    }
+
 
     /** 
      *

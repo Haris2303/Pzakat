@@ -22,6 +22,18 @@ class Pengeluaran extends Controller {
         $this->view('dashboard/footer', $data);
     }
 
+    public function detail($id): void
+    {
+        $data = [
+            "judul" => "Detail Pengeluaran",
+            "detail" => $this->model('Pengeluaran_model')->getDataPengeluaranById($id)
+        ];
+
+        $this->view('dashboard/sidebar', $data);
+        $this->view('pengeluaran/detail', $data);
+        $this->view('dashboard/footer', $data);
+    }
+
     /**
      * 
      * @method Aksi
