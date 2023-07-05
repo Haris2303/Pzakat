@@ -5,7 +5,7 @@ class Pengeluaran extends Controller {
     public function index() :void 
     {
         $data = [
-            "judul" => "Pengeluaran Donasi",
+            "judul" => "Pengeluaran Tunai",
             "css" => VENDOR_TABLES_CSS,
             "script" => [
                 "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
@@ -20,6 +20,25 @@ class Pengeluaran extends Controller {
 
         $this->view('dashboard/sidebar', $data);
         $this->view('pengeluaran/index', $data);
+        $this->view('dashboard/footer', $data);
+    }
+
+    public function barang(): void
+    {
+        $data = [
+            "judul" => "Pengeluaran Barang",
+            "css" => VENDOR_TABLES_CSS,
+            "script" => [
+                "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
+                "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
+                "demo_datatables"       => "js/demo/datatables-demo.js",
+                "util" => "js/util/script.js"
+            ],
+            "dataBarang" => $this->model("Kelolaprogram_model")->getAllDataProgramBarang()
+        ];
+
+        $this->view('dashboard/sidebar', $data);
+        $this->view('pengeluaran/barang', $data);
         $this->view('dashboard/footer', $data);
     }
 

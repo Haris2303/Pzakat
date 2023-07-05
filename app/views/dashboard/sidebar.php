@@ -150,7 +150,7 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Kategori pengeluaran:</h6>
             <a class="collapse-item" href="<?= BASEURL ?>/pengeluaran/">Pengeluaran Tunai</a>
-            <a class="collapse-item" href="<?= BASEURL ?>/kelola_pembayaran/barang">Pengeluaran Barang</a>
+            <a class="collapse-item" href="<?= BASEURL ?>/pengeluaran/barang">Pengeluaran Barang</a>
         </div>
       </div>
     </li>
