@@ -379,7 +379,7 @@
 
   /**
    * 
-   * @Pengeluaran
+   * @Pengeluaran Tunai
    * 
    * @Rekening Selected
    * 
