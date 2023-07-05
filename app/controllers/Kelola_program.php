@@ -29,7 +29,7 @@ class Kelola_program extends Controller
             "judul" => "Kelola Zakat Uang",
             "css" => VENDOR_TABLES_CSS,
             "script" => VENDOR_TABLES,
-            "dataZakat" => $this->model('Kelolaprogram_model')->getAllDataProgramZakat()
+            "dataZakat" => $this->model('Kelolaprogram_model')->getAllDataProgramZakatTunai()
         ];
 
         $this->view('dashboard/sidebar', $data);

@@ -129,6 +129,19 @@ class Kelolaprogram_model {
 
     /**
      * 
+     * @method GetAllData WHERE jenis_pembayaran
+     * 
+     */
+    public function getAllDataProgramZakatTunai(): array
+    {
+        $view = $this->view['allZakat'];
+        $query = "SELECT * FROM $view WHERE jenis_pembayaran <> 'barang'";
+        $this->db->query($query);
+        return $this->db->resultSet();
+    }
+
+    /**
+     * 
      * @method Limit
      * 
      * @param Limit|JenisProgram

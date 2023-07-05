@@ -29,7 +29,7 @@
                     <tr>
                         <th>Nama Penerima</th>
                         <th>Nama Program</th>
-                        <th>Nominal (Rp)</th>
+                        <th>Nominal (Kg)</th>
                         <th>Tanggal</th>
                         <th>Aksi</th>
                     </tr>
@@ -39,10 +39,10 @@
                         <tr>
                             <td><?= $item['nama_penerima'] ?></td>
                             <td><?= $item['nama_program'] ?></td>
-                            <td><?= number_format($item['nominal'], 0, ',', '.') ?></td>
+                            <td><?= Utility::convertGramToKilogram($item['nominal']) ?>kg</td>
                             <td><?= explode(' ', $item['tanggal'])[0] ?></td>
                             <td>
-                                <a href="<?= BASEURL ?>/pengeluaran/detailTunai/<?= $item['id_pengeluaran'] ?>" class="btn badge btn-secondary">Detail</a>
+                                <a href="<?= BASEURL ?>/pengeluaran/detailBarang/<?= $item['id_pengeluaran'] ?>" class="btn badge btn-secondary">Detail</a>
                             </td>
                         </tr>
                     <?php endforeach ?>
@@ -63,7 +63,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
             </div>
 
-            <form action="<?= BASEURL ?>/pengeluaran/aksi_tambah_pengeluaran_tunai" method="post" enctype="multipart/form-data">
+            <form action="<?= BASEURL ?>/pengeluaran/aksi_tambah_pengeluaran_barang" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <input type="hidden" name="username_amil" value="<?= $_SESSION['username'] ?>" readonly>
                     <div class="mb-3">
@@ -74,12 +74,14 @@
                         <label for="nama-program" class="form-label">Nama Program</label>
                         <select name="id-program" id="nama-program" class="form-control" required>
                             <?php foreach( $data['dataBarang'] as $item ) : ?>
-                                <option value="<?= $item['id_program'] ?>" data-saldo="<?= $item['total_dana'] ?>"><?= $item['nama_program'] ?></option>
+                                <?php if($item['total_dana'] >= 5000): ?>
+                                    <option value="<?= $item['id_program'] ?>" data-berat="<?= $item['total_dana'] ?>"><?= $item['nama_program'] ?></option>
+                                <?php endif ?>
                             <?php endforeach ?>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="nominal" class="form-label">Nominal (Rp)</label>
+                        <label for="nominal" class="form-label">Nominal (Gram)</label>
                         <input type="text" name="nominal" id="nominal" class="form-control" placeholder="nominal pengeluaran" required onkeydown="return currency(event)" autocomplete="off">
                         <div id="pesan-nominal" class="form-text"></div>
                     </div>

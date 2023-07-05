@@ -1,5 +1,5 @@
 <!-- Page Heading -->
-<h2 class="h3">Detail Pembayaran</h2>
+<h2 class="h3 text-dark">Detail Pembayaran Barang</h2>
 <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
   For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
@@ -61,7 +61,7 @@
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title fs-5" id="exampleModalLabel">Bukti Pembayaran</h3>
+        <h3 class="modal-title fs-5" id="exampleModalLabel">Bukti Barang</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
       </div>
       

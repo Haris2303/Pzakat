@@ -471,4 +471,75 @@
     });
   })
 
+
+  /**
+   * 
+   * @Pengeluaran Barang
+   * 
+   * @Program Selected
+   * 
+   */
+  // ketika option pada nama-progarm di klik
+  $('#nama-program option').on('click', function() {
+
+    let beratBarang = $(this).data('berat')
+
+    const component = {
+      msgNominalInput: (saldo) => `<span class="text-primary">Masukkan nominal tidak lebih dari <strong>${saldo.toLocaleString('id-ID')}Gram</strong></span>`,
+      msgAwal: '<span class="text-primary">Masukkan nominal!</span>',
+      msgNonValid: (saldo) => `<span class="text-danger">Nominal harus lebih dari 5000Gram, kurang dari <strong>${saldo.toLocaleString('id-ID')}Gram</strong></span>`,
+      msgSaldoKosong: `<span class="text-danger">Saldo Kosong!</span>`,
+    }
+
+    // destruct component
+    const { msgNominalInput, msgAwal, msgNonValid, msgSaldoKosong } = component
+
+    // get nominal value
+    let nominal = $('#nominal').val()
+
+    // jika nominal kosong
+    if(nominal === '') {
+      $('#pesan-nominal').html(msgAwal)
+      $('.btn-tambah').prop('disabled', true)
+    }
+
+    $('#nominal').on('keyup', function() {
+      // set text content pesan nominal jadi kosong
+      $('#pesan-nominal').html('')
+
+      // replace currency ke format angka biasa
+      nominal = parseInt($(this).val().replace(/\D/g, ''));
+      
+      // jika berat barang = 0
+      if(beratBarang === 0) {
+        $('#pesan-nominal').html(msgSaldoKosong)
+        $('.btn-tambah').prop('disabled', true)
+      } else {
+        // jika nominal = 0
+        if(nominal < 5000) {
+          $('#pesan-nominal').html(msgNonValid(beratBarang))
+          $('.btn-tambah').prop('disabled', true)
+        }
+
+        // jika nominal sesuai
+        if((nominal >= 5000) && (nominal <= beratBarang)) {
+          $('#pesan-nominal').html(msgNominalInput(beratBarang))
+          $('.btn-tambah').prop('disabled', false)
+        }
+
+        // jika nominal <= 0
+        if(nominal < 0) {
+          $('#pesan-nominal').html(msgNonValid(beratBarang))
+          $('.btn-tambah').prop('disabled', true)
+        }
+
+        // jika nominal > saldoProgram
+        if(nominal > beratBarang) {
+          $('#pesan-nominal').html(msgNonValid(beratBarang))
+          $('.btn-tambah').prop('disabled', true)
+        }
+      }
+    })
+  })
+
 })(jQuery); // akhir strict

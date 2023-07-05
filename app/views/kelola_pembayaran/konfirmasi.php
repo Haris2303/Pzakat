@@ -36,7 +36,7 @@
           <tr>
             <th>Nama Donatur</th>
             <th>Nama Bank</th>
-            <th>Jumlah Donasi</th>
+            <th>Jumlah Donasi (Rp)</th>
             <th>Tanggal Pembayaran</th>
             <th>Aksi</th>
           </tr>
@@ -46,7 +46,7 @@
             <tr>
               <td><?= $item['nama_donatur'] ?></td>
               <td><?= $item['nama_bank'] ?></td>
-              <td><?= $item['jumlah_pembayaran'] ?></td>
+              <td><?= number_format($item['jumlah_pembayaran'], 0, ',', '.') ?></td>
               <td><?= $item['tanggal_pembayaran'] ?></td>
               <td>
                 <a href="<?= BASEURL ?>/kelola_pembayaran/aksi_konfirmasi_pembayaran/<?= $item['slug_program'] ?>/<?= $item['status_pembayaran'] ?>/<?= $item['id_donatur'] ?>/<?= $_SESSION['username'] ?>/<?= $item['jumlah_pembayaran'] ?>/<?= join('-', explode(' ',$item['nama_bank'])) ?>" class="btn badge btn-primary">Konfirmasi</a>

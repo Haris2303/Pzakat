@@ -34,6 +34,7 @@ class Pengeluaran extends Controller {
                 "demo_datatables"       => "js/demo/datatables-demo.js",
                 "util" => "js/util/script.js"
             ],
+            "dataPengeluaran" => $this->model('Pengeluaran_model')->getAllDataPengeluaranBarang(),
             "dataBarang" => $this->model("Kelolaprogram_model")->getAllDataProgramBarang()
         ];
 
@@ -54,6 +55,18 @@ class Pengeluaran extends Controller {
         $this->view('dashboard/footer', $data);
     }
 
+    public function detailBarang($id): void
+    {
+        $data = [
+            "judul" => "Detail Pengeluaran",
+            "detail" => $this->model('Pengeluaran_model')->getDataPengeluaranBarangById($id)
+        ];
+
+        $this->view('dashboard/sidebar', $data);
+        $this->view('pengeluaran/detailBarang', $data);
+        $this->view('dashboard/footer', $data);
+    }
+
     /**
      * 
      * @method Aksi
@@ -70,6 +83,20 @@ class Pengeluaran extends Controller {
         } else {
             Flasher::setFlash('Data Pengeluaran <strong>Gagal</strong> Ditambahkan!', 'danger');
             header('Location: ' . BASEURL . '/pengeluaran/index');
+            exit;
+        }
+    }
+
+    public function aksi_tambah_pengeluaran_barang()
+    {
+        $result = $this->model('Pengeluaran_model')->tambahDataPengeluaranBarang($_POST);
+        if($result > 0) {
+            Flasher::setFlash('Data Pengeluaran <strong>Berhasil</strong> Ditambahkan!', 'success');
+            header('Location: ' . BASEURL . '/pengeluaran/barang');
+            exit;
+        } else {
+            Flasher::setFlash('Data Pengeluaran <strong>Gagal</strong> Ditambahkan!', 'danger');
+            header('Location: ' . BASEURL . '/pengeluaran/barang');
             exit;
         }
     }
