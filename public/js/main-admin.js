@@ -421,7 +421,6 @@
       dataType: "json",
       success: function (response) {
         $.each(response, function (i, item) { 
-          console.log(item.total_dana);
           if(saldoRekening >= item.total_dana && item.total_dana > 0) $('#nama-program').append(elementOption(item.nama_program, item.id_program, item.total_dana))
         });
 
