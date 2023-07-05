@@ -28,7 +28,7 @@
         <thead>
           <tr>
             <th>Nama Program Infaq</th>
-            <th>Total Dana</th>
+            <th>Total Dana (Rp)</th>
             <th>Jumlah Donatur</th>
             <th>Aksi</th>
           </tr>
@@ -37,7 +37,7 @@
           <?php foreach ($data['dataInfaq'] as $item) : ?>
             <tr>
               <td><?= $item['nama_program'] ?></td>
-              <td><?= $item['total_dana'] ?></td>
+              <td><?= number_format($item['total_dana'], 0, ',', '.') ?></td>
               <td><?= $item['jumlah_donatur'] ?></td>
               <td>
                 <a href="<?= BASEURL ?>/kelola_program/detail/<?= $item['slug'] ?>" class="btn badge btn-secondary">Detail</a>
