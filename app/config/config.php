@@ -11,4 +11,4 @@ define('VENDOR_TABLES_CSS', ["vendor_bootstraptable" => "vendor/datatables/dataT
 define('DBNAME', 'dbzakat');
 define('DBHOST', 'localhost');
 define('DBUSER', 'root');
-define('DBPASS', 'password');
+define('DBPASS', '');

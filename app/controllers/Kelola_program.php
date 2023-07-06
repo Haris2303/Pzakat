@@ -68,6 +68,19 @@ class Kelola_program extends Controller
         $this->view('dashboard/footer', $data);
     }
 
+    public function qurban(): void
+    {
+        $data = [
+            "judul" => "Kelola Qurban",
+            "css" => VENDOR_TABLES_CSS,
+            "script" => VENDOR_TABLES,
+        ];
+
+        $this->view("dashboard/sidebar", $data);
+        $this->view("kelola_program/qurban", $data);
+        $this->view("dashboard/footer", $data);
+    }
+
     public function detail($slug): void
     {
         $data = [

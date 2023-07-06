@@ -31,7 +31,7 @@ CREATE TABLE `tb_admin` (
   `id_admin` int NOT NULL,
   `id_user` int NOT NULL,
   `nama` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_admin`
@@ -55,8 +55,8 @@ CREATE TABLE `tb_amil` (
   `nama` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `nohp` varchar(13) NOT NULL,
-  `alamat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `alamat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_amil`
@@ -76,7 +76,7 @@ CREATE TABLE `tb_banner` (
   `username` varchar(50) NOT NULL,
   `gambar` varchar(100) NOT NULL,
   `datetime` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_banner`
@@ -104,7 +104,7 @@ CREATE TABLE `tb_donasibarang` (
   `berat_barang` int NOT NULL,
   `bukti_barang` varchar(100) NOT NULL,
   `datetime` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -115,15 +115,15 @@ CREATE TABLE `tb_donasibarang` (
 CREATE TABLE `tb_donatur` (
   `id_donatur` int NOT NULL,
   `id_bank` int DEFAULT NULL,
-  `slug_program` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `slug_program` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `nama_donatur` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `nohp` varchar(13) NOT NULL,
   `donasi` int NOT NULL,
   `pesan` text NOT NULL,
   `datetime` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_donatur`
@@ -150,7 +150,7 @@ CREATE TABLE `tb_kategoriprogram` (
   `id_kategoriprogram` int NOT NULL,
   `nama_kategoriprogram` varchar(20) NOT NULL,
   `status` enum('aktif','pasif') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_kategoriprogram`
@@ -174,7 +174,7 @@ CREATE TABLE `tb_latarbelakang` (
   `username` varchar(50) NOT NULL,
   `content` text NOT NULL,
   `datetime` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_latarbelakang`
@@ -199,7 +199,7 @@ CREATE TABLE `tb_mesjid` (
   `kabupaten` varchar(100) NOT NULL,
   `kecamatan` varchar(100) NOT NULL,
   `kelurahan` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_mesjid`
@@ -223,7 +223,7 @@ CREATE TABLE `tb_muzakki` (
   `nama` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `nohp` varchar(13) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -239,7 +239,7 @@ CREATE TABLE `tb_norek` (
   `jenis_program` varchar(50) NOT NULL,
   `saldo_donasi` bigint NOT NULL,
   `gambar` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_norek`
@@ -265,7 +265,7 @@ CREATE TABLE `tb_pemasukkan` (
   `pemasukkan_mingguan` int NOT NULL,
   `pemasukkan_bulanan` int NOT NULL,
   `datetime` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -276,14 +276,14 @@ CREATE TABLE `tb_pemasukkan` (
 CREATE TABLE `tb_pembayaran` (
   `id_pembayaran` int NOT NULL,
   `id_donatur` int NOT NULL,
-  `username_amil` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `username_amil` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `nomor_pembayaran` varchar(100) NOT NULL,
   `jenis_pembayaran` varchar(100) NOT NULL,
   `jumlah_pembayaran` int NOT NULL,
   `bukti_pembayaran` varchar(100) NOT NULL,
   `tanggal_pembayaran` datetime NOT NULL,
   `status_pembayaran` enum('failed','pending','konfirmasi','success') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_pembayaran`
@@ -309,7 +309,7 @@ CREATE TABLE `tb_pengeluaran` (
   `nominal` int NOT NULL,
   `keterangan` text NOT NULL,
   `tanggal` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_pengeluaran`
@@ -330,14 +330,14 @@ CREATE TABLE `tb_program` (
   `nama_program` varchar(100) NOT NULL,
   `slug` varchar(255) NOT NULL,
   `jenis_program` varchar(20) NOT NULL,
-  `jenis_pembayaran` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `jenis_pembayaran` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `deskripsi_program` text NOT NULL,
   `total_dana` int NOT NULL,
   `jumlah_donatur` int NOT NULL,
-  `gambar` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `gambar` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `datetime` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_program`
@@ -363,7 +363,7 @@ CREATE TABLE `tb_user` (
   `password` varchar(100) NOT NULL,
   `waktu_login` datetime NOT NULL,
   `level` enum('1','2','3') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_user`
@@ -390,7 +390,7 @@ CREATE TABLE `tb_views` (
   `gambar` varchar(100) NOT NULL,
   `content` text NOT NULL,
   `datetime` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_views`
@@ -413,7 +413,7 @@ CREATE TABLE `tb_visimisi` (
   `username` varchar(50) NOT NULL,
   `content` text NOT NULL,
   `datetime` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tb_visimisi`
