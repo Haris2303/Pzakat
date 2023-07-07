@@ -10,17 +10,20 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-dark">Data Program Infaq</h6>
+    <div class="row justify-content-between align-items-center mx-0">
+      <div>
+        <h6 class="m-0 font-weight-bold text-dark">Data Program Infaq</h6>
+      </div>
+      <div class="position-relative">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#formModal">
+          Tambah <i class="ml-1 fas fa-plus-circle"></i>
+        </button>
+      </div>
+    </div>
   </div>
 
-  <div class="container mt-3">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">
-      Tambah Data Infaq
-    </button>
-  </div>
-  
-  
+
   <div class="card-body">
     <?php Flasher::flash() ?>
     <div class="table-responsive">
@@ -75,7 +78,7 @@
           <div class="mb-3">
             <label for="jenis-pembayaran" class="form-label">Jenis Pembayaran</label>
             <select id="browsers" name="jenis-pembayaran" class="form-control" required>
-                <option value="uang" selected>Uang (umum)</option>
+              <option value="uang" selected>Uang (umum)</option>
             </select>
           </div>
           <div class="mb-3">
