@@ -40,7 +40,8 @@
           <tr>
             <th>Nama Donatur</th>
             <th>Nama Bank</th>
-            <th>Jumlah Donasi</th>
+            <th>Jenis Program</th>
+            <th>Jumlah Donasi (Rp)</th>
             <th>Tanggal Pembayaran</th>
             <th>Aksi</th>
           </tr>
@@ -50,7 +51,8 @@
             <tr>
               <td><?= $item['nama_donatur'] ?></td>
               <td><?= $item['nama_bank'] ?></td>
-              <td><?= $item['jumlah_pembayaran'] ?></td>
+              <td><?= $item['jenis_program'] ?></td>
+              <td><?= number_format($item['jumlah_pembayaran'], 0, ',', '.') ?></td>
               <td><?= $item['tanggal_pembayaran'] ?></td>
               <td>
                 <a href="<?= BASEURL ?>/kelola_pembayaran/detail/<?= $item['id_donatur'] ?>" class="btn badge btn-secondary">Detail</a>

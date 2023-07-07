@@ -18,12 +18,17 @@
                     <label for="nominal-donasi">Nominal Donasi</label>
                     <div class="position-relative">
                         <p class="position-absolute mt-2 mx-3">Rp </p>
+                        <!-- jika pembayaran adalah fidyah -->
                         <?php if($data['dataProgram']['jenis_pembayaran'] === 'fidyah'): ?>
                             <?php if(($data['qtyFidyah'] <= 0)): ?>
                                 <?php header('Location: ' . BASEURL . '/transaksi/qty/' . $data['dataProgram']['jenis_pembayaran'] . '/' . $data['dataProgram']['slug']) ?>
                             <?php else: ?>
                                 <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi" value="<?= number_format($data['qtyFidyah'], 0, ',', '.') ?>" readonly>
                             <?php endif ?>
+                        <!-- jika pembayaran adalah qurban -->
+                        <?php elseif((!is_null($data['dataProgram']['nominal_bayar'])) && ($data['dataProgram']['nominal_bayar'] !== 0)): ?>
+                            <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi" placeholder="0" value="<?= number_format($data['dataProgram']['nominal_bayar'], 0, ',', '.') ?>" readonly>
+                        <!-- Jika pembayaran bukan fidyah dan qurban -->
                         <?php else: ?>
                             <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi" placeholder="0" onkeydown="return currency(event)">
                         <?php endif ?>

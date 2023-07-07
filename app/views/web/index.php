@@ -58,69 +58,8 @@
             <?php endforeach ?>
           </div>
 
-          <!-- program -->
-          <div class="w-full flex gap-5 flex-col lg:flex-row md:gap-5 mt-5 hover:shadow-lg transition-500 text-sm program">
-            <div class="lg:w-1/3 shadow-md">
-              <a href="#">
-                <img src="<?= BASEURL ?>/img/banner/2.jpeg" alt="" class="lg:h-48 h-64 lg:w-full w-screen">
-              </a>
-              <div class="px-4 my-4 flex flex-col gap-1">
-                <a href=""><span class="category text-lightgray text-xs">Zakat</span></a>
-                <a href="">
-                  <h4 class="text-md text-darkgray">Zakat mari zakat ayo kita zakat</h4>
-                </a>
-                <span class="garis-progress my-1 after:w-8"></span>
-                <div class="flex justify-between text-xs text-lightgray">
-                  <div>Donasi Terkumpul</div>
-                  <div>Donatur</div>
-                </div>
-                <div class="flex justify-between text-md text">
-                  <div class="font-bold text-darkgray">Rp 123.456.789</div>
-                  <div class="text-darkgray">23</div>
-                </div>
-              </div>
-            </div>
-            <div class="lg:w-1/3 shadow-md">
-              <a href="#">
-                <img src="<?= BASEURL ?>/img/banner/2.jpeg" alt="" class="lg:h-48 h-64 lg:w-full w-screen">
-              </a>
-              <div class="px-4 my-4 flex flex-col gap-1">
-                <a href=""><span class="category text-lightgray text-xs">Zakat</span></a>
-                <a href="">
-                  <h4 class="text-md text-darkgray">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, placeat.</h4>
-                </a>
-                <span class="garis-progress my-1 after:w-[80%]"></span>
-                <div class="flex justify-between text-xs text-lightgray">
-                  <div>Donasi Terkumpul</div>
-                  <div>Donatur</div>
-                </div>
-                <div class="flex justify-between text-md text">
-                  <div class="font-bold text-darkgray">Rp 123.456.789</div>
-                  <div class="text-darkgray">23</div>
-                </div>
-              </div>
-            </div>
-            <div class="lg:w-1/3 shadow-md">
-              <a href="#">
-                <img src="<?= BASEURL ?>/img/banner/2.jpeg" alt="" class="lg:h-48 h-64 lg:w-full w-screen">
-              </a>
-              <div class="px-4 my-4 flex flex-col gap-1">
-                <a href=""><span class="category text-lightgray text-xs">Zakat</span></a>
-                <a href="">
-                  <h4 class="text-md text-darkgray">Lorem ipsum dolor sit amet consectetur adipisicing. Lorem ipsum dolor,</h4>
-                </a>
-                <span class="garis-progress my-1 after:w-[60%]"></span>
-                <div class="flex justify-between text-xs text-lightgray">
-                  <div>Donasi Terkumpul</div>
-                  <div>Donatur</div>
-                </div>
-                <div class="flex justify-between text-md text">
-                  <div class="font-bold text-darkgray">Rp 123.456.789</div>"
-                  <div class="text-darkgray">23</div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- program, use javascript in app.js -->
+          <div class="w-full flex gap-5 flex-col lg:flex-row md:gap-5 mt-5 hover:shadow-lg transition-500 text-sm program"></div>
 
           <a href="<?= BASEURL ?>/programs">
             <div class="w-40 m-auto">
@@ -147,7 +86,7 @@
           </div>
           <a href="<?= BASEURL ?>/perhitunganzakat">
             <div class="sm:w-36 w-32">
-              <button class="btn btn-lightgreen">Kalkulator Zakat</button>
+              <button class="btn btn-lightgreen">Zakat Sekarang</button>
             </div>
           </a>
           <div class="sm:w-36 w-32">

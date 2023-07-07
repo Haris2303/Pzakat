@@ -11,13 +11,13 @@
 
       <div class="w-full flex text-center mt-10 text-sm">
         <?php foreach($data['dataJenisProgramAktif'] as $item): ?>
-          <a href="<?= BASEURL ?>/programs/<?= strtolower($item['nama_kategoriprogram']) ?>" class="w-1/3 bg-lightgreen py-2 md:mx-3 mx-1 hover:bg-green hover:text-white transition-300 shadow-md text-darkgreen"><?= $item['nama_kategoriprogram'] ?></a>
+          <a href="<?= BASEURL ?>/programs/<?= strtolower($item['nama_kategoriprogram']) ?>" class="w-1/3 bg-lightgreen py-2 md:mx-3 mx-1 hover:bg-green hover:text-white transition-300 shadow-md"><?= $item['nama_kategoriprogram'] ?></a>
         <?php endforeach ?>
       </div>
 
       <div class="w-full flex gap-y-5 flex-wrap mt-5 text-sm">
 
-      <?php foreach ($data['dataProgram'] as $item): ?>
+      <?php foreach ($data['dataProgramQurban'] as $item): ?>
         <div class="lg:w-1/3 sm:w-1/2 lg:px-3 px-2">
           <div class="shadow-md pb-3">
             <a href="<?= BASEURL ?>/program/<?= $item['slug'] ?>">

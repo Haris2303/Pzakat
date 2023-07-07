@@ -40,7 +40,7 @@
           <tr>
             <th>Nama Donatur</th>
             <th>Nama Bank</th>
-            <th>Jumlah Donasi</th>
+            <th>Jumlah Donasi (Rp)</th>
             <th>Tanggal Pembayaran</th>
             <th>Aksi</th>
           </tr>
@@ -50,7 +50,7 @@
             <tr>
               <td><?= $item['nama_donatur'] ?></td>
               <td><?= $item['nama_bank'] ?></td>
-              <td><?= $item['jumlah_pembayaran'] ?></td>
+              <td><?= number_format($item['jumlah_pembayaran'], 0, ',', '.') ?></td>
               <td><?= $item['tanggal_pembayaran'] ?></td>
               <td>
                 <?php 

@@ -36,6 +36,7 @@
           <tr>
             <th>Nama Donatur</th>
             <th>Nama Bank</th>
+            <th>Jenis Program</th>
             <th>Jumlah Donasi (Rp)</th>
             <th>Tanggal Pembayaran</th>
             <th>Aksi</th>
@@ -46,6 +47,7 @@
             <tr>
               <td><?= $item['nama_donatur'] ?></td>
               <td><?= $item['nama_bank'] ?></td>
+              <td><?= $item['jenis_program'] ?></td>
               <td><?= number_format($item['jumlah_pembayaran'], 0, ',', '.') ?></td>
               <td><?= $item['tanggal_pembayaran'] ?></td>
               <td>

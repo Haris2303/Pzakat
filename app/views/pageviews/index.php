@@ -6,18 +6,23 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-dark">DataTables Berita</h6>
+    <div class="row justify-content-between align-items-center mx-0">
+      <div>
+        <h6 class="m-0 font-weight-bold text-dark">Daftar Data Berita</h6>
+      </div>
+      <div class="position-relative">
+        <a href="<?= BASEURL ?>/pageviews/upload/Berita" class="btn btn-primary">
+          Tambah Berita <i class="ml-1 fas fa-plus-circle"></i>
+        </a>
+      </div>
+    </div>
   </div>
 
   <div class="container mt-3">
-    <!-- Button trigger modal -->
     <?php Flasher::flash() ?>
-    <a href="<?= BASEURL ?>/pageviews/upload/Berita" class="btn btn-primary">
-      Tambah Berita
-    </a>
   </div>
 
-  
+
   <div class="card-body">
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -34,7 +39,7 @@
             <tr>
               <td><?= $item['nama_penulis'] ?></td>
               <td><?= $item['judul'] ?></td>
-              <td><img src="<?= BASEURL?>/img/views/<?= $item['gambar'] ?>" alt="" width="70"></td>
+              <td><img src="<?= BASEURL ?>/img/views/<?= $item['gambar'] ?>" alt="" width="70"></td>
               <td>
                 <a href="<?= BASEURL ?>/pageviews/detail/<?= $item['slug'] ?>" class="btn badge btn-secondary">Detail</a>
               </td>
