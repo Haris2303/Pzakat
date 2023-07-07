@@ -34,7 +34,7 @@
                 <div>Donatur</div>
               </div>
               <div class="flex justify-between text-md text">
-                <div class="font-bold text-darkgray">Rp <?= $item['total_dana'] ?></div>
+                <div class="font-bold text-darkgray">Rp <?= number_format($item['total_dana'], 0, ',', '.') ?></div>
                 <div class="text-darkgray"><?= $item['jumlah_donatur'] ?></div>
               </div>
             </div>

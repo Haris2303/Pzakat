@@ -6,15 +6,22 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-dark">Daftar Nomor Rekening</h6>
+        <div class="row justify-content-between align-items-center mx-0">
+            <div>
+                <h6 class="m-0 font-weight-bold text-dark">Daftar Nomor Rekening</h6>
+            </div>
+            <div class="position-relative">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#formNorekModal">
+                    Tambah <i class="ml-1 fas fa-plus-circle"></i>
+                </button>
+            </div>
+        </div>
     </div>
 
     <div class="container mt-3">
-        <!-- Button trigger modal -->
+        <!-- flasher alert -->
         <?php Flasher::flash() ?>
-        <button type="button" class="btn btn-primary btn-add-norek" data-toggle="modal" data-target="#formNorekModal">
-            <i class="fas fa-plus"></i> Norek
-        </button>
     </div>
 
     <div class="card-body">
@@ -73,7 +80,7 @@
                         <datalist id="browsers">
                             <?php foreach ($data['dataBank'] as $item) : ?>
                                 <option value="<?= $item['name'] ?>">
-                            <?php endforeach ?>
+                                <?php endforeach ?>
                         </datalist>
                     </div>
                     <div class="mb-3">
@@ -88,7 +95,7 @@
                         <label for="jenis-program" class="form-label">Jenis Program</label>
                         <select name="jenis-program" id="jenis-program" class="form-control">
                             <option selected disabled> -- Pilih Jenis Program -- </option>
-                            <?php foreach( $data['programNameAktif'] as $item): ?>
+                            <?php foreach ($data['programNameAktif'] as $item) : ?>
                                 <option value="<?= $item['nama_kategoriprogram'] ?>"><?= $item['nama_kategoriprogram'] ?></option>
                             <?php endforeach ?>
                         </select>

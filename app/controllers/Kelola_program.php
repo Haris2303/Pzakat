@@ -70,14 +70,21 @@ class Kelola_program extends Controller
 
     public function qurban(): void
     {
+
         $data = [
             "judul" => "Kelola Qurban",
             "css" => VENDOR_TABLES_CSS,
-            "script" => VENDOR_TABLES,
+            "dataQurban" => $this->model('Kelolaprogram_model')->getAllDataProgramQurban()
         ];
+
+        $array1 = VENDOR_TABLES;
+        $array2 = ["util" => "js/util/script.js"];
+
+        $data['script'] = array_merge($array1, $array2);
 
         $this->view("dashboard/sidebar", $data);
         $this->view("kelola_program/qurban", $data);
+        $this->view("tinymce/tinymce");
         $this->view("dashboard/footer", $data);
     }
 
@@ -154,6 +161,20 @@ class Kelola_program extends Controller
         } else {
             Flasher::setFlash($result, 'danger');
             header('Location: ' . BASEURL . '/kelola_program/infaq');
+            exit;
+        }
+    }
+
+    public function aksi_tambah_qurban(): void
+    {
+        $result = $this->model('Kelolaprogram_model')->tambahDataQurban($_POST, $_FILES);
+        if($result > 0) {
+            Flasher::setFlash('Data Qurban <strong>Berhasil</strong> Ditambahkan!', 'success');
+            header('Location: ' . BASEURL . '/kelola_program/qurban');
+            exit;
+        } else {
+            Flasher::setFlash($result, 'danger');
+            header('Location: ' . BASEURL . '/kelola_program/qurban');
             exit;
         }
     }

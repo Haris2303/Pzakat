@@ -57,7 +57,7 @@
                   <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                       Qurban</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">Rp 400.230</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= ($data['sumDanaQurban'] <= 0) ? "Dana Belum Masuk" : 'Rp ' . $data['sumDanaQurban'] ?></div>
                   </div>
                   <div class="col-auto">
                     <i class="fas fa-calendar fa-2x text-gray-300"></i>

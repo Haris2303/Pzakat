@@ -1773,16 +1773,6 @@ video {
   width: 2rem;
 }
 
-.after\:w-\[60\%\]::after {
-  content: var(--tw-content);
-  width: 60%;
-}
-
-.after\:w-\[80\%\]::after {
-  content: var(--tw-content);
-  width: 80%;
-}
-
 .hover\:cursor-pointer:hover {
   cursor: pointer;
 }

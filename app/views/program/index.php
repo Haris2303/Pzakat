@@ -10,6 +10,9 @@
                 <div>
                     <span class="text-lightgray text-xs"><?= $data['dataProgram']['nama_program'] ?></span>
                     <p class="text-darkgray text-md font-medium"><?= $data['dataProgram']['deskripsi_program'] ?></p>
+                    <?php if(($data['dataProgram']['nominal_bayar'] !== 0) && (!is_null($data['dataProgram']['nominal_bayar']))): ?>
+                        <span class="text-lightgray text-md">Nominal yang harus dibayarkan: Rp <?= number_format($data['dataProgram']['nominal_bayar'], 0, ',', '.') ?></span>
+                    <?php endif ?>
                 </div>
                 <div>
                     <p class="font-medium text-darkgray text-2xl">Rp <?= number_format($data['dataProgram']['total_dana'], 0, ',', '.') ?></p>
@@ -19,7 +22,7 @@
                         <!-- <span>Hari Lagi</span> -->
                     </div>
                     <div class="flex">
-                        <a href="<?= BASEURL ?>/transaksi/<?= ($data['dataProgram']['jenis_pembayaran'] !== 'fidyah') ? $data['dataProgram']['jenis_program'] . '/' : '' ?><?= ($data['dataProgram']['jenis_pembayaran'] === 'uang') ? $data['dataProgram']['slug'] : 'qty/fidyah/'.$data['dataProgram']['slug'] ?>" class="btn btn-lightgreen">Tunaikan Sekarang</a>
+                        <a href="<?= BASEURL ?>/transaksi/<?= ($data['dataProgram']['jenis_pembayaran'] !== 'fidyah') ? $data['dataProgram']['jenis_program'] . '/' . $data['dataProgram']['slug'] : 'qty/fidyah/'.$data['dataProgram']['slug'] ?>" class="btn btn-lightgreen">Tunaikan Sekarang</a>
                     </div>
                 </div>
             </div>

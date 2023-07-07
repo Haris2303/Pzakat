@@ -10,17 +10,20 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-dark">DataTables Banner</h6>
+    <div class="row justify-content-between align-items-center mx-0">
+      <div>
+        <h6 class="m-0 font-weight-bold text-dark">Daftar Data Banner</h6>
+      </div>
+      <div class="position-relative">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-add-data-banner" data-toggle="modal" data-target="#formModal">
+          <i class="fas fa-plus"></i> Banner
+        </button>
+      </div>
+    </div>
   </div>
 
-  <div class="container mt-3">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-add-data-banner" data-toggle="modal" data-target="#formModal">
-      <i class="fas fa-plus"></i> Banner
-    </button>
-  </div>
-  
-  
+
   <div class="card-body">
     <?php Flasher::flash() ?>
     <div class="table-responsive">

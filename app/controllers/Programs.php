@@ -18,7 +18,7 @@ class Programs extends Controller {
   {
     $data = [
       "judul" => "Programs Zakat",
-      "dataProgramZakat" => $this->model('Kelolaprogram_model')->getAllDataProgramZakat(),
+      "dataProgramZakat" => $this->model('Kelolaprogram_model')->getAllDataProgramZakatTunai(),
       "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
     $this->view('template/header', $data);
@@ -35,6 +35,18 @@ class Programs extends Controller {
     ];
     $this->view('template/header', $data);
     $this->view('programs/infaq', $data);
+    $this->view('template/footer', $data);
+  }
+
+  public function qurban(): void
+  {
+    $data = [
+      "judul" => "Programs Qurban",
+      "dataProgramQurban" => $this->model('Kelolaprogram_model')->getAllDataProgramQurban(),
+      "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
+    ];
+    $this->view('template/header', $data);
+    $this->view('programs/qurban', $data);
     $this->view('template/footer', $data);
   }
 

@@ -146,7 +146,7 @@ $(document).ready(function() {
     success: function(data) {
       // tampilkan isi card content sesuai kategori awal
       $.each(data, function(i, item) {
-        $('.program').append(cardContent(item.gambar, item.slug, item.jenis_program, item.nama_program, item.total_dana, item.jumlah_donatur))
+        $('.program').append(cardContent(item.gambar, item.slug, item.jenis_program, item.nama_program, item.total_dana.toLocaleString('id-ID'), item.jumlah_donatur))
       })
     }
   })
@@ -166,7 +166,7 @@ $(document).ready(function() {
       dataType: 'json',
       success: function(data) {
         $.each(data, function(i, item) {
-          $('.program').append(cardContent(item.gambar, item.slug, item.jenis_program, item.deskripsi_program, item.total_dana, item.jumlah_donatur))
+          $('.program').append(cardContent(item.gambar, item.slug, item.jenis_program, item.deskripsi_program, item.total_dana.toLocaleString('id-ID'), item.jumlah_donatur))
         })
       }
     })

@@ -35,6 +35,7 @@
           <tr>
             <th>Nama Donatur</th>
             <th>Nama Bank</th>
+            <th>Jenis Program</th>
             <th>Jumlah Donasi</th>
             <th>Datetime</th>
             <th></th>
@@ -45,7 +46,8 @@
             <tr>
               <td><?= $item['nama_donatur'] ?></td>
               <td><?= $item['nama_bank'] ?></td>
-              <td><?= $item['jumlah_pembayaran'] ?></td>
+              <th><?= $item['jenis_program'] ?></th>
+              <td><?= number_format($item['jumlah_pembayaran'], 0, ',', '.') ?></td>
               <td><?= $item['tanggal_pembayaran'] ?></td>
               <td>
                 <a href="<?= BASEURL ?>/kelola_pembayaran/detail/<?= $item['id_donatur'] ?>" class="btn badge btn-secondary">Detail</a>
