@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 03, 2023 at 11:48 PM
+-- Generation Time: Jul 05, 2023 at 12:18 PM
 -- Server version: 8.0.33
 -- PHP Version: 8.1.2-1ubuntu2.11
 
@@ -106,6 +106,13 @@ CREATE TABLE `tb_donasibarang` (
   `datetime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `tb_donasibarang`
+--
+
+INSERT INTO `tb_donasibarang` (`id_donasibarang`, `slug_program`, `nama_donatur`, `email`, `nohp`, `pesan`, `jenis_barang`, `berat_barang`, `bukti_barang`, `datetime`) VALUES
+(1, 'zakatbarang', 'Fulana', 'fulan@gmail.com', '082312323123', 'Semoga berkah', 'beras', 40000, '64a4c225d09db.webp', '2023-07-05 10:06:45');
+
 -- --------------------------------------------------------
 
 --
@@ -130,7 +137,9 @@ CREATE TABLE `tb_donatur` (
 --
 
 INSERT INTO `tb_donatur` (`id_donatur`, `id_bank`, `slug_program`, `key`, `nama_donatur`, `email`, `nohp`, `donasi`, `pesan`, `datetime`) VALUES
-(1, 15, 'zakatumum', '53295dceb4a0242c3d24c57c29476718', 'Ilham Cool', 'ilham@gmail.com', '081223231223', 160000, 'Semoga Berkah ya', '2023-07-03');
+(2, 16, 'zakatfidyah', '4daf9f6d58584025271ad4fe06d8068b', 'Herman', 'herman@gmail.com', '082312231223', 450000, 'Semoga berkah', '2023-07-04'),
+(3, 16, 'zakatfidyah', '506d05732ccd97707ab2ed177afc67cf', 'John', 'john@gmail.com', '081223231223', 675000, 'Semoga Berkah', '2023-07-04'),
+(4, 15, 'ZakatMaal', '426cecb65ebcc8640050f2812021efcd', 'Samsudin', 'asdfa@gmail.com', '082312231223', 50000, 'Semoga berkah', '2023-07-05');
 
 --
 -- Triggers `tb_donatur`
@@ -247,8 +256,8 @@ CREATE TABLE `tb_norek` (
 
 INSERT INTO `tb_norek` (`id_norek`, `nama_pemilik`, `nama_bank`, `norek`, `jenis_program`, `saldo_donasi`, `gambar`) VALUES
 (14, 'Salahudin', 'BANK BCA', '513413411', 'Infaq', 0, 'bank-bca.jpeg'),
-(15, 'Jalaludin Syukurudin', 'BANK BRI', '132412351233', 'Zakat', 0, 'bank-bri.jpeg'),
-(16, 'Sotoyo Maryo', 'BANK MUAMALAT', '1234234123432', 'Zakat', 0, 'bank-muamalat.jpeg'),
+(15, 'Jalaludin Syukurudin', 'BANK BRI', '132412351233', 'Zakat', 50000, 'bank-bri.jpeg'),
+(16, 'Sotoyo Maryo', 'BANK MUAMALAT', '1234234123432', 'Zakat', 555000, 'bank-muamalat.jpeg'),
 (17, 'Arya Nugraha', 'BANK MANDIRI', '23012348127341', 'Infaq', 0, 'bank-mandiri.jpeg');
 
 -- --------------------------------------------------------
@@ -290,7 +299,9 @@ CREATE TABLE `tb_pembayaran` (
 --
 
 INSERT INTO `tb_pembayaran` (`id_pembayaran`, `id_donatur`, `username_amil`, `nomor_pembayaran`, `jenis_pembayaran`, `jumlah_pembayaran`, `bukti_pembayaran`, `tanggal_pembayaran`, `status_pembayaran`) VALUES
-(9, 1, 'ilham', 'KDA-1688387424', 'uang', 160000, '64a2bf81b0968.webp', '2023-07-03 21:30:57', 'success');
+(17, 2, 'ilham', 'KDA-1688471907', 'uang', 450000, '64a40969c01fa.webp', '2023-07-04 20:58:33', 'success'),
+(18, 3, 'ilham', 'KDA-1688471999', 'uang', 675000, '64a409c6b226d.webp', '2023-07-04 21:00:06', 'success'),
+(19, 4, 'ilham', 'KDA-1688524219', 'uang', 50000, '64a4d5c5005be.webp', '2023-07-05 11:30:29', 'success');
 
 -- --------------------------------------------------------
 
@@ -301,10 +312,11 @@ INSERT INTO `tb_pembayaran` (`id_pembayaran`, `id_donatur`, `username_amil`, `no
 CREATE TABLE `tb_pengeluaran` (
   `id_pengeluaran` int NOT NULL,
   `id_program` int NOT NULL,
-  `id_bank` int NOT NULL,
+  `id_bank` int DEFAULT NULL,
+  `username_amil` varchar(50) NOT NULL,
   `nama_penerima` varchar(50) NOT NULL,
   `alamat` varchar(255) NOT NULL,
-  `nohp` varchar(13) NOT NULL,
+  `nohp` varchar(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `jenis_pengeluaran` varchar(20) NOT NULL,
   `nominal` int NOT NULL,
   `keterangan` text NOT NULL,
@@ -315,9 +327,9 @@ CREATE TABLE `tb_pengeluaran` (
 -- Dumping data for table `tb_pengeluaran`
 --
 
-INSERT INTO `tb_pengeluaran` (`id_pengeluaran`, `id_program`, `id_bank`, `nama_penerima`, `alamat`, `nohp`, `jenis_pengeluaran`, `nominal`, `keterangan`, `tanggal`) VALUES
-(1, 9, 15, 'Andi Rahmat', 'Jalan Kok Buntu', '081324247667', 'uang', 150000, 'Semoga yang diterima dapat digunakan dengan sebijak bijaknya.', '2023-07-03 23:29:48'),
-(2, 9, 15, 'Arya', 'Jalan Aimas aja', '082312232233', 'uang', 10000, 'kasihan arya perlu 10rb', '2023-07-03 23:44:43');
+INSERT INTO `tb_pengeluaran` (`id_pengeluaran`, `id_program`, `id_bank`, `username_amil`, `nama_penerima`, `alamat`, `nohp`, `jenis_pengeluaran`, `nominal`, `keterangan`, `tanggal`) VALUES
+(1, 8, 16, 'ilham', 'Penerima1', 'Jalan Kupang', '082312323213', 'uang', 570000, 'Bantuan kesehatan', '2023-07-05 09:20:11'),
+(3, 10, NULL, 'ilham', 'Penerima1', 'Jalan Yakult', '082312232123', 'barang', 8000, 'Kasihan bro', '2023-07-05 10:50:12');
 
 -- --------------------------------------------------------
 
@@ -344,12 +356,12 @@ CREATE TABLE `tb_program` (
 --
 
 INSERT INTO `tb_program` (`id_program`, `nama_program`, `slug`, `jenis_program`, `jenis_pembayaran`, `deskripsi_program`, `total_dana`, `jumlah_donatur`, `gambar`, `content`, `datetime`) VALUES
-(5, 'Zakat Maal', 'ZakatMaal', 'Zakat', 'uang', 'Ayo tunaikan zakat maal kamu di lazismu unamin', 0, 0, '647ddc9ebc17c.webp', '<p>Ini adalah content</p>', '2023-06-05 22:01:19'),
+(5, 'Zakat Maal', 'ZakatMaal', 'Zakat', 'uang', 'Ayo tunaikan zakat maal kamu di lazismu unamin', 50000, 1, '647ddc9ebc17c.webp', '<p>Ini adalah content</p>', '2023-06-05 22:01:19'),
 (6, 'Asdfas', 'asdfas', 'Infaq', 'uang', 'asdfas', 0, 0, '647ef34a0593e.webp', '<p>asdfasdf</p>', '2023-06-06 17:50:18'),
 (7, 'Infaq Umum', 'infaqumum', 'Infaq', 'uang', 'Ayo tunaikan infaq kamu di lazismu-unamin', 0, 0, '647ef609375d7.webp', '<p><span style=\"color: rgb(126, 140, 141);\">Ini adalah content dari infaq umum</span></p>', '2023-06-06 18:02:01'),
-(8, 'Zakat Fidyah', 'zakatfidyah', 'Zakat', 'fidyah', 'Bayar Hutang Puasa Kamu Dengan Fidyah Untuk Fakir Miskin', 0, 0, '647f0bbabfb7e.webp', '<p><span style=\"color: rgb(52, 73, 94);\">Ini adalah content dari zakat fidyah</span></p>', '2023-06-06 19:34:35'),
-(9, 'Zakat Umum', 'zakatumum', 'Zakat', 'uang', 'Tunaikan Zakat Umum Kamu Di Lazismu Unamin', 0, 1, '648021e306588.webp', '<p>ini adalah content</p>', '2023-06-07 15:21:23'),
-(10, 'Zakat Barang', 'zakatbarang', 'Zakat', 'barang', 'Zakatkan barang anda disini', 0, 0, NULL, NULL, '2023-06-24 12:21:38');
+(8, 'Zakat Fidyah', 'zakatfidyah', 'Zakat', 'fidyah', 'Bayar Hutang Puasa Kamu Dengan Fidyah Untuk Fakir Miskin', 555000, 2, '647f0bbabfb7e.webp', '<p><span style=\"color: rgb(52, 73, 94);\">Ini adalah content dari zakat fidyah</span></p>', '2023-06-06 19:34:35'),
+(9, 'Zakat Umum', 'zakatumum', 'Zakat', 'uang', 'Tunaikan Zakat Umum Kamu Di Lazismu Unamin', 0, 0, '648021e306588.webp', '<p>ini adalah content</p>', '2023-06-07 15:21:23'),
+(10, 'Zakat Barang', 'zakatbarang', 'Zakat', 'barang', 'Zakatkan barang anda disini', 22000, 1, NULL, NULL, '2023-06-24 12:21:38');
 
 -- --------------------------------------------------------
 
@@ -442,13 +454,13 @@ CREATE TABLE `vwAllAdmin` (
 -- (See below for the actual view)
 --
 CREATE TABLE `vwAllAmil` (
-`alamat` varchar(255)
-,`email` varchar(100)
-,`id_amil` int
+`id_amil` int
 ,`id_mesjid` int
-,`id_user` int
 ,`nama` varchar(50)
+,`email` varchar(100)
+,`alamat` varchar(255)
 ,`nohp` varchar(13)
+,`id_user` int
 ,`username` varchar(50)
 ,`waktu_login` datetime
 );
@@ -460,17 +472,17 @@ CREATE TABLE `vwAllAmil` (
 -- (See below for the actual view)
 --
 CREATE TABLE `vwAllDataInfaq` (
-`content` text
-,`datetime` datetime
-,`deskripsi_program` text
-,`gambar` varchar(100)
-,`id_program` int
-,`jenis_pembayaran` varchar(20)
-,`jenis_program` varchar(20)
-,`jumlah_donatur` int
+`id_program` int
 ,`nama_program` varchar(100)
 ,`slug` varchar(255)
+,`jenis_program` varchar(20)
+,`jenis_pembayaran` varchar(20)
+,`deskripsi_program` text
 ,`total_dana` int
+,`jumlah_donatur` int
+,`gambar` varchar(100)
+,`content` text
+,`datetime` datetime
 );
 
 -- --------------------------------------------------------
@@ -480,14 +492,41 @@ CREATE TABLE `vwAllDataInfaq` (
 -- (See below for the actual view)
 --
 CREATE TABLE `vwAllDataPengeluaran` (
-`alamat` varchar(255)
-,`id_bank` int
-,`id_pengeluaran` int
-,`id_program` int
-,`jenis_pengeluaran` varchar(20)
-,`keterangan` text
+`id_pengeluaran` int
+,`nama_pemilik` varchar(50)
+,`nama_bank` varchar(50)
+,`norek` varchar(20)
+,`jenis_program` varchar(50)
 ,`nama_penerima` varchar(50)
+,`nama_amil` varchar(50)
+,`username_amil` varchar(50)
+,`alamat` varchar(255)
+,`nohp` varchar(13)
+,`jenis_pengeluaran` varchar(20)
 ,`nominal` int
+,`keterangan` text
+,`tanggal` datetime
+,`nama_program` varchar(100)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vwAllDataPengeluaranBarang`
+-- (See below for the actual view)
+--
+CREATE TABLE `vwAllDataPengeluaranBarang` (
+`id_pengeluaran` int
+,`nama_program` varchar(100)
+,`jenis_program` varchar(20)
+,`nama_amil` varchar(50)
+,`username_amil` varchar(50)
+,`nama_penerima` varchar(50)
+,`alamat` varchar(255)
+,`nohp` varchar(13)
+,`jenis_pengeluaran` varchar(20)
+,`nominal` int
+,`keterangan` text
 ,`tanggal` datetime
 );
 
@@ -498,14 +537,15 @@ CREATE TABLE `vwAllDataPengeluaran` (
 -- (See below for the actual view)
 --
 CREATE TABLE `vwAllDataPengeluaranTunai` (
-`alamat` varchar(255)
+`id_pengeluaran` int
 ,`id_bank` int
-,`id_pengeluaran` int
-,`id_program` int
-,`jenis_pengeluaran` varchar(20)
-,`keterangan` text
 ,`nama_penerima` varchar(50)
+,`username_amil` varchar(50)
+,`alamat` varchar(255)
+,`jenis_pengeluaran` varchar(20)
 ,`nominal` int
+,`nama_program` varchar(100)
+,`keterangan` text
 ,`tanggal` datetime
 );
 
@@ -516,20 +556,20 @@ CREATE TABLE `vwAllDataPengeluaranTunai` (
 -- (See below for the actual view)
 --
 CREATE TABLE `vwAllDataProgramAktif` (
-`content` text
-,`datetime` datetime
-,`deskripsi_program` text
-,`gambar` varchar(100)
-,`id_kategoriprogram` int
-,`id_program` int
-,`jenis_pembayaran` varchar(20)
-,`jenis_program` varchar(20)
-,`jumlah_donatur` int
-,`nama_kategoriprogram` varchar(20)
+`id_program` int
 ,`nama_program` varchar(100)
 ,`slug` varchar(255)
-,`status` enum('aktif','pasif')
+,`jenis_program` varchar(20)
+,`jenis_pembayaran` varchar(20)
+,`deskripsi_program` text
 ,`total_dana` int
+,`jumlah_donatur` int
+,`gambar` varchar(100)
+,`content` text
+,`datetime` datetime
+,`id_kategoriprogram` int
+,`nama_kategoriprogram` varchar(20)
+,`status` enum('aktif','pasif')
 );
 
 -- --------------------------------------------------------
@@ -539,17 +579,17 @@ CREATE TABLE `vwAllDataProgramAktif` (
 -- (See below for the actual view)
 --
 CREATE TABLE `vwAllDataZakat` (
-`content` text
-,`datetime` datetime
-,`deskripsi_program` text
-,`gambar` varchar(100)
-,`id_program` int
-,`jenis_pembayaran` varchar(20)
-,`jenis_program` varchar(20)
-,`jumlah_donatur` int
+`id_program` int
 ,`nama_program` varchar(100)
 ,`slug` varchar(255)
+,`jenis_program` varchar(20)
+,`jenis_pembayaran` varchar(20)
+,`deskripsi_program` text
 ,`total_dana` int
+,`jumlah_donatur` int
+,`gambar` varchar(100)
+,`content` text
+,`datetime` datetime
 );
 
 -- --------------------------------------------------------
@@ -559,12 +599,28 @@ CREATE TABLE `vwAllDataZakat` (
 -- (See below for the actual view)
 --
 CREATE TABLE `vwAllMuzakki` (
-`email` varchar(100)
-,`id_muzakki` int
+`id_muzakki` int
 ,`nama` varchar(50)
+,`email` varchar(100)
 ,`nohp` varchar(13)
 ,`username` varchar(50)
 ,`waktu_login` datetime
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vwAllNorekHaveSaldo`
+-- (See below for the actual view)
+--
+CREATE TABLE `vwAllNorekHaveSaldo` (
+`id_norek` int
+,`nama_pemilik` varchar(50)
+,`nama_bank` varchar(50)
+,`norek` varchar(20)
+,`jenis_program` varchar(50)
+,`saldo_donasi` bigint
+,`gambar` varchar(100)
 );
 
 -- --------------------------------------------------------
@@ -574,20 +630,21 @@ CREATE TABLE `vwAllMuzakki` (
 -- (See below for the actual view)
 --
 CREATE TABLE `vwAllPembayaran` (
-`bukti_pembayaran` varchar(100)
-,`email` varchar(100)
-,`id_bank` int
-,`id_donatur` int
-,`jenis_program` varchar(50)
-,`jumlah_pembayaran` int
-,`nama_bank` varchar(50)
-,`nama_donatur` varchar(50)
-,`nama_pemilik` varchar(50)
-,`nohp` varchar(13)
-,`nomor_pembayaran` varchar(100)
-,`norek` varchar(20)
-,`pesan` text
+`id_bank` int
 ,`slug_program` varchar(255)
+,`id_donatur` int
+,`nama_donatur` varchar(50)
+,`email` varchar(100)
+,`nohp` varchar(13)
+,`pesan` text
+,`nama_pemilik` varchar(50)
+,`nama_bank` varchar(50)
+,`norek` varchar(20)
+,`jenis_program` varchar(50)
+,`nama_program` varchar(100)
+,`jumlah_pembayaran` int
+,`nomor_pembayaran` varchar(100)
+,`bukti_pembayaran` varchar(100)
 ,`status_pembayaran` enum('failed','pending','konfirmasi','success')
 ,`tanggal_pembayaran` datetime
 );
@@ -599,20 +656,20 @@ CREATE TABLE `vwAllPembayaran` (
 -- (See below for the actual view)
 --
 CREATE TABLE `vwAllProgramAktif` (
-`content` text
-,`datetime` datetime
-,`deskripsi_program` text
-,`gambar` varchar(100)
-,`id_kategoriprogram` int
-,`id_program` int
-,`jenis_pembayaran` varchar(20)
-,`jenis_program` varchar(20)
-,`jumlah_donatur` int
-,`nama_kategoriprogram` varchar(20)
+`id_program` int
 ,`nama_program` varchar(100)
 ,`slug` varchar(255)
-,`status` enum('aktif','pasif')
+,`jenis_program` varchar(20)
+,`jenis_pembayaran` varchar(20)
+,`deskripsi_program` text
 ,`total_dana` int
+,`jumlah_donatur` int
+,`gambar` varchar(100)
+,`content` text
+,`datetime` datetime
+,`id_kategoriprogram` int
+,`nama_kategoriprogram` varchar(20)
+,`status` enum('aktif','pasif')
 );
 
 -- --------------------------------------------------------
@@ -622,20 +679,20 @@ CREATE TABLE `vwAllProgramAktif` (
 -- (See below for the actual view)
 --
 CREATE TABLE `vwAllProgramAktifTunai` (
-`content` text
-,`datetime` datetime
-,`deskripsi_program` text
-,`gambar` varchar(100)
-,`id_kategoriprogram` int
-,`id_program` int
-,`jenis_pembayaran` varchar(20)
-,`jenis_program` varchar(20)
-,`jumlah_donatur` int
-,`nama_kategoriprogram` varchar(20)
+`id_program` int
 ,`nama_program` varchar(100)
 ,`slug` varchar(255)
-,`status` enum('aktif','pasif')
+,`jenis_program` varchar(20)
+,`jenis_pembayaran` varchar(20)
+,`deskripsi_program` text
 ,`total_dana` int
+,`jumlah_donatur` int
+,`gambar` varchar(100)
+,`content` text
+,`datetime` datetime
+,`id_kategoriprogram` int
+,`nama_kategoriprogram` varchar(20)
+,`status` enum('aktif','pasif')
 );
 
 -- --------------------------------------------------------
@@ -645,18 +702,31 @@ CREATE TABLE `vwAllProgramAktifTunai` (
 -- (See below for the actual view)
 --
 CREATE TABLE `vwAllProgramBarangAktif` (
-`content` text
-,`datetime` datetime
-,`deskripsi_program` text
-,`gambar` varchar(100)
-,`id_kategoriprogram` int
-,`id_program` int
-,`jenis_pembayaran` varchar(20)
-,`jenis_program` varchar(20)
-,`jumlah_donatur` int
+`id_program` int
 ,`nama_program` varchar(100)
 ,`slug` varchar(255)
+,`jenis_program` varchar(20)
+,`jenis_pembayaran` varchar(20)
+,`deskripsi_program` text
+,`total_dana` int
+,`jumlah_donatur` int
+,`gambar` varchar(100)
+,`content` text
+,`datetime` datetime
+,`id_kategoriprogram` int
 ,`status` enum('aktif','pasif')
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vwAllProgramHaveMoney`
+-- (See below for the actual view)
+--
+CREATE TABLE `vwAllProgramHaveMoney` (
+`id_program` int
+,`nama_program` varchar(100)
+,`jenis_program` varchar(20)
 ,`total_dana` int
 );
 
@@ -691,8 +761,8 @@ CREATE TABLE `vwAllProgramTidakAktif` (
 -- (See below for the actual view)
 --
 CREATE TABLE `vwPemasukkanBulanan` (
-`bulan` int
-,`tahun` int
+`tahun` int
+,`bulan` int
 ,`total_pemasukkan` decimal(32,0)
 );
 
@@ -714,18 +784,18 @@ CREATE TABLE `vwPemasukkanHarian` (
 -- (See below for the actual view)
 --
 CREATE TABLE `vwPembayaranBarang` (
-`berat_barang` int
-,`bukti_barang` varchar(100)
-,`datetime` datetime
-,`email` varchar(100)
-,`id_donasibarang` int
-,`jenis_barang` varchar(50)
+`nama_program` varchar(100)
 ,`jenis_program` varchar(20)
+,`id_donasibarang` int
+,`slug_program` varchar(255)
 ,`nama_donatur` varchar(100)
-,`nama_program` varchar(100)
+,`email` varchar(100)
 ,`nohp` varchar(13)
 ,`pesan` text
-,`slug_program` varchar(255)
+,`jenis_barang` varchar(50)
+,`berat_barang` int
+,`bukti_barang` varchar(100)
+,`datetime` datetime
 );
 
 -- --------------------------------------------------------
@@ -735,15 +805,15 @@ CREATE TABLE `vwPembayaranBarang` (
 -- (See below for the actual view)
 --
 CREATE TABLE `vwPembayaranGagal` (
-`bukti_pembayaran` varchar(100)
-,`id_bank` int
+`id_bank` int
 ,`id_donatur` int
-,`jenis_program` varchar(50)
-,`jumlah_pembayaran` int
-,`nama_bank` varchar(50)
 ,`nama_donatur` varchar(50)
 ,`nama_pemilik` varchar(50)
+,`nama_bank` varchar(50)
 ,`norek` varchar(20)
+,`jenis_program` varchar(50)
+,`jumlah_pembayaran` int
+,`bukti_pembayaran` varchar(100)
 ,`tanggal_pembayaran` datetime
 );
 
@@ -754,16 +824,16 @@ CREATE TABLE `vwPembayaranGagal` (
 -- (See below for the actual view)
 --
 CREATE TABLE `vwPembayaranKonfirmasi` (
-`bukti_pembayaran` varchar(100)
-,`id_bank` int
+`id_bank` int
 ,`id_donatur` int
+,`nama_donatur` varchar(50)
+,`slug_program` varchar(255)
+,`nama_pemilik` varchar(50)
+,`nama_bank` varchar(50)
+,`norek` varchar(20)
 ,`jenis_program` varchar(50)
 ,`jumlah_pembayaran` int
-,`nama_bank` varchar(50)
-,`nama_donatur` varchar(50)
-,`nama_pemilik` varchar(50)
-,`norek` varchar(20)
-,`slug_program` varchar(255)
+,`bukti_pembayaran` varchar(100)
 ,`status_pembayaran` enum('failed','pending','konfirmasi','success')
 ,`tanggal_pembayaran` datetime
 );
@@ -777,12 +847,12 @@ CREATE TABLE `vwPembayaranKonfirmasi` (
 CREATE TABLE `vwPembayaranPending` (
 `id_bank` int
 ,`id_donatur` int
-,`jenis_program` varchar(50)
-,`jumlah_pembayaran` int
-,`nama_bank` varchar(50)
 ,`nama_donatur` varchar(50)
 ,`nama_pemilik` varchar(50)
+,`nama_bank` varchar(50)
 ,`norek` varchar(20)
+,`jenis_program` varchar(50)
+,`jumlah_pembayaran` int
 ,`tanggal_pembayaran` datetime
 );
 
@@ -793,15 +863,15 @@ CREATE TABLE `vwPembayaranPending` (
 -- (See below for the actual view)
 --
 CREATE TABLE `vwPembayaranSukses` (
-`bukti_pembayaran` varchar(100)
-,`id_bank` int
+`id_bank` int
 ,`id_donatur` int
-,`jenis_program` varchar(50)
-,`jumlah_pembayaran` int
-,`nama_bank` varchar(50)
 ,`nama_donatur` varchar(50)
 ,`nama_pemilik` varchar(50)
+,`nama_bank` varchar(50)
 ,`norek` varchar(20)
+,`jenis_program` varchar(50)
+,`jumlah_pembayaran` int
+,`bukti_pembayaran` varchar(100)
 ,`tanggal_pembayaran` datetime
 );
 
@@ -859,7 +929,16 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vwAllDataPengeluaran`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllDataPengeluaran`  AS SELECT `tb_pengeluaran`.`id_pengeluaran` AS `id_pengeluaran`, `tb_pengeluaran`.`id_program` AS `id_program`, `tb_pengeluaran`.`id_bank` AS `id_bank`, `tb_pengeluaran`.`nama_penerima` AS `nama_penerima`, `tb_pengeluaran`.`alamat` AS `alamat`, `tb_pengeluaran`.`jenis_pengeluaran` AS `jenis_pengeluaran`, `tb_pengeluaran`.`nominal` AS `nominal`, `tb_pengeluaran`.`keterangan` AS `keterangan`, `tb_pengeluaran`.`tanggal` AS `tanggal` FROM `tb_pengeluaran` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllDataPengeluaran`  AS SELECT `tb_pengeluaran`.`id_pengeluaran` AS `id_pengeluaran`, `tb_norek`.`nama_pemilik` AS `nama_pemilik`, `tb_norek`.`nama_bank` AS `nama_bank`, `tb_norek`.`norek` AS `norek`, `tb_norek`.`jenis_program` AS `jenis_program`, `tb_pengeluaran`.`nama_penerima` AS `nama_penerima`, `tb_amil`.`nama` AS `nama_amil`, `tb_pengeluaran`.`username_amil` AS `username_amil`, `tb_pengeluaran`.`alamat` AS `alamat`, `tb_pengeluaran`.`nohp` AS `nohp`, `tb_pengeluaran`.`jenis_pengeluaran` AS `jenis_pengeluaran`, `tb_pengeluaran`.`nominal` AS `nominal`, `tb_pengeluaran`.`keterangan` AS `keterangan`, `tb_pengeluaran`.`tanggal` AS `tanggal`, `tb_program`.`nama_program` AS `nama_program` FROM ((((`tb_pengeluaran` join `tb_program` on((`tb_pengeluaran`.`id_program` = `tb_program`.`id_program`))) join `tb_norek` on((`tb_pengeluaran`.`id_bank` = `tb_norek`.`id_norek`))) join `tb_user` on((`tb_pengeluaran`.`username_amil` = `tb_user`.`username`))) join `tb_amil` on((`tb_user`.`id_user` = `tb_amil`.`id_user`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vwAllDataPengeluaranBarang`
+--
+DROP TABLE IF EXISTS `vwAllDataPengeluaranBarang`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllDataPengeluaranBarang`  AS SELECT `tb_pengeluaran`.`id_pengeluaran` AS `id_pengeluaran`, `tb_program`.`nama_program` AS `nama_program`, `tb_program`.`jenis_program` AS `jenis_program`, `tb_amil`.`nama` AS `nama_amil`, `tb_pengeluaran`.`username_amil` AS `username_amil`, `tb_pengeluaran`.`nama_penerima` AS `nama_penerima`, `tb_pengeluaran`.`alamat` AS `alamat`, `tb_pengeluaran`.`nohp` AS `nohp`, `tb_pengeluaran`.`jenis_pengeluaran` AS `jenis_pengeluaran`, `tb_pengeluaran`.`nominal` AS `nominal`, `tb_pengeluaran`.`keterangan` AS `keterangan`, `tb_pengeluaran`.`tanggal` AS `tanggal` FROM (((`tb_pengeluaran` join `tb_program` on((`tb_pengeluaran`.`id_program` = `tb_program`.`id_program`))) join `tb_user` on((`tb_pengeluaran`.`username_amil` = `tb_user`.`username`))) join `tb_amil` on((`tb_user`.`id_user` = `tb_amil`.`id_user`))) WHERE (`tb_pengeluaran`.`jenis_pengeluaran` = 'barang') ;
 
 -- --------------------------------------------------------
 
@@ -868,7 +947,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vwAllDataPengeluaranTunai`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllDataPengeluaranTunai`  AS SELECT `tb_pengeluaran`.`id_pengeluaran` AS `id_pengeluaran`, `tb_pengeluaran`.`id_program` AS `id_program`, `tb_pengeluaran`.`id_bank` AS `id_bank`, `tb_pengeluaran`.`nama_penerima` AS `nama_penerima`, `tb_pengeluaran`.`alamat` AS `alamat`, `tb_pengeluaran`.`jenis_pengeluaran` AS `jenis_pengeluaran`, `tb_pengeluaran`.`nominal` AS `nominal`, `tb_pengeluaran`.`keterangan` AS `keterangan`, `tb_pengeluaran`.`tanggal` AS `tanggal` FROM `tb_pengeluaran` WHERE (`tb_pengeluaran`.`jenis_pengeluaran` = 'uang') ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllDataPengeluaranTunai`  AS SELECT `tb_pengeluaran`.`id_pengeluaran` AS `id_pengeluaran`, `tb_pengeluaran`.`id_bank` AS `id_bank`, `tb_pengeluaran`.`nama_penerima` AS `nama_penerima`, `tb_pengeluaran`.`username_amil` AS `username_amil`, `tb_pengeluaran`.`alamat` AS `alamat`, `tb_pengeluaran`.`jenis_pengeluaran` AS `jenis_pengeluaran`, `tb_pengeluaran`.`nominal` AS `nominal`, `tb_program`.`nama_program` AS `nama_program`, `tb_pengeluaran`.`keterangan` AS `keterangan`, `tb_pengeluaran`.`tanggal` AS `tanggal` FROM (`tb_pengeluaran` join `tb_program` on((`tb_pengeluaran`.`id_program` = `tb_program`.`id_program`))) WHERE (`tb_pengeluaran`.`jenis_pengeluaran` = 'uang') ;
 
 -- --------------------------------------------------------
 
@@ -900,11 +979,20 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `vwAllNorekHaveSaldo`
+--
+DROP TABLE IF EXISTS `vwAllNorekHaveSaldo`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllNorekHaveSaldo`  AS SELECT `tb_norek`.`id_norek` AS `id_norek`, `tb_norek`.`nama_pemilik` AS `nama_pemilik`, `tb_norek`.`nama_bank` AS `nama_bank`, `tb_norek`.`norek` AS `norek`, `tb_norek`.`jenis_program` AS `jenis_program`, `tb_norek`.`saldo_donasi` AS `saldo_donasi`, `tb_norek`.`gambar` AS `gambar` FROM `tb_norek` WHERE (`tb_norek`.`saldo_donasi` > 0) ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `vwAllPembayaran`
 --
 DROP TABLE IF EXISTS `vwAllPembayaran`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllPembayaran`  AS SELECT `tb_donatur`.`id_bank` AS `id_bank`, `tb_donatur`.`slug_program` AS `slug_program`, `tb_donatur`.`id_donatur` AS `id_donatur`, `tb_donatur`.`nama_donatur` AS `nama_donatur`, `tb_donatur`.`email` AS `email`, `tb_donatur`.`nohp` AS `nohp`, `tb_donatur`.`pesan` AS `pesan`, `tb_norek`.`nama_pemilik` AS `nama_pemilik`, `tb_norek`.`nama_bank` AS `nama_bank`, `tb_norek`.`norek` AS `norek`, `tb_norek`.`jenis_program` AS `jenis_program`, `tb_pembayaran`.`jumlah_pembayaran` AS `jumlah_pembayaran`, `tb_pembayaran`.`nomor_pembayaran` AS `nomor_pembayaran`, `tb_pembayaran`.`bukti_pembayaran` AS `bukti_pembayaran`, `tb_pembayaran`.`status_pembayaran` AS `status_pembayaran`, `tb_pembayaran`.`tanggal_pembayaran` AS `tanggal_pembayaran` FROM ((`tb_norek` join `tb_donatur` on((`tb_norek`.`id_norek` = `tb_donatur`.`id_bank`))) join `tb_pembayaran` on((`tb_pembayaran`.`id_donatur` = `tb_donatur`.`id_donatur`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllPembayaran`  AS SELECT `tb_donatur`.`id_bank` AS `id_bank`, `tb_donatur`.`slug_program` AS `slug_program`, `tb_donatur`.`id_donatur` AS `id_donatur`, `tb_donatur`.`nama_donatur` AS `nama_donatur`, `tb_donatur`.`email` AS `email`, `tb_donatur`.`nohp` AS `nohp`, `tb_donatur`.`pesan` AS `pesan`, `tb_norek`.`nama_pemilik` AS `nama_pemilik`, `tb_norek`.`nama_bank` AS `nama_bank`, `tb_norek`.`norek` AS `norek`, `tb_norek`.`jenis_program` AS `jenis_program`, `tb_program`.`nama_program` AS `nama_program`, `tb_pembayaran`.`jumlah_pembayaran` AS `jumlah_pembayaran`, `tb_pembayaran`.`nomor_pembayaran` AS `nomor_pembayaran`, `tb_pembayaran`.`bukti_pembayaran` AS `bukti_pembayaran`, `tb_pembayaran`.`status_pembayaran` AS `status_pembayaran`, `tb_pembayaran`.`tanggal_pembayaran` AS `tanggal_pembayaran` FROM (((`tb_norek` join `tb_donatur` on((`tb_norek`.`id_norek` = `tb_donatur`.`id_bank`))) join `tb_pembayaran` on((`tb_pembayaran`.`id_donatur` = `tb_donatur`.`id_donatur`))) join `tb_program` on((`tb_donatur`.`slug_program` = `tb_program`.`slug`))) ;
 
 -- --------------------------------------------------------
 
@@ -932,6 +1020,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `vwAllProgramBarangAktif`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllProgramBarangAktif`  AS SELECT `tb_program`.`id_program` AS `id_program`, `tb_program`.`nama_program` AS `nama_program`, `tb_program`.`slug` AS `slug`, `tb_program`.`jenis_program` AS `jenis_program`, `tb_program`.`jenis_pembayaran` AS `jenis_pembayaran`, `tb_program`.`deskripsi_program` AS `deskripsi_program`, `tb_program`.`total_dana` AS `total_dana`, `tb_program`.`jumlah_donatur` AS `jumlah_donatur`, `tb_program`.`gambar` AS `gambar`, `tb_program`.`content` AS `content`, `tb_program`.`datetime` AS `datetime`, `tb_kategoriprogram`.`id_kategoriprogram` AS `id_kategoriprogram`, `tb_kategoriprogram`.`status` AS `status` FROM (`tb_program` join `tb_kategoriprogram` on((`tb_program`.`jenis_program` = `tb_kategoriprogram`.`nama_kategoriprogram`))) WHERE ((`tb_kategoriprogram`.`status` = 'aktif') AND (`tb_program`.`jenis_pembayaran` = 'barang')) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vwAllProgramHaveMoney`
+--
+DROP TABLE IF EXISTS `vwAllProgramHaveMoney`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllProgramHaveMoney`  AS SELECT `tb_program`.`id_program` AS `id_program`, `tb_program`.`nama_program` AS `nama_program`, `tb_program`.`jenis_program` AS `jenis_program`, `tb_program`.`total_dana` AS `total_dana` FROM `tb_program` WHERE (`tb_program`.`total_dana` > 0) ;
 
 -- --------------------------------------------------------
 
@@ -1180,13 +1277,13 @@ ALTER TABLE `tb_banner`
 -- AUTO_INCREMENT for table `tb_donasibarang`
 --
 ALTER TABLE `tb_donasibarang`
-  MODIFY `id_donasibarang` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_donasibarang` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tb_donatur`
 --
 ALTER TABLE `tb_donatur`
-  MODIFY `id_donatur` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_donatur` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_kategoriprogram`
@@ -1228,13 +1325,13 @@ ALTER TABLE `tb_pemasukkan`
 -- AUTO_INCREMENT for table `tb_pembayaran`
 --
 ALTER TABLE `tb_pembayaran`
-  MODIFY `id_pembayaran` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_pembayaran` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tb_pengeluaran`
 --
 ALTER TABLE `tb_pengeluaran`
-  MODIFY `id_pengeluaran` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pengeluaran` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tb_program`
