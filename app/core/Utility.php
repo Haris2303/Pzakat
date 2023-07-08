@@ -6,7 +6,7 @@ use PHPMailer\PHPMailer\Exception;
 class Utility
 {
     // method upload image 
-    public static function uploadImage($dataFile, $folderName)
+    public static function uploadImage(array $dataFile, string $folderName)
     {
         // initialisasi file gambar
         $namaFile   = $dataFile['gambar']['name'];
@@ -117,13 +117,13 @@ class Utility
         return $key;
     }
 
-    public static function convertGramToKilogram($gram): float
+    public static function convertGramToKilogram(int $gram): float
     {
         $kilogram = $gram / 1000;
         return $kilogram;
     }
 
-    public static function sendEmail($address, $subject, $body, $altBody): bool
+    public static function sendEmailKonfirmasi(string $address, string $subject, string $body): bool
     {
         //Load Composer's autoloader
         require '/var/www/html/Pzakat/vendor/autoload.php';
@@ -151,7 +151,7 @@ class Utility
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = $subject;
             $mail->Body    = $body;
-            $mail->AltBody = $altBody;
+            $mail->AltBody = 'Donasi Kamu';
 
             $mail->send();
             return true;
@@ -159,5 +159,87 @@ class Utility
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             return false;
         }
+    }
+
+    // pesan email body
+    public static function mailBody(string $nama, int $nominal_donasi):string {
+        return '<!DOCTYPE html>
+                <html>
+                <head>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            background-color: #f4f4f4;
+                            margin: 0;
+                            padding: 20px;
+                        }
+                
+                        .container {
+                            max-width: 600px;
+                            margin: 0 auto;
+                            background-color: #ffffff;
+                            border: 1px solid #e4e4e4;
+                            padding: 20px;
+                            border-radius: 4px;
+                        }
+                
+                        h1 {
+                            color: #333333;
+                        }
+                
+                        p {
+                            color: #666666;
+                        }
+                
+                        .logo {
+                            text-align: center;
+                            margin-bottom: 30px;
+                        }
+                
+                        .logo img {
+                            max-width: 200px;
+                            height: auto;
+                        }
+                
+                        .thank-you {
+                            text-align: center;
+                            margin-bottom: 30px;
+                        }
+                
+                        .donation-details {
+                            margin-bottom: 20px;
+                        }
+                
+                        .details-label {
+                            font-weight: bold;
+                        }
+                
+                        .button {
+                            display: inline-block;
+                            background-color: #4caf50;
+                            color: #ffffff;
+                            text-decoration: none;
+                            padding: 10px 20px;
+                            border-radius: 4px;
+                            margin-top: 20px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="thank-you">
+                            <h1>Terima Kasih!</h1>
+                            <p>Donasi Anda Telah Terkonfirmasi</p>
+                        </div>
+                        <div class="donation-details">
+                            <p><span class="details-label">Nama:</span> ' . $nama . '</p>
+                            <p><span class="details-label">Nominal Donasi:</span> ' . number_format($nominal_donasi, 0, ',', '.') . '</p>
+                        </div>
+                        <p>Kami ingin mengucapkan terima kasih atas donasi yang telah Anda berikan. Kontribusi Anda akan membantu kami mencapai tujuan kami dan membuat perbedaan yang signifikan.</p>
+                        <p>Jika Anda memiliki pertanyaan lebih lanjut atau ingin mempelajari lebih lanjut tentang bagaimana donasi Anda digunakan, jangan ragu untuk menghubungi kami.</p>
+                        <a class="button" href="#">Hubungi Kami</a>
+                    </div>
+                </body>
+                </html>';
     }
 }

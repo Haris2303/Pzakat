@@ -51,18 +51,12 @@
               <td><?= number_format($item['jumlah_pembayaran'], 0, ',', '.') ?></td>
               <td><?= $item['tanggal_pembayaran'] ?></td>
               <td>
-                <?php 
-                  $slug           = $item['slug_program'];
-                  $location       = $item['status_pembayaran'];
+                <?php
                   $id_donatur     = $item['id_donatur'];
                   $username       = $_SESSION['username'];
-                  $nama_donatur   = $item['nama_donatur'];
-                  $email          = $item['email'];
-                  $jumlah_donasi  = $item['jumlah_pembayaran'];
-                  $nama_bank      = join('-', explode(' ',$item['nama_bank']));
                 ?>
                 <!-- kelola_pembayaran/aksi_konfirmasi_pembayaran/slug/location/id_donatur/username/jumlah_donasi/nama_bank -->
-                <a href="<?= BASEURL ?>/kelola_pembayaran/aksi_konfirmasi_pembayaran/<?= "$slug/$location/$id_donatur/$username/$nama_donatur/$email/$jumlah_donasi/$nama_bank" ?>" class="btn badge btn-primary">Konfirmasi</a>
+                <a href="<?= BASEURL ?>/kelola_pembayaran/aksi_konfirmasi_pembayaran/<?= "$id_donatur/$username" ?>" class="btn badge btn-primary">Konfirmasi</a>
                 <!-- kelola_pembayaran/aksi_batal_pembayaran/id_donatur/username -->
                 <a href="<?= BASEURL ?>/kelola_pembayaran/aksi_batal_pembayaran/<?= "$id_donatur/$username" ?>" class="btn badge btn-danger">Batal</a>
                 <a href="<?= BASEURL ?>/kelola_pembayaran/detail/<?= $id_donatur ?>" class="btn badge btn-secondary">Detail</a>

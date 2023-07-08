@@ -128,27 +128,45 @@ class Kelola_pembayaran extends Controller
    * 
    */
 
-  public function aksi_konfirmasi_pembayaran($slug, $location, $id, $username, $nama_donatur, $emailDonatur, $jumlah_dana, $nama_bank): void
+  public function aksi_konfirmasi_pembayaran(int $id, string $username): void
   {
-    $subject = "[Lazismu-Unamin] Donasi Telah Terkonfirmasi!";
-    $body = "Haii $nama_donatur Donasi Anda $jumlah_dana telah <strong>terkonfirmasi!</strong><br>Terima Kasih Sudah Berdonasi";
-    $isEmail = Utility::sendEmail($emailDonatur, $subject , $body, "Terima Kasih");
-    if ($isEmail) {
-      $result = $this->model('Kelolapembayaran_model')->konfirmasiPembayaran($slug, $id, $username, $jumlah_dana, $nama_bank);
-      if ($result > 0) {
-        Flasher::setFlash('Pembayaran <strong>Berhasil</strong> Dikonfirmasi!', 'success');
-        header('Location: ' . BASEURL . "/kelola_pembayaran/$location");
-        exit;
-      } else {
-        Flasher::setFlash('Pembayaran <strong>Gagal</strong> Dikonfirmasi!', 'danger');
-        header('Location: ' . BASEURL . "/kelola_pembayaran/$location");
-        exit;
-      }
-    } else {
-      Flasher::setFlash('Pesan Email <strong>Gagal</strong> Terkirim!', 'danger');
-      header('Location: ' . BASEURL . "/kelola_pembayaran/$location");
-      exit;
-    }
+
+    /**
+     * 
+     * @TroubleShooting!!!
+     * 
+     */
+
+    $dataKonfirmasi = $this->model('Kelolapembayaran_model')->getDataPembayaranById($id);
+    $slug         = $dataKonfirmasi['slug_program'];
+    $username     = $username;
+    $jumlah_dana  = $dataKonfirmasi['jumlah_pembayaran'];
+    $nama_bank    = $dataKonfirmasi['nama_bank'];
+    var_dump($slug);
+    var_dump($dataKonfirmasi);
+
+    // kirim email
+    // $subject = "[Lazismu-Unamin] Konfirmasi Donasi Anda Telah Diterima";
+    // $body = Utility::mailBody($nama_donatur, $jumlah_dana);
+    // $isEmail = Utility::sendEmailKonfirmasi($email_donatur, $subject , $body);
+
+    // // jika email terkirim
+    // if ($isEmail) {
+    //   $result = $this->model('Kelolapembayaran_model')->konfirmasiPembayaran($slug, $id, $username, $jumlah_dana, $nama_bank);
+    //   if ($result > 0) {
+    //     Flasher::setFlash('Pembayaran <strong>Berhasil</strong> Dikonfirmasi!', 'success');
+    //     header('Location: ' . BASEURL . "/kelola_pembayaran/$location");
+    //     exit;
+    //   } else {
+    //     Flasher::setFlash('Pembayaran <strong>Gagal</strong> Dikonfirmasi!', 'danger');
+    //     header('Location: ' . BASEURL . "/kelola_pembayaran/$location");
+    //     exit;
+    //   }
+    // } else {
+    //   Flasher::setFlash('Pesan Email <strong>Gagal</strong> Terkirim!', 'danger');
+    //   header('Location: ' . BASEURL . "/kelola_pembayaran/$location");
+    //   exit;
+    // }
   }
 
   public function aksi_batal_pembayaran($id, $username): void
