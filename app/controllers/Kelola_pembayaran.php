@@ -135,18 +135,19 @@ class Kelola_pembayaran extends Controller
     $dataKonfirmasi = $this->model('Kelolapembayaran_model')->getDataPembayaranById($id);
 
     // initialisasi variabel on datakonfirmasi
-    $slug         = $dataKonfirmasi['slug_program'];
-    $username     = $username;
-    $jumlah_dana  = $dataKonfirmasi['jumlah_pembayaran'];
-    $nama_bank    = $dataKonfirmasi['nama_bank'];
-    $nama_donatur = $dataKonfirmasi['nama_donatur'];
-    $email_donatur= $dataKonfirmasi['email'];
-    $location     = $dataKonfirmasi['status_pembayaran'];
+    $slug             = $dataKonfirmasi['slug_program'];
+    $username         = $username;
+    $jumlah_dana      = $dataKonfirmasi['jumlah_pembayaran'];
+    $nama_bank        = $dataKonfirmasi['nama_bank'];
+    $email_donatur    = $dataKonfirmasi['email'];
+    $location         = $dataKonfirmasi['status_pembayaran'];
 
     // kirim email
     $subject = "[Lazismu-Unamin] Konfirmasi Donasi Anda Telah Diterima";
-    $body = Utility::mailBody($nama_donatur, $jumlah_dana);
+    $body = Utility::mailBody($id);
     $isEmail = Utility::sendEmailKonfirmasi($email_donatur, $subject , $body);
+
+    var_dump($dataKonfirmasi);
 
     // jika email terkirim
     if ($isEmail) {

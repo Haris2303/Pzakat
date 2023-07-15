@@ -39,7 +39,7 @@ class Utility
     }
 
     // method convert image to webp
-    public static function webpConvert($file, $compression_quality = 80)
+    public static function webpConvert($file, int $compression_quality = 80)
     {
         // check if file exists
         if (!file_exists($file)) {
@@ -162,7 +162,17 @@ class Utility
     }
 
     // pesan email body
-    public static function mailBody(string $nama, int $nominal_donasi):string {
+    public static function mailBody(int $id):string {
+
+        $controller = new Controller();
+        $dataKonfirmasi = $controller->model('Kelolapembayaran_model')->getDataPembayaranById($id);
+
+        // assignment variabel
+        $nomor_pembayaran   = $dataKonfirmasi['nomor_pembayaran'];
+        $program            = $dataKonfirmasi['nama_program'];
+        $nama               = $dataKonfirmasi['nama_donatur'];
+        $nominal_donasi     = $dataKonfirmasi['jumlah_pembayaran'];
+
         return '<!DOCTYPE html>
                 <html>
                 <head>
@@ -207,7 +217,15 @@ class Utility
                         }
                 
                         .donation-details {
-                            margin-bottom: 20px;
+                            margin: 0 auto;
+                        }
+                
+                        .donation-details table {
+                            width: 100%;
+                        }
+                
+                        .donation-details table td {
+                            padding: 0 10px;
                         }
                 
                         .details-label {
@@ -232,12 +250,28 @@ class Utility
                             <p>Donasi Anda Telah Terkonfirmasi</p>
                         </div>
                         <div class="donation-details">
-                            <p><span class="details-label">Nama:</span> ' . $nama . '</p>
-                            <p><span class="details-label">Nominal Donasi:</span> ' . number_format($nominal_donasi, 0, ',', '.') . '</p>
+                            <table border="1px" cellspacing="0">
+                                <tr>
+                                    <td><p><span class="details-label">Nomor Transaksi</span></p></td>
+                                    <td><p>'. $nomor_pembayaran .'</p></td>
+                                </tr>
+                                <tr>
+                                    <td><p><span class="details-label">Nama Donatur</span></p></td>
+                                    <td><p>'. $nama .'</p></td>
+                                </tr>
+                                <tr>
+                                    <td><p><span class="details-label">Program</span></p></td>
+                                    <td><p>'. $program .'</p></td>
+                                </tr>
+                                <tr>
+                                    <td><p><span class="details-label">Nominal Donasi</span></p></td>
+                                    <td><p>Rp '. number_format($nominal_donasi, 0, ',', '.') .'</p></td>
+                                </tr>
+                            </table>
                         </div>
                         <p>Kami ingin mengucapkan terima kasih atas donasi yang telah Anda berikan. Kontribusi Anda akan membantu kami mencapai tujuan kami dan membuat perbedaan yang signifikan.</p>
                         <p>Jika Anda memiliki pertanyaan lebih lanjut atau ingin mempelajari lebih lanjut tentang bagaimana donasi Anda digunakan, jangan ragu untuk menghubungi kami.</p>
-                        <a class="button" href="#">Hubungi Kami</a>
+                        <a class="button" href="https://wa.me/6281342528736" target="_blank">Hubungi Kami</a>
                     </div>
                 </body>
                 </html>';
