@@ -446,13 +446,13 @@
             $('.btn-tambah').prop('disabled', true)
           } else {
             // jika nominal empty
-            if((nominal >= 500000) && (nominal <= saldoProgram)) {
+            if((nominal >= 100000) && (nominal <= saldoProgram)) {
               $('#pesan-nominal').html(msgNominalInput(saldoProgram))
               $('.btn-tambah').prop('disabled', false)
             }
   
             // jika nominal <= 0
-            if(nominal < 500000) {
+            if(nominal < 100000) {
               $('#pesan-nominal').html(msgNonValid(saldoProgram))
               $('.btn-tambah').prop('disabled', true)
             }
