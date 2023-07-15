@@ -10,7 +10,7 @@ class Login_model {
     $this->db = new Database();
   }
 
-  public function login($data) {
+  public function login($data): int|string {
 
     $tb_user = $this->tableUser;
     
