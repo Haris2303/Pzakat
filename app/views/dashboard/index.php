@@ -209,8 +209,7 @@
                   <div>Jumat</div>
                   <div>Sabtu</div>
                 </div>
-                <div class="days">
-                </div>
+                <div class="days"></div>
               </div>
             </div>
           </div>
