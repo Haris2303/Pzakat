@@ -8,7 +8,9 @@ class Kelolapembayaran_model {
         "dataKonfirmasi" => "vwPembayaranKonfirmasi",
         "dataSukses"     => "vwPembayaranSukses",
         "dataGagal"      => "vwPembayaranGagal",
-        "dataBarang"     => "vwPembayaranBarang"
+        "dataBarang"     => "vwPembayaranBarang",
+        "pemasukkanBulanan" => "vwPemasukkanBulanan",
+        "pemasukkanHarian"  => "vwPemasukkanHarian"
     ];
     private $table = [
         'pembayaran' => 'tb_pembayaran',
@@ -104,6 +106,27 @@ class Kelolapembayaran_model {
         $this->db->query($query);
         $this->db->bind('id_donasibarang', $id);
         return $this->db->single();
+    }
+
+    /**
+     * Pemasukkan
+     * @method GET DATA
+     * @param NULL
+     */
+    public function getDataPemasukkanBulanan(): array {
+        $view = $this->view['pemasukkanBulanan'];
+        $query1 = "SELECT * FROM $view";
+        $this->db->query($query1);
+        $result = $this->db->resultSet();
+
+        return $result;
+    }
+
+    public function getDataPemasukkanHarian(): array {
+        $view = $this->view['pemasukkanHarian'];
+        $query = "SELECT * FROM $view";
+        $this->db->query($query);
+        return $this->db->resultSet();
     }
 
     /**

@@ -25,9 +25,14 @@ class Dashboard extends Controller{
     $this->view('dashboard/footer', $data);
   }
 
-  public function getdatapemasukkan(): void 
+  public function getDataPemasukkanBulanan(): void 
   {
-    echo json_encode($this->model('Dashboard_model')->getDataPemasukkan());
+    echo json_encode($this->model('Kelolapembayaran_model')->getDataPemasukkanBulanan());
+  }
+
+  public function getDataPemasukkanHarian(): void 
+  {
+    echo json_encode($this->model('Kelolapembayaran_model')->getDataPemasukkanHarian());
   }
 
 }
