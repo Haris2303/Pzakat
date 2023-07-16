@@ -186,39 +186,48 @@
         <div class="row">
 
           <div class="col-lg-6 mb-4">
-
-            <!-- Illustrations -->
-            <div class="card shadow mb-4">
+            <!-- Kalender -->
+            <div class="card shadow">
               <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Kalender</h6>
               </div>
-              <div class="card-body">
-                <div class="text-center">
-                  <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="...">
+              <div class="calendar">
+                <div class="month text-primary">
+                  <i class="fas fa-angle-left prev"></i>
+                  <div class="date">
+                    <h1></h1>
+                    <p></p>
+                  </div>
+                  <i class="fas fa-angle-right next"></i>
                 </div>
-                <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                  constantly updated collection of beautiful svg images that you can use
-                  completely free and without attribution!</p>
-                <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                  unDraw &rarr;</a>
+                <div class="weekdays text-primary">
+                  <div>Minggu</div>
+                  <div>Senin</div>
+                  <div>Selasa</div>
+                  <div>Rabu</div>
+                  <div>Kamis</div>
+                  <div>Jumat</div>
+                  <div>Sabtu</div>
+                </div>
+                <div class="days">
+                </div>
               </div>
             </div>
+          </div>
 
-            <!-- Approach -->
-            <div class="card shadow mb-4">
+          <div class="col-lg-6 mb-4">
+            <!-- About App -->
+            <div class="card shadow">
               <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Apa itu Lazismu?</h6>
               </div>
               <div class="card-body">
-                <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                  CSS bloat and poor page performance. Custom CSS classes are used to create
-                  custom components and custom utility classes.</p>
-                <p class="mb-0">Before working with this theme, you should become familiar with the
-                  Bootstrap framework, especially the utility classes.</p>
+                <p>LAZISMU adalah lembaga zakat nasional dengan SK Menag No. 90 Tahun 2022, yang berkhidmat dalam pemberdayaan masyarakat melalui pendayagunaan dana zakat, infaq, wakaf dan dana kedermawanan lainnya baik dari perseorangan, lembaga, perusahaan dan instansi lainnya.</p>
+                <p class="mb-0">Lazismu tidak menerima segala bentuk dana yang bersumber dari kejahatan. UU RI No. 8 Tahun 2010 Tentang Pencegahan dan Pemberantasan Tindak Pidana Pencucian Uang.</p>
               </div>
             </div>
-
           </div>
+
         </div>
 
       <!-- </div> -->
