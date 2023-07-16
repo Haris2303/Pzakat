@@ -213,9 +213,20 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
 
     <!-- Nav Item - Laporan -->
     <li class="nav-item">
-      <a class="nav-link" href="charts.html">
-        <i class="fas fa-fw fa-file"></i>
-        <span>Laporan</span></a>
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#callapseLaporan" aria-expanded="true" aria-controls="callapseLaporan">
+        <i class="fas fa-fw fa-folder"></i>
+        <span>Laporan</span>
+      </a>
+      <div id="callapseLaporan" class="collapse" aria-labelledby="headingPrograms" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Kategori Program</h6>
+          <a class="collapse-item" href="<?= BASEURL ?>/laporan/zakat">Zakat</a>
+          <a class="collapse-item" href="<?= BASEURL ?>/laporan/infaq">Infaq</a>
+          <a class="collapse-item" href="<?= BASEURL ?>/laporan/donasi">Donasi</a>
+          <a class="collapse-item" href="<?= BASEURL ?>/laporan/qurban">Qurban</a>
+          <a class="collapse-item" href="<?= BASEURL ?>/laporan/ramadhan">Ramadhan</a>
+        </div>
+      </div>
     </li>
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
