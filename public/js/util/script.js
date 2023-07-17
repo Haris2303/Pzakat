@@ -50,13 +50,13 @@ $('.calendar').ready(function() {
   ]
 
   const nameDays = [
-    "Senin",
-    "Selasa",
-    "Rabu",
-    "Kamis",
+    "Minggu",
+    "Sabtu",
     "Jumat",
-    "Sabut",
-    "Minggu"
+    "Kamis",
+    "Rabu",
+    "Selasa",
+    "Senin"
   ]
 
   const date = new Date()
@@ -91,7 +91,7 @@ $('.calendar').ready(function() {
     }
 
     const dateToday = date.toDateString().split(' ')
-    for(let k = 0; k <= nameDays.length; k++) {
+    for(let k = 0; k <= nameDays.length - 1; k++) {
       if(k === date.getDay()) {
         dateToday[0] = nameDays[k]
       }

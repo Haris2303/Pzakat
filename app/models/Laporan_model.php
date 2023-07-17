@@ -3,7 +3,8 @@
 class Laporan_model {
 
     private $view = [
-        "laporanZakat" => "vwLaporanZakat"
+        "laporanZakat" => "vwLaporanZakat",
+        "laporanInfaq" => "vwLaporanInfaq",
     ];
     private $db;
 
@@ -12,9 +13,17 @@ class Laporan_model {
         $this->db = new Database();
     }
 
-    public function getLaporan() 
+    public function getLaporanZakat() 
     {
         $view = $this->view['laporanZakat'];
+        $query = "SELECT * FROM $view";
+        $this->db->query($query);
+        return $this->db->resultSet();
+    }
+
+    public function getLaporanInfaq() 
+    {
+        $view = $this->view['laporanInfaq'];
         $query = "SELECT * FROM $view";
         $this->db->query($query);
         return $this->db->resultSet();

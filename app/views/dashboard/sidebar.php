@@ -220,11 +220,11 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
       <div id="callapseLaporan" class="collapse" aria-labelledby="headingPrograms" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Kategori Program</h6>
-          <a class="collapse-item" href="<?= BASEURL ?>/laporan/zakat">Zakat</a>
-          <a class="collapse-item" href="<?= BASEURL ?>/laporan/infaq">Infaq</a>
-          <a class="collapse-item" href="<?= BASEURL ?>/laporan/donasi">Donasi</a>
-          <a class="collapse-item" href="<?= BASEURL ?>/laporan/qurban">Qurban</a>
-          <a class="collapse-item" href="<?= BASEURL ?>/laporan/ramadhan">Ramadhan</a>
+          <a class="collapse-item" href="<?= BASEURL ?>/laporan/zakat" target="_blank">Zakat</a>
+          <a class="collapse-item" href="<?= BASEURL ?>/laporan/infaq" target="_blank">Infaq</a>
+          <a class="collapse-item" href="<?= BASEURL ?>/laporan/donasi" target="_blank">Donasi</a>
+          <a class="collapse-item" href="<?= BASEURL ?>/laporan/qurban" target="_blank">Qurban</a>
+          <a class="collapse-item" href="<?= BASEURL ?>/laporan/ramadhan" target="_blank">Ramadhan</a>
         </div>
       </div>
     </li>

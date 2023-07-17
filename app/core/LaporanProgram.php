@@ -7,10 +7,12 @@ class LaporanProgram extends FPDF
 {
 
     private $data = NULL; // data untuk content pada tabel
+    private $nama_program = ''; // nama program pada content
 
-    public function __construct(array $data)
+    public function __construct(string $nama_program, array $data)
     {
         parent::__construct();
+        $this->nama_program = $nama_program;
         $this->data = $data;
     }
 
@@ -60,7 +62,7 @@ class LaporanProgram extends FPDF
         $this->Ln(15);
 
         $this->SetFont('helvetica', 'B', 14);
-        $this->Cell(0, 0, 'Data Program Zakat ', 0, 1, 'C');
+        $this->Cell(0, 0, 'Data Program ' . $this->nama_program, 0, 1, 'C');
         $this->Ln(10);
 
         // Header tabel

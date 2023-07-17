@@ -399,7 +399,7 @@
       },
       msgNominalInput: (saldo) => `<span class="text-primary">Masukkan nominal tidak lebih dari <strong>${saldo.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</strong></span>`,
       msgAwal: '<span class="text-primary">Masukkan nominal!</span>',
-      msgNonValid: (saldo) => `<span class="text-danger">Nominal harus lebih dari Rp 500.000 kurang dari <strong>${saldo.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</strong></span>`,
+      msgNonValid: (saldo) => `<span class="text-danger">Nominal harus lebih dari Rp 100.000 kurang dari <strong>${saldo.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</strong></span>`,
       msgSaldoKosong: `<span class="text-danger">Saldo Kosong!</span>`
     }
 
@@ -487,7 +487,7 @@
     const component = {
       msgNominalInput: (saldo) => `<span class="text-primary">Masukkan nominal tidak lebih dari <strong>${saldo.toLocaleString('id-ID')}Gram</strong></span>`,
       msgAwal: '<span class="text-primary">Masukkan nominal!</span>',
-      msgNonValid: (saldo) => `<span class="text-danger">Nominal harus lebih dari 5000Gram, kurang dari <strong>${saldo.toLocaleString('id-ID')}Gram</strong></span>`,
+      msgNonValid: (saldo) => `<span class="text-danger">Nominal harus lebih dari 1000Gram, kurang dari <strong>${saldo.toLocaleString('id-ID')}Gram</strong></span>`,
       msgSaldoKosong: `<span class="text-danger">Saldo Kosong!</span>`,
     }
 
@@ -516,13 +516,13 @@
         $('.btn-tambah').prop('disabled', true)
       } else {
         // jika nominal = 0
-        if(nominal < 5000) {
+        if(nominal < 1000) {
           $('#pesan-nominal').html(msgNonValid(beratBarang))
           $('.btn-tambah').prop('disabled', true)
         }
 
         // jika nominal sesuai
-        if((nominal >= 5000) && (nominal <= beratBarang)) {
+        if((nominal >= 1000) && (nominal <= beratBarang)) {
           $('#pesan-nominal').html(msgNominalInput(beratBarang))
           $('.btn-tambah').prop('disabled', false)
         }

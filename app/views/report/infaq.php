@@ -1,7 +1,7 @@
 <?php
 
 //instantisasi objek
-$pdf = new LaporanProgram('Zakat', $data['dataZakat']);
+$pdf = new LaporanProgram('Infaq', $data['dataInfaq']);
 
 // Mulai dokumen
 $pdf->AddPage('P', 'A4');
@@ -16,5 +16,5 @@ $pdf->garis();
 $pdf->content();
 $pdf->akhir();
 
-$pdf->Output('laporan_zakat', 'I');
+$pdf->Output('laporan_infaq', 'I');
 ?>
