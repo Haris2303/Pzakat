@@ -43,24 +43,36 @@ class Pengeluaran extends Controller {
         $this->view('dashboard/footer', $data);
     }
 
-    public function detailTunai($id): void
+    public function detailTunai($id = true): void
     {
         $data = [
             "judul" => "Detail Pengeluaran",
             "detail" => $this->model('Pengeluaran_model')->getDataPengeluaranById($id)
         ];
 
+        // jika halaman tidak ditemukan
+        if(is_bool($data['detail'])) {
+            $this->view('error/404');
+            exit;
+        }
+
         $this->view('dashboard/sidebar', $data);
         $this->view('pengeluaran/detailTunai', $data);
         $this->view('dashboard/footer', $data);
     }
 
-    public function detailBarang($id): void
+    public function detailBarang($id = true): void
     {
         $data = [
             "judul" => "Detail Pengeluaran",
             "detail" => $this->model('Pengeluaran_model')->getDataPengeluaranBarangById($id)
         ];
+
+        // jika halaman tidak ditemukan
+        if(is_bool($data['detail'])) {
+            $this->view('error/404');
+            exit;
+        }
 
         $this->view('dashboard/sidebar', $data);
         $this->view('pengeluaran/detailBarang', $data);

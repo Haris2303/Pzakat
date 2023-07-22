@@ -44,7 +44,7 @@ class Pengeluaran_model {
      * @method GetData WHERE
      * 
      */
-    public function getDataPengeluaranById($id): array
+    public function getDataPengeluaranById($id): array|bool
     {
         $view = $this->view['allDataPengeluaran'];
         $query = "SELECT * FROM $view WHERE id_pengeluaran = :id_pengeluaran";
@@ -53,7 +53,7 @@ class Pengeluaran_model {
         return $this->db->single();
     }
 
-    public function getDataPengeluaranBarangById($id): array
+    public function getDataPengeluaranBarangById($id): array|bool
     {
         $view = $this->view['allDataPengeluaranBarang'];
         $query = "SELECT * FROM $view WHERE id_pengeluaran = :id_pengeluaran";

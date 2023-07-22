@@ -32,7 +32,7 @@ class Pageviews extends Controller {
     $this->view('dashboard/footer', $data);
   }
 
-  public function detail($slug) {
+  public function detail($slug = true) {
 
     $data = [
       "judul" => 'Muzakki',
@@ -41,6 +41,12 @@ class Pageviews extends Controller {
       "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
 
+    // jika halaman tidak ditemukan
+    if(is_bool($data['dataView'])) {
+      $this->view('error/404');
+      exit;
+    }
+
     $this->view('dashboard/sidebar', $data);
     $this->view('pageviews/detail', $data);
     $this->view('tinymce/tinymce', $data);
@@ -48,6 +54,11 @@ class Pageviews extends Controller {
   }
   
   public function upload($jenis_view) {
+    
+    if($jenis_view !== 'Artikel' && $jenis_view !== 'Berita') {
+      $this->view('error/404');
+      exit;
+    }
     
     $data = [
       "judul" => "Upload Berita",

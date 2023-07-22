@@ -51,12 +51,12 @@ $('.calendar').ready(function() {
 
   const nameDays = [
     "Minggu",
-    "Sabtu",
-    "Jumat",
-    "Kamis",
-    "Rabu",
+    "Senin",
     "Selasa",
-    "Senin"
+    "Rabu",
+    "Kamis",
+    "Jumat",
+    "Sabtu"
   ]
 
   const date = new Date()

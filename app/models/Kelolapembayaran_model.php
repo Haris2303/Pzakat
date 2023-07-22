@@ -90,7 +90,7 @@ class Kelolapembayaran_model {
      * 
      */
 
-    public function getDataPembayaranById($id): array
+    public function getDataPembayaranById($id): array|bool
     {
         $vw = $this->view['dataAll'];
         $query = "SELECT * FROM $vw WHERE id_donatur = :id_donatur";
@@ -99,7 +99,7 @@ class Kelolapembayaran_model {
         return $this->db->single();
     }
 
-    public function getDataPembayaranBarangById($id): array
+    public function getDataPembayaranBarangById($id): array|bool
     {
         $vw = $this->view['dataBarang'];
         $query = "SELECT * FROM $vw WHERE id_donasibarang = :id_donasibarang";

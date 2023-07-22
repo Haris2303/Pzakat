@@ -27,14 +27,12 @@ class Pageviews_model
     return $this->db->resultSet();
   }
 
-  public function getDataViewBySlug($slug): array
+  public function getDataViewBySlug($slug): array|bool
   {
-
     $query = "SELECT * FROM $this->table WHERE slug = :slug";
     $this->db->query($query);
     $this->db->bind('slug', $slug);
-    $result = $this->db->single();
-    return $result;
+    return $this->db->single();
   }
 
   public function getAllDataBeritaLimit($limit): array
@@ -100,7 +98,7 @@ class Pageviews_model
       $gambarBaru = $gambarLama;
     } else {
       // hapus gambar lama
-      unlink('/var/www/html/Pzakat/public/img/views/'.$gambarLama);
+      @unlink('/var/www/html/Pzakat/public/img/views/'.$gambarLama);
     }
 
     // update data
@@ -125,7 +123,7 @@ class Pageviews_model
     $this->db->query($querySelect);
     $this->db->bind('slug', $slug);
     $getImageName = $this->db->single();
-    unlink('/var/www/html/Pzakat/public/img/views/'. $getImageName['gambar']);
+    @unlink('/var/www/html/Pzakat/public/img/views/'. $getImageName['gambar']);
 
     // delete data
     $query = "DELETE FROM $this->table WHERE slug = :slug";

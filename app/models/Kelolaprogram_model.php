@@ -201,7 +201,7 @@ class Kelolaprogram_model {
         return $this->db->resultSet();
     }
 
-    public function getDataProgramBySlug($slug): array
+    public function getDataProgramBySlug($slug): array|bool
     {
         $query = "SELECT * FROM $this->table WHERE slug = :slug";
         $this->db->query($query);

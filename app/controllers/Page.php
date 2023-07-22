@@ -2,7 +2,9 @@
 
 class Page extends Controller {
 
-  public function index() {}
+  public function index() {
+    $this->view('error/404');
+  }
 
   public function news() {
     $data = [

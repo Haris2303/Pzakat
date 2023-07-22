@@ -19,13 +19,19 @@ class Kelola_pembayaran extends Controller
     $this->view('dashboard/footer', $data);
   }
 
-  public function detail($id): void
+  public function detail($id = true): void
   {
     $data = [
       "judul" => "Detail Pembayaran",
       "css" => VENDOR_TABLES_CSS,
       "detail" => $this->model('Kelolapembayaran_model')->getDataPembayaranById($id)
     ];
+
+    // jika halaman tidak ditemukan
+    if(is_bool($data['detail'])) {
+      $this->view('error/404');
+      exit;
+    }
 
     $this->view('dashboard/sidebar', $data);
     $this->view('kelola_pembayaran/detail', $data);
@@ -109,12 +115,18 @@ class Kelola_pembayaran extends Controller
     $this->view('dashboard/footer', $data);
   }
 
-  public function detailbarang($id): void
+  public function detailbarang($id = true): void
   {
     $data = [
       "judul" => "Detail Barang",
       "detail" => $this->model('Kelolapembayaran_model')->getDataPembayaranBarangById($id)
     ];
+
+    // jika halaman tidak ditemukan
+    if(is_bool($data['detail'])) {
+      $this->view('error/404');
+      exit;
+    }
 
     $this->view('dashboard/sidebar', $data);
     $this->view('kelola_pembayaran/detailbarang', $data);

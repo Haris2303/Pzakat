@@ -3,13 +3,19 @@
 class Transaksi extends Controller
 {
 
-    public function index($program, $slug, $qty = null): void
+    public function index($program = null, $slug = null, $qty = null): void
     {
-
+        $dataProgram = $this->model('Kelolaprogram_model')->getDataProgramBySlug($slug);
+        // jika halaman tidak ditemukan
+        if(is_bool($dataProgram)) {
+            $this->view('error/404');
+            exit;
+        }
+        
         $data = [
             "judul" => "Form Donasi",
-            "dataProgram" => $this->model('Kelolaprogram_model')->getDataProgramBySlug($slug),
-            "dataNorek" => $this->model('Norek_model')->getAllDataNorekByProgram($program),
+            "dataProgram" => $dataProgram,
+            "dataNorek" => $this->model('Norek_model')->getAllDataNorekByProgram($dataProgram['jenis_program']),
             "dataKey" => Utility::getKeyRandom(),
             "qtyFidyah" => $qty * 45000
         ];
@@ -38,7 +44,6 @@ class Transaksi extends Controller
 
     public function qty($jenis, $slug): void
     {
-
         $data = [
             "judul" => "Form Quantity Fidyah",
             "dataProgram" => $this->model('Kelolaprogram_model')->getDataProgramBySlug($slug)

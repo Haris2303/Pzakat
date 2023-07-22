@@ -61,7 +61,7 @@ class Database {
     return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function single(): array {
+  public function single(): array|bool {
     $this->execute();
     return $this->stmt->fetch(PDO::FETCH_ASSOC);
   }
