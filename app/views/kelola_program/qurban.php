@@ -64,12 +64,12 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
       </div>
 
-      <form action="<?= BASEURL ?>/kelola_program/aksi_tambah_qurban" method="post" enctype="multipart/form-data">
+      <form action="<?= BASEURL ?>/kelola_program/aksi_tambah_program/qurban" method="post" enctype="multipart/form-data">
 
         <div class="modal-body">
           <div class="mb-3">
             <label for="nama_qurban" class="form-label">Nama Program Qurban</label>
-            <input type="text" class="form-control" id="nama_qurban" name="nama-qurban" required autocomplete="off">
+            <input type="text" class="form-control" id="nama_qurban" name="nama-program" required autocomplete="off">
           </div>
           <div class="mb-3">
             <label for="deskripsi" class="form-label">Deskripsi</label>

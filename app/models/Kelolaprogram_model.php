@@ -7,6 +7,7 @@ class Kelolaprogram_model {
         "allZakat" => "vwAllDataZakat",
         "allInfaq" => "vwAllDataInfaq",
         "allQurban" => "vwAllDataQurban",
+        "allDonasi" => "vwAllDataDonasi",
         "allDataProgramBarang" => "vwAllProgramBarangAktif",
         "allProgramNameAktif" => "vwAllProgramNameAktif",
         "allDataProgramAktif" => "vwAllDataProgramAktif",
@@ -30,21 +31,21 @@ class Kelolaprogram_model {
      * @param NULL
      * 
      */
-    public function getSumProgramZakat() {
+    public function getSumProgramZakat(): array {
         $view = $this->view['sumZakat'];
         $query = "SELECT * FROM $view";
         $this->db->query($query);
         return $this->db->single();
     }
 
-    public function getSumProgramInfaq() {
+    public function getSumProgramInfaq(): array {
         $view = $this->view['sumInfaq'];
         $query = "SELECT * FROM $view";
         $this->db->query($query);
         return $this->db->single();
     }
 
-    public function getSumProgramQurban() {
+    public function getSumProgramQurban(): array {
         $view = $this->view['sumQurban'];
         $query = "SELECT * FROM $view";
         $this->db->query($query);
@@ -107,7 +108,10 @@ class Kelolaprogram_model {
 
     public function getAllDataProgramDonasi(): array
     {
-        return [];
+        $view = $this->view['allDonasi'];
+        $query = "SELECT * FROM $view";
+        $this->db->query($query);
+        return $this->db->resultSet();
     }
 
     public function getAllDataProgramQurban(): array
@@ -131,11 +135,12 @@ class Kelolaprogram_model {
         return $this->db->resultSet();
     }
 
-    public function getAllDataProgramBarang(): array
+    public function getAllDataProgramBarang(string $program): array
     {
         $view = $this->view['allDataProgramBarang'];
-        $query = "SELECT * FROM $view";
+        $query = "SELECT * FROM $view WHERE jenis_program = :program";
         $this->db->query($query);
+        $this->db->bind('program', $program);
         return $this->db->resultSet();
     }
 
@@ -183,7 +188,7 @@ class Kelolaprogram_model {
      * @param Slug
      * 
     */
-    public function getAllDataProgramAktifByJenisProgram($jenis_program)
+    public function getAllDataProgramAktifByJenisProgram($jenis_program): array
     {
         $view = $this->view['allDataProgramAktifTunai'];
         $query = "SELECT * FROM $view WHERE jenis_program = :jenis_program";
@@ -216,196 +221,61 @@ class Kelolaprogram_model {
      * @param POST|FILES
      * 
      */
-    public function tambahDataZakat($dataPost, $dataFiles) {
 
+    public function tambahDataProgram(string $jenis_program, array $dataPost, array $dataFiles = NULL): int|string {
         // initial variabel
-        $namazakat          = $dataPost['nama-zakat'];
+        $namaprogram        = ucwords(htmlspecialchars($dataPost['nama-program']));
         $jenis_pembayaran   = $dataPost['jenis-pembayaran'];
-        $deskripsi          = $dataPost['deskripsi'];
-        $content            = $dataPost['content'];
-        $gambar             = Utility::uploadImage($dataFiles, 'program');
-
-        // buat slug
-        $slug = strtolower(join('', explode(' ', $namazakat)));
-
-        // cek slug
-        $cek = "SELECT slug FROM $this->table WHERE slug = :slug";
-        $this->db->query($cek);
-        $this->db->bind('slug', $slug);
-        if(count($this->db->resultSet()) > 0) return 'Nama Zakat Telah Tersedia';
-
-        // cek gambar
-        if(!is_string($gambar)) return 'Gagal Upload Gambar! Mohon untuk memeriksa <strong>format gambar</strong> dan ukuran gambar kurang dari <strong>2mb</strong>';
-
-        // insert data
-        $query = "INSERT INTO $this->table VALUES(NULL, 
-                                                :nama_program, 
-                                                :slug, 
-                                                :jenis_program, 
-                                                :jenis_pembayaran, 
-                                                :deskripsi_program, 
-                                                NULL,
-                                                :total_dana, 
-                                                :jumlah_donatur, 
-                                                :gambar, 
-                                                :content,
-                                                NOW())";
-
-        $this->db->query($query);
-        $this->db->bind('nama_program', ucwords($namazakat));
-        $this->db->bind('slug', $slug);
-        $this->db->bind('jenis_program', 'Zakat');
-        $this->db->bind('jenis_pembayaran', $jenis_pembayaran);
-        $this->db->bind('deskripsi_program', ucwords($deskripsi));
-        $this->db->bind('total_dana', 0);
-        $this->db->bind('jumlah_donatur', 0);
-        $this->db->bind('gambar', $gambar);
-        $this->db->bind('content', $content);
-        $this->db->execute();
-
-        return $this->db->rowCount();
-
-    }
-
-    public function tambahDataZakatBarang($dataPost) {
-        // initial variabel
-        $nama_zakat         = $dataPost['nama-zakat'];
-        $deskripsi          = $dataPost['deskripsi'];
-        $jenis_program      = 'Zakat';
-        $jenis_pembayaran   = 'barang';
-        $berat_barang       = 0;
-        $jumlah_donatur     = 0;
+        $deskripsi          = ucwords(htmlspecialchars($dataPost['deskripsi']));
         $gambar             = NULL;
         $content            = NULL;
-        
-        // buat slug
-        $slug = strtolower(join('', explode(' ', $nama_zakat)));
+        $nominal_bayar      = NULL;
 
-        // cek slug
+        // if exist data post content
+        if(isset($dataPost['content'])) {
+            $content = $dataPost['content'];
+        }
+        
+        // if exist data post nominal_bayar
+        if(isset($dataPost['nominal-bayar'])) {
+            $nominal_bayar = str_replace('.', '', $dataPost['nominal-bayar']);
+        }
+
+        // create slug
+        $slug = strtolower(join('', explode(' ', $namaprogram)));
+
+        // if datafiles is null
+        if($dataFiles !== NULL) {
+            $gambar = Utility::uploadImage($dataFiles, 'program');
+        }
+
+        // check slug
         $cek = "SELECT slug FROM $this->table WHERE slug = :slug";
         $this->db->query($cek);
         $this->db->bind('slug', $slug);
         if(count($this->db->resultSet()) > 0) return 'Nama Zakat Telah Tersedia';
 
-        // insert data
-        $query = "INSERT INTO $this->table VALUES(NULL, 
-                                                :nama_zakat, 
-                                                :slug, 
-                                                :jenis_program, 
-                                                :jenis_pembayaran, 
-                                                :deskripsi_program, 
-                                                NULL,
-                                                :berat_barang, 
-                                                :jumlah_donatur, 
-                                                :gambar, 
-                                                :content, 
-                                                NOW())";
+        // check image
+        if((!is_string($gambar)) && ($gambar !== NULL)) return 'Gagal Upload Gambar! Mohon untuk memeriksa <strong>format gambar</strong> dan ukuran gambar kurang dari <strong>2mb</strong>';
+
+         // insert data
+         $query = "INSERT INTO $this->table VALUES(NULL, 
+                                            :nama_program, 
+                                            :slug, 
+                                            :jenis_program, 
+                                            :jenis_pembayaran, 
+                                            :deskripsi_program, 
+                                            :nominal_bayar,
+                                            :total_dana, 
+                                            :jumlah_donatur, 
+                                            :gambar, 
+                                            :content,
+                                            NOW())";
+
         $this->db->query($query);
-        $this->db->bind('nama_zakat', $nama_zakat);
+        $this->db->bind('nama_program', ucwords($namaprogram));
         $this->db->bind('slug', $slug);
         $this->db->bind('jenis_program', $jenis_program);
-        $this->db->bind('jenis_pembayaran', $jenis_pembayaran);
-        $this->db->bind('deskripsi_program', $deskripsi);
-        $this->db->bind('berat_barang', $berat_barang);
-        $this->db->bind('jumlah_donatur', $jumlah_donatur);
-        $this->db->bind('gambar', $gambar);
-        $this->db->bind('content', $content);
-        $this->db->execute();
-
-        return $this->db->rowCount();
-    }
-
-    public function tambahDataInfaq($dataPost, $dataFiles) {
-
-        // initial variabel
-        $namainfaq          = $dataPost['nama-infaq'];
-        $jenis_pembayaran   = $dataPost['jenis-pembayaran'];
-        $deskripsi          = $dataPost['deskripsi'];
-        $content            = $dataPost['content'];
-        $gambar             = Utility::uploadImage($dataFiles, 'program');
-
-        // buat slug
-        $slug = strtolower(join('', explode(' ', $namainfaq)));
-
-        // cek slug
-        $cek = "SELECT slug FROM $this->table WHERE slug = :slug";
-        $this->db->query($cek);
-        $this->db->bind('slug', $slug);
-        if(count($this->db->resultSet()) > 0) return 'Nama Infaq Telah Tersedia';
-
-        // cek gambar
-        if(!is_string($gambar)) return 'Gagal Upload Gambar! Mohon untuk memeriksa <strong>format gambar</strong> dan ukuran gambar kurang dari <strong>2mb</strong>';
-
-        // insert data
-        $query = "INSERT INTO $this->table VALUES(NULL, 
-                                                :nama_program, 
-                                                :slug, 
-                                                :jenis_program, 
-                                                :jenis_pembayaran, 
-                                                :deskripsi_program, 
-                                                NULL,
-                                                :total_dana, 
-                                                :jumlah_donatur, 
-                                                :gambar, 
-                                                :content,
-                                                NOW())";
-
-        $this->db->query($query);
-        $this->db->bind('nama_program', ucwords($namainfaq));
-        $this->db->bind('slug', $slug);
-        $this->db->bind('jenis_program', 'Infaq');
-        $this->db->bind('jenis_pembayaran', $jenis_pembayaran);
-        $this->db->bind('deskripsi_program', ucwords($deskripsi));
-        $this->db->bind('total_dana', 0);
-        $this->db->bind('jumlah_donatur', 0);
-        $this->db->bind('gambar', $gambar);
-        $this->db->bind('content', $content);
-        $this->db->execute();
-
-        return $this->db->rowCount();
-
-    }
-
-    public function tambahDataQurban($dataPost, $dataFiles) {
-
-        // initial variabel
-        $namaqurban         = $dataPost['nama-qurban'];
-        $jenis_pembayaran   = $dataPost['jenis-pembayaran'];
-        $deskripsi          = $dataPost['deskripsi'];
-        $nominal_bayar      = str_replace('.', '', $dataPost['nominal-bayar']);
-        $content            = $dataPost['content'];
-        $gambar             = Utility::uploadImage($dataFiles, 'program');
-
-        // buat slug
-        $slug = strtolower(join('', explode(' ', $namaqurban)));
-
-        // cek slug
-        $cek = "SELECT slug FROM $this->table WHERE slug = :slug";
-        $this->db->query($cek);
-        $this->db->bind('slug', $slug);
-        if(count($this->db->resultSet()) > 0) return 'Nama Qurban Telah Tersedia!';
-
-        // cek gambar
-        if(!is_string($gambar)) return 'Gagal Upload Gambar! Mohon untuk memeriksa <strong>format gambar</strong> dan ukuran gambar kurang dari <strong>2mb</strong>';
-
-        // insert data
-        $query = "INSERT INTO $this->table VALUES(NULL, 
-                                                :nama_program, 
-                                                :slug, 
-                                                :jenis_program, 
-                                                :jenis_pembayaran, 
-                                                :deskripsi_program, 
-                                                :nominal_bayar,
-                                                :total_dana, 
-                                                :jumlah_donatur, 
-                                                :gambar, 
-                                                :content,
-                                                NOW())";
-
-        $this->db->query($query);
-        $this->db->bind('nama_program', ucwords($namaqurban));
-        $this->db->bind('slug', $slug);
-        $this->db->bind('jenis_program', 'qurban');
         $this->db->bind('jenis_pembayaran', $jenis_pembayaran);
         $this->db->bind('deskripsi_program', ucwords($deskripsi));
         $this->db->bind('nominal_bayar', $nominal_bayar);
@@ -416,8 +286,6 @@ class Kelolaprogram_model {
         $this->db->execute();
 
         return $this->db->rowCount();
-
     }
-
 
 }

@@ -62,12 +62,13 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
       </div>
 
-      <form action="<?= BASEURL ?>/kelola_program/aksi_tambah_zakatbarang" method="post" enctype="multipart/form-data">
+      <form action="<?= BASEURL ?>/kelola_program/aksi_tambah_barang/zakat" method="post">
 
         <div class="modal-body">
+          <input type="hidden" name="jenis-pembayaran" value="barang">
           <div class="mb-3">
             <label for="nama_zakat" class="form-label">Nama Program Zakat</label>
-            <input type="text" class="form-control" id="nama_zakat" name="nama-zakat" required autocomplete="off">
+            <input type="text" class="form-control" id="nama_zakat" name="nama-program" required autocomplete="off">
           </div>
           <div class="mb-3">
             <label for="deskripsi" class="form-label">Deskripsi</label>

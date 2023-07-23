@@ -5,7 +5,7 @@ class Kelola_program extends Controller
 
     /**
      * 
-     * @method View
+     * @method Index
      * 
     */
 
@@ -22,6 +22,12 @@ class Kelola_program extends Controller
         $this->view('kelola_program/index', $data);
         $this->view('dashboard/footer', $data);
     }
+
+    /**
+     * 
+     * @method Zakat
+     * 
+    */
 
     public function zakat(): void
     {
@@ -44,13 +50,19 @@ class Kelola_program extends Controller
             "judul" => "Kelola Zakat Barang",
             "css" => VENDOR_TABLES_CSS,
             "script" => VENDOR_TABLES,
-            "dataBarang" => $this->model('Kelolaprogram_model')->getAllDataProgramBarang()
+            "dataBarang" => $this->model('Kelolaprogram_model')->getAllDataProgramBarang('Zakat')
         ];
 
         $this->view('dashboard/sidebar', $data);
         $this->view('kelola_program/zakatbarang', $data);
         $this->view('dashboard/footer', $data);
     }
+
+    /**
+     * 
+     * @method Infaq
+     * 
+    */
 
     public function infaq(): void
     {
@@ -67,6 +79,12 @@ class Kelola_program extends Controller
         $this->view('tinymce/tinymce');
         $this->view('dashboard/footer', $data);
     }
+
+    /**
+     * 
+     * @method Qurban
+     * 
+    */
 
     public function qurban(): void
     {
@@ -88,7 +106,43 @@ class Kelola_program extends Controller
         $this->view("dashboard/footer", $data);
     }
 
-    public function detail($slug): void
+    /**
+     * 
+     * @method Donasi
+     * 
+    */
+    public function donasi(): void {
+        $data = [
+            "judul" => "Kelola Donasi Uang",
+            "css"   => VENDOR_TABLES_CSS,
+            "dataDonasi" => $this->model('Kelolaprogram_model')->getAllDataProgramDonasi()
+        ];
+
+        $this->view('dashboard/sidebar', $data);
+        $this->view('kelola_program/donasi', $data);
+        $this->view("tinymce/tinymce");
+        $this->view('dashboard/footer', $data);
+    }
+
+    public function donasibarang(): void {
+        $data = [
+            "judul" => "Kelola Donasi Barang",
+            "css"   => VENDOR_TABLES_CSS,
+            "dataBarang" => $this->model('Kelolaprogram_model')->getAllDataProgramBarang('Donasi')
+        ];
+
+        $this->view('dashboard/sidebar', $data);
+        $this->view('kelola_program/donasibarang', $data);
+        $this->view('dashboard/footer', $data);
+    }
+
+    /**
+     * 
+     * @method detail
+     * @param Slug Type String
+     * 
+    */
+    public function detail(string $slug): void
     {
         $data = [
             "judul" => "Detail Program",
@@ -103,6 +157,12 @@ class Kelola_program extends Controller
         $this->view('tinymce/tinymce');
         $this->view('dashboard/footer', $data);
     }
+
+    /**
+     * 
+     * @method Get Data Json Type
+     * 
+    */
 
     public function getDataProgramHaveMoneyById()
     {
@@ -123,58 +183,30 @@ class Kelola_program extends Controller
      * 
     */
 
-    public function aksi_tambah_zakatuang(): void
+    public function aksi_tambah_barang(string $program): void
     {
-        $result = $this->model('Kelolaprogram_model')->tambahDataZakat($_POST, $_FILES);
-        if($result > 0) {
-            Flasher::setFlash('Data Zakat <strong>Berhasil</strong> Ditambahkan!', 'success');
-            header('Location: ' . BASEURL . '/kelola_program/zakat');
-            exit;
-        } else {
-            Flasher::setFlash($result, 'danger');
-            header('Location: ' . BASEURL . '/kelola_program/zakat');
-            exit;
-        }
-    }
-
-    public function aksi_tambah_zakatbarang(): void
-    {
-        $result = $this->model('Kelolaprogram_model')->tambahDataZakatBarang($_POST);
-        if($result > 0) {
+        $result = $this->model('Kelolaprogram_model')->tambahDataProgram(ucwords($program), $_POST);
+        if(is_int($result) && $result > 0) {
             Flasher::setFlash('Data Barang <strong>Berhasil</strong> Ditambahkan!', 'success');
-            header('Location: ' . BASEURL . '/kelola_program/zakatbarang');
+            header('Location: ' . BASEURL . "/kelola_program//" .$program. "barang");
             exit;
         } else {
             Flasher::setFlash($result, 'danger');
-            header('Location: ' . BASEURL . '/kelola_program/zakatbarang');
+            header('Location: ' . BASEURL . '/kelola_program//' .$program. 'barang');
             exit;
         }
     }
 
-    public function aksi_tambah_infaq(): void
+    public function aksi_tambah_program(string $program): void
     {
-        $result = $this->model('Kelolaprogram_model')->tambahDataInfaq($_POST, $_FILES);
-        if($result > 0) {
-            Flasher::setFlash('Data Infaq <strong>Berhasil</strong> Ditambahkan!', 'success');
-            header('Location: ' . BASEURL . '/kelola_program/infaq');
+        $result = $this->model('Kelolaprogram_model')->tambahDataProgram(ucwords($program), $_POST, $_FILES);
+        if(is_int($result) && $result > 0) {
+            Flasher::setFlash("Data $program <strong>Berhasil</strong> Ditambahkan!", 'success');
+            header('Location: ' . BASEURL . "/kelola_program/$program");
             exit;
         } else {
             Flasher::setFlash($result, 'danger');
-            header('Location: ' . BASEURL . '/kelola_program/infaq');
-            exit;
-        }
-    }
-
-    public function aksi_tambah_qurban(): void
-    {
-        $result = $this->model('Kelolaprogram_model')->tambahDataQurban($_POST, $_FILES);
-        if($result > 0) {
-            Flasher::setFlash('Data Qurban <strong>Berhasil</strong> Ditambahkan!', 'success');
-            header('Location: ' . BASEURL . '/kelola_program/qurban');
-            exit;
-        } else {
-            Flasher::setFlash($result, 'danger');
-            header('Location: ' . BASEURL . '/kelola_program/qurban');
+            header('Location: ' . BASEURL . "/kelola_program/$program");
             exit;
         }
     }

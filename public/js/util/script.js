@@ -92,7 +92,7 @@ $('.calendar').ready(function() {
 
     const dateToday = date.toDateString().split(' ')
     for(let k = 0; k <= nameDays.length - 1; k++) {
-      if(k === date.getDay()) {
+      if(k === new Date().getDay()) {
         dateToday[0] = nameDays[k]
       }
     }
