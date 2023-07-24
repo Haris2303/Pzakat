@@ -18,7 +18,7 @@ class Programs extends Controller {
   {
     $data = [
       "judul" => "Programs Zakat",
-      "dataProgramZakat" => $this->model('Kelolaprogram_model')->getAllDataProgramZakatTunai(),
+      "dataProgramZakat" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('zakat'),
       "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
     $this->view('template/header', $data);
@@ -30,7 +30,7 @@ class Programs extends Controller {
   {
     $data = [
       "judul" => "Programs Infaq",
-      "dataProgramInfaq" => $this->model('Kelolaprogram_model')->getAllDataProgramInfaq(),
+      "dataProgramInfaq" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('infaq'),
       "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
     $this->view('template/header', $data);
@@ -42,11 +42,35 @@ class Programs extends Controller {
   {
     $data = [
       "judul" => "Programs Qurban",
-      "dataProgramQurban" => $this->model('Kelolaprogram_model')->getAllDataProgramQurban(),
+      "dataProgramQurban" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('qurban'),
       "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
     $this->view('template/header', $data);
     $this->view('programs/qurban', $data);
+    $this->view('template/footer', $data);
+  }
+
+  public function donasi(): void
+  {
+    $data = [
+      "judul" => "Programs Donasi",
+      "dataProgramDonasi" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('donasi'),
+      "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
+    ];
+    $this->view('template/header', $data);
+    $this->view('programs/donasi', $data);
+    $this->view('template/footer', $data);
+  }
+
+  public function ramadhan(): void
+  {
+    $data = [
+      "judul" => "Programs Ramadhan",
+      "dataProgramRamadhan" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('ramadhan'),
+      "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
+    ];
+    $this->view('template/header', $data);
+    $this->view('programs/ramadhan', $data);
     $this->view('template/footer', $data);
   }
 

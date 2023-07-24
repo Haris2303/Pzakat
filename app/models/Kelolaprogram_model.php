@@ -2,22 +2,24 @@
 
 class Kelolaprogram_model {
 
+    private $db;
     private $table = 'tb_program';
     private $view = [
         "allZakat" => "vwAllDataZakat",
         "allInfaq" => "vwAllDataInfaq",
         "allQurban" => "vwAllDataQurban",
         "allDonasi" => "vwAllDataDonasi",
+        "allRamadhan" => "vwAllDataRamadhan",
         "allDataProgramBarang" => "vwAllProgramBarangAktif",
         "allProgramNameAktif" => "vwAllProgramNameAktif",
         "allDataProgramAktif" => "vwAllDataProgramAktif",
         "allDataProgramAktifTunai" => "vwAllProgramAktifTunai",
         "allDataProgramHaveMoney"   => "vwAllProgramHaveMoney",
+        "sumProgram"    => "vwSumProgram",
         "sumZakat" => "vwSumProgramZakat",
         "sumInfaq" => "vwSumProgramInfaq",
         "sumQurban" => "vwSumProgramQurban",
     ];
-    private $db;
 
     public function __construct()
     {
@@ -26,30 +28,17 @@ class Kelolaprogram_model {
 
     /**
      * 
-     * @method Sum
+     * @method Sum (Menjumlahkan Total dana dari program)
      * 
      * @param NULL
      * 
      */
-    public function getSumProgramZakat(): array {
-        $view = $this->view['sumZakat'];
-        $query = "SELECT * FROM $view";
+    public function getSumProgram(string $jenis_program): string {
+        $view = $this->view['sumProgram'];
+        $query = "SELECT * FROM $view WHERE jenis_program = :jenis_program";
         $this->db->query($query);
-        return $this->db->single();
-    }
-
-    public function getSumProgramInfaq(): array {
-        $view = $this->view['sumInfaq'];
-        $query = "SELECT * FROM $view";
-        $this->db->query($query);
-        return $this->db->single();
-    }
-
-    public function getSumProgramQurban(): array {
-        $view = $this->view['sumQurban'];
-        $query = "SELECT * FROM $view";
-        $this->db->query($query);
-        return $this->db->single();
+        $this->db->bind('jenis_program', ucwords($jenis_program));
+        return number_format($this->db->single()['total_dana'], 0, ',', '.');
     }
 
 
@@ -69,9 +58,13 @@ class Kelolaprogram_model {
         return $this->db->resultSet();
     }
 
-    public function getAllDataProgram(): array
+    public function getAllDataProgramTunai(string $jenis_program): array
     {
-        return [];
+        $view = $this->view['allDataProgramAktif'];
+        $query = "SELECT * FROM $view WHERE jenis_program = :jenis_program AND jenis_pembayaran <> 'barang' ORDER BY id_program DESC";
+        $this->db->query($query);
+        $this->db->bind('jenis_program', ucwords($jenis_program));
+        return $this->db->resultSet();
     }
 
     public function getAllDataProgramAktif(): array
@@ -90,43 +83,6 @@ class Kelolaprogram_model {
         return $this->db->resultSet();
     }
 
-    public function getAllDataProgramZakat(): array
-    {
-        $view = $this->view['allZakat'];
-        $query = "SELECT * FROM $view";
-        $this->db->query($query);
-        return $this->db->resultSet();
-    }
-
-    public function getAllDataProgramInfaq(): array
-    {
-        $view = $this->view['allInfaq'];
-        $query = "SELECT * FROM $view";
-        $this->db->query($query);
-        return $this->db->resultSet();
-    }
-
-    public function getAllDataProgramDonasi(): array
-    {
-        $view = $this->view['allDonasi'];
-        $query = "SELECT * FROM $view";
-        $this->db->query($query);
-        return $this->db->resultSet();
-    }
-
-    public function getAllDataProgramQurban(): array
-    {
-        $view = $this->view['allQurban'];
-        $query = "SELECT * FROM $view";
-        $this->db->query($query);
-        return $this->db->resultSet();
-    }
-
-    public function getAllDataProgramRamadhan(): array
-    {
-        return [];
-    }
-
     public function getAllProgramNameAktif(): array 
     {
         $view = $this->view['allProgramNameAktif'];
@@ -135,25 +91,20 @@ class Kelolaprogram_model {
         return $this->db->resultSet();
     }
 
-    public function getAllDataProgramBarang(string $program): array
+    public function getAllDataProgramBarang(string $program = NULL): array
     {
         $view = $this->view['allDataProgramBarang'];
-        $query = "SELECT * FROM $view WHERE jenis_program = :program";
-        $this->db->query($query);
-        $this->db->bind('program', $program);
-        return $this->db->resultSet();
-    }
+        
+        // if $program is NULL
+        if(is_null($program)) $query = "SELECT * FROM $view";
+        else $query = "SELECT * FROM $view WHERE jenis_program = :program";
 
-    /**
-     * 
-     * @method GetAllData WHERE jenis_pembayaran
-     * 
-     */
-    public function getAllDataProgramZakatTunai(): array
-    {
-        $view = $this->view['allZakat'];
-        $query = "SELECT * FROM $view WHERE jenis_pembayaran <> 'barang'";
+        // query
         $this->db->query($query);
+
+        // binding if not null
+        if(!is_null($program)) $this->db->bind('program', ucwords($program));
+
         return $this->db->resultSet();
     }
 
@@ -188,14 +139,6 @@ class Kelolaprogram_model {
      * @param Slug
      * 
     */
-    public function getAllDataProgramAktifByJenisProgram($jenis_program): array
-    {
-        $view = $this->view['allDataProgramAktifTunai'];
-        $query = "SELECT * FROM $view WHERE jenis_program = :jenis_program";
-        $this->db->query($query);
-        $this->db->bind('jenis_program', $jenis_program);
-        return $this->db->resultSet();
-    }
 
     public function getAllDataProgramHaveMoneyById($id): array
     {

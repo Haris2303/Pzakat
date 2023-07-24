@@ -8,7 +8,7 @@
   <div class="card-header py-3">
     <div class="row justify-content-between align-items-center mx-0">
       <div>
-        <h6 class="m-0 font-weight-bold text-dark">Data Program Zakat</h6>
+        <h6 class="m-0 font-weight-bold text-dark">Data Pembayaran Barang</h6>
       </div>
       <div class="position-relative">
         <!-- Button trigger modal -->
@@ -59,7 +59,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title fs-5" id="formModalLabel">Tambah Data Zakat Barang</h3>
+        <h3 class="modal-title fs-5" id="formModalLabel">Tambah Data Pembayaran Barang</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
       </div>
 

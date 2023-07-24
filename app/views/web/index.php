@@ -54,7 +54,7 @@
           <!-- Kategori program -->
           <div class="w-full flex gap-2 md:gap-5 text-center mt-10 text-sm program-kategori">
             <?php foreach( $data['programNameAktif'] as $item ): ?>
-              <a class="w-1/3 bg-lightgreen py-2 hover:bg-green hover:text-white transition-300 shadow-md text-darkgreen" data-name="<?= $item['nama_kategoriprogram'] ?>"><?= $item['nama_kategoriprogram'] ?></a>
+              <a class="w-1/3 bg-lightgreen py-2 hover:bg-green hover:text-white transition-300 shadow-md text-darkgreen hover:cursor-pointer" data-name="<?= $item['nama_kategoriprogram'] ?>"><?= $item['nama_kategoriprogram'] ?></a>
             <?php endforeach ?>
           </div>
 
@@ -242,8 +242,8 @@
                 <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
               </svg>
             </div>
-            <span class="text-darkgray">Pendidikan</span>
-            <p class="text-lightgray">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit sapiente perferendis repudiandae, corporis culpa molestias, quas numquam minima eveniet delectus, blanditiis nobis itaque. Porro, quis. Ipsum at repellat amet commodi?</p>
+            <span class="text-darkgray">Kesehatan</span>
+            <p class="text-lightgray">Program Lazismu yang berfokus pada pemenuhan hak-hak mustahik untuk mendapatkan kehidupan yang berkualitas melalui layanan kesehatan atau prokes</p>
           </div>
         </a>
 
@@ -255,8 +255,8 @@
                 <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
               </svg>
             </div>
-            <span class="text-darkgray">Pendidikan</span>
-            <p class="text-lightgray">Program meningkatkan mutu SDM dengan menjalankan berbagai program di bidang pendidikan berupa pemenuhan sarana dan biaya pendidikan</p>
+            <span class="text-darkgray">Ekonomi</span>
+            <p class="text-lightgray">Program peningkatan kesejahteraan penerima manfaat dana Zakat dan Donasi lainnya dengan pola pemberdayaan maupun pelatihan-pelatihan wirausaha</p>
           </div>
         </a>
 
@@ -268,8 +268,8 @@
                 <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
               </svg>
             </div>
-            <span class="text-darkgray">Pendidikan</span>
-            <p class="text-lightgray">Program meningkatkan mutu SDM dengan menjalankan berbagai program di bidang pendidikan berupa pemenuhan sarana dan biaya pendidikan</p>
+            <span class="text-darkgray">Kemanusiaan</span>
+            <p class="text-lightgray">Penanganan masalah sosial yang timbul akibat ekses external terhadapa kehidupan mustahik, seperti bantuan bencana, pendampingan manula dan kegiatan karikatif</p>
           </div>
         </a>
 
@@ -281,8 +281,8 @@
                 <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
               </svg>
             </div>
-            <span class="text-darkgray">Pendidikan</span>
-            <p class="text-lightgray">Program meningkatkan mutu SDM dengan menjalankan berbagai program di bidang pendidikan berupa pemenuhan sarana dan biaya pendidikan</p>
+            <span class="text-darkgray">Sosial Dakwah</span>
+            <p class="text-lightgray">Pilar yang berfungsi menguatkan dan pemenuhan kebutuhan untuk kegiatan dakwah dengan tujuan kemandirian para da'i dan institusi dakwah</p>
           </div>
         </a>
 
@@ -294,8 +294,8 @@
                 <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
               </svg>
             </div>
-            <span class="text-darkgray">Pendidikan</span>
-            <p class="text-lightgray">Program meningkatkan mutu SDM dengan menjalankan berbagai program di bidang pendidikan berupa pemenuhan sarana dan biaya pendidikan</p>
+            <span class="text-darkgray">Lingkungan</span>
+            <p class="text-lightgray">Sumbangsih Lazismu unutk peningkatan kualitas lingkungan bagi kehidupan masyarakat dan ekosistem yang lebih baik sehingga bisa menjaga keseimbangan alam</p>
           </div>
         </a>
       </div>

@@ -35,7 +35,7 @@ class Kelola_program extends Controller
             "judul" => "Kelola Zakat Uang",
             "css" => VENDOR_TABLES_CSS,
             "script" => VENDOR_TABLES,
-            "dataZakat" => $this->model('Kelolaprogram_model')->getAllDataProgramZakatTunai()
+            "dataZakat" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('zakat')
         ];
 
         $this->view('dashboard/sidebar', $data);
@@ -70,7 +70,7 @@ class Kelola_program extends Controller
             "judul" => "Kelola Infaq",
             "css" => VENDOR_TABLES_CSS,
             "script" => VENDOR_TABLES,
-            "dataInfaq" => $this->model('Kelolaprogram_model')->getAllDataProgramInfaq(),
+            "dataInfaq" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('infaq'),
             "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
         ];
 
@@ -92,13 +92,11 @@ class Kelola_program extends Controller
         $data = [
             "judul" => "Kelola Qurban",
             "css" => VENDOR_TABLES_CSS,
-            "dataQurban" => $this->model('Kelolaprogram_model')->getAllDataProgramQurban()
+            "script" => VENDOR_TABLES,
+            "dataQurban" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('qurban')
         ];
-
-        $array1 = VENDOR_TABLES;
-        $array2 = ["util" => "js/util/script.js"];
-
-        $data['script'] = array_merge($array1, $array2);
+        $array = ["util" => "js/util/script.js"];
+        $data['script'] = array_merge($data['script'], $array);
 
         $this->view("dashboard/sidebar", $data);
         $this->view("kelola_program/qurban", $data);
@@ -115,7 +113,8 @@ class Kelola_program extends Controller
         $data = [
             "judul" => "Kelola Donasi Uang",
             "css"   => VENDOR_TABLES_CSS,
-            "dataDonasi" => $this->model('Kelolaprogram_model')->getAllDataProgramDonasi()
+            "script" => VENDOR_TABLES,
+            "dataDonasi" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('donasi')
         ];
 
         $this->view('dashboard/sidebar', $data);
@@ -133,6 +132,25 @@ class Kelola_program extends Controller
 
         $this->view('dashboard/sidebar', $data);
         $this->view('kelola_program/donasibarang', $data);
+        $this->view('dashboard/footer', $data);
+    }
+
+    /**
+     * 
+     * @method Ramadhan
+     * 
+     */
+    public function ramadhan(): void {
+        $data = [
+            "judul" => "Kelola Ramdhan",
+            "css"   => VENDOR_TABLES_CSS,
+            "script" => VENDOR_TABLES,
+            "dataRamadhan" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('ramadhan')
+        ];
+
+        $this->view('dashboard/sidebar', $data);
+        $this->view('kelola_program/ramadhan', $data);
+        $this->view('tinymce/tinymce');
         $this->view('dashboard/footer', $data);
     }
 
@@ -171,7 +189,7 @@ class Kelola_program extends Controller
 
     public function getDataProgramByJenisProgram()
     {
-        echo json_encode($this->model('Kelolaprogram_model')->getAllDataProgramAktifByJenisProgram($_POST['jenis_program']));
+        echo json_encode($this->model('Kelolaprogram_model')->getAllDataProgramTunai($_POST['jenis_program']));
     }
 
 

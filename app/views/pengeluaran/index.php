@@ -74,7 +74,7 @@
                         <label for="rekening-bank" class="form-label">Rekening Bank</label>
                         <select name="id-bank" id="rekening-bank" class="form-control" required>
                             <?php foreach ($data['dataRekening'] as $item): ?>
-                                <option value="<?= $item['id_norek'] ?>" data-saldo="<?= $item['saldo_donasi'] ?>" data-jenis=<?= $item['jenis_program'] ?>><?= $item['nama_bank'] ?></option>
+                                <option value="<?= $item['id_norek'] ?>" data-saldo="<?= $item['saldo_donasi'] ?>" data-jenis=<?= $item['jenis_program'] ?>><?= $item['nama_bank'] ?> ( <?= $item['nama_pemilik'] ?> )</option>
                             <?php endforeach ?>
                         </select>
                     </div>
