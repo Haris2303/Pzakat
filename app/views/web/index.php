@@ -28,11 +28,17 @@
           <div class="bg-darkgray box-program">
             <div class="box-program-item border-b border-lightgray md:border-none">
               <span class="block text-xs">Program Donasi</span>
-              <span class="font-bold lg:text-2xl">10</span>
+              <span class="font-bold lg:text-2xl"><?= $data['jumlahProgram'] ?></span>
             </div>
             <div class="box-program-item border-b border-lightgray md:border-none">
               <span class="block text-xs">Total Dana Terkumpul</span>
-              <span class="font-bold lg:text-2xl">Rp 1000524152</span>
+              <?php
+              $dana = 0;
+              foreach ($data['danaTerkumpul'] as $item) {
+                $dana += filter_var($item['total_pemasukkan'], FILTER_VALIDATE_INT);
+              }
+              ?>
+              <span class="font-bold lg:text-2xl">Rp <?= number_format($dana, 0, ',', '.') ?></span>
             </div>
             <div class="box-program-item">
               <span class="block text-xs">Donatur Terdaftar</span>
@@ -50,10 +56,10 @@
             <h3 class="text-title">Salurkan donasimu disini</h3>
             <span class="text-sm text-lightgray mt-2 inline-block">Silahkan pilih program donasi yang anda inginkan</span>
           </div>
-          
+
           <!-- Kategori program -->
           <div class="w-full flex gap-2 md:gap-5 text-center mt-10 text-sm program-kategori">
-            <?php foreach( $data['programNameAktif'] as $item ): ?>
+            <?php foreach ($data['programNameAktif'] as $item) : ?>
               <a class="w-1/3 bg-lightgreen py-2 hover:bg-green hover:text-white transition-300 shadow-md text-darkgreen hover:cursor-pointer" data-name="<?= $item['nama_kategoriprogram'] ?>"><?= $item['nama_kategoriprogram'] ?></a>
             <?php endforeach ?>
           </div>
@@ -223,11 +229,8 @@
       <div class="flex flex-wrap justify-evenly center mt-10 gap-y-20">
         <a href="" class="lg:w-1/3 w-1/2">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
-            <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md">
-              <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-calendar3 scale-50 fill-darkgreen" viewBox="0 0 16 16">
-                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
-                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-              </svg>
+            <div class="w-14 h-14 flex justify-center items-center bg-lightgreen m-auto rounded-md shadow-md">
+              <i class="fas fa-solid fa-graduation-cap text-darkgreen text-2xl"></i>
             </div>
             <span class="text-darkgray">Pendidikan</span>
             <p class="text-lightgray">Program meningkatkan mutu SDM dengan menjalankan berbagai program di bidang pendidikan berupa pemenuhan sarana dan biaya pendidikan</p>
@@ -236,11 +239,8 @@
 
         <a href="" class="lg:w-1/3 w-1/2">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
-            <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md">
-              <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-calendar3 scale-50 fill-darkgreen" viewBox="0 0 16 16">
-                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
-                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-              </svg>
+            <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md flex justify-center items-center">
+              <i class="fas fa-solid fa-notes-medical text-darkgreen text-2xl"></i>
             </div>
             <span class="text-darkgray">Kesehatan</span>
             <p class="text-lightgray">Program Lazismu yang berfokus pada pemenuhan hak-hak mustahik untuk mendapatkan kehidupan yang berkualitas melalui layanan kesehatan atau prokes</p>
@@ -249,11 +249,8 @@
 
         <a href="" class="lg:w-1/3 w-1/2">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
-            <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md">
-              <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-calendar3 scale-50 fill-darkgreen" viewBox="0 0 16 16">
-                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
-                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-              </svg>
+            <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md flex justify-center items-center">
+              <i class="fas fa-solid fa-chart-line text-darkgreen text-2xl"></i>
             </div>
             <span class="text-darkgray">Ekonomi</span>
             <p class="text-lightgray">Program peningkatan kesejahteraan penerima manfaat dana Zakat dan Donasi lainnya dengan pola pemberdayaan maupun pelatihan-pelatihan wirausaha</p>
@@ -262,11 +259,8 @@
 
         <a href="" class="lg:w-1/3 w-1/2">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
-            <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md">
-              <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-calendar3 scale-50 fill-darkgreen" viewBox="0 0 16 16">
-                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
-                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-              </svg>
+            <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md flex justify-center items-center">
+              <i class="fas fa-solid fa-people-carry text-darkgreen text-2xl"></i>
             </div>
             <span class="text-darkgray">Kemanusiaan</span>
             <p class="text-lightgray">Penanganan masalah sosial yang timbul akibat ekses external terhadapa kehidupan mustahik, seperti bantuan bencana, pendampingan manula dan kegiatan karikatif</p>
@@ -275,11 +269,8 @@
 
         <a href="" class="lg:w-1/3 w-1/2">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
-            <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md">
-              <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-calendar3 scale-50 fill-darkgreen" viewBox="0 0 16 16">
-                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
-                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-              </svg>
+            <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md flex justify-center items-center">
+              <i class="fas fa-solid fa-stream text-darkgreen text-2xl"></i>
             </div>
             <span class="text-darkgray">Sosial Dakwah</span>
             <p class="text-lightgray">Pilar yang berfungsi menguatkan dan pemenuhan kebutuhan untuk kegiatan dakwah dengan tujuan kemandirian para da'i dan institusi dakwah</p>
@@ -288,11 +279,8 @@
 
         <a href="" class="lg:w-1/3 w-1/2">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
-            <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md">
-              <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-calendar3 scale-50 fill-darkgreen" viewBox="0 0 16 16">
-                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
-                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-              </svg>
+            <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md flex justify-center items-center">
+              <i class="fas fa-solid fa-dove text-darkgreen text-2xl"></i>
             </div>
             <span class="text-darkgray">Lingkungan</span>
             <p class="text-lightgray">Sumbangsih Lazismu unutk peningkatan kualitas lingkungan bagi kehidupan masyarakat dan ekosistem yang lebih baik sehingga bisa menjaga keseimbangan alam</p>

@@ -20,6 +20,8 @@ if(isset($_SESSION['level']) && $_SESSION['level'] !== '3') {
   <link rel="shortcut icon" href="<?= BASEURL ?>/img/logo/unamin.png" type="image/x-icon">
   <!-- cdn swiperjs -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <!-- font awesome -->
+  <link href="<?= BASEURL ?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- my css -->
   <link rel="stylesheet" href="<?= BASEURL ?>/css/app.css">
 </head>

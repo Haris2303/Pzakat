@@ -21,6 +21,12 @@ class Programs extends Controller {
       "dataProgramZakat" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('zakat'),
       "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
+
+    if(count($data['dataProgramZakat']) <= 0) {
+      $this->view('error/404');
+      exit;
+    }
+
     $this->view('template/header', $data);
     $this->view('programs/zakat', $data);
     $this->view('template/footer', $data);
@@ -33,6 +39,12 @@ class Programs extends Controller {
       "dataProgramInfaq" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('infaq'),
       "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
+
+    if(count($data['dataProgramInfaq']) <= 0) {
+      $this->view('error/404');
+      exit;
+    }
+
     $this->view('template/header', $data);
     $this->view('programs/infaq', $data);
     $this->view('template/footer', $data);
@@ -45,6 +57,12 @@ class Programs extends Controller {
       "dataProgramQurban" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('qurban'),
       "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
+
+    if(count($data['dataProgramQurban']) <= 0) {
+      $this->view('error/404');
+      exit;
+    }
+
     $this->view('template/header', $data);
     $this->view('programs/qurban', $data);
     $this->view('template/footer', $data);
@@ -57,6 +75,12 @@ class Programs extends Controller {
       "dataProgramDonasi" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('donasi'),
       "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
+
+    if(count($data['dataProgramDonasi']) <= 0) {
+      $this->view('error/404');
+      exit;
+    }
+
     $this->view('template/header', $data);
     $this->view('programs/donasi', $data);
     $this->view('template/footer', $data);
@@ -69,6 +93,12 @@ class Programs extends Controller {
       "dataProgramRamadhan" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('ramadhan'),
       "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
+
+    if(count($data['dataProgramRamadhan']) <= 0) {
+      $this->view('error/404');
+      exit;
+    }
+
     $this->view('template/header', $data);
     $this->view('programs/ramadhan', $data);
     $this->view('template/footer', $data);

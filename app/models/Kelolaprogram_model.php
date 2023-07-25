@@ -33,14 +33,20 @@ class Kelolaprogram_model {
      * @param NULL
      * 
      */
-    public function getSumProgram(string $jenis_program): string {
+    public function getSumProgram(string $jenis_program = NULL): string 
+    {
         $view = $this->view['sumProgram'];
-        $query = "SELECT * FROM $view WHERE jenis_program = :jenis_program";
+
+        $q1 = "SELECT * FROM $view WHERE jenis_program = :jenis_program";
+        $q2 = "SELECT * FROM $view";
+        
+        $query = (is_null($jenis_program)) ? $q2 : $q1;
         $this->db->query($query);
-        $this->db->bind('jenis_program', ucwords($jenis_program));
+
+        if(!is_null($jenis_program)) $this->db->bind('jenis_program', ucwords($jenis_program));
+
         return number_format($this->db->single()['total_dana'], 0, ',', '.');
     }
-
 
     /**
      * 
