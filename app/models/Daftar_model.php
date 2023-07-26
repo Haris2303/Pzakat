@@ -24,7 +24,7 @@ class Daftar_model
     $tableUser    = $this->table['user'];
 
     // assignment query
-    $queryUser      = "INSERT INTO $tableUser VALUES(NULL, :username, :password, NOW(), '3')";
+    $queryUser      = "INSERT INTO $tableUser VALUES(NULL, :username, :password, :token, NOW(), '3')";
     $queryMuzakki   = "INSERT INTO $tableMuzakki VALUES(NULL, :id_user, :nama, :email, :nohp)";
     $cekdataUser    = "SELECT username FROM $tableUser WHERE username = :username";
     $cekDataMuzakki = "SELECT email, nohp FROM $tableMuzakki WHERE email = :email OR nohp = :nohp";
@@ -40,6 +40,13 @@ class Daftar_model
     $this->db->bind('nohp', $data['nohp']);
     if(count($this->db->resultSet()) > 0) return 'Email or NoHP is already available!';
 
+    // generate token
+    $token = base64_encode(random_bytes(32));
+    // delete character '/' and '='
+    $token = trim($token, '=');
+    $token = explode('/', $token);
+    $token = join('', $token);
+
     // cek panjang password
     if(strlen($data['password'] < 8)) return 'Password Terlalu Lemah!';
 
@@ -50,6 +57,7 @@ class Daftar_model
       $this->db->query($queryUser);
       $this->db->bind('username', htmlspecialchars($data['username']));
       $this->db->bind('password', password_hash($data['password'], PASSWORD_DEFAULT));
+      $this->db->bind('token', $token);
       $this->db->execute();
       $this->db->query("SELECT id_user FROM $tableUser WHERE username = :username");
       $this->db->bind('username', $data['username']);

@@ -49,6 +49,9 @@
         </div>
       </form>
       <div class="mt-3 text-center">
+        <a href="<?= BASEURL ?>/login/lupa_password" class="text-primary">Lupa Password?</a>
+      </div>
+      <div class="mt-2 text-center">
         <a href="<?= BASEURL ?>/daftar" class="text-secondary">Belum Punya Akun?</a>
       </div>
 

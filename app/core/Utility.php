@@ -123,7 +123,7 @@ class Utility
         return $kilogram;
     }
 
-    public static function sendEmailKonfirmasi(string $address, string $subject, string $body): bool
+    public static function sendEmailKonfirmasi(string $address, string $subject, string $message): bool
     {
         //Load Composer's autoloader
         require '/var/www/html/Pzakat/vendor/autoload.php';
@@ -150,7 +150,7 @@ class Utility
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = $subject;
-            $mail->Body    = $body;
+            $mail->Body    = $message;
             $mail->AltBody = 'Donasi Kamu';
 
             $mail->send();
