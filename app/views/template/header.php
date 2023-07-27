@@ -97,12 +97,20 @@ if(isset($_SESSION['level']) && $_SESSION['level'] !== '3') {
                   </button>
                 </div>
               </li>
-              <li class="group lg:bg-green lg:py-2 lg:px-3 lg:hover:bg-darkgreen transition-300 lg:border-none border-t-2 lg:-mr-5">
-                <a href="<?= BASEURL ?>/login" class="lg:text-white group-hover:text-lightgreen transition-300 text-green">Masuk</a>
-              </li>
-              <li class="group lg:bg-green lg:py-2 lg:px-3 lg:hover:bg-darkgreen transition-300 lg:-mr-5">
-                <a href="<?= BASEURL ?>/daftar" class="lg:text-white group-hover:text-lightgreen transition-300 text-green">Daftar</a>
-              </li>
+              <?php if(isset($_SESSION['level']) && $_SESSION['level'] === '3'): ?>
+                <!-- dashboard user -->
+                <li class="group lg:bg-green lg:py-2 lg:px-3 lg:hover:bg-darkgreen transition-300 lg:border-none border-t-2 lg:-mr-5">
+                  <a href="<?= BASEURL ?>/user_dashboard" class="lg:text-white group-hover:text-lightgreen transition-300 text-green">Dashboard</a>
+                </li>
+                <?php else: ?>
+                  <!-- login and regist -->
+                  <li class="group lg:bg-green lg:py-2 lg:px-3 lg:hover:bg-darkgreen transition-300 lg:border-none border-t-2 lg:-mr-5">
+                    <a href="<?= BASEURL ?>/login" class="lg:text-white group-hover:text-lightgreen transition-300 text-green">Masuk</a>
+                  </li>
+                  <li class="group lg:bg-green lg:py-2 lg:px-3 lg:hover:bg-darkgreen transition-300 lg:-mr-5">
+                    <a href="<?= BASEURL ?>/daftar" class="lg:text-white group-hover:text-lightgreen transition-300 text-green">Daftar</a>
+                  </li>
+              <?php endif ?>
             </ul>
           </nav>
         </div>
