@@ -53,7 +53,10 @@ class Masjid extends Controller
   }
 
   // method hapus data mesjid
-  public function aksi_hapus_mesjid($id): void {
+  public function aksi_hapus_mesjid(): void {
+
+    $id = $_POST['id'];
+    
     if($this->model('Masjid_model')->hapusMesjid($id) > 0) {
       Flasher::setFlash('Data Masjid Berhasil Dihapus!', 'success');
       header("Location: " . BASEURL . '/Masjid');

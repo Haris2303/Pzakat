@@ -49,7 +49,10 @@
                             <td><img src="<?= BASEURL ?>/img/norek/<?= $item['gambar'] ?>" alt="<?= $item['gambar'] ?>" width="100px"></td>
                             <td>
                                 <button type="submit" class="btn badge btn-success btn-ubah-norek" data-toggle="modal" data-target="#formNorekModal" data-id="<?= $item['id_norek'] ?>">Ubah</button>
-                                <a href="<?= BASEURL ?>/norek/aksi_hapus_norek/<?= $item['id_norek'] ?>" class="btn badge btn-danger" onclick="return confirm('Anda yakin ingin menghapus norek tersebut?')">Hapus</a>
+                                <form action="<?= BASEURL ?>/norek/aksi_hapus_norek" method="post">
+                                    <input type="hidden" name="id" value="<?= $item['id_norek'] ?>">
+                                    <button type="submit" class="btn badge btn-danger" onclick="return confirm('Anda yakin ingin menghapus norek tersebut?')">Hapus</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach ?>

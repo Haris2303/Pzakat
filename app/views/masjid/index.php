@@ -45,7 +45,10 @@
               <td><?= $item['RW'] ?></td>
               <td>
                 <a href="<?= BASEURL ?>/masjid/ubah/<?= $item['id_mesjid'] ?>" class="btn badge btn-success btn-update-data-masjid" data-id="<?= $item['id_mesjid'] ?>" data-toggle="modal" data-target="#formModal">Ubah</a>
-                <a href="<?= BASEURL ?>/masjid/aksi_hapus_mesjid/<?= $item['id_mesjid'] ?>" class="btn badge btn-danger">Hapus</a>
+                <form action="<?= BASEURL ?>/masjid/aksi_hapus_mesjid" method="post" class="d-inline">
+                  <input type="hidden" name="id" value="<?= $item['id_mesjid'] ?>">
+                  <button type="submit" class="btn badge btn-danger" onclick="return confirm('Anda akan menghapus data tersebut?')">Hapus</button>
+                </form>
               </td>
             </tr>
           <?php endforeach ?>

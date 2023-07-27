@@ -159,8 +159,6 @@ class Kelola_pembayaran extends Controller
     $body = Utility::mailBody($id);
     $isEmail = Utility::sendEmailKonfirmasi($email_donatur, $subject , $body);
 
-    var_dump($dataKonfirmasi);
-
     // jika email terkirim
     if ($isEmail) {
       $result = $this->model('Kelolapembayaran_model')->konfirmasiPembayaran($slug, $id, $username, $jumlah_dana, $nama_bank);
@@ -194,8 +192,12 @@ class Kelola_pembayaran extends Controller
     }
   }
 
-  public function aksi_hapus_pembayaran(string $location, int $id): void
+  public function aksi_hapus_pembayaran(): void
   {
+    
+    $location = $_POST['pembayaran'];
+    $id = $_POST['id'];
+
     $result = $this->model('Kelolapembayaran_model')->hapusPembayaran($id);
     if ($result > 0) {
       Flasher::setFlash('Pembayaran <strong>Berhasil</strong> Dihapus!', 'success');

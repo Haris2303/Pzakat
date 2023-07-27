@@ -51,7 +51,11 @@
               <td><?= $item['tanggal_pembayaran'] ?></td>
               <td>
                 <a href="<?= BASEURL ?>/kelola_pembayaran/detail/<?= $item['id_donatur'] ?>" class="btn badge btn-secondary">Detail</a>
-                <a href="<?= BASEURL ?>/kelola_pembayaran/aksi_hapus_pembayaran/pending/<?= $item['id_donatur'] ?>" class="btn badge btn-danger" onclick="return confirm('Anda akan menghapus data <?= $item['nama_donatur'] ?>?')">hapus</a>
+                <form action="<?= BASEURL ?>/kelola_pembayaran/aksi_hapus_pembayaran" method="post">
+                  <input type="hidden" name="pembayaran" value="pending">
+                  <input type="hidden" name="id" value="<?= $item['id_donatur'] ?>">
+                  <button type="submit" class="btn badge btn-danger" onclick="return confirm('Anda akan menghapus data <?= $item['nama_donatur'] ?>?')">Hapus</button>
+                </form>
               </td>
             </tr>
           <?php endforeach ?>
