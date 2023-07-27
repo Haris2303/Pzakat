@@ -16,13 +16,13 @@ class Login extends Controller {
       Flasher::setFlash('Login Berhasil :)', 'success');
       switch ($_SESSION['level']) {
         case '3':
-          header('Location: ' . BASEURL . '/');
+          header('Location: ' . BASEURL . '/user_dashboard');
           break;
         case '2':
           header('Location: ' . BASEURL . '/dashboard');
           break;
         default:
-          header('Location: ' . BASEURL . '/dashboard');
+          header('Location: ' . BASEURL . '/');
           break;
       }
       exit;

@@ -55,7 +55,7 @@ if(isset($_SESSION['level']) && $_SESSION['level'] !== '3') {
           <nav id="nav-menu" class="hidden absolute nav-menu">
             <ul class="block lg:flex gap-7 items-center">
               <li class="group lg:pb-0 pb-2">
-                <a href="<?= BASEURL ?>" class="text-lightgray group-hover:text-green transition-300">Beranda</a>
+                <a href="<?= BASEURL ?>" class="text-lightgray group-hover:text-green transition-300 <?= ($data['judul'] === 'Home') ? 'nav-active' : '' ?>">Beranda</a>
               </li>
               <li class="lg:pb-0 pb-2 dropmenu relative">
 
@@ -81,10 +81,10 @@ if(isset($_SESSION['level']) && $_SESSION['level'] !== '3') {
 
               </li>
               <li class="group lg:pb-0 pb-2">
-                <a href="<?= BASEURL ?>/page/news" class="text-lightgray group-hover:text-green transition-300">Berita</a>
+                <a href="<?= BASEURL ?>/page/news" class="text-lightgray group-hover:text-green transition-300 <?= ($data['judul'] === 'Berita') ? 'nav-active' : '' ?>">Berita</a>
               </li>
               <li class="group lg:pb-0 pb-2">
-                <a href="<?= BASEURL ?>/programs" class="text-lightgray group-hover:text-green transition-300">Program</a>
+                <a href="<?= BASEURL ?>/programs" class="text-lightgray group-hover:text-green transition-300 <?= ($data['judul'] === 'Programs') ? 'nav-active' : '' ?>">Program</a>
               </li>
               <li class="lg:block hidden">
                 <!-- search -->

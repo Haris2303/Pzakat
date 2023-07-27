@@ -55,6 +55,11 @@
   transition: all 1s;
 }
 
+/* menu navbar active */
+.nav-active {
+  @apply text-green
+}
+
 /* dropdown active */
 .dropdown-active {
   @apply p-4 h-auto;
