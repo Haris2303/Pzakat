@@ -162,7 +162,7 @@ class Utility
     }
 
     // pesan email body
-    public static function mailBody(int $id):string {
+    public static function emailMessageKonfirmasi(int $id):string {
 
         $controller = new Controller();
         $dataKonfirmasi = $controller->model('Kelolapembayaran_model')->getDataPembayaranById($id);
@@ -272,6 +272,41 @@ class Utility
                         <p>Kami ingin mengucapkan terima kasih atas donasi yang telah Anda berikan. Kontribusi Anda akan membantu kami mencapai tujuan kami dan membuat perbedaan yang signifikan.</p>
                         <p>Jika Anda memiliki pertanyaan lebih lanjut atau ingin mempelajari lebih lanjut tentang bagaimana donasi Anda digunakan, jangan ragu untuk menghubungi kami.</p>
                         <a class="button" href="https://wa.me/6281342528736" target="_blank">Hubungi Kami</a>
+                    </div>
+                </body>
+                </html>';
+    }
+
+    // pesan email body
+    public static function emailMessageBatal(int $id):string {
+
+        $controller = new Controller();
+        $dataKonfirmasi = $controller->model('Kelolapembayaran_model')->getDataPembayaranById($id);
+
+        // assignment variabel
+        $program            = $dataKonfirmasi['nama_program'];
+        $nama               = $dataKonfirmasi['nama_donatur'];
+        $nominal_donasi     = $dataKonfirmasi['jumlah_pembayaran'];
+
+        return '<!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Konfirmasi Pembayaran Gagal</title>
+                </head>
+                <body>
+                    <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px;">
+                        <h2 style="color: #ff0000; text-align: center;">Konfirmasi Pembayaran Gagal</h2>
+                        <p>Dear '. $nama .',</p>
+                        <p>Kami menyesal memberitahu Anda bahwa pembayaran sebesar <strong>Rp '. number_format($nominal_donasi, 0, ',', '.') .'</strong> untuk program <strong>'. $program .'</strong> tidak dapat kami terima karena tidak memenuhi syarat pembayaran. Silakan periksa kembali informasi pembayaran yang Anda berikan.</p>
+                        <p>Jika Anda memiliki pertanyaan atau memerlukan bantuan lebih lanjut, jangan ragu untuk menghubungi tim kami di nomor atau alamat email berikut:</p>
+                        <p>Telepon: 081234567890</p>
+                        <p>Email: email@gmail.com</p>
+                        <p>Kami harap Anda dapat menyelesaikan pembayaran sesuai syarat yang berlaku agar transaksi Anda dapat kami proses dengan baik.</p>
+                        <p>Terima kasih atas perhatian Anda.</p>
+                        <p>Salam,<br>
+                        Layanan Lazismu-Unamin</p>
+                        <hr style="border: none; border-top: 1px solid #ccc; margin-top: 20px;">
+                        <p style="text-align: center; font-size: 12px; color: #777;">Email ini adalah email otomatis, mohon jangan membalas email ini.</p>
                     </div>
                 </body>
                 </html>';

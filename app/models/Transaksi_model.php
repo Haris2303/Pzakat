@@ -21,7 +21,7 @@ class Transaksi_model {
     public function konfirmasiDataTransaksi($dataPost, $dataFile)
     {
         $nomor_pembayaran   = $dataPost['nomor-pembayaran'];
-        $key                = $dataPost['key'];
+        $kode                = $dataPost['key'];
         $jumlah_pembayaran  = str_replace('.', '', $dataPost['nominal-donasi']);
         $gambar             = Utility::uploadImage($dataFile, 'bukti_pembayaran');
 
@@ -29,9 +29,9 @@ class Transaksi_model {
         if(!is_string($gambar)) return 'Gagal upload gambar!';
 
         // get id pembayaran
-        $getIDPembayaran = "SELECT id_pembayaran FROM tb_pembayaran WHERE nomor_pembayaran = :key";
+        $getIDPembayaran = "SELECT id_pembayaran FROM $this->table WHERE nomor_pembayaran = :kode";
         $this->db->query($getIDPembayaran);
-        $this->db->bind('key', $key);
+        $this->db->bind('kode', $kode);
         $id_pembayaran = $this->db->single()['id_pembayaran'];
 
         // update data
@@ -51,7 +51,18 @@ class Transaksi_model {
         $this->db->bind('status_pembayaran', 'konfirmasi');
         $this->db->execute();
 
-        return $this->db->rowCount();
+        // jika konfirmasi pembayaran berhasil
+        if($this->db->rowCount() > 0) {
+            // update kode lama ke kode baru
+            $kode_new = Utility::getKeyRandom();
+            $update_kode = "UPDATE tb_donatur SET kode = :kode_new WHERE kode = :kode_old";
+            $this->db->query($update_kode);
+            $this->db->bind('kode_new', $kode_new);
+            $this->db->bind('kode_old', $kode);
+            $this->db->execute();
+
+            return $this->db->rowCount();
+        }
 
     }
 

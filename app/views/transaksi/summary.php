@@ -16,7 +16,7 @@
             </div>
             <form action="<?= BASEURL ?>/transaksi/aksi_tambah_transaksi" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="nomor-pembayaran" value="<?= $_COOKIE['kode-pembayaran'] ?>">
-                <input type="hidden" name="key" value="<?= $_COOKIE['keyRandom'] ?>">
+                <input type="hidden" name="key" value="<?= $data['dataKode'] ?>">
                 <div class="mb-3">
                     <label for="nominal-donasi">Nominal Donasi</label>
                     <div class="position-relative">

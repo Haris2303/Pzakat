@@ -140,15 +140,18 @@ class Kelola_pembayaran extends Controller
    * 
    */
 
-  public function aksi_konfirmasi_pembayaran(int $id, string $username): void
+  public function aksi_konfirmasi_pembayaran(): void
   {
+
+    // get id_donatur on POST
+    $id = $_POST['id_donatur'];
 
     // get data pembayaran by id
     $dataKonfirmasi = $this->model('Kelolapembayaran_model')->getDataPembayaranById($id);
 
     // initialisasi variabel on datakonfirmasi
     $slug             = $dataKonfirmasi['slug_program'];
-    $username         = $username;
+    $username         = $_POST['username'];
     $jumlah_dana      = $dataKonfirmasi['jumlah_pembayaran'];
     $nama_bank        = $dataKonfirmasi['nama_bank'];
     $email_donatur    = $dataKonfirmasi['email'];
@@ -156,8 +159,8 @@ class Kelola_pembayaran extends Controller
 
     // kirim email
     $subject = "[Lazismu-Unamin] Konfirmasi Donasi Anda Telah Diterima";
-    $body = Utility::mailBody($id);
-    $isEmail = Utility::sendEmailKonfirmasi($email_donatur, $subject , $body);
+    $message = Utility::emailMessageKonfirmasi($id);
+    $isEmail = Utility::sendEmailKonfirmasi($email_donatur, $subject , $message);
 
     // jika email terkirim
     if ($isEmail) {
@@ -178,17 +181,37 @@ class Kelola_pembayaran extends Controller
     }
   }
 
-  public function aksi_batal_pembayaran(int $id, string $username): void
+  public function aksi_batal_pembayaran(): void
   {
-    $result = $this->model('Kelolapembayaran_model')->batalkanPembayaran($id, $username);
-    if ($result > 0) {
-      Flasher::setFlash('Pembayaran <strong>Berhasil</strong> Dibatalkan!', 'success');
-      header('Location: ' . BASEURL . '/kelola_pembayaran');
-      exit;
-    } else {
-      Flasher::setFlash('Pembayaran <strong>Gagal</strong> Dibatalkan!', 'danger');
-      header('Location: ' . BASEURL . '/kelola_pembayaran');
-      exit;
+
+    // get id_donatur on POST
+    $id = $_POST['id_donatur'];
+
+    // get data pembayaran by id
+    $dataKonfirmasi = $this->model('Kelolapembayaran_model')->getDataPembayaranById($id);
+
+    // initialisasi variabel on datakonfirmasi
+    $username         = $_POST['username'];
+    $email_donatur    = $dataKonfirmasi['email'];
+
+    // kirim email
+    $subject = "[Lazismu-Unamin] Konfirmasi Donasi Anda Gagal";
+    $message = Utility::emailMessageBatal($id);
+    $isEmail = Utility::sendEmailKonfirmasi($email_donatur, $subject , $message);
+
+    // jika email terkirim
+    if($isEmail) {
+      // jalankan model
+      $result = $this->model('Kelolapembayaran_model')->batalkanPembayaran($id, $username);
+      if ($result > 0) {
+        Flasher::setFlash('Pembayaran <strong>Berhasil</strong> Dibatalkan!', 'success');
+        header('Location: ' . BASEURL . '/kelola_pembayaran/konfirmasi');
+        exit;
+      } else {
+        Flasher::setFlash('Pembayaran <strong>Gagal</strong> Dibatalkan!', 'danger');
+        header('Location: ' . BASEURL . '/kelola_pembayaran/konfirmasi');
+        exit;
+      }
     }
   }
 

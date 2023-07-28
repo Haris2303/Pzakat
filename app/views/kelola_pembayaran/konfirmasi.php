@@ -51,14 +51,20 @@
               <td><?= number_format($item['jumlah_pembayaran'], 0, ',', '.') ?></td>
               <td><?= $item['tanggal_pembayaran'] ?></td>
               <td>
-                <?php
-                  $id_donatur     = $item['id_donatur'];
-                  $username       = $_SESSION['username'];
-                ?>
-                <!-- kelola_pembayaran/aksi_konfirmasi_pembayaran/slug/location/id_donatur/username/jumlah_donasi/nama_bank -->
-                <a href="<?= BASEURL ?>/kelola_pembayaran/aksi_konfirmasi_pembayaran/<?= "$id_donatur/$username" ?>" class="btn badge btn-primary">Konfirmasi</a>
-                <!-- kelola_pembayaran/aksi_batal_pembayaran/id_donatur/username -->
-                <a href="<?= BASEURL ?>/kelola_pembayaran/aksi_batal_pembayaran/<?= "$id_donatur/$username" ?>" class="btn badge btn-danger">Batal</a>
+
+              <!-- konfirmasi button -->
+                <form action="<?= BASEURL ?>/kelola_pembayaran/aksi_konfirmasi_pembayaran" method="post" class="d-inline">
+                  <input type="hidden" name="id_donatur" value="<?= $item['id_donatur'] ?>">
+                  <input type="hidden" name="username" value="<?= $_SESSION['username'] ?>">
+                  <button type="submit" class="btn badge btn-primary">Konfirmasi</button>
+                </form>
+
+                <!-- batal button -->
+                <form action="<?= BASEURL ?>/kelola_pembayaran/aksi_batal_pembayaran" method="post" class="d-inline">
+                  <input type="hidden" name="id_donatur" value="<?= $item['id_donatur'] ?>">
+                  <input type="hidden" name="username" value="<?= $_SESSION['username'] ?>">
+                  <button type="submit" class="btn badge btn-danger">Batal</button>
+                </form>
                 <a href="<?= BASEURL ?>/kelola_pembayaran/detail/<?= $id_donatur ?>" class="btn badge btn-secondary">Detail</a>
               </td>
             </tr>

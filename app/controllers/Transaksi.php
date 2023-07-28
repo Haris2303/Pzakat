@@ -27,19 +27,33 @@ class Transaksi extends Controller
 
     public function summary($kode): void
     {
+        // check key valid atau tidak
+        $isKode = $this->model('Donatur_model')->checkKode($kode);
+
+        // jika kode valid
+        if(!$isKode) {
+            header("Location: " . BASEURL . '/programs');
+            exit;
+        }
+
+
+        // get id bank
+        $id_bank = $this->model('Donatur_model')->getIdBankByKode($kode);
+
         $data = [
             "judul" => "Summary",
-            "dataBank" => $this->model('Norek_model')->getDataNorekById($_COOKIE['id-bank'])
+            "dataKode" => $kode,
+            "dataBank" => $this->model('Norek_model')->getDataNorekById($id_bank)
         ];
 
-        if ($kode === $_COOKIE['keyRandom']) {
+        // if ($kode === $_COOKIE['keyRandom']) {
             $this->view('template/normalheader', $data);
             $this->view('transaksi/summary', $data);
             $this->view('template/normalfooter', $data);
-        } else {
-            header("Location: " . BASEURL . '/');
-            exit;
-        }
+        // } else {
+        //     header("Location: " . BASEURL . '/');
+        //     exit;
+        // }
     }
 
     public function qty($jenis, $slug): void
@@ -70,7 +84,6 @@ class Transaksi extends Controller
     {
         $this->model('Transaksi_model')->setCookieKodePembayaran();
         $key = $_POST['key'];
-        setcookie('keyRandom', $key, time() + (24 * 3600));
         $result = $this->model('Donatur_model')->tambahDataDonatur($_POST);
         if ($result > 0) {
             Flasher::setFlash('Berhasil', 'success');
@@ -85,11 +98,6 @@ class Transaksi extends Controller
 
     public function aksi_tambah_transaksi(): void
     {
-        // hapus cookie
-        setcookie('nominal-donasi', 0, time() - 3600);
-        setcookie('id-bank', 0, time() - 3600);
-        setcookie('kode-pembayaran', '', time() - 3600);
-        setcookie('keyRandom', '', time() - 3600);
         
         $result = $this->model('Transaksi_model')->konfirmasiDataTransaksi($_POST, $_FILES);
         if ($result > 0) {

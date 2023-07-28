@@ -13,7 +13,17 @@
         <div class="col-lg-6 border-bottom shadow-lg py-4 px-3">
             <form action="<?= BASEURL ?>/transaksi/aksi_tambah_donatur" method="POST">
                 <input type="hidden" name="slug_program" value="<?= $data['dataProgram']['slug'] ?>">
-                <input type="hidden" name="key" value="<?= $data['dataKey'] ?>">
+                <input type="hidden" name="key" value="<?= $data['dataKey'] . '_' . time() ?>">
+
+                <!-- jika ada session username -->
+                <?php if(isset($_SESSION['username'])): ?>
+                    <?php 
+                        // ambil id user
+                        $id_user = $this->model('User_model')->getIdByUsername($_SESSION['username']);
+                    ?>
+                    <input type="hidden" name="id_user" value="<?= $id_user ?>">
+                <?php endif ?>
+
                 <div class="mb-3">
                     <label for="nominal-donasi">Nominal Donasi</label>
                     <div class="position-relative">
