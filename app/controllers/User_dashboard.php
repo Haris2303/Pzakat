@@ -2,6 +2,11 @@
 
 class User_dashboard extends Controller {
 
+    protected $id_user = null;
+    protected $data_pending = null;
+    protected $data_konfirmasi = null;
+    protected $data_sukses = null;
+
     public function __construct()
     {
         // cek status level
@@ -9,11 +14,21 @@ class User_dashboard extends Controller {
             header('Location: ' . BASEURL . '/');
             exit;
         }
+
+        // get id user
+        $this->id_user = $this->model('User_model')->getIdByUsername($_SESSION['username']);
+
+        // set data
+        $this->data_pending = $this->model('Kelolapembayaran_model')->getDataPembayaran('pending', 'id_user', $this->id_user);
+        $this->data_konfirmasi = $this->model('Kelolapembayaran_model')->getDataPembayaran('konfirmasi', 'id_user', $this->id_user);
+        $this->data_sukses = $this->model('Kelolapembayaran_model')->getDataPembayaran('success', 'id_user', $this->id_user);
     }
 
     public function index() {
         $data = [
-            'judul' => 'User Dashboard'
+            'judul' => 'User Dashboard',
+            'jumlah_donasi' => count($this->data_sukses),
+            'dana' => $this->data_sukses
         ];
 
         $this->view('template/header', $data);
@@ -24,7 +39,8 @@ class User_dashboard extends Controller {
 
     public function donasi_pending() {
         $data = [
-            'judul' => 'Menunggu Pembayaran'
+            'judul' => 'Menunggu Pembayaran',
+            'pending' => $this->data_pending
         ];
 
         $this->view('template/header', $data);
@@ -35,7 +51,8 @@ class User_dashboard extends Controller {
 
     public function donasi_konfirmasi() {
         $data = [
-            'judul' => 'Konfirmasi Donasi'
+            'judul' => 'Konfirmasi Donasi',
+            'konfirmasi' => $this->data_konfirmasi
         ];
 
         $this->view('template/header', $data);
@@ -46,7 +63,8 @@ class User_dashboard extends Controller {
 
     public function donasi_sukses() {
         $data = [
-            'judul' => 'Donasi Sukses'
+            'judul' => 'Donasi Sukses',
+            'sukses' => $this->data_sukses
         ];
 
         $this->view('template/header', $data);

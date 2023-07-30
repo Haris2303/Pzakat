@@ -3,8 +3,8 @@
         <?= Flasher::flash() ?>
         <div class="col-lg-6 border-bottom shadow-sm py-3 px-3 d-flex gap-3">
             <div class="mb-3 m-auto text-center">
-                <span>No Pembayaran</span>
-                <h3 class="h3"><?= $_COOKIE['kode-pembayaran'] ?></h3>
+                <span>Kode Pembayaran</span>
+                <h3 class="h3"><?= explode('_', $data['dataKode'])[0] ?></h3>
             </div>
         </div>
     </div>
@@ -15,13 +15,12 @@
                 <h4>Data Konfirmasi Donasi</h4>
             </div>
             <form action="<?= BASEURL ?>/transaksi/aksi_tambah_transaksi" method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="nomor-pembayaran" value="<?= $_COOKIE['kode-pembayaran'] ?>">
-                <input type="hidden" name="key" value="<?= $data['dataKode'] ?>">
+                <input type="hidden" name="nomor-pembayaran" value="<?= $data['dataKode'] ?>">
                 <div class="mb-3">
                     <label for="nominal-donasi">Nominal Donasi</label>
                     <div class="position-relative">
                         <p class="position-absolute mt-2 mx-3">Rp. </p>
-                        <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi" value="<?= number_format($_COOKIE['nominal-donasi'], 0, ',', '.') ?>" readonly>
+                        <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi" value="<?= number_format($data['nominal'], 0, ',', '.') ?>" readonly>
                     </div>
                 </div>
                 <div class="mb-3">
