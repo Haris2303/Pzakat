@@ -37,9 +37,18 @@ class Transaksi extends Controller
             exit;
         }
 
+        // waktu expired dari kode
+        $kode_expired = explode('_', $kode)[1] + (24 * 3600);
+
+        // jika waktu saat ini telah lewat dari expired kode
+        if(time() > $kode_expired) {
+            Flasher::setFlash('Kode pembayaran sudah expired!', 'danger');
+            header("Location: " . BASEURL . '/programs');
+            exit;
+        }
+
         // get id bank
         $id_bank = $this->model('Donatur_model')->getIdBankByKode($kode);
-
 
         $data = [
             "judul" => "Summary",
@@ -79,18 +88,35 @@ class Transaksi extends Controller
 
     public function aksi_tambah_donatur()
     {
-        $this->model('Transaksi_model')->setCookieKodePembayaran();
-        $key = $_POST['key'];
+        $key    = $_POST['key'];
+        $email  = $_POST['email'];
+
         $result = $this->model('Donatur_model')->tambahDataDonatur($_POST);
+
         if ($result > 0) {
-            Flasher::setFlash('Berhasil', 'success');
-            header("Location: " . BASEURL . '/transaksi/summary/' . $key);
-            exit;
+            
+            // get id donatur
+            $id_donatur = $this->model('Kelolapembayaran_model')->getDataPembayaran('pending', 'nomor_pembayaran', $key)[0]['id_donatur'];
+            
+            $subject = 'Pembayaran Belum Terselesaikan';
+            $message = Design::emailMessageSummary($id_donatur);
+            
+            // kirim pesan email
+            $isEmail = Utility::sendEmail($email, $subject, $message);
+            
+            // jika email berhasil terkirim
+            if($isEmail) {
+                Flasher::setFlash('Cek Email Anda jika halaman ini hilang!', 'warning');
+                header("Location: " . BASEURL . '/transaksi/summary/' . $key);
+                exit;
+            }
+            
         } else {
             Flasher::setFlash('Gagal', 'danger');
             header("location: " . BASEURL . '/transaksi');
             exit;
         }
+
     }
 
     public function aksi_tambah_transaksi(): void

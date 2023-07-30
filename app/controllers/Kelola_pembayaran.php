@@ -158,9 +158,9 @@ class Kelola_pembayaran extends Controller
     $location         = $dataKonfirmasi['status_pembayaran'];
 
     // kirim email
-    $subject = "[Lazismu-Unamin] Konfirmasi Donasi Anda Telah Diterima";
-    $message = Utility::emailMessageKonfirmasi($id);
-    $isEmail = Utility::sendEmailKonfirmasi($email_donatur, $subject , $message);
+    $subject = "Konfirmasi Donasi Anda Telah Diterima";
+    $message = Design::emailMessageKonfirmasi($id);
+    $isEmail = Utility::sendEmail($email_donatur, $subject , $message);
 
     // jika email terkirim
     if ($isEmail) {
@@ -195,9 +195,9 @@ class Kelola_pembayaran extends Controller
     $email_donatur    = $dataKonfirmasi['email'];
 
     // kirim email
-    $subject = "[Lazismu-Unamin] Konfirmasi Donasi Anda Gagal";
-    $message = Utility::emailMessageBatal($id);
-    $isEmail = Utility::sendEmailKonfirmasi($email_donatur, $subject , $message);
+    $subject = "Konfirmasi Donasi Anda Gagal";
+    $message = Design::emailMessageBatal($id);
+    $isEmail = Utility::sendEmail($email_donatur, $subject , $message);
 
     // jika email terkirim
     if($isEmail) {

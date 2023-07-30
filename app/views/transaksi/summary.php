@@ -1,6 +1,11 @@
 <div class="container mt-3">
+    <div class="row justify-content-center mt-2">
+        <div class="col-lg-6">
+            <?= Flasher::flash() ?>
+        </div>
+    </div>
+    
     <div class="row justify-content-center">
-        <?= Flasher::flash() ?>
         <div class="col-lg-6 border-bottom shadow-sm py-3 px-3 d-flex gap-3">
             <div class="mb-3 m-auto text-center">
                 <span>Kode Pembayaran</span>

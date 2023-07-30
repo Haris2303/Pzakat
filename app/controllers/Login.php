@@ -77,7 +77,7 @@ class Login extends Controller {
 
     // send email
     $message = 'Klik link berikut untuk mengubah password Anda: ' . BASEURL . '/login/ubah_password/' . $email . '/' . $token;
-    $email = Utility::sendEmailKonfirmasi($email, 'Lupa Password', $message);
+    $email = Utility::sendEmail($email, 'Lupa Password', $message);
 
     if($email) {
       Flasher::setFlash('Pesan Berhasil terkirim! Silahkan cek email Anda', 'success');
