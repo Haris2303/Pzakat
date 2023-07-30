@@ -106,7 +106,7 @@ const countOnly = (event) => {
 $(document).ready(function() {
 
   // arrow function
-  const url = 'http://localhost/Pzakat/public';
+  const url = 'http://localhost/Pzakat';
   const cardContent = (imageSource, programSlug, programKategori, programName, dana, donatur) => { 
     return `
       <div class="lg:w-1/3 shadow-md">

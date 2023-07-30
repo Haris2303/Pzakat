@@ -42,7 +42,8 @@ class App {
       $url = filter_var($url, FILTER_SANITIZE_URL);
       $url = explode('/', $url);
       return $url;
-    } else {
+    } 
+    else {
       $url[] = 'Web';
       return $url;
     }

@@ -1,6 +1,14 @@
-Options -Multiviews
-
+# Aktifkan URL rewriting
 RewriteEngine On
+
+# Jika permintaan tidak sesuai dengan file atau folder yang ada,
+# arahkan ke folder "public" jika file atau folder ada di dalamnya.
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php [L]
+RewriteCond %{REQUEST_FILENAME} !-l
+
+# Atur permintaan URL kosong ke folder "public/"
+RewriteRule ^$ public/ [L]
+
+# Atur permintaan lainnya ke dalam folder "public/"
+RewriteRule ^(.*)$ public/$1 [L]
