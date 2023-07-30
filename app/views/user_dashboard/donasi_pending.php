@@ -3,80 +3,54 @@
     <p class="text-sm text-lightgray">Data pembayaran yang belum dibayarkan</p>
 
     <div class="mt-4 relative overflow-x-auto shadow-md">
-        <table class="w-full text-sm text-left text-gray-500">
-            <thead class="text-xs text-white uppercase bg-green">
-                <tr>
-                    <th scope="col" class="px-6 py-3">
-                        No
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Nama Program
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Jenis Program
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Jumlah Donasi
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Action
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="text-darkgray">
-                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                        1
-                    </th>
-                    <td class="px-6 py-4">
-                        Silver
-                    </td>
-                    <td class="px-6 py-4">
-                        Laptop
-                    </td>
-                    <td class="px-6 py-4">
-                        $2999
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    </td>
-                </tr>
-                <tr class="text-darkgray bg-gray-300">
-                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                        1
-                    </th>
-                    <td class="px-6 py-4">
-                        Silver
-                    </td>
-                    <td class="px-6 py-4">
-                        Laptop
-                    </td>
-                    <td class="px-6 py-4">
-                        $2999
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    </td>
-                </tr>
-                <tr class="text-darkgray">
-                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                        1
-                    </th>
-                    <td class="px-6 py-4">
-                        Silver
-                    </td>
-                    <td class="px-6 py-4">
-                        Laptop
-                    </td>
-                    <td class="px-6 py-4">
-                        $2999
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <?php if (count($data['pending']) > 0) : ?>
+            <table class="w-full text-sm text-left text-gray-500">
+                <thead class="text-xs text-white uppercase bg-green">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            No
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Nama Program
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Jenis Program
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Jumlah Donasi
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $i = 1 ?>
+                    <?php foreach ($data['pending'] as $item) : ?>
+                        <tr class="text-darkgray even:bg-gray-300 hover:bg-lightgreen">
+                            <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
+                                <?= $i++ ?>
+                            </th>
+                            <td class="px-6 py-4">
+                                <a href="<?= BASEURL ?>/transaksi/summary/<?= $item['nomor_pembayaran'] ?>">
+                                    <?= $item['nama_program'] ?>
+                                </a>
+                            </td>
+                            <td class="px-6 py-4">
+                                <a href="<?= BASEURL ?>/transaksi/summary/<?= $item['nomor_pembayaran'] ?>">
+                                    <?= $item['jenis_program'] ?>
+                                </a>
+                            </td>
+                            <td class="px-6 py-4">
+                                <a href="<?= BASEURL ?>/transaksi/summary/<?= $item['nomor_pembayaran'] ?>">
+                                    Rp <?= number_format($item['jumlah_pembayaran'], 0, ',', '.') ?>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
+
+        <?php else : ?>
+            <h2>Data Kosong!</h2>
+        <?php endif ?>
     </div>
 
 </div>

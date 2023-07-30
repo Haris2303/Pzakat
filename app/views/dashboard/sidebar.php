@@ -12,6 +12,7 @@ if (!isset($_SESSION['level'])) {
 $controller = New Controller();
 
 $countKonfirmasi = count($controller->model('Kelolapembayaran_model')->getAllDataPembayaranKonfirmasi());
+$countPending = count($controller->model('Kelolapembayaran_model')->getAllDataPembayaranPending());
 $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif();
 
 ?>
@@ -294,25 +295,40 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
               <i class="fas fa-bell fa-fw"></i>
               <!-- Counter - Notifikasi -->
               <!-- <span class="badge badge-danger badge-counter">3+</span> -->
-              <?php if($countKonfirmasi > 0): ?><span class="badge badge-danger badge-counter mr-3"><?= $countKonfirmasi ?>+</span><?php endif ?>
+              <?php if($countKonfirmasi > 0 || $countPending > 0): ?><span class="badge badge-danger badge-counter mr-3"><?= $countKonfirmasi + $countPending ?>+</span><?php endif ?>
             </a>
             <!-- Dropdown - Notifikasi -->
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
               <h6 class="dropdown-header">
                 Notifikasi Pembayaran
               </h6>
-              <?php if($countKonfirmasi > 0): ?>
-                <a class="dropdown-item d-flex align-items-center" href="<?= BASEURL ?>/kelola_pembayaran/konfirmasi">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-primary">
-                      <i class="fas fa-donate text-white"></i>
+              <?php if($countKonfirmasi > 0 || $countPending > 0): ?>
+                <?php if($countKonfirmasi): ?>
+                  <a class="dropdown-item d-flex align-items-center" href="<?= BASEURL ?>/kelola_pembayaran/konfirmasi">
+                    <div class="mr-3">
+                      <div class="icon-circle bg-primary">
+                        <i class="fas fa-donate text-white"></i>
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">Konfirmasi Pembayaran</div>
-                    <span class="font-weight-bold">Terdapat <?= $countKonfirmasi ?> pembayaran belum terkonfirmasi!</span>
-                  </div>
-                </a>
+                    <div>
+                      <div class="small text-gray-500">Konfirmasi Pembayaran</div>
+                      <span class="font-weight-bold">Terdapat <?= $countKonfirmasi ?> pembayaran belum terkonfirmasi!</span>
+                    </div>
+                  </a>
+                <?php endif ?>
+                <?php if($countPending): ?>
+                  <a class="dropdown-item d-flex align-items-center" href="<?= BASEURL ?>/kelola_pembayaran/pending">
+                    <div class="mr-3">
+                      <div class="icon-circle bg-warning">
+                        <i class="fas fa-donate text-white"></i>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="small text-gray-500">Pending Pembayaran</div>
+                      <span class="font-weight-bold"><?= $countPending ?> pembayaran pending!</span>
+                    </div>
+                  </a>
+                <?php endif ?>
               <?php else: ?>
                 <a class="dropdown-item text-center small text-secondary">Belum ada notifikasi</a>
               <?php endif ?>

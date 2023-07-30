@@ -27,33 +27,30 @@ class Transaksi extends Controller
 
     public function summary($kode): void
     {
-        // check key valid atau tidak
-        $isKode = $this->model('Donatur_model')->checkKode($kode);
+
+        // get nominal
+        $nominal = $this->model('Kelolapembayaran_model')->getDataPembayaran('pending', 'nomor_pembayaran', $kode)[0]['jumlah_pembayaran'];
 
         // jika kode valid
-        if(!$isKode) {
+        if(is_null($nominal)) {
             header("Location: " . BASEURL . '/programs');
             exit;
         }
 
-
         // get id bank
         $id_bank = $this->model('Donatur_model')->getIdBankByKode($kode);
+
 
         $data = [
             "judul" => "Summary",
             "dataKode" => $kode,
-            "dataBank" => $this->model('Norek_model')->getDataNorekById($id_bank)
+            "nominal" => $nominal,
+            "dataBank" => $this->model('Norek_model')->getDataNorekById($id_bank),
         ];
 
-        // if ($kode === $_COOKIE['keyRandom']) {
-            $this->view('template/normalheader', $data);
-            $this->view('transaksi/summary', $data);
-            $this->view('template/normalfooter', $data);
-        // } else {
-        //     header("Location: " . BASEURL . '/');
-        //     exit;
-        // }
+        $this->view('template/normalheader', $data);
+        $this->view('transaksi/summary', $data);
+        $this->view('template/normalfooter', $data);
     }
 
     public function qty($jenis, $slug): void
@@ -100,7 +97,7 @@ class Transaksi extends Controller
     {
         
         $result = $this->model('Transaksi_model')->konfirmasiDataTransaksi($_POST, $_FILES);
-        if ($result > 0) {
+        if ($result > 0 && is_int($result)) {
             Flasher::setFlash('Transaksi <strong>Berhasil</strong> Dikonfirmasi!', 'success');
             header("Location: " . BASEURL . "/programs");
             exit;
