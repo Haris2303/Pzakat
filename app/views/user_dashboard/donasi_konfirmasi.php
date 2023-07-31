@@ -60,6 +60,8 @@
         <?php echo Design::blankData() ?>
     <?php endif ?>
 
+    <?php Pagination::view() ?>
+
 </div>
 
 

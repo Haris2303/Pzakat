@@ -37,10 +37,18 @@ class User_dashboard extends Controller {
         $this->view('template/footer', $data);
     }
 
-    public function donasi_pending() {
+    public function donasi_pending($page = 1) {
+
+        $pagination = new Pagination('vwAllPembayaran', $this->data_pending, 5, $page);
+
+        $paginate = $pagination->setPager(function() {
+            $where = "WHERE status_pembayaran = 'pending' AND id_user = $this->id_user";
+            return $where;
+        });
+        
         $data = [
             'judul' => 'Menunggu Pembayaran',
-            'pending' => $this->data_pending
+            'pending' => $paginate,
         ];
 
         $this->view('template/header', $data);
@@ -49,10 +57,17 @@ class User_dashboard extends Controller {
         $this->view('template/footer', $data);
     }
 
-    public function donasi_konfirmasi() {
+    public function donasi_konfirmasi($page = 1) {
+        $pagination = new Pagination('vwAllPembayaran', $this->data_konfirmasi, 5, $page);
+
+        $paginate = $pagination->setPager(function() {
+            $where = "WHERE status_pembayaran = 'konfirmasi' AND id_user = $this->id_user";
+            return $where;
+        });
+
         $data = [
             'judul' => 'Konfirmasi Donasi',
-            'konfirmasi' => $this->data_konfirmasi
+            'konfirmasi' => $paginate
         ];
 
         $this->view('template/header', $data);
@@ -61,10 +76,17 @@ class User_dashboard extends Controller {
         $this->view('template/footer', $data);
     }
 
-    public function donasi_sukses() {
+    public function donasi_sukses($page = 1) {
+        $pagination = new Pagination('vwAllPembayaran', $this->data_sukses, 5, $page);
+
+        $paginate = $pagination->setPager(function() {
+            $where = "WHERE status_pembayaran = 'success' AND id_user = $this->id_user";
+            return $where;
+        });
+
         $data = [
             'judul' => 'Donasi Sukses',
-            'sukses' => $this->data_sukses
+            'sukses' => $paginate
         ];
 
         $this->view('template/header', $data);

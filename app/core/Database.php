@@ -27,6 +27,10 @@ class Database {
   }
 
   // make query
+  /**
+   * @param string $query berisikan perintah sql yang bertipe string example `SELECT * FROM table` atau lainnya
+   * @var prepare $query
+   */
   public function query($query): void {
     $this->stmt = $this->dbh->prepare($query);
   }

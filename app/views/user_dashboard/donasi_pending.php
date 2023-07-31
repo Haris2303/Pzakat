@@ -54,8 +54,10 @@
         <?php echo Design::blankData() ?>
     <?php endif ?>
 
-</div>
+    <!-- pagination -->
+    <?php Pagination::view(4) ?>
 
+</div>
 
 
 <!-- Close div container -->

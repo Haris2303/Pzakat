@@ -13,7 +13,6 @@ class Login extends Controller {
     $result = $this->model('Login_model')->login($_POST);
     // pengecekkan login valid
     if($result > 0 && is_int($result)) {
-      Flasher::setFlash('Login Berhasil :)', 'success');
       switch ($_SESSION['level']) {
         case '3':
           header('Location: ' . BASEURL . '/user_dashboard');

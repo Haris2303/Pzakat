@@ -1,6 +1,6 @@
 <div class="lg:mt-20 mt-10 w-full">
     <h2 class="font-bold text-xl text-darkgray mb-2">Donasi Sukses</h2>
-    <p class="text-sm text-lightgray">Data pembayaran yang belum dibayarkan</p>
+    <p class="text-sm text-lightgray">Data pembayaran sukses</p>
 
     <?php if (count($data['sukses']) > 0) : ?>
 
@@ -54,6 +54,9 @@
     <?php else : ?>
         <?php echo Design::blankData() ?>
     <?php endif ?>
+
+    <!-- pagination -->
+    <?php Pagination::view() ?>
 
 </div>
 
