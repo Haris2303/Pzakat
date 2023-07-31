@@ -170,7 +170,7 @@ class Design {
         $futureTimestamp = $expired + (24 * 3600);
 
         // Konversi timestamp 24 jam ke depan ke dalam format tanggal dan waktu
-        $futureDateTime = date('Y-m-d H:i:s', $futureTimestamp);
+        $futureDateTime = date('Y-m-d H:i', $futureTimestamp);
         
         return '<!DOCTYPE html>
                 <html>
@@ -224,5 +224,12 @@ class Design {
                 </body>
                 </html>
                 ';
+    }
+
+    public static function blankData(): string {
+        return '<div class="flex flex-col justify-center items-center text-lightgray mt-20">
+                    <i class="fas fa-solid fa-file text-8xl"></i>
+                    <span class="mt-3 text-sm">Data Kosong</span>
+                </div>';
     }
 }
