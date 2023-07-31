@@ -2,8 +2,9 @@
     <h2 class="font-bold text-xl text-darkgray mb-2">Pembayaran Pending</h2>
     <p class="text-sm text-lightgray">Data pembayaran yang belum dibayarkan</p>
 
-    <div class="mt-4 relative overflow-x-auto shadow-md">
-        <?php if (count($data['pending']) > 0) : ?>
+    <?php if (count($data['pending']) > 0) : ?>
+
+        <div class="mt-4 relative overflow-x-auto shadow-md">
             <table class="w-full text-sm text-left text-gray-500">
                 <thead class="text-xs text-white uppercase bg-green">
                     <tr>
@@ -47,11 +48,11 @@
                     <?php endforeach ?>
                 </tbody>
             </table>
+        </div>
 
-        <?php else : ?>
-            <h2>Data Kosong!</h2>
-        <?php endif ?>
-    </div>
+    <?php else : ?>
+        <?php echo Design::blankData() ?>
+    <?php endif ?>
 
 </div>
 
