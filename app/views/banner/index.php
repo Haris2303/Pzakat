@@ -31,6 +31,7 @@
         <thead>
           <tr>
             <th>Gambar</th>
+            <th>Link</th>
             <th>Ditambahkan oleh</th>
             <th>Terakhir Upload</th>
             <th>Aksi</th>
@@ -39,7 +40,8 @@
         <tbody>
           <?php foreach ($data['dataBanner'] as $item) : ?>
             <tr>
-              <td><img src="<?= BASEURL ?>/img/banner/<?= $item['gambar'] ?>" alt="Gambar Banner" width="200"></td>
+              <td><img src="<?= BASEURL ?>/img/banner/<?= $item['gambar'] ?>" alt="Gambar Banner" width="150"></td>
+              <td><?= $item['link'] ?></td>
               <td><?= $item['username'] ?></td>
               <td><?= $item['datetime'] ?></td>
               <td>
@@ -67,10 +69,17 @@
       <form action="" method="post" enctype="multipart/form-data">
 
         <div class="modal-body">
+          <div class="mb-3 text-right">
+            <span>Saran ukuran (1150x430)</span>
+          </div>
           <input type="hidden" name="username_amil" value="<?= $_SESSION['username'] ?>">
           <div class="mb-3">
             <label for="gambar" class="form-label">Gambar</label>
             <input type="file" class="form-control" id="gambar" name="gambar" required autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label for="link" class="form-label">Link</label>
+            <input type="text" name="link" id="link" class="form-control">
           </div>
         </div>
 

@@ -9,8 +9,11 @@
           <div class="swiper-wrapper">
             <!-- Slides -->
             <?php foreach ($data['dataBanner'] as $item) : ?>
+
               <div class="swiper-slide">
-                <img src="<?= BASEURL ?>/img/banner/<?= $item['gambar'] ?>" alt="" class="h-[200px] img-slide">
+                <a href="<?= $item['link'] ?>">
+                  <img src="<?= BASEURL ?>/img/banner/<?= $item['gambar'] ?>" alt="<?= $item['link'] ?>" class="aspect-video w-full lg:h-[420px]">
+                </a>
               </div>
             <?php endforeach ?>
           </div>
