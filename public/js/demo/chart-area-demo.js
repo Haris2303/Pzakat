@@ -38,14 +38,12 @@ function fetchData() {
       success: function(response) {
         // apakah tahun pada database adalah tahun ini
         $.each(response, function (index, item) { 
-          let isYear = true
-          if(date.getFullYear() === item.tahun && isYear) {
+          if(date.getFullYear() === item.tahun) {
             // Menetapkan nilai variabel di dalam fungsi success
             for(let i = 0; i < 12; i++) {
               if(i === item.bulan - 1) datas[i] = parseInt(item.total_pemasukkan)
-              else datas[i] = 0
+              else datas[i] = (datas[i]) ? datas[i] : 0
             }
-            isYear = false
           }
         });
         resolve(); // Menyelesaikan promise
