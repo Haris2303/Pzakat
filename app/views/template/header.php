@@ -46,7 +46,7 @@ if(isset($_SESSION['level']) && $_SESSION['level'] !== '3') {
         </div>
 
         <div class="flex items-center px-4">
-          <button id="hamburger" name="hamburger" class="block absolute right-4 lg:hidden">
+          <button id="hamburger" name="hamburger" class="block absolute right-2 pl-2 lg:hidden overflow-hidden">
             <span class="hamburger-line bg-darkgray transition-500 origin-top-left"></span>
             <span class="hamburger-line bg-darkgray transition-500"></span>
             <span class="hamburger-line bg-darkgray transition-500 origin-bottom-left"></span>
