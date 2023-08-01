@@ -173,12 +173,12 @@
     <div class="content">
       <div class="w-full flex flex-wrap gap-5 justify-center">
 
-        <div class="lg:w-1/2 relative">
-          <p class="text-sm font-bold text-darkgray block sm:pl-0 pl-16 sm:-mb-0 -mb-10">Video</p>
-          <iframe class="scale-75 sm:scale-100" width="480" height="315" src="https://www.youtube.com/embed/bUkp-Tv4T0o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <div class="lg:w-1/2 w-full relative">
+          <p class="text-sm font-bold text-darkgray block sm:-mb-0">Video</p>
+          <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/bUkp-Tv4T0o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
 
-        <div class="flex flex-col lg:w-1/3">
+        <div class="flex flex-col lg:w-1/3 w-full">
           <span class="text-darkgray text-sm font-bold">Artikel</span>
           <div class="flex gap-5 flex-col justify-center mt-2">
 
@@ -218,7 +218,7 @@
 
 
   <!-- Pilar -->
-  <div class="container">
+  <div class="container mt-24">
     <div class="content">
 
       <div class="title">
@@ -226,8 +226,8 @@
         <span class="text-sm text-lightgray mt-2 inline-block">Mari kita dukung program-program yang dilaksanakan oleh Lazismu</span>
       </div>
 
-      <div class="flex flex-wrap justify-evenly center mt-10 gap-y-20">
-        <a href="" class="lg:w-1/3 w-1/2">
+      <div class="flex flex-wrap justify-evenly center mt-10 sm:gap-y-20 gap-y-10">
+        <a href="" class="lg:w-1/3 sm:w-1/2 w-full">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
             <div class="w-14 h-14 flex justify-center items-center bg-lightgreen m-auto rounded-md shadow-md">
               <i class="fas fa-solid fa-graduation-cap text-darkgreen text-2xl"></i>
@@ -237,7 +237,7 @@
           </div>
         </a>
 
-        <a href="" class="lg:w-1/3 w-1/2">
+        <a href="" class="lg:w-1/3 sm:w-1/2 w-full">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
             <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md flex justify-center items-center">
               <i class="fas fa-solid fa-notes-medical text-darkgreen text-2xl"></i>
@@ -247,7 +247,7 @@
           </div>
         </a>
 
-        <a href="" class="lg:w-1/3 w-1/2">
+        <a href="" class="lg:w-1/3 sm:w-1/2 w-full">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
             <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md flex justify-center items-center">
               <i class="fas fa-solid fa-chart-line text-darkgreen text-2xl"></i>
@@ -257,7 +257,7 @@
           </div>
         </a>
 
-        <a href="" class="lg:w-1/3 w-1/2">
+        <a href="" class="lg:w-1/3 sm:w-1/2 w-full">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
             <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md flex justify-center items-center">
               <i class="fas fa-solid fa-people-carry text-darkgreen text-2xl"></i>
@@ -267,7 +267,7 @@
           </div>
         </a>
 
-        <a href="" class="lg:w-1/3 w-1/2">
+        <a href="" class="lg:w-1/3 sm:w-1/2 w-full">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
             <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md flex justify-center items-center">
               <i class="fas fa-solid fa-stream text-darkgreen text-2xl"></i>
@@ -277,7 +277,7 @@
           </div>
         </a>
 
-        <a href="" class="lg:w-1/3 w-1/2">
+        <a href="" class="lg:w-1/3 sm:w-1/2 w-full">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
             <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md flex justify-center items-center">
               <i class="fas fa-solid fa-dove text-darkgreen text-2xl"></i>
