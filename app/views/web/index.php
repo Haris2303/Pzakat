@@ -175,7 +175,7 @@
 
         <div class="lg:w-1/2 w-full relative">
           <p class="text-sm font-bold text-darkgray block sm:-mb-0">Video</p>
-          <iframe class="w-full aspect-video" src="https://www.youtube.com/embed/bUkp-Tv4T0o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <iframe class="w-full aspect-video" src="<?= $data['src_video'] ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
 
         <div class="flex flex-col lg:w-1/3 w-full">

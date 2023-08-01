@@ -179,6 +179,13 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
         <span>Banner</span></a>
     </li>
 
+    <!-- Nav Item - Banner -->
+    <li class="nav-item">
+      <a class="nav-link" href="<?= BASEURL ?>/video_player">
+        <i class="fas fa-video"></i>
+        <span>Video Player</span></a>
+    </li>
+
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
         <i class="fas fa-fw fa-wrench"></i>

@@ -11,7 +11,8 @@ class Web extends Controller {
       "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif(),
       "dataZakat" => $this->model('Kelolaprogram_model')->getDataProgramZakatLimit(1),
       "jumlahProgram" => count($this->model('Kelolaprogram_model')->getAllDataProgramAktifTunai()),
-      "danaTerkumpul" => $this->model('Kelolapembayaran_model')->getDataPemasukkanHarian()
+      "danaTerkumpul" => $this->model('Kelolapembayaran_model')->getDataPemasukkanHarian(),
+      "src_video" => $this->model('Video_model')->getData()['link']
     ];
     $this->view('template/header', $data);
     $this->view('web/index', $data);

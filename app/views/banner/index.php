@@ -27,7 +27,7 @@
   <div class="card-body">
     <?php Flasher::flash() ?>
     <div class="table-responsive">
-      <table class="table table-bordered" width="100%" cellspacing="0">
+      <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
         <thead>
           <tr>
             <th>Gambar</th>
