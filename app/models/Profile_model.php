@@ -1,6 +1,6 @@
 <?php
 
-class Profile_model {
+class Profile_model extends Controller {
 
     private $table = [
         'amil' => 'tb_amil',
@@ -8,14 +8,18 @@ class Profile_model {
     ];
     private $db;
 
+    protected $controller;
+
     public function __construct()
     {
         $this->db = new Database();
+        $this->controller = new Controller();
     }
 
-    public function ubahProfilAmil(array $data, string $username) {
+    public function ubahProfilAmil(array $data, string $username): int|string {
         // init variabel
         $table = $this->table['amil'];
+
         $nama_amil  = $data['nama_amil'];
         $email      = $data['email'];
         $nohp       = $data['nohp'];
@@ -27,6 +31,9 @@ class Profile_model {
         $this->db->query($id_user);
         $this->db->bind('username', $username);
         $id_user = $this->db->single()['id_user'];
+        
+        // cek email input in database
+        if($this->controller->model('User_model')->isEmail($email, $id_user)) return 'Email sudah terdaftar!';
 
         // ubah data
         $query = "UPDATE $table SET id_mesjid = :id_mesjid,

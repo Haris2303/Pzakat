@@ -21,14 +21,13 @@ class Profile extends Controller {
      * @param NULL
      */
     public function aksi_ubah_profil_amil(): void {
-        var_dump($_POST);
         $result = $this->model('Profile_model')->ubahProfilAmil($_POST, $_SESSION['username']);
-        if($result > 0) {
+        if($result > 0 && is_int($result)) {
             Flasher::setFlash('Perubahan <strong>Berhasil</strong> Disimpan!', 'success');
             header('Location: ' . BASEURL . '/profile');
             exit;
         } else {
-            Flasher::setFlash('Perubahan <strong>Gagal</strong> Disimpan!', 'danger');
+            Flasher::setFlash((is_string($result)) ? $result : "'Perubahan <strong>Gagal</strong> Disimpan!'", 'danger');
             header('Location: ' . BASEURL . '/profile');
             exit;
         }

@@ -53,18 +53,7 @@ class Transaksi_model {
         $this->db->bind('status_pembayaran', 'konfirmasi');
         $this->db->execute();
 
-        // jika konfirmasi pembayaran berhasil
-        // if($this->db->rowCount() > 0) {
-        //     // update kode lama ke kode baru
-        //     $kode_new = Utility::getKeyRandom();
-        //     $update_kode = "UPDATE tb_donatur SET kode = :kode_new WHERE kode = :kode_old";
-        //     $this->db->query($update_kode);
-        //     $this->db->bind('kode_new', $kode_new);
-        //     $this->db->bind('kode_old', $nomor_pembayaran);
-        //     $this->db->execute();
-
         return $this->db->rowCount();
-        // }
 
     }
 
