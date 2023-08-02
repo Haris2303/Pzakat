@@ -1,13 +1,14 @@
 // inputan hanya angka
-const countInput = (event) => {
+const renderCountInput = (event) => {
   const count = (event.which) ? event.which : event.keyCode
   if (count >= 48 && count <= 57) String.fromCharCode(count);
   else if (count === 8) String.fromCharCode(count);
-  else event.preventDefault()
+  else event.preventDefault() 
 }
+function countInput(event) { renderCountInput(event) }
 
 // currency input keyup
-const currency = (event) => {
+const renderCurrency = (event) => {
   // // function count only
   const count = (event.which) ? event.which : event.keyCode
   if (count >= 48 && count <= 57) String.fromCharCode(count);
@@ -30,6 +31,8 @@ const currency = (event) => {
     })
   })
 }
+
+function currency(event) { renderCurrency(event) }
 
 // calendar
 $('.calendar').ready(function() {

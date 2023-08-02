@@ -79,6 +79,9 @@
   </div>
 </div>
 
+<!-- tutup div root -->
+</div>
+
 <script type="module">
   import Swiper from "https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.esm.browser.min.js";
 
@@ -100,6 +103,7 @@
   });
 </script>
 <script src="<?= BASEURL ?>/vendor/jquery/jquery.js"></script>
+<script type="text/javascript" src="<?= BASEURL ?>/js/util/loader.js"></script>
 <script type="text/javascript" src="<?= BASEURL ?>/js/app.js"></script>
 </body>
 

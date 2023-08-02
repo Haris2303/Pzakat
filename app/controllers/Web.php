@@ -24,6 +24,11 @@ class Web extends Controller {
     echo json_encode($this->model('Kelolaprogram_model')->getDataProgramLimitByJenisProgram(3, $_POST['name']));
   }
 
+  public function getTemplate(): void
+  {
+    echo $this->view('template/spinner');
+  }
+
   public function profil(): void {
     $data['judul'] = 'Profile';
     $this->view('template/header', $data);
