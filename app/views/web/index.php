@@ -68,7 +68,7 @@
           </div>
 
           <!-- program, use javascript in app.js -->
-          <div class="w-full flex gap-5 flex-col lg:flex-row md:gap-5 mt-5 hover:shadow-lg transition-500 text-sm program"></div>
+          <div class="w-full flex gap-5 flex-col lg:h-[20.5rem] h-[77.4rem] lg:flex-row md:gap-5 mt-5 lg:hover:shadow-lg transition-500 text-sm program"></div>
 
           <a href="<?= BASEURL ?>/programs">
             <div class="w-40 m-auto">
@@ -90,9 +90,11 @@
         <h3 class="font-medium text-lightgreen text-3xl mb-2">Masih Bingung Berzakat?</h3>
         <p class="text-green text-md">Anda dapat menekan tombol dibawah ini</p>
         <div class="flex justify-center mt-5 md:gap-5 gap-2 md:text-md flex-wrap">
-          <div class="sm:w-36 w-32">
-            <button class="btn btn-lightgreen">Konsultasi</button>
-          </div>
+          <a href="<?= BASEURL ?>/page/artikel">
+            <div class="sm:w-36 w-32">
+              <button class="btn btn-lightgreen">Artikel</button>
+            </div>
+          </a>
           <a href="<?= BASEURL ?>/perhitunganzakat">
             <div class="sm:w-36 w-32">
               <button class="btn btn-lightgreen">Zakat Sekarang</button>
@@ -230,7 +232,7 @@
       </div>
 
       <div class="flex flex-wrap justify-evenly center mt-10 sm:gap-y-20 gap-y-10">
-        <a href="" class="lg:w-1/3 sm:w-1/2 w-full">
+        <a href="<?= BASEURL ?>/view/pilarpendidikan" class="lg:w-1/3 sm:w-1/2 w-full">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
             <div class="w-14 h-14 flex justify-center items-center bg-lightgreen m-auto rounded-md shadow-md">
               <i class="fas fa-solid fa-graduation-cap text-darkgreen text-2xl"></i>
@@ -240,7 +242,7 @@
           </div>
         </a>
 
-        <a href="" class="lg:w-1/3 sm:w-1/2 w-full">
+        <a href="<?= BASEURL ?>/view/pilarkesehatan" class="lg:w-1/3 sm:w-1/2 w-full">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
             <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md flex justify-center items-center">
               <i class="fas fa-solid fa-notes-medical text-darkgreen text-2xl"></i>
@@ -250,7 +252,7 @@
           </div>
         </a>
 
-        <a href="" class="lg:w-1/3 sm:w-1/2 w-full">
+        <a href="<?= BASEURL ?>/view/pilarekonomi" class="lg:w-1/3 sm:w-1/2 w-full">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
             <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md flex justify-center items-center">
               <i class="fas fa-solid fa-chart-line text-darkgreen text-2xl"></i>
@@ -260,7 +262,7 @@
           </div>
         </a>
 
-        <a href="" class="lg:w-1/3 sm:w-1/2 w-full">
+        <a href="<?= BASEURL ?>/view/pilarkemanusiaan" class="lg:w-1/3 sm:w-1/2 w-full">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
             <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md flex justify-center items-center">
               <i class="fas fa-solid fa-people-carry text-darkgreen text-2xl"></i>
@@ -270,7 +272,7 @@
           </div>
         </a>
 
-        <a href="" class="lg:w-1/3 sm:w-1/2 w-full">
+        <a href="<?= BASEURL ?>/view/pilarsosialdakwah" class="lg:w-1/3 sm:w-1/2 w-full">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
             <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md flex justify-center items-center">
               <i class="fas fa-solid fa-stream text-darkgreen text-2xl"></i>
@@ -280,7 +282,7 @@
           </div>
         </a>
 
-        <a href="" class="lg:w-1/3 sm:w-1/2 w-full">
+        <a href="<?= BASEURL ?>/view/pilarlingkungan" class="lg:w-1/3 sm:w-1/2 w-full">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
             <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md flex justify-center items-center">
               <i class="fas fa-solid fa-dove text-darkgreen text-2xl"></i>
@@ -309,7 +311,7 @@
               <div class="flex lg:flex-nowrap flex-wrap gap-10 px-5">
                 <div class="lg:w-1/2">
                   <a href="">
-                    <img src="<?= BASEURL ?>/img/banner/banner.jpg" alt="" class="w-full h-full rounded-lg">
+                    <img src="<?= BASEURL ?>/img/logo/logo.png" alt="" class="w-full h-full rounded-lg">
                   </a>
                 </div>
                 <div class="lg:w-1/2 relative">

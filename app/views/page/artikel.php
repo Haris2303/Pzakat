@@ -50,5 +50,6 @@
         <?php endforeach ?>
       </div>
     </div>
+    <?php Pagination::view(5) ?>
   </div>
 </div>

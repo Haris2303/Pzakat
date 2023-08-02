@@ -62,20 +62,24 @@ class Pagination
     {
         $page = self::$page;
         $jumlah_page = ceil(self::$data / self::$limit);
-        $next = $page + 1;
-        $prev = $page - 1;
+        $next = $page + 1; // tambahkan 1 setiap klik
+        $prev = $page - 1; // kurangkan 1 setiap klik
 
+        // set awal start and end page
         $start_page = 1;
         $end_page = $page + $jumlah_pagination;
 
+        // start pagination
         if($page > $jumlah_pagination) {
             $start_page =+ ($page - $jumlah_pagination);
         }
 
+        // end pagination
         if(($page + $jumlah_pagination) > $jumlah_page) {
             $end_page = $jumlah_page;
         }
 
+        // kirimkan data
         $data = [
             "jumlah_page" => $jumlah_page,
             "next_page" => $next,
@@ -85,7 +89,10 @@ class Pagination
             "page" => $page,
         ];
 
-        $view = new Controller();
-        echo $view->view('pagination/default', $data);
+        // jika data lebih banyak dari limit munculkan view pagination
+        if(self::$data > self::$limit) {
+            $view = new Controller();
+            echo $view->view('pagination/default', $data);
+        }
     }
 }
