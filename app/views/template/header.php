@@ -37,8 +37,6 @@ if(isset($_SESSION['level']) && $_SESSION['level'] !== '3') {
     <span class="sr-only">Loading...</span>
   </div>
 
-  <div id="root">
-
     <navbar class="relative top-0 left-0 w-full flex items-center z-10">
       <div class="container">
         <div class="content flex item-center justify-between relative">
