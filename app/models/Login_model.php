@@ -28,7 +28,11 @@ class Login_model {
 
       // cek password
       $dbPass = $row['password'];
-      if(password_verify($data['password'], $dbPass)) {
+      if(password_verify($data['password'], $dbPass) ) {
+
+        // cek aktivasi akun
+        if($row['status_aktivasi'] === '0') return 'Akun belum di aktivasi!';
+
         // initialisasi session
         session_reset();
         $_SESSION = [];
@@ -36,6 +40,7 @@ class Login_model {
         $_SESSION['username'] = $row['username'];
         return 1;
       }
+
     }
 
     return 'Username atau Password Salah!';

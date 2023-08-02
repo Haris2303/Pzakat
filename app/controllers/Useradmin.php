@@ -39,11 +39,25 @@ class Useradmin extends Controller {
   }
 
   public function aksi_tambah_amil(): void {
-    $result = $this->model('Daftar_model')->daftarAmil($_POST);
+    $username = $_POST['username'];
+    $email    = $_POST['email'];
+    $result = $this->model('Daftar_model')->daftarUser('Amil', $_POST);
     if($result > 0) {
-      Flasher::setFlash('Data Amil Berhasil Ditambahkan!', 'success');
-      header('Location: ' . BASEURL . '/amil');
-      exit;
+
+      // get token
+      $token = $this->model('User_model')->getTokenByUsername($username);
+
+      // kirim pesan email untuk aktivasi
+      $subject = 'Aktivasi Akun';
+      $msg = 'Klik ini berikut untuk aktivasi akun Anda: ' . BASEURL . '/daftar/aktivasi_akun/' . $token;
+      $is_email = Utility::sendEmail($email, $subject, $msg);
+
+      if($is_email) {
+        Flasher::setFlash('Akun Berhasil Terdaftar Silahkan <strong>Cek Email</strong> untuk <strong>Aktivasi Akun</strong>!', 'info');
+        header('Location: ' . BASEURL . '/amil');
+        exit;
+      }
+
     } else {
       Flasher::setFlash($result, 'danger');
       header('Location: ' . BASEURL . '/amil');

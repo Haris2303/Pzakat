@@ -10,13 +10,46 @@ class Daftar extends Controller {
     $this->view('template/normalfooter', $data);
   }
 
-  // aksi daftar muzakki
-  public function aksi_daftar_muzakki(): void {
-    $result = $this->model('Daftar_model')->daftarMuzakki($_POST);
-    if($result > 0) {
-      Flasher::setFlash('Anda Berhasil Terdaftar Silahkan Login!', 'success');
+  public function aktivasi_akun(string $token): void {
+    // cek token
+    $isToken = $this->model('User_model')->isToken($token);
+    if(!$isToken) { 
       header('Location: ' . BASEURL . '/login');
       exit;
+    }
+
+    $aktivasi = $this->model('User_model')->aktivasiAkun($token);
+    if($aktivasi > 0) {
+      Flasher::setFlash('Akun Anda telah diaktivasi silahkan login!', 'success');
+      header("Location: " . BASEURL . '/login');
+      exit;
+    } else {
+      Flasher::setFlash('Akun Anda gagal diaktivasi!', 'danger');
+      header("Location: " . BASEURL . '/login');
+    }
+  }
+
+  // aksi daftar muzakki
+  public function aksi_daftar_muzakki(): void {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $result = $this->model('Daftar_model')->daftarUser('muzakki', $_POST);
+    if($result > 0) {
+      
+      // get token
+      $token = $this->model('User_model')->getTokenByUsername($username);
+
+      // kirim pesan email untuk aktivasi
+      $subject = 'Aktivasi Akun';
+      $msg = 'Klik ini berikut untuk aktivasi akun Anda: ' . BASEURL . '/daftar/aktivasi_akun/' . $token;
+      $is_email = Utility::sendEmail($email, $subject, $msg);
+
+      if($is_email) {
+        Flasher::setFlash('Akun Anda Berhasil Terdaftar Silahkan <strong>Cek Email</strong> untuk <strong>Aktivasi Akun</strong>!', 'info');
+        header('Location: ' . BASEURL . '/login');
+        exit;
+      }
+
     } else {
       Flasher::setFlash($result, 'danger');
       header('Location: ' . BASEURL . '/daftar');

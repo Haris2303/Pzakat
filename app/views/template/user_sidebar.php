@@ -7,7 +7,7 @@
                     <img src="<?= BASEURL ?>/svg/undraw_profile.svg" alt="Logo Profile" class="m-auto" width="80">
                 </div>
                 <div class="w-full flex flex-col justify-center">
-                    <span class="text-darkgray"><?= $_SESSION['username'] ?></span>
+                    <span class="text-darkgray"><?= $_SESSION['nama'] ?></span>
                     <span class="text-sm text-lightgray"><?= $_SESSION['username'] ?></span>
                 </div>
             </div>

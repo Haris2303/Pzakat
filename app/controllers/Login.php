@@ -10,9 +10,16 @@ class Login extends Controller {
   }
 
   public function aksi_login(): void {
+    $username = $_POST['username'];
     $result = $this->model('Login_model')->login($_POST);
     // pengecekkan login valid
     if($result > 0 && is_int($result)) {
+
+      // get id user
+      $id_User = $this->model('User_model')->getIdByUsername($username);
+      // set session nama 
+      $_SESSION['nama'] = $this->model('User_model')->getNamaByIdUser($id_User);
+
       switch ($_SESSION['level']) {
         case '3':
           header('Location: ' . BASEURL . '/user_dashboard');
