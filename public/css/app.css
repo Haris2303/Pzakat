@@ -838,86 +838,49 @@ video {
   height: 200px;
 }
 
-.h-full {
-  height: 100%;
-}
-
-.h-52 {
-  height: 13rem;
-}
-
-.h-80 {
-  height: 20rem;
-}
-
-.h-96 {
-  height: 24rem;
-}
-
-.h-\[100rem\] {
-  height: 100rem;
-}
-
-.h-\[50em\] {
-  height: 50em;
-}
-
-.h-\[2rem\] {
-  height: 2rem;
-}
-
-.h-\[10rem\] {
-  height: 10rem;
-}
-
-.h-\[20rem\] {
-  height: 20rem;
-}
-
-.h-\[20\.5rem\] {
-  height: 20.5rem;
-}
-
-.h-\[22rem\] {
-  height: 22rem;
-}
-
-.h-\[50rem\] {
-  height: 50rem;
-}
-
-.h-fit {
-  height: -moz-fit-content;
-  height: fit-content;
-}
-
-.h-max {
-  height: -moz-max-content;
-  height: max-content;
-}
-
-.h-\[70rem\] {
-  height: 70rem;
-}
-
-.h-\[80rem\] {
-  height: 80rem;
-}
-
-.h-\[78\.4rem\] {
-  height: 78.4rem;
-}
-
-.h-\[76\.4rem\] {
-  height: 76.4rem;
-}
-
 .h-\[77\.4rem\] {
   height: 77.4rem;
 }
 
+.h-full {
+  height: 100%;
+}
+
 .max-h-20 {
   max-height: 5rem;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.min-h-max {
+  min-height: -moz-max-content;
+  min-height: max-content;
+}
+
+.min-h-0 {
+  min-height: 0px;
+}
+
+.min-h-\[20re\] {
+  min-height: 20re;
+}
+
+.min-h-\[20rem\] {
+  min-height: 20rem;
+}
+
+.min-h-\[25rem\] {
+  min-height: 25rem;
+}
+
+.min-h-\[22\.5rem\] {
+  min-height: 22.5rem;
+}
+
+.min-h-\[20\.5rem\] {
+  min-height: 20.5rem;
 }
 
 .w-1\/3 {
@@ -1936,12 +1899,6 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.hover\:shadow-lg:hover {
-  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
 .group:hover .group-hover\:text-green {
   --tw-text-opacity: 1;
   color: rgb(0 100 1 / var(--tw-text-opacity));
@@ -2074,16 +2031,16 @@ video {
     height: 12rem;
   }
 
+  .lg\:h-\[20\.5rem\] {
+    height: 20.5rem;
+  }
+
   .lg\:h-\[420px\] {
     height: 420px;
   }
 
   .lg\:h-auto {
     height: auto;
-  }
-
-  .lg\:h-\[20\.5rem\] {
-    height: 20.5rem;
   }
 
   .lg\:w-1\/2 {

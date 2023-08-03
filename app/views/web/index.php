@@ -68,7 +68,7 @@
           </div>
 
           <!-- program, use javascript in app.js -->
-          <div class="w-full flex gap-5 flex-col lg:h-[20.5rem] h-[77.4rem] lg:flex-row md:gap-5 mt-5 lg:hover:shadow-lg transition-500 text-sm program"></div>
+          <div class="w-full flex gap-5 flex-col min-h-[20.5rem] lg:flex-row md:gap-5 mt-5 lg:hover:shadow-lg transition-500 text-sm program"></div>
 
           <a href="<?= BASEURL ?>/programs">
             <div class="w-40 m-auto">
