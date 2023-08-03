@@ -44,9 +44,6 @@
 
       </div>
 
-      <div class="w-40 m-auto">
-        <button class="mt-10 btn btn-lightgreen">Lihat Lebih Banyak</button>
-      </div>
     </section>
     <!-- end program donasi -->
 
