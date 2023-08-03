@@ -2,6 +2,14 @@
 
 class Login extends Controller {
 
+  public function __construct()
+  {
+    if(isset($_SESSION['level'])) {
+      header('Location: ' . BASEURL . '/');
+      exit;
+    }
+  }
+
   public function index(): void {
     $data['judul'] = 'Login';
     $this->view('template/normalheader', $data);

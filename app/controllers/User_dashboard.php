@@ -100,14 +100,44 @@ class User_dashboard extends Controller {
     }
 
     public function pengaturan() {
+        $data_user = $this->model('Muzakki_model')->getDataByUsername($_SESSION['username']);
+
         $data = [
-            'judul' => 'Pengaturan Akun'
+            'judul' => 'Pengaturan Akun',
+            'muzakki' => $data_user
         ];
 
         $this->view('template/header', $data);
         $this->view('template/user_sidebar', $data);
         $this->view('user_dashboard/pengaturan', $data);
         $this->view('template/footer', $data);
+    }
+
+    public function aksi_ubah_profil() {
+        $id_user = $this->model('User_model')->getIdByUsername($_SESSION['username']);
+        $update = $this->model('Muzakki_model')->ubahProfil($id_user, $_POST);
+        if($update > 0) {
+            Flasher::setFlash('Perubahan berhasil disimpan!', 'success');
+            header('Location: ' . BASEURL . '/user_dashboard/pengaturan');
+            exit;
+        } else {
+            Flasher::setFlash('Perubahan gagal disimpan!', 'danger');
+            header('Location: ' . BASEURL . '/user_dashboard/pengaturan');
+            exit;
+        }
+    }
+
+    public function aksi_ubah_password() {
+        $update = $this->model('User_model')->ubahPassword($_SESSION['username'], $_POST);
+        if($update > 0 && is_int($update)) {
+            Flasher::setFlash('Perubahan Password berhasil disimpan!', 'success');
+            header('Location: ' . BASEURL . '/user_dashboard/pengaturan');
+            exit;
+        } else {
+            Flasher::setFlash($update, 'danger');
+            header('Location: ' . BASEURL . '/user_dashboard/pengaturan');
+            exit;
+        }
     }
 
 }

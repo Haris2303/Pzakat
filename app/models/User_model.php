@@ -93,5 +93,43 @@ class User_model {
         return false;
     }
 
+    /**
+     * --------------------------------------------------------------------------------------------------------------------------
+     *               UPDATE DATA
+     * --------------------------------------------------------------------------------------------------------------------------
+     */
+    public function ubahPassword(string $username, array $data): int|string {
+
+        $password               = $data['password'];
+        $password_baru          = $data['password_baru'];
+        $password_konfirmasi    = $data['password_konfirmasi'];
+
+        // cek password lama
+        $cek_password = "SELECT password FROM $this->table WHERE username = :username";
+        $this->db->query($cek_password);
+        $this->db->bind('username', $username);
+        $pass_in_db = $this->db->single()['password'];
+
+        if(password_verify($password, $pass_in_db)) {
+
+            // cek konfirmasi pasword
+            if($password_baru !== $password_konfirmasi) return 'Password Konfirmasi Salah!';
+            
+            // encrypt pass
+            $password_baru = password_hash($password_baru, PASSWORD_DEFAULT);
+    
+            // update password
+            $query = "UPDATE $this->table SET password = :password WHERE username = :username";
+            $this->db->query($query);
+            $this->db->bind('password', $password_baru);
+            $this->db->bind('username', $username);
+            $this->db->execute();
+    
+            return $this->db->rowCount();
+        } 
+
+        return 'Password Salah!';
+
+    }
 
 }

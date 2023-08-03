@@ -92,7 +92,7 @@ class Pagination
         // jika data lebih banyak dari limit munculkan view pagination
         if(self::$data > self::$limit) {
             $view = new Controller();
-            echo $view->view('pagination/default', $data);
+            return $view->view('pagination/default', $data);
         }
     }
 }

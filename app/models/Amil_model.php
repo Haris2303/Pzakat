@@ -13,7 +13,6 @@ class Amil_model {
 
   // get all data amil
   public function getAllDataAmil(): array {
-
     $query = "SELECT * FROM $this->view";
     $this->db->query($query);
     return $this->db->resultSet();
@@ -21,7 +20,6 @@ class Amil_model {
 
   // get data amil by id
   public function getDataAmilByUsername($username): array {
-
     $query = "SELECT * FROM $this->view WHERE username = :username";
     $this->db->query($query);
     $this->db->bind('username', $username);

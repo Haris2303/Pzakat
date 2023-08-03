@@ -15,18 +15,18 @@ if($data['next_page'] < 0) {
 
 <div class="mt-5 flex justify-center text-sm">
     <?php if($data['prev_page'] > 0): ?>
-        <a href="<?= $url . $data['prev_page'] ?>" class="px-3 py-2 border border-gray-400 rounded-md text-gray-600">&laquo; Prev</a>
+        <a href="<?= $url . $data['prev_page'] ?>" class="px-3 py-2 border border-gray-400 rounded-md text-gray-600 hover:border-green hover:text-green transition-300">&laquo; Prev</a>
     <?php endif ?>
     
     <?php for ($i = $data['start_page']; $i <= $data['end_page']; $i++): ?>
         <?php if($i === $data['page']): ?>
             <a href="<?= $url . $i ?>" class="px-3 py-2 bg-green text-white rounded-md mx-1"><?= $i ?></a>
         <?php else: ?>
-            <a href="<?= $url . $i ?>" class="px-3 py-2 bg-gray-200 text-gray-600 rounded-md mx-1"><?= $i ?></a>
+            <a href="<?= $url . $i ?>" class="px-3 py-2 bg-gray-200 text-gray-600 rounded-md mx-1 hover:border box-border border hover:border-green hover:text-green transition-300"><?= $i ?></a>
         <?php endif ?>
     <?php endfor ?>
     
     <?php if($data['next_page'] <= $data['jumlah_page']): ?>
-        <a href="<?= $url . $data['next_page'] ?>" class="px-3 py-2 border border-gray-400 rounded-md text-gray-600">Next &raquo;</a>
+        <a href="<?= $url . $data['next_page'] ?>" class="px-3 py-2 border border-gray-400 rounded-md text-gray-600 hover:border-green hover:text-green transition-300">Next &raquo;</a>
     <?php endif ?>
 </div>

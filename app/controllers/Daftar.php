@@ -2,6 +2,14 @@
 
 class Daftar extends Controller {
 
+  public function __construct()
+  {
+    if(isset($_SESSION['level'])) {
+      header('Location: ' . BASEURL . '/');
+      exit;
+    }
+  }
+
   // control view index muzakki
   public function index(): void {
     $data['judul'] = "Daftar Muzaqqi";

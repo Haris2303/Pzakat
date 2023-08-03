@@ -26,7 +26,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i = 1 ?>
+                    <?php $i = $data['no'] ?>
                     <?php foreach ($data['sukses'] as $item) : ?>
                         <tr class="text-darkgray even:bg-gray-300 hover:bg-lightgreen">
                             <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
