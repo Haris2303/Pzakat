@@ -4,7 +4,7 @@
     <div class="desc sm:w-80">
       <h4 class="font-bold text-slate-700 text-lg mb-3">Zakat</h4>
       <div class="text-lightgray">
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste aliquid sunt molestias voluptas, tenetur sint, commodi reiciendis dolores, ea voluptatibus nemo. Tenetur eius consequuntur nam quos odio. Quaerat nihil quia unde aliquam assumenda quam amet et voluptatum? Quis eum sit dicta commodi quos quibusdam necessitatibus sapiente vel molestias, expedita aspernatur?</p>
+        <p>LAZISMU adalah lembaga zakat nasional dengan SK Menag No. 90 Tahun 2022, yang berkhidmat dalam pemberdayaan masyarakat melalui pendayagunaan dana zakat, infaq, wakaf dan dana kedermawanan lainnya baik dari perseorangan, lembaga, perusahaan dan instansi lainnya. Lazismu tidak menerima segala bentuk dana yang bersumber dari kejahatan. UU RI No. 8 Tahun 2010 Tentang Pencegahan dan Pemberantasan Tindak Pidana Pencucian Uang</p>
       </div>
     </div>
     <div class="address md:w-64">

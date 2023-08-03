@@ -3,6 +3,15 @@
 class Norek extends Controller
 {
 
+    public function __construct()
+    {
+        // jika yang akses bukan admin
+        if($_SESSION['level'] !== '1') {
+            header('Location: ' . BASEURL . '/');
+            exit;
+        }
+    }
+
     public function index(): void
     {
         $data = [

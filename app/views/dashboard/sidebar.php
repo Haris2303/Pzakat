@@ -156,12 +156,14 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
       </div>
     </li>
 
-    <!-- Nav Item - Norek -->
-    <li class="nav-item">
-      <a class="nav-link" href="<?= BASEURL ?>/norek">
-        <i class="fas fa-fw fa-credit-card"></i>
-        <span>Nomor Rekening</span></a>
-    </li>
+    <?php if($_SESSION['level'] === '1'): ?>
+      <!-- Nav Item - Norek -->
+      <li class="nav-item">
+        <a class="nav-link" href="<?= BASEURL ?>/norek">
+          <i class="fas fa-fw fa-credit-card"></i>
+          <span>Nomor Rekening</span></a>
+      </li>
+    <?php endif ?>
 
 
     <!-- Divider -->
@@ -180,11 +182,13 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
     </li>
 
     <!-- Nav Item - Banner -->
-    <li class="nav-item">
-      <a class="nav-link" href="<?= BASEURL ?>/video_player">
-        <i class="fas fa-video"></i>
-        <span>Video Player</span></a>
-    </li>
+    <?php if($_SESSION['level'] === '1'): ?>
+      <li class="nav-item">
+        <a class="nav-link" href="<?= BASEURL ?>/video_player">
+          <i class="fas fa-video"></i>
+          <span>Video Player</span></a>
+      </li>
+    <?php endif ?>
 
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
@@ -260,6 +264,8 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
           <i class="fa fa-bars"></i>
         </button>
+
+        <span>Status <strong><?= ($_SESSION['level'] === '1')? 'SuperAdmin' : 'Admin' ?></strong></span>
 
         <!-- Topbar Search -->
         <!-- <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -407,7 +413,7 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
           <!-- Nav Item - User Information -->
           <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['username'] ?></span>
+              <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['nama'] ?></span>
               <img class="img-profile rounded-circle" src="<?= BASEURL ?>/svg/undraw_profile.svg" alt="Gambar Profile">
             </a>
             <!-- Dropdown - User Information -->

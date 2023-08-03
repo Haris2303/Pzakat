@@ -32,9 +32,9 @@ class Banner extends Controller
         }
     }
 
-    public function aksi_hapus_banner($id): void
+    public function aksi_hapus_banner(): void
     {
-        $result = $this->model('Banner_model')->hapusDataBanner($id);
+        $result = $this->model('Banner_model')->hapusDataBanner($_POST['id']);
         if($result > 0) {
             Flasher::setFlash('Data Banner <strong>Berhasil</strong> dihapus', 'success');
             header('Location: ' . BASEURL . '/banner');

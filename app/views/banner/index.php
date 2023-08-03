@@ -45,7 +45,10 @@
               <td><?= $item['username'] ?></td>
               <td><?= $item['datetime'] ?></td>
               <td>
-                <a href="<?= BASEURL ?>/banner/aksi_hapus_banner/<?= $item['id_banner'] ?>" class="btn badge btn-danger" onclick="return confirm('Yakin ingin menghapus?')"><i class="fas fa-trash"></i> Hapus</a>
+                <form action="<?= BASEURL ?>/banner/aksi_hapus_banner/" method="post">
+                  <input type="hidden" name="id" value="<?= $item['id_banner'] ?>">
+                  <button type="submit" class="btn badge btn-danger" onclick="return confirm('Yakin ingin menghapus?')"><i class="fas fa-trash"></i> Hapus</button>
+                </form>
               </td>
             </tr>
           <?php endforeach ?>

@@ -2,6 +2,15 @@
 
 class Video_player extends Controller {
 
+    public function __construct()
+    {
+        // jika akses bukan admin
+        if($_SESSION['level'] !== '1') {
+            header('Location: ' . BASEURL . '/');
+            exit;
+        }
+    }
+
     public function index(): void {
         $video = $this->model('Video_model')->getData();
 

@@ -6,6 +6,7 @@ class User_dashboard extends Controller {
     protected $data_pending = null;
     protected $data_konfirmasi = null;
     protected $data_sukses = null;
+    protected $limit = 5;
 
     public function __construct()
     {
@@ -39,16 +40,17 @@ class User_dashboard extends Controller {
 
     public function donasi_pending($page = 1) {
 
-        $pagination = new Pagination('vwAllPembayaran', $this->data_pending, 5, $page);
+        $pagination = new Pagination('vwAllPembayaran', $this->data_pending, $this->limit, $page);
 
         $paginate = $pagination->setPager(function() {
-            $where = "WHERE status_pembayaran = 'pending' AND id_user = $this->id_user";
+            $where = "WHERE status_pembayaran = 'pending' AND id_user = $this->id_user ORDER BY id_donatur DESC";
             return $where;
         });
         
         $data = [
             'judul' => 'Menunggu Pembayaran',
             'pending' => $paginate,
+            'no' => (($page - 1) * $this->limit) + 1
         ];
 
         $this->view('template/header', $data);
@@ -58,7 +60,7 @@ class User_dashboard extends Controller {
     }
 
     public function donasi_konfirmasi($page = 1) {
-        $pagination = new Pagination('vwAllPembayaran', $this->data_konfirmasi, 5, $page);
+        $pagination = new Pagination('vwAllPembayaran', $this->data_konfirmasi, $this->limit, $page);
 
         $paginate = $pagination->setPager(function() {
             $where = "WHERE status_pembayaran = 'konfirmasi' AND id_user = $this->id_user";
@@ -67,7 +69,8 @@ class User_dashboard extends Controller {
 
         $data = [
             'judul' => 'Konfirmasi Donasi',
-            'konfirmasi' => $paginate
+            'konfirmasi' => $paginate,
+            'no' => (($page - 1) * $this->limit) + 1
         ];
 
         $this->view('template/header', $data);
@@ -77,7 +80,7 @@ class User_dashboard extends Controller {
     }
 
     public function donasi_sukses($page = 1) {
-        $pagination = new Pagination('vwAllPembayaran', $this->data_sukses, 5, $page);
+        $pagination = new Pagination('vwAllPembayaran', $this->data_sukses, $this->limit, $page);
 
         $paginate = $pagination->setPager(function() {
             $where = "WHERE status_pembayaran = 'success' AND id_user = $this->id_user";
@@ -86,7 +89,8 @@ class User_dashboard extends Controller {
 
         $data = [
             'judul' => 'Donasi Sukses',
-            'sukses' => $paginate
+            'sukses' => $paginate,
+            'no' => (($page - 1) * $this->limit) + 1
         ];
 
         $this->view('template/header', $data);

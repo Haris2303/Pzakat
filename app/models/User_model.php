@@ -31,6 +31,12 @@ class User_model {
     }
 
     public function getNamaByIdUser(int $id_user): string {
+        // cek pada tb_admin
+        $query = "SELECT nama FROM tb_admin WHERE id_user = $id_user";
+        $this->db->query($query);
+        $nama = $this->db->single()['nama'];
+        if(is_string($nama)) return $nama;
+
         // cek pada tb_amil
         $query = "SELECT nama FROM tb_amil WHERE id_user = $id_user";
         $this->db->query($query);
@@ -42,6 +48,7 @@ class User_model {
         $this->db->query($query);
         $nama = $this->db->single()['nama'];
         if(is_string($nama)) return $nama;
+        
     } 
 
     /**
