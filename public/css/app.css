@@ -850,6 +850,10 @@ video {
   height: 100%;
 }
 
+.h-40 {
+  height: 10rem;
+}
+
 .max-h-20 {
   max-height: 5rem;
 }
@@ -1896,10 +1900,6 @@ video {
   cursor: pointer;
 }
 
-.hover\:border-2:hover {
-  border-width: 2px;
-}
-
 .hover\:border:hover {
   border-width: 1px;
 }
@@ -2018,6 +2018,10 @@ video {
     margin-right: 0.75rem;
   }
 
+  .md\:mb-0 {
+    margin-bottom: 0px;
+  }
+
   .md\:w-1\/2 {
     width: 50%;
   }
@@ -2034,6 +2038,10 @@ video {
     width: 100%;
   }
 
+  .md\:w-2\/4 {
+    width: 50%;
+  }
+
   .md\:flex-row {
     flex-direction: row;
   }
@@ -2048,6 +2056,11 @@ video {
 
   .md\:border-none {
     border-style: none;
+  }
+
+  .md\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
   }
 }
 
