@@ -232,7 +232,7 @@
       </div>
 
       <div class="flex flex-wrap justify-evenly center mt-10 sm:gap-y-20 gap-y-10">
-        <a href="<?= BASEURL ?>/view/pilarpendidikan" class="lg:w-1/3 sm:w-1/2 w-full">
+        <a href="<?= BASEURL ?>/view/pilar-pendidikan" class="lg:w-1/3 sm:w-1/2 w-full">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
             <div class="w-14 h-14 flex justify-center items-center bg-lightgreen m-auto rounded-md shadow-md">
               <i class="fas fa-solid fa-graduation-cap text-darkgreen text-2xl"></i>
@@ -242,7 +242,7 @@
           </div>
         </a>
 
-        <a href="<?= BASEURL ?>/view/pilarkesehatan" class="lg:w-1/3 sm:w-1/2 w-full">
+        <a href="<?= BASEURL ?>/view/pilar-kesehatan" class="lg:w-1/3 sm:w-1/2 w-full">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
             <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md flex justify-center items-center">
               <i class="fas fa-solid fa-notes-medical text-darkgreen text-2xl"></i>
@@ -252,7 +252,7 @@
           </div>
         </a>
 
-        <a href="<?= BASEURL ?>/view/pilarekonomi" class="lg:w-1/3 sm:w-1/2 w-full">
+        <a href="<?= BASEURL ?>/view/pilar-ekonomi" class="lg:w-1/3 sm:w-1/2 w-full">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
             <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md flex justify-center items-center">
               <i class="fas fa-solid fa-chart-line text-darkgreen text-2xl"></i>
@@ -262,7 +262,7 @@
           </div>
         </a>
 
-        <a href="<?= BASEURL ?>/view/pilarkemanusiaan" class="lg:w-1/3 sm:w-1/2 w-full">
+        <a href="<?= BASEURL ?>/view/pilar-kemanusiaan" class="lg:w-1/3 sm:w-1/2 w-full">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
             <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md flex justify-center items-center">
               <i class="fas fa-solid fa-people-carry text-darkgreen text-2xl"></i>
@@ -272,7 +272,7 @@
           </div>
         </a>
 
-        <a href="<?= BASEURL ?>/view/pilarsosialdakwah" class="lg:w-1/3 sm:w-1/2 w-full">
+        <a href="<?= BASEURL ?>/view/pilar-sosialdakwah" class="lg:w-1/3 sm:w-1/2 w-full">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
             <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md flex justify-center items-center">
               <i class="fas fa-solid fa-stream text-darkgreen text-2xl"></i>
@@ -282,7 +282,7 @@
           </div>
         </a>
 
-        <a href="<?= BASEURL ?>/view/pilarlingkungan" class="lg:w-1/3 sm:w-1/2 w-full">
+        <a href="<?= BASEURL ?>/view/pilar-lingkungan" class="lg:w-1/3 sm:w-1/2 w-full">
           <div class="flex flex-col gap-3 text-center text-sm shadow-md rounded-lg mx-3 p-5">
             <div class="w-14 h-14 bg-lightgreen m-auto rounded-md shadow-md flex justify-center items-center">
               <i class="fas fa-solid fa-dove text-darkgreen text-2xl"></i>

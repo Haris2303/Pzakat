@@ -25,8 +25,8 @@ class Page extends Controller {
   public function artikel(int $page = 1): void {
     $data = $this->model('Pageviews_model')->getAllDataArtikel();
     $pagination = new Pagination('tb_views', $data, 10, $page);
-    $pager = $pagination->setPager(function() {
-      $where = "WHERE jenis_views = 'Artikel' ORDER BY id_views DESC";
+    $pager = $pagination->setPager(function() { 
+      $where = "WHERE jenis_views = 'Artikel' AND slug NOT LIKE '%Pilar%' ORDER BY id_views DESC";
       return $where;
     });
     $data = [

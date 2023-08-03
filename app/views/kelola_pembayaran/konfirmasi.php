@@ -65,7 +65,7 @@
                   <input type="hidden" name="username" value="<?= $_SESSION['username'] ?>">
                   <button type="submit" class="btn badge btn-danger">Batal</button>
                 </form>
-                <a href="<?= BASEURL ?>/kelola_pembayaran/detail/<?= $id_donatur ?>" class="btn badge btn-secondary">Detail</a>
+                <a href="<?= BASEURL ?>/kelola_pembayaran/detail/<?= $item['id_donatur'] ?>" class="btn badge btn-secondary">Detail</a>
               </td>
             </tr>
           <?php endforeach ?>

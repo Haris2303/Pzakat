@@ -13,7 +13,6 @@ class Pageviews_model
 
   public function getAllDataBerita(): array
   {
-
     $query = "SELECT * FROM $this->table WHERE jenis_views = 'Berita' ORDER BY id_views DESC";
     $this->db->query($query);
     return $this->db->resultSet();
@@ -21,8 +20,7 @@ class Pageviews_model
 
   public function getAllDataArtikel(): array
   {
-
-    $query = "SELECT * FROM $this->table WHERE jenis_views = 'Artikel' ORDER BY id_views DESC";
+    $query = "SELECT * FROM $this->table WHERE jenis_views = 'Artikel' AND slug NOT LIKE '%pilar%' ORDER BY id_views DESC";
     $this->db->query($query);
     return $this->db->resultSet();
   }
@@ -44,7 +42,7 @@ class Pageviews_model
 
   public function getAllDataArtikelLimit($limit): array 
   {
-    $query = "SELECT judul, slug, gambar, datetime FROM $this->table WHERE jenis_views = 'Artikel' ORDER BY id_views DESC LIMIT $limit ";
+    $query = "SELECT judul, slug, gambar, datetime FROM $this->table WHERE jenis_views = 'Artikel' AND slug NOT LIKE '%pilar%' ORDER BY id_views DESC LIMIT $limit ";
     $this->db->query($query);
     return $this->db->resultSet();  
   }

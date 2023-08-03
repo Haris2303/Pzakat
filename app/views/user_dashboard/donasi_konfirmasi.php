@@ -23,9 +23,6 @@
                         <th scope="col" class="px-6 py-3">
                             Jumlah Donasi
                         </th>
-                        <th scope="col" class="px-6 py-3">
-                            Status
-                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,9 +43,6 @@
                             </td>
                             <td class="px-6 py-4">
                                 Rp <?= number_format($item['jumlah_pembayaran'], 0, ',', '.') ?>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="text-red-700">Belum Terkonfirmasi</span>
                             </td>
                         </tr>
                     <?php endforeach ?>

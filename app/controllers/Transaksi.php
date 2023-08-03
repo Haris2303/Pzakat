@@ -133,4 +133,19 @@ class Transaksi extends Controller
             exit;
         }
     }
+
+    public function aksi_hapus_transaksi(): void 
+    {
+        $id = $_POST['id'];
+        $result = $this->model('Kelolapembayaran_model')->hapusPembayaran($id);
+        if($result > 0) {
+            Flasher::setFlash('Transaksi pending berhasil dihapus!', 'success');
+            header('Location: ' . BASEURL . '/user_dashboard/donasi_pending');
+            exit;
+        } else {
+            Flasher::setFlash('Transaksi pending gagal dihapus!', 'danger');
+            header('Location: ' . BASEURL . '/user_dashboard/donasi_pending');
+            exit;
+        }
+    }
 }

@@ -9,7 +9,10 @@
     <div class="row justify-content-between align-items-center mx-1">
       <h6 class="m-0 font-weight-bold text-dark">Detail Kode Pembayaran <?= $data['detail']['nomor_pembayaran'] ?></h6>
       <?php if($data['detail']['status_pembayaran'] !== 'success'): ?>
-        <a href="<?= BASEURL ?>/kelola_pembayaran/aksi_hapus_pembayaran/<?= $data['detail']['status_pembayaran'] ?>/<?= $data['detail']['id_donatur'] ?>" class="btn btn-danger" onclick="return confirm('Anda akan menghapus data <?= $data['detail']['nomor_pembayaran'] ?>?')"><i class="fas fa-trash"></i> Hapus</a>
+        <form action="<?= BASEURL ?>/kelola_pembayaran/aksi_hapus_pembayaran" method="post">
+          <input type="hidden" name="id" value="<?= $data['detail']['id_donatur'] ?>">
+          <button type="submit" class="btn btn-danger" onclick="return confirm('Anda akan menghapus data <?= $data['detail']['nomor_pembayaran'] ?>?')"><i class="fas fa-trash"></i> Hapus</button>
+        </form>
       <?php endif ?>
     </div>
   </div>
@@ -66,7 +69,10 @@
     <div class="mt-3">
       <a href="<?= BASEURL ?>/kelola_pembayaran/<?= $data['detail']['status_pembayaran'] ?>" class="btn btn-secondary"><i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
       <?php if($data['detail']['status_pembayaran'] === 'konfirmasi'):?>
-        <a href="<?= BASEURL ?>/kelola_pembayaran/aksi_konfirmasi_pembayaran/<?= $data['detail']['slug_program'] ?>/<?= $data['detail']['status_pembayaran'] ?>/<?= $data['detail']['id_donatur'] ?>/<?= $_SESSION['username'] ?>/<?= $data['detail']['jumlah_pembayaran'] ?>/<?= join('-', explode(' ',$data['detail']['nama_bank'])) ?>" class="btn btn-primary"><i class="fas fa-arrow-alt-circle-left"></i> Konfirmasi</a>
+        <form action="<?= BASEURL ?>/kelola_pembayaran/aksi_konfirmasi_pembayaran" method="post" class="d-inline">
+          <input type="hidden" name="id_donatur" value="<?= $data['detail']['id_donatur'] ?>">
+          <button type="submit" class="btn btn-primary"><i class="fas fa-arrow-alt-circle-left"></i> Konfirmasi</button>
+        </form>
       <?php endif ?>
     </div>
   </div>
