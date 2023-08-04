@@ -49,7 +49,8 @@ class Daftar extends Controller {
 
       // kirim pesan email untuk aktivasi
       $subject = 'Aktivasi Akun';
-      $msg = 'Klik ini berikut untuk aktivasi akun Anda: ' . BASEURL . '/daftar/aktivasi_akun/' . $token;
+      $href = BASEURL . '/daftar/aktivasi_akun/' . $token;
+      $msg = Design::emailMessageActivation($username, $href);
       $is_email = Utility::sendEmail($email, $subject, $msg);
 
       if($is_email) {

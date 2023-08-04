@@ -267,6 +267,22 @@ class Design {
     }
 
     /**
+     * @return string html
+     */
+    public static function emailMessageActivation(string $username, string $href) {
+        return self::emailHeader().'
+                <p>Halo '.$username.',</p>
+                <p>Terima kasih telah mendaftar di situs kami! Untuk melengkapi proses pendaftaran, silakan mengaktifkan akun Anda dengan mengklik tombol di bawah ini:</p>
+                <p class="btn">
+                    <a href="'. $href .'" style="background-color: #4CAF50; color: white; padding: 12px 20px; text-align: center; text-decoration: none; display: inline-block; border-radius: 4px;">Aktifkan Akun</a>
+                </p>
+                <p>Setelah akun Anda diaktifkan, Anda akan dapat mengakses layanan kami dan menikmati semua fitur yang disediakan.</p>
+                <p>Jika Anda tidak melakukan pendaftaran di situs kami, Anda dapat mengabaikan pesan ini. Akun tersebut tidak akan diaktifkan tanpa tindakan konfirmasi dari Anda.</p>
+                <p>Terima kasih atas perhatian dan dukungan Anda.</p>
+                '.self::emailFooter();
+    }
+
+    /**
      * -------------------------------------------------------------------------------------------------------------------------
      *                  VIEW DATA KOSONG
      * -------------------------------------------------------------------------------------------------------------------------
