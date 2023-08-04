@@ -3,9 +3,31 @@
 class Transaksi extends Controller
 {
 
-    public function index($program = null, $slug = null, $qty = null): void
+    public function index($slug = null, $qty = null): void
     {
+        // jika slug adalah zakat penghasilan dan tidak memiliki post hitung zakat
+        if($slug === 'zakatpenghasilan' && !isset($_POST['hitung-zakat'])) {
+            header("Location: " . BASEURL . '/perhitunganzakat');
+            exit;
+        }
+
+        // cek nilai zakat
+        $nilai_zakat = null;
+        if(isset($_POST['hitung-zakat'])) {
+            $nilai_zakat = $_POST['nilai-zakat'];
+            $nilai_zakat = (int) str_replace(array('Rp', '.', ' '), '', $nilai_zakat);
+            // jika nilai zakat tidak memenuhi nisab
+            if($nilai_zakat < 150000) {
+                Flasher::setFlash('Nilai zakat harus memenuhi nisab!', 'warning');
+                header('Location: ' . BASEURL . '/perhitunganzakat');
+                exit;
+            }
+            $data['nilai-zakat'] = $nilai_zakat;
+        }
+
+        // get data program by slug
         $dataProgram = $this->model('Kelolaprogram_model')->getDataProgramBySlug($slug);
+        
         // jika halaman tidak ditemukan
         if(is_bool($dataProgram)) {
             $this->view('error/404');
@@ -17,7 +39,8 @@ class Transaksi extends Controller
             "dataProgram" => $dataProgram,
             "dataNorek" => $this->model('Norek_model')->getAllDataNorekByProgram($dataProgram['jenis_program']),
             "dataKey" => Utility::getKeyRandom(),
-            "qtyFidyah" => $qty * 45000
+            "qtyFidyah" => $qty * 45000,
+            "nilai-zakat" => $nilai_zakat
         ];
 
         $this->view('template/normalheader', $data);

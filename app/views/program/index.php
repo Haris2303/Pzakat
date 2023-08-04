@@ -22,7 +22,7 @@
                         <!-- <span>Hari Lagi</span> -->
                     </div>
                     <div class="flex">
-                        <a href="<?= BASEURL ?>/transaksi/<?= ($data['dataProgram']['jenis_pembayaran'] !== 'fidyah') ? $data['dataProgram']['jenis_program'] . '/' . $data['dataProgram']['slug'] : 'qty/fidyah/'.$data['dataProgram']['slug'] ?>" class="btn btn-lightgreen">Tunaikan Sekarang</a>
+                        <a href="<?= BASEURL ?>/transaksi/<?= ($data['dataProgram']['jenis_pembayaran'] !== 'fidyah') ? $data['dataProgram']['slug'] : 'qty/fidyah/'.$data['dataProgram']['slug'] ?>" class="btn btn-lightgreen">Tunaikan Sekarang</a>
                     </div>
                 </div>
             </div>

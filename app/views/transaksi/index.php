@@ -38,7 +38,10 @@
                         <!-- jika pembayaran adalah qurban -->
                         <?php elseif((!is_null($data['dataProgram']['nominal_bayar'])) && ($data['dataProgram']['nominal_bayar'] !== 0)): ?>
                             <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi" placeholder="0" value="<?= number_format($data['dataProgram']['nominal_bayar'], 0, ',', '.') ?>" readonly>
-                        <!-- Jika pembayaran bukan fidyah dan qurban -->
+                        <!-- jika pembayaran adalah zakat penghasilan dari perhitungan zakat -->
+                        <?php elseif(!is_null($data['nilai-zakat'])): ?>
+                            <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi" placeholder="0" value="<?= number_format($data['nilai-zakat'], 0, ',', '.') ?>" readonly>
+                        <!-- Jika pembayaran bukan fidyah, qurban, dan perhitungan zakat -->
                         <?php else: ?>
                             <input type="text" id="nominal-donasi" class="form-control px-5" name="nominal-donasi" placeholder="0" onkeydown="return currency(event)">
                         <?php endif ?>
