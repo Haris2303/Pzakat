@@ -124,6 +124,16 @@ class Kelolapembayaran_model {
         return $this->db->resultSet();
     }
 
+    // get data donatur terdaftar, dimana yang diambil hanyalah donatur yang mendaftar dan sudah sukses berdonasi
+    public function getDonaturTerdaftar(): int {
+        $table = $this->table['pembayaran'];
+        $query = "SELECT COUNT(DISTINCT(id_user)) AS 'id_user' FROM $table WHERE (status_pembayaran = :status_pembayaran AND id_user <> :id_user)";
+        $this->db->query($query);
+        $this->db->bind('status_pembayaran', 'success');
+        $this->db->bind('id_user', 0);
+        return $this->db->single()['id_user'];
+    }
+
 
     /**
      * Pemasukkan

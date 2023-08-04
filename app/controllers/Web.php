@@ -5,6 +5,7 @@ class Web extends Controller {
   public function index(): void {
     $data = [
       "judul" => "Home",
+      "donaturTerdaftar" => $this->model('Kelolapembayaran_model')->getDonaturTerdaftar(),
       "dataBerita"  => $this->model('Pageviews_model')->getAllDataBeritaLimit(3),
       "dataArtikel" => $this->model('Pageviews_model')->getAllDataArtikelLimit(4),
       "dataBanner" => $this->model('Banner_model')->getAllDataBanner(),

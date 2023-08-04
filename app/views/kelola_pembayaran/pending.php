@@ -35,19 +35,24 @@
           <tr>
             <th>Nama Donatur</th>
             <th>Nama Bank</th>
-            <th>Jenis Program</th>
             <th>Jumlah Donasi</th>
-            <th>Datetime</th>
-            <th></th>
+            <th>Tenggat Waktu</th>
+            <th>Dibuat Pada</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($data['dataPending'] as $item) : ?>
+            <?php
+            // waktu expired dari kode
+            $kode_expired = explode('_', $item['nomor_pembayaran'])[1] + (24 * 3600);
+            $tenggat_waktu = date('M-d H:i', $kode_expired);
+            ?>
             <tr>
               <td><?= $item['nama_donatur'] ?></td>
               <td><?= $item['nama_bank'] ?></td>
-              <th><?= $item['jenis_program'] ?></th>
               <td><?= number_format($item['jumlah_pembayaran'], 0, ',', '.') ?></td>
+              <td><?= (time() > $kode_expired)? '<span class="text-danger">Expired</span>' : '<span class="text-dark">'.$tenggat_waktu  .'</span>' ?></td>
               <td><?= $item['tanggal_pembayaran'] ?></td>
               <td>
                 <a href="<?= BASEURL ?>/kelola_pembayaran/detail/<?= $item['id_donatur'] ?>" class="btn badge btn-secondary">Detail</a>

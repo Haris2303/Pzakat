@@ -45,7 +45,7 @@
             </div>
             <div class="box-program-item">
               <span class="block text-xs">Donatur Terdaftar</span>
-              <span class="font-bold lg:text-2xl">102341</span>
+              <span class="font-bold lg:text-2xl"><?= $data['donaturTerdaftar'] ?></span>
             </div>
           </div>
         </div>
