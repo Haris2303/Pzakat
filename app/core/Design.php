@@ -2,6 +2,67 @@
 
 class Design {
 
+    /**
+     * --------------------------------------------------------------------------------------------------------------------------
+     *                  VIEW EMAIL
+     * --------------------------------------------------------------------------------------------------------------------------
+     */
+    private static function emailHeader(): string {
+        return '<!DOCTYPE html>
+                <html>
+                
+                <head>
+                    <meta charset="UTF-8">
+                    <title></title>
+                    <style>
+                        .container {
+                            max-width: 600px;
+                            margin: 0 auto;
+                            background-color: #1e1e1e;
+                            border: 1px solid #e4e4e4;
+                            padding: 20px;
+                            border-radius: 4px;
+                        }
+                        h3 {
+                            color: #eeeeee;
+                        }
+                        table {
+                            color: #ffffff;
+                            font-size: 12px;
+                            text-align: left;
+                        }
+                        p {
+                            color: #eeeeee;
+                        }
+                        p.btn {
+                            margin: 2rem 0;
+                        }
+                        p a {
+                            font-size: 14px;
+                            border-radius: 0.4rem;
+                            color: white;
+                            padding: 0.7rem;
+                            text-decoration: none;
+                            background-color: #4CAF50;
+                        }
+                    </style>
+                </head>
+                <body>
+                <div class="container">';
+    }
+
+    private static function emailFooter(): string {
+        return '<p>Salam,<br>
+                        Layanan Lazismu-Unamin</p>
+                    <hr style="border: none; border-top: 1px solid #ccc;">
+                    <p style="text-align: center; font-size: 12px; color: #777;">Email ini adalah email otomatis, mohon jangan
+                        membalas email ini. Jika Anda memiliki pertanyaan, silakan hubungi Customer Service kami.</p>
+                </div>
+                </body>
+
+                </html>';
+    }
+
     // pesan email body
     public static function emailMessageKonfirmasi(int $id):string {
 
@@ -129,28 +190,12 @@ class Design {
         $nama               = $dataKonfirmasi['nama_donatur'];
         $nominal_donasi     = $dataKonfirmasi['jumlah_pembayaran'];
 
-        return '<!DOCTYPE html>
-                <html>
-                <head>
-                    <title>Konfirmasi Pembayaran Gagal</title>
-                </head>
-                <body>
-                    <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px;">
-                        <h2 style="color: #ff0000; text-align: center;">Konfirmasi Pembayaran Gagal</h2>
-                        <p>Dear '. $nama .',</p>
-                        <p>Kami menyesal memberitahu Anda bahwa pembayaran sebesar <strong>Rp '. number_format($nominal_donasi, 0, ',', '.') .'</strong> untuk program <strong>'. $program .'</strong> tidak dapat kami terima karena tidak memenuhi syarat pembayaran. Silakan periksa kembali informasi pembayaran yang Anda berikan.</p>
-                        <p>Jika Anda memiliki pertanyaan atau memerlukan bantuan lebih lanjut, jangan ragu untuk menghubungi tim kami di nomor atau alamat email berikut:</p>
-                        <p>Telepon: 081234567890</p>
-                        <p>Email: email@gmail.com</p>
-                        <p>Kami harap Anda dapat menyelesaikan pembayaran sesuai syarat yang berlaku agar transaksi Anda dapat kami proses dengan baik.</p>
-                        <p>Terima kasih atas perhatian Anda.</p>
-                        <p>Salam,<br>
-                        Layanan Lazismu-Unamin</p>
-                        <hr style="border: none; border-top: 1px solid #ccc; margin-top: 20px;">
-                        <p style="text-align: center; font-size: 12px; color: #777;">Email ini adalah email otomatis, mohon jangan membalas email ini.</p>
-                    </div>
-                </body>
-                </html>';
+        return self::emailHeader() .'
+                <h3>Dear '. $nama .',</h3>
+                <p>Kami menyesal memberitahu Anda bahwa pembayaran sebesar <strong>Rp '. number_format($nominal_donasi, 0, ',', '.') .'</strong> untuk program <strong>'. $program .'</strong> tidak dapat kami terima karena tidak memenuhi syarat pembayaran. Silakan periksa kembali informasi pembayaran yang Anda berikan.</p>
+                <p>Kami harap Anda dapat menyelesaikan pembayaran sesuai syarat yang berlaku agar transaksi Anda dapat kami proses dengan baik.</p>
+                <p>Terima kasih atas perhatian Anda.</p>
+                '. self::emailFooter();
     }
 
     // pesan summary
@@ -172,64 +217,65 @@ class Design {
         // Konversi timestamp 24 jam ke depan ke dalam format tanggal dan waktu
         $futureDateTime = date('Y-m-d H:i', $futureTimestamp);
         
-        return '<!DOCTYPE html>
-                <html>
-                <head>
-                    <meta charset="UTF-8">
-                    <title>Pembayaran Belum Dibayarkan</title>
-                    <style>
-                        .button {
-                            background-color: #4CAF50;
-                            border: none;
-                            color: white;
-                            padding: 10px 20px;
-                            text-align: center;
-                            text-decoration: none;
-                            display: inline-block;
-                            font-size: 16px;
-                            margin: 4px 2px;
-                            cursor: pointer;
-                            border-radius: 4px;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px;">
-                        <h1>Pembayaran Belum Dibayarkan</h1>
-                        <p>Dear '. $nama .',</p>
-                        <p>Kami ingin memberikan pemberitahuan penting mengenai pembayaran yang belum dibayarkan pada akun Anda.</p>
-                        
-                        <h2>Detail pembayaran yang belum diselesaikan:</h2>
-                        <ul>
-                            <li>Kode Pembayaran.: '. $kode .'</li>
-                            <li>Nama Program : '. $nama_program .'</li>
-                            <li>Jumlah Tagihan: Rp '. $nominal .'</li>
-                            <li>Tenggat Pembayaran: '. $futureDateTime .'</li>
-                        </ul>
-                        
-                        <p>Kami memahami bahwa kadang-kadang ada kendala atau kelalaian yang dapat terjadi. Untuk menghindari gangguan layanan atau akun yang dinonaktifkan, harap segera melakukan pembayaran sebelum tanggal jatuh tempo yang disebutkan di atas.</p>
-                        
-                        <p><a class="button" href="'. $tautan .'">Bayar Sekarang</a></p>
-                        
-                        <p>Jika Anda memerlukan bantuan atau memiliki pertanyaan terkait pembayaran ini, silakan hubungi kami melalui nomor telepon berikut:</p>
-                        <p>Nomor Telepon: 08123456890</p>
-                        
-                        <p>Kami sangat menghargai kerjasama Anda dalam menyelesaikan pembayaran ini dengan segera. Terima kasih atas perhatian dan waktu Anda.</p>
-                        <p>Terima kasih atas perhatian Anda.</p>
-                        <p>Salam,<br>
-                        Layanan Lazismu-Unamin</p>
-                        <hr style="border: none; border-top: 1px solid #ccc; margin-top: 20px;">
-                        <p style="text-align: center; font-size: 12px; color: #777;">Email ini adalah email otomatis, mohon jangan membalas email ini. Jika Anda memiliki pertanyaan, silakan hubungi Customer Service kami di nomor telepon yang tertera di atas.</p>
-                    </div>
-                </body>
-                </html>
-                ';
+        return self::emailHeader() .'
+                <h3>Dear '. $nama .',</h3>
+                <p>Kami ingin memberikan pemberitahuan penting mengenai pembayaran yang belum dibayarkan pada akun Anda.</p>
+                <p><strong>Detail pembayaran yang belum diselesaikan</strong>:</p>
+                <table cellpadding="5" cellspacing="0">
+                    <tr>
+                        <th>Kode Pembayaran</th>
+                        <td>: '. $kode .'</td>
+                    </tr>
+                    <tr>
+                        <th>Nama Program</th>
+                        <td>: '. $nama_program .'</td>
+                    </tr>
+                    <tr>
+                        <th>Jumlah Tagihan</th>
+                        <td>: Rp '. $nominal .'</td>
+                    </tr>
+                    <tr>
+                        <th>Tenggat Pembayaran</th>
+                        <td>: '. $futureDateTime .'</td>
+                    </tr>
+                </table>
+                <p>Kami memahami bahwa kadang-kadang ada kendala atau kelalaian yang dapat terjadi. Untuk menghindari gangguan
+                    layanan atau akun yang dinonaktifkan, harap segera melakukan pembayaran sebelum tanggal jatuh tempo yang
+                    disebutkan di atas.</p>
+                <p class="btn"><a href="'. $tautan .'">Bayar Sekarang</a></p>
+                <p>Kami sangat menghargai kerjasama Anda dalam menyelesaikan pembayaran ini dengan segera. Terima kasih atas
+                    perhatian dan waktu Anda.</p>
+                
+            '. self::emailFooter();
     }
 
+    /**
+     * @return string html
+     */
+    public static function emailMessageForgot(int $user_id, string $email, string $token): string {
+        $controller = new Controller();
+        $nama = $controller->model('User_model')->getNamaByIdUser($user_id);
+
+        return self::emailHeader().'
+                    <h3>Hello, '.$nama.'</h3>
+                    <p>Seseorang telah meminta untuk mereset password akun Anda. Jika Anda tidak melakukan permintaan ini, Anda dapat
+                        mengabaikan email ini.</p>
+                    <p>Jika Anda ingin mereset password Anda, kunjungi halaman reset password kami:</p>
+                    <p class="btn"><a href="' . BASEURL . '/login/ubah_password/'.$email.'/'.$token.'">Reset Password</a></p>
+                    <p>Terima kasih,</p>
+                '.self::emailFooter();
+    }
+
+    /**
+     * -------------------------------------------------------------------------------------------------------------------------
+     *                  VIEW DATA KOSONG
+     * -------------------------------------------------------------------------------------------------------------------------
+     */
     public static function blankData(): string {
         return '<div class="flex flex-col justify-center items-center text-lightgray mt-20">
                     <i class="fas fa-solid fa-file text-5xl"></i>
                     <span class="mt-3 text-sm">Data Kosong</span>
                 </div>';
     }
+
 }

@@ -43,7 +43,7 @@ class User_dashboard extends Controller {
         $pagination = new Pagination('vwAllPembayaran', $this->data_pending, $this->limit, $page);
 
         $paginate = $pagination->setPager(function() {
-            $where = "WHERE status_pembayaran = 'pending' AND id_user = $this->id_user ORDER BY id_donatur DESC";
+            $where = "WHERE status_pembayaran = 'pending' AND id_user = $this->id_user ORDER BY tanggal_pembayaran DESC";
             return $where;
         });
         
@@ -63,7 +63,7 @@ class User_dashboard extends Controller {
         $pagination = new Pagination('vwAllPembayaran', $this->data_konfirmasi, $this->limit, $page);
 
         $paginate = $pagination->setPager(function() {
-            $where = "WHERE status_pembayaran = 'konfirmasi' AND id_user = $this->id_user";
+            $where = "WHERE status_pembayaran = 'konfirmasi' AND id_user = $this->id_user ORDER BY tanggal_pembayaran DESC";
             return $where;
         });
 
@@ -83,7 +83,7 @@ class User_dashboard extends Controller {
         $pagination = new Pagination('vwAllPembayaran', $this->data_sukses, $this->limit, $page);
 
         $paginate = $pagination->setPager(function() {
-            $where = "WHERE status_pembayaran = 'success' AND id_user = $this->id_user";
+            $where = "WHERE status_pembayaran = 'success' AND id_user = $this->id_user ORDER BY tanggal_pembayaran DESC";
             return $where;
         });
 

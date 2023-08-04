@@ -106,7 +106,7 @@ class Transaksi extends Controller
             
             // jika email berhasil terkirim
             if($isEmail) {
-                Flasher::setFlash('Cek Email Anda jika halaman ini hilang!', 'warning');
+                Flasher::setFlash('Cek Email Anda jika halaman ini hilang!', 'info');
                 header("Location: " . BASEURL . '/transaksi/summary/' . $key);
                 exit;
             }

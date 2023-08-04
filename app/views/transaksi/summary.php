@@ -14,6 +14,12 @@
         </div>
     </div>
 
+    <div class="row justify-content-center mt-2">
+        <div class="col-lg-6">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">Pembayaran sebelum 24 jam.</div>
+        </div>
+    </div>
+
     <div class="row justify-content-center mt-2 mb-5">
         <div class="col-lg-6 border-bottom shadow-lg py-4 px-3">
             <div class="mb-3 border-bottom">

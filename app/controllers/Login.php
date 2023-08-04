@@ -90,12 +90,12 @@ class Login extends Controller {
     $token = $this->model('Login_model')->updateToken($token, $user_id);
 
     // send email
-    $message = 'Klik link berikut untuk mengubah password Anda: ' . BASEURL . '/login/ubah_password/' . $email . '/' . $token;
+    $message = Design::emailMessageForgot($user_id, $email, $token);
     $email = Utility::sendEmail($email, 'Lupa Password', $message);
 
     if($email) {
       Flasher::setFlash('Pesan Berhasil terkirim! Silahkan cek email Anda', 'success');
-      header('Location: '. BASEURL . '/login/lupa_password');
+      header('Location: '. BASEURL . '/login');
       exit;
     }
   }
