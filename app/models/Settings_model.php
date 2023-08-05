@@ -24,14 +24,13 @@ class Settings_model {
         $this->db->query($cek);
         $this->db->bind('username', $username);
         $row = $this->db->single();
-        if(!password_verify($password_lama, $row['password'])) {
-            return 'Password Salah!';
-        }
+        if(!password_verify($password_lama, $row['password'])) return 'Password Salah!';
 
         // cek konfirmasi password
-        if($password_baru !== $password_konfirmasi) {
-            return 'Password Konfirmasi Salah!';
-        }
+        if($password_baru !== $password_konfirmasi) return 'Password Konfirmasi Salah!';
+
+        // cek panjang password
+        if(strlen($password_baru) < 8) return 'Password harus lebih dari 8 karakter!';
 
         // hash password
         $password_baru = password_hash($password_baru, PASSWORD_DEFAULT);

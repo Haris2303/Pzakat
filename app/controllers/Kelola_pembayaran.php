@@ -44,7 +44,7 @@ class Kelola_pembayaran extends Controller
       "judul" => "Pembayaran Pending",
       "css" => VENDOR_TABLES_CSS,
       "script" => VENDOR_TABLES,
-      "dataPending" => $this->model("Kelolapembayaran_model")->getAllDataPembayaranPending(),
+      "dataPending" => $this->model("Kelolapembayaran_model")->getDataPembayaran('pending'),
       "countKonfirmasi" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranKonfirmasi()),
     ];
 

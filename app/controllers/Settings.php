@@ -3,9 +3,40 @@
 class Settings extends Controller {
 
     public function index(): void {
+        if($_SESSION['level'] === '1') {
+            header('Location: ' . BASEURL . '/settings/admin');
+            exit;
+        } else {
+            header('Location: ' . BASEURL . '/settings/amil');
+            exit;
+        }
+    }
+
+    public function amil(): void {
+        if($_SESSION['level'] === '1') {
+            header('Location: ' . BASEURL . '/settings/admin');
+            exit;
+        }
+
         $data = [
             "judul" => "Pengaturan Akun",
             "dataAmil" => $this->model('Amil_model')->getDataAmilByUsername($_SESSION['username'])
+        ];
+
+        $this->view('dashboard/sidebar', $data);
+        $this->view('settings/index', $data);
+        $this->view('dashboard/footer', $data);
+    }
+
+    public function admin(): void {
+        if($_SESSION['level'] === '2') {
+            header('Location: ' . BASEURL . '/settings/amil');
+            exit;
+        }
+
+        $data = [
+            "judul" => "Pengaturan Akun",
+            "dataAmil" => $this->model('Useradmin_model')->getDataByUsername($_SESSION['username'])
         ];
 
         $this->view('dashboard/sidebar', $data);

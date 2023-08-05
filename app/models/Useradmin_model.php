@@ -2,7 +2,6 @@
 
 class Useradmin_model
 {
-
   private $table  = [
     'admin' => 'tb_admin',
     'user'  => 'tb_user'
@@ -14,6 +13,20 @@ class Useradmin_model
   public function __construct()
   {
     $this->db = new Database();
+  }
+
+  /**
+   * ------------------------------------------------------------------------------------------------------------------------------
+   *          GET DATA
+   * -------------------------------------------------------------------------------------------------------------------------------
+   */
+
+  // get data by username
+  public function getDataByUsername($username): array {
+    $query = "SELECT * FROM $this->view WHERE username = :username";
+    $this->db->query($query);
+    $this->db->bind('username', $username);
+    return $this->db->single();
   }
 
   public function addUserAdmin($data)

@@ -117,9 +117,8 @@ class Kelolapembayaran_model {
     public function getDataPembayaran(string $status_pembayaran = null, string $where = null, string $value = null): array|bool {
         $view = $this->view['dataAll'];
         $query = "SELECT * FROM $view";
-        if(!is_null($where) || !is_null($status_pembayaran) || !is_null($value)) {
-            $query = "SELECT * FROM $view WHERE (status_pembayaran = '$status_pembayaran' AND $where = '$value')";
-        }
+        if(!is_null($status_pembayaran) && !is_null($where) || !is_null($value)) $query .= " WHERE (status_pembayaran = '$status_pembayaran' AND $where = '$value') ORDER BY tanggal_pembayaran DESC";
+        elseif(!is_null($status_pembayaran)) $query .= " WHERE status_pembayaran = '$status_pembayaran' ORDER BY tanggal_pembayaran DESC";
         $this->db->query($query);
         return $this->db->resultSet();
     }

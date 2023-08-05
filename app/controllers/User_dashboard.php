@@ -6,6 +6,7 @@ class User_dashboard extends Controller {
     protected $data_pending = null;
     protected $data_konfirmasi = null;
     protected $data_sukses = null;
+    protected $data_failed = null;
     protected $limit = 5;
 
     public function __construct()
@@ -22,6 +23,7 @@ class User_dashboard extends Controller {
         // set data
         $this->data_pending = $this->model('Kelolapembayaran_model')->getDataPembayaran('pending', 'id_user', $this->id_user);
         $this->data_konfirmasi = $this->model('Kelolapembayaran_model')->getDataPembayaran('konfirmasi', 'id_user', $this->id_user);
+        $this->data_failed = $this->model('Kelolapembayaran_model')->getDataPembayaran('failed', 'id_user', $this->id_user);
         $this->data_sukses = $this->model('Kelolapembayaran_model')->getDataPembayaran('success', 'id_user', $this->id_user);
     }
 
@@ -76,6 +78,26 @@ class User_dashboard extends Controller {
         $this->view('template/header', $data);
         $this->view('template/user_sidebar', $data);
         $this->view('user_dashboard/donasi_konfirmasi', $data);
+        $this->view('template/footer', $data);
+    }
+
+    public function donasi_gagal($page = 1) {
+        $pagination = new Pagination('vwAllPembayaran', $this->data_failed, $this->limit, $page);
+
+        $paginate = $pagination->setPager(function() {
+            $where = "WHERE status_pembayaran = 'failed' AND id_user = $this->id_user ORDER BY tanggal_pembayaran DESC";
+            return $where;
+        });
+
+        $data = [
+            'judul' => 'Donasi Gagal',
+            'gagal' => $paginate,
+            'no' => (($page - 1) * $this->limit) + 1
+        ];
+
+        $this->view('template/header', $data);
+        $this->view('template/user_sidebar', $data);
+        $this->view('user_dashboard/donasi_gagal', $data);
         $this->view('template/footer', $data);
     }
 
