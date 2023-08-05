@@ -31,6 +31,12 @@
                         <span class="text-sm">Donasi Konfirmasi</span>
                     </div>
                 </a>
+                <a href="<?= BASEURL ?>/user_dashboard/donasi_gagal">
+                    <div class="flex gap-3 items-center hover:bg-green p-3 cursor-pointer transition-300 rounded-lg hover:text-white <?= ($data['judul'] === 'Konfirmasi Donasi') ? 'bg-green text-white' : '' ?>">
+                        <i class="fas fa-times-circle"></i>
+                        <span class="text-sm">Donasi Gagal</span>
+                    </div>
+                </a>
                 <a href="<?= BASEURL ?>/user_dashboard/donasi_sukses">
                     <div class="flex gap-3 items-center hover:bg-green p-3 cursor-pointer transition-300 rounded-lg hover:text-white <?= ($data['judul'] === 'Donasi Sukses') ? 'bg-green text-white' : '' ?>">
                         <i class="fas fa-solid fa-check-circle"></i>

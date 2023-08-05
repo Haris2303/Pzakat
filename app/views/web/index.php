@@ -307,32 +307,34 @@
           <!-- Additional required wrapper -->
           <div class="swiper-wrapper">
             <!-- Slides -->
-            <div class="swiper-slide">
-              <div class="flex lg:flex-nowrap flex-wrap gap-10 px-5">
-                <div class="lg:w-1/2">
-                  <a href="">
-                    <img src="<?= BASEURL ?>/img/logo/logo.png" alt="" class="w-full h-full rounded-lg">
-                  </a>
-                </div>
-                <div class="lg:w-1/2 relative">
-                  <span class="absolute bg-lightgreen text-darkgreen text-sm rounded-lg block px-3">Laporan</span>
-                  <div class="flex flex-col justify-center gap-5 h-full mt-5">
-                    <div class="font-semibold text-white">
-                      <h3>Laporan keuangan tahun ini boss</h3>
-                    </div>
-                    <div class="text-sm text-lightgreen">
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, quasi aliquam? Enim in ex dolores perferendis numquam architecto exercitationem! Soluta?</p>
-                    </div>
-                    <a href="">
-                      <div class="w-40">
-                        <button class="btn bg-green text-darkgreen">Detail</button>
-                      </div>
+            <?php foreach ($data['laporan'] as $item) : ?>
+              <div class="swiper-slide">
+                <div class="flex lg:flex-nowrap flex-wrap gap-10 px-5">
+                  <div class="lg:w-1/2">
+                    <a href="<?= $item['link'] ?>" target="_blank">
+                      <img src="<?= BASEURL ?>/img/laporan/keuangan.jpg" alt="" class="w-full h-full rounded-lg">
                     </a>
                   </div>
+                  <div class="lg:w-1/2 relative">
+                    <span class="absolute bg-lightgreen text-darkgreen text-sm rounded-lg block px-3">Laporan</span>
+                    <div class="flex flex-col justify-center gap-5 h-full mt-5">
+                      <div class="font-semibold text-white">
+                        <h3>Laporan keuangan tahun <?= $item['tahun'] ?></h3>
+                      </div>
+                      <div class="text-sm text-lightgreen">
+                        <p><?= $item['keterangan'] ?></p>
+                      </div>
+                      <a href="<?= $item['link'] ?>">
+                        <div class="w-40">
+                          <button class="btn bg-green text-white">Detail</button>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
                 </div>
-              </div>
 
-            </div>
+              </div>
+            <?php endforeach ?>
             <!-- <div class="swiper-slide">
               <img src="<?= BASEURL ?>/img/banner/2.jpeg" alt="" class="h-[200px] img-slide">
             </div>
@@ -352,8 +354,8 @@
       </div>
 
       <!-- button -->
-      <div class="w-40 m-auto">
-        <button class="mt-10 btn btn-lightgreen">Lihat Semua</button>
+      <div class="w-40 m-auto mt-10">
+        <a href="<?= BASEURL ?>/laporan_keuangan" class="px-5 btn btn-lightgreen">Lihat Semua</a>
       </div>
     </div>
   </div>

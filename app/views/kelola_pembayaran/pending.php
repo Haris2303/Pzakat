@@ -34,10 +34,9 @@
         <thead>
           <tr>
             <th>Nama Donatur</th>
-            <th>Nama Bank</th>
+            <th>Kode Pembayaran</th>
             <th>Jumlah Donasi</th>
             <th>Tenggat Waktu</th>
-            <th>Dibuat Pada</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -50,17 +49,18 @@
             ?>
             <tr>
               <td><?= $item['nama_donatur'] ?></td>
-              <td><?= $item['nama_bank'] ?></td>
-              <td><?= number_format($item['jumlah_pembayaran'], 0, ',', '.') ?></td>
+              <td><?= explode("_", $item['nomor_pembayaran'])[0] ?></td>
+              <td>Rp <?= number_format($item['jumlah_pembayaran'], 0, ',', '.') ?></td>
               <td><?= (time() > $kode_expired)? '<span class="text-danger">Expired</span>' : '<span class="text-dark">'.$tenggat_waktu  .'</span>' ?></td>
-              <td><?= $item['tanggal_pembayaran'] ?></td>
               <td>
                 <a href="<?= BASEURL ?>/kelola_pembayaran/detail/<?= $item['id_donatur'] ?>" class="btn badge btn-secondary">Detail</a>
-                <form action="<?= BASEURL ?>/kelola_pembayaran/aksi_hapus_pembayaran" method="post" class="d-inline">
-                  <input type="hidden" name="pembayaran" value="pending">
-                  <input type="hidden" name="id" value="<?= $item['id_donatur'] ?>">
-                  <button type="submit" class="btn badge btn-danger" onclick="return confirm('Anda akan menghapus data <?= $item['nama_donatur'] ?>?')">Hapus</button>
-                </form>
+                <?php if(time() > $kode_expired): ?>
+                  <form action="<?= BASEURL ?>/kelola_pembayaran/aksi_hapus_pembayaran" method="post" class="d-inline">
+                    <input type="hidden" name="pembayaran" value="pending">
+                    <input type="hidden" name="id" value="<?= $item['id_donatur'] ?>">
+                    <button type="submit" class="btn badge btn-danger" onclick="return confirm('Anda akan menghapus data <?= $item['nama_donatur'] ?>?')">Hapus</button>
+                  </form>
+                <?php endif ?>
               </td>
             </tr>
           <?php endforeach ?>

@@ -13,7 +13,8 @@ class Web extends Controller {
       "dataZakat" => $this->model('Kelolaprogram_model')->getDataProgramZakatLimit(1),
       "jumlahProgram" => count($this->model('Kelolaprogram_model')->getAllDataProgramAktifTunai()),
       "danaTerkumpul" => $this->model('Kelolapembayaran_model')->getDataPemasukkanHarian(),
-      "src_video" => $this->model('Video_model')->getData()['link']
+      "src_video" => $this->model('Video_model')->getData()['link'],
+      "laporan" => $this->model('Laporantahunan_model')->getDataLimit(3)
     ];
     $this->view('template/header', $data);
     $this->view('web/index', $data);
@@ -28,6 +29,11 @@ class Web extends Controller {
   public function getTemplate(): void
   {
     echo $this->view('template/spinner');
+  }
+
+  public function laporan(): void 
+  {
+
   }
 
   public function profil(): void {

@@ -103,11 +103,13 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
     </li>
 
     <!-- Nav Item - Masjid -->
+    <?php if($_SESSION['level'] === '2'): ?>
     <li class="nav-item">
       <a class="nav-link" href="<?= BASEURL ?>/masjid">
         <i class="fas fa-fw fa-mosque"></i>
         <span>Masjid</span></a>
     </li>
+    <?php endif ?>
 
     <!-- nav item - Program -->
     <li class="nav-item">
@@ -127,6 +129,7 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
     </li>
 
     <!-- nav item - Kelola Pembayaran -->
+    <?php if($_SESSION['level'] === '2'): ?>
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#callapsePembayaran" aria-expanded="true" aria-controls="callapsePembayaran">
         <i class="fas fa-fw fa-donate"></i>
@@ -140,21 +143,24 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
         </div>
       </div>
     </li>
+    <?php endif ?>
 
     <!-- nav item - Pengeluaran -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePengeluaran" aria-expanded="true" aria-controls="collapsePengeluaran">
-        <i class="fas fa-fw fa-inbox"></i>
-        <span>Pengeluaran</span>
-      </a>
-      <div id="collapsePengeluaran" class="collapse" aria-labelledby="headingPrograms" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Kategori pengeluaran:</h6>
-            <a class="collapse-item" href="<?= BASEURL ?>/pengeluaran/">Pengeluaran Tunai</a>
-            <a class="collapse-item" href="<?= BASEURL ?>/pengeluaran/barang">Pengeluaran Barang</a>
+    <?php if($_SESSION['level'] === '2'): ?>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePengeluaran" aria-expanded="true" aria-controls="collapsePengeluaran">
+          <i class="fas fa-fw fa-inbox"></i>
+          <span>Pengeluaran</span>
+        </a>
+        <div id="collapsePengeluaran" class="collapse" aria-labelledby="headingPrograms" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Kategori pengeluaran:</h6>
+              <a class="collapse-item" href="<?= BASEURL ?>/pengeluaran/">Pengeluaran Tunai</a>
+              <a class="collapse-item" href="<?= BASEURL ?>/pengeluaran/barang">Pengeluaran Barang</a>
+          </div>
         </div>
-      </div>
-    </li>
+      </li>
+    <?php endif ?>
 
     <?php if($_SESSION['level'] === '1'): ?>
       <!-- Nav Item - Norek -->
@@ -165,6 +171,23 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
       </li>
     <?php endif ?>
 
+    <!-- Nav Item - Laporan -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#callapseLaporan" aria-expanded="true" aria-controls="callapseLaporan">
+        <i class="fas fa-fw fa-file-pdf"></i>
+        <span>Laporan</span>
+      </a>
+      <div id="callapseLaporan" class="collapse" aria-labelledby="headingPrograms" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Kategori Program</h6>
+          <a class="collapse-item" href="<?= BASEURL ?>/laporan/zakat" target="_blank">Zakat</a>
+          <a class="collapse-item" href="<?= BASEURL ?>/laporan/infaq" target="_blank">Infaq</a>
+          <a class="collapse-item" href="<?= BASEURL ?>/laporan/donasi" target="_blank">Donasi</a>
+          <a class="collapse-item" href="<?= BASEURL ?>/laporan/qurban" target="_blank">Qurban</a>
+          <a class="collapse-item" href="<?= BASEURL ?>/laporan/ramadhan" target="_blank">Ramadhan</a>
+        </div>
+      </div>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -181,7 +204,7 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
         <span>Banner</span></a>
     </li>
 
-    <!-- Nav Item - Banner -->
+    <!-- Nav Item - Video Player -->
     <?php if($_SESSION['level'] === '1'): ?>
       <li class="nav-item">
         <a class="nav-link" href="<?= BASEURL ?>/video_player">
@@ -219,23 +242,15 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
       </div>
     </li>
 
-    <!-- Nav Item - Laporan -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#callapseLaporan" aria-expanded="true" aria-controls="callapseLaporan">
-        <i class="fas fa-fw fa-folder"></i>
-        <span>Laporan</span>
-      </a>
-      <div id="callapseLaporan" class="collapse" aria-labelledby="headingPrograms" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Kategori Program</h6>
-          <a class="collapse-item" href="<?= BASEURL ?>/laporan/zakat" target="_blank">Zakat</a>
-          <a class="collapse-item" href="<?= BASEURL ?>/laporan/infaq" target="_blank">Infaq</a>
-          <a class="collapse-item" href="<?= BASEURL ?>/laporan/donasi" target="_blank">Donasi</a>
-          <a class="collapse-item" href="<?= BASEURL ?>/laporan/qurban" target="_blank">Qurban</a>
-          <a class="collapse-item" href="<?= BASEURL ?>/laporan/ramadhan" target="_blank">Ramadhan</a>
-        </div>
-      </div>
-    </li>
+    <!-- Nav Item - Banner -->
+    <?php if($_SESSION['level'] === '1'): ?>
+      <li class="nav-item">
+        <a class="nav-link" href="<?= BASEURL ?>/laporan_tahunan">
+          <i class="fas fa-fw fa-file-upload"></i>
+          <span>Laporan Tahunan</span></a>
+      </li>
+    <?php endif ?>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
@@ -262,18 +277,6 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
         </button>
 
         <span>Status <strong><?= ($_SESSION['level'] === '1')? 'SuperAdmin' : 'Admin' ?></strong></span>
-
-        <!-- Topbar Search -->
-        <!-- <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-          <div class="input-group">
-            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-              <button class="btn btn-primary" type="button">
-                <i class="fas fa-search fa-sm"></i>
-              </button>
-            </div>
-          </div>
-        </form> -->
 
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
@@ -414,11 +417,11 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-              <a class="dropdown-item" href="<?= BASEURL ?>/profile/">
+              <a class="dropdown-item" href="<?= BASEURL ?>/profile<?= ($_SESSION['level'] === '1') ? '/admin' : '/amil'?>">
                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                 Profil Saya
               </a>
-              <a class="dropdown-item" href="<?= BASEURL ?>/settings">
+              <a class="dropdown-item" href="<?= BASEURL ?>/settings<?= ($_SESSION['level'] === '1') ? '/admin' : '/amil'?>">
                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                 Pengaturan
               </a>

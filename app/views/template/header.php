@@ -74,7 +74,7 @@ if(isset($_SESSION['level']) && $_SESSION['level'] !== '3') {
                     <div class="lg:mt-2 lg:p-3 lg:scale-0 lg:group-hover:scale-110 lg:h-auto h-0 text-sm lg:text-md overflow-hidden transition-500 dropdown-menu flex gap-1 flex-col lg:absolute top-5 bg-white text-lightgray rounded-md w-52 lg:shadow-md">
                       <a class="dropdown-item hover:text-green transition-300" href="<?= BASEURL ?>/latarbelakang">Latar Belakang</a>
                       <a class="dropdown-item hover:text-green transition-300" href="<?= BASEURL ?>/visimisi">Visi Misi dan Prinsip</a>
-                      <a class="dropdown-item hover:text-green transition-300" href="#">Laporan Keuangan</a>
+                      <a class="dropdown-item hover:text-green transition-300" href="<?= BASEURL ?>/laporan_keuangan">Laporan Keuangan</a>
                       <a class="dropdown-item hover:text-green transition-300" href="<?= BASEURL ?>/contact">Contact Us</a>
                     </div>
                   </div>
