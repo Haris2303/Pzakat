@@ -13,7 +13,7 @@ $controller = New Controller();
 
 $countKonfirmasi = count($controller->model('Kelolapembayaran_model')->getAllDataPembayaranKonfirmasi());
 $countPending = count($controller->model('Kelolapembayaran_model')->getAllDataPembayaranPending());
-$programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif();
+$programNameAktif = $this->model('Kelolaprogram_model')->getAllKategoriProgram('aktif');
 
 ?>
 
@@ -120,7 +120,9 @@ $programNameAktif = $this->model('Kelolaprogram_model')->getAllProgramNameAktif(
       <div id="callapsePrograms" class="collapse" aria-labelledby="headingPrograms" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Kategori program:</h6>
-            <a class="collapse-item" href="<?= BASEURL ?>/kelola_program">Kelola Program</a>
+            <?php if($_SESSION['level'] === '1'): ?>
+              <a class="collapse-item" href="<?= BASEURL ?>/kelola_program">Kelola Program</a>
+            <?php endif ?>
             <?php foreach ($programNameAktif as $item): ?>
               <a class="collapse-item" href="<?= BASEURL ?>/kelola_program/<?= strtolower($item['nama_kategoriprogram']) ?>"><?= $item['nama_kategoriprogram'] ?></a>
             <?php endforeach ?>

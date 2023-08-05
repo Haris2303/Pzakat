@@ -18,22 +18,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Zakat</td>
-            <td>Telah Aktif</td>
-          </tr>
-          <tr>
-            <td>Infaq</td>
-            <td>Telah Aktif</td>
-          </tr>
-          <tr>
-            <td>Donasi</td>
-            <td>Telah Aktif</td>
-          </tr>
-          <tr>
-            <td>Qurban</td>
-            <td>Telah Aktif</td>
-          </tr>
+          <?php foreach($data['program'] as $item): ?>
+            <tr>
+              <td><?= $item['nama_kategoriprogram'] ?></td>
+              <td>
+                <form action="<?= BASEURL ?>/kelola_program/aksi_status_program" method="post">
+                  <input type="hidden" name="id" value="<?= $item['id_kategoriprogram'] ?>">
+                  <input type="hidden" name="status" value="<?= $item['status'] ?>">
+                  <button type="submit" class="btn badge btn-<?= ($item['status'] === 'aktif') ? 'success' : 'danger' ?>"><?= ($item['status'] === 'aktif') ? 'Aktif' : 'Nonaktif'?></button>
+                </form>
+              </td>
+            </tr>
+          <?php endforeach ?>
         </tbody>
       </table>
     </div>

@@ -9,7 +9,7 @@ class Web extends Controller {
       "dataBerita"  => $this->model('Pageviews_model')->getAllDataBeritaLimit(3),
       "dataArtikel" => $this->model('Pageviews_model')->getAllDataArtikelLimit(4),
       "dataBanner" => $this->model('Banner_model')->getAllDataBanner(),
-      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif(),
+      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllKategoriProgram('aktif'),
       "dataZakat" => $this->model('Kelolaprogram_model')->getDataProgramZakatLimit(1),
       "jumlahProgram" => count($this->model('Kelolaprogram_model')->getAllDataProgramAktifTunai()),
       "danaTerkumpul" => $this->model('Kelolapembayaran_model')->getDataPemasukkanHarian(),

@@ -20,7 +20,7 @@ class Dashboard extends Controller{
       "sumDanaQurban"  => $this->model('Kelolaprogram_model')->getSumProgram('qurban'),
       "sumDanaDonasi"  => $this->model('Kelolaprogram_model')->getSumProgram('donasi'),
       "sumDanaRamadhan"  => $this->model('Kelolaprogram_model')->getSumProgram('ramadhan'),
-      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
+      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllKategoriProgram('aktif')
     ];
     $this->view('dashboard/sidebar', $data);
     $this->view('dashboard/index', $data);

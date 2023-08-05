@@ -11,11 +11,15 @@ class Kelola_program extends Controller
 
     public function index(): void
     {
+        // jika yang akses bukan admin
+        if($_SESSION['level'] !== '1') {
+            header('Location: ' . BASEURL . '/');
+            exit;
+        }
+        
         $data = [
             "judul" => "Kelola Programs",
-            "css" => VENDOR_TABLES_CSS,
-            "script" => VENDOR_TABLES,
-            "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
+            "program" => $this->model('Kelolaprogram_model')->getAllKategoriProgram()
         ];
 
         $this->view('dashboard/sidebar', $data);
@@ -71,7 +75,6 @@ class Kelola_program extends Controller
             "css" => VENDOR_TABLES_CSS,
             "script" => VENDOR_TABLES,
             "dataInfaq" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('infaq'),
-            "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
         ];
 
         $this->view('dashboard/sidebar', $data);
@@ -160,15 +163,26 @@ class Kelola_program extends Controller
      * @param Slug Type String
      * 
     */
-    public function detail(string $slug): void
+    public function detail(string $slug = null): void
     {
+        // jika slug null
+        if(is_null($slug)) {
+            header('Location: ' . BASEURL . '/');
+            exit;
+        }
+
         $data = [
             "judul" => "Detail Program",
             "css" => VENDOR_TABLES_CSS,
             "script" => VENDOR_TABLES,
-            "dataProgram" => $this->model('Kelolaprogram_model')->getDataProgramBySlug($slug),
-            "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
+            "dataProgram" => $this->model('Kelolaprogram_model')->getDataProgramAktifBySlug($slug),
         ];
+
+        // cek data model
+        if(is_bool($data['dataProgram'])) {
+            $this->view('error/404');
+            exit;
+        }
 
         $this->view('dashboard/sidebar', $data);
         $this->view('kelola_program/detail', $data);
@@ -225,6 +239,22 @@ class Kelola_program extends Controller
         } else {
             Flasher::setFlash($result, 'danger');
             header('Location: ' . BASEURL . "/kelola_program/$program");
+            exit;
+        }
+    }
+
+    public function aksi_status_program(): void
+    {
+        $update_to = ($_POST['status'] === 'aktif') ? 'pasif' : 'aktif';
+        $pesan = ($_POST['status'] === 'aktif') ? 'Nonaktifkan' : 'Aktifkan';
+        $result = $this->model('Kelolaprogram_model')->ubahStatusProgram($_POST['id'], $update_to);
+        if($result > 0) {
+            Flasher::setFlash('Status berhasil di ' . $pesan . '!', 'success');
+            header('Location: ' . BASEURL . '/kelola_program');
+            exit;
+        } else {
+            Flasher::setFlash('Status gagal di ' . $pesan . '!', 'danger');
+            header('Location: ' . BASEURL . '/kelola_program');
             exit;
         }
     }

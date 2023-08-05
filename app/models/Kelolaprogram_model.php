@@ -4,6 +4,7 @@ class Kelolaprogram_model {
 
     private $db;
     private $table = 'tb_program';
+    private $tb_kategori = 'tb_kategoriprogram';
     private $view = [
         "allZakat" => "vwAllDataZakat",
         "allInfaq" => "vwAllDataInfaq",
@@ -11,7 +12,6 @@ class Kelolaprogram_model {
         "allDonasi" => "vwAllDataDonasi",
         "allRamadhan" => "vwAllDataRamadhan",
         "allDataProgramBarang" => "vwAllProgramBarangAktif",
-        "allProgramNameAktif" => "vwAllProgramNameAktif",
         "allDataProgramAktif" => "vwAllDataProgramAktif",
         "allDataProgramAktifTunai" => "vwAllProgramAktifTunai",
         "allDataProgramHaveMoney"   => "vwAllProgramHaveMoney",
@@ -89,11 +89,14 @@ class Kelolaprogram_model {
         return $this->db->resultSet();
     }
 
-    public function getAllProgramNameAktif(): array 
+    public function getAllKategoriProgram(string $status = null): array 
     {
-        $view = $this->view['allProgramNameAktif'];
-        $query = "SELECT * FROM $view";
+        $query = "SELECT * FROM $this->tb_kategori";
+        // WHERE query jika status tidak null
+        if(!is_null($status)) $query .= " WHERE status = :status";
         $this->db->query($query);
+        // binding jika status tidak null
+        if(!is_null($status)) $this->db->bind('status', $status);
         return $this->db->resultSet();
     }
 
@@ -155,9 +158,10 @@ class Kelolaprogram_model {
         return $this->db->resultSet();
     }
 
-    public function getDataProgramBySlug($slug): array|bool
+    public function getDataProgramAktifBySlug(string $slug): array|bool
     {
-        $query = "SELECT * FROM $this->table WHERE slug = :slug";
+        $view = $this->view['allDataProgramAktif'];
+        $query = "SELECT * FROM $view WHERE slug = :slug";
         $this->db->query($query);
         $this->db->bind('slug', $slug);
         return $this->db->single();
@@ -234,6 +238,15 @@ class Kelolaprogram_model {
         $this->db->bind('content', $content);
         $this->db->execute();
 
+        return $this->db->rowCount();
+    }
+
+    public function ubahStatusProgram(int $id, string $status): int {
+        $query = "UPDATE $this->tb_kategori SET status = :status WHERE id_kategoriprogram = :id";
+        $this->db->query($query);
+        $this->db->bind('status', $status);
+        $this->db->bind('id', $id);
+        $this->db->execute();
         return $this->db->rowCount();
     }
 
