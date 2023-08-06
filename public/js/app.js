@@ -30,11 +30,11 @@ btn_dropdown.addEventListener('click', () => {
 
 
 
-/* =========================
-  |   PERHITUNGAN ZAKAT
-  ==========================
-*/
-
+/**
+ * @function countOnly
+ * @param {event} event 
+ * @return true | 0
+ */
 const countOnly = (event) => {
   // // function count only
   const count = (event.which) ? event.which : event.keyCode
@@ -44,12 +44,14 @@ const countOnly = (event) => {
 
   $(document).ready(function () {
 
+    // get element DOM by jquery
     const gajibulanan = $('#gajibulanan')
     const gajilain = $('#gajilain')
     const cicilan = $('#cicilan')
     const etotaluang = $('#totaluang')
     const enilaizakat = $('#nilaizakat')
 
+    // when user typing..
     $(event.target).on('input', function () {
       if (this.value) {
         const value = parseInt(this.value.replace(/\D/g, ''));
@@ -89,10 +91,6 @@ const countOnly = (event) => {
 }
 
 
-/* =========================
-|   PROGRAM PAGINATION
-==========================
-*/
 /**
  * 
  * @public jquery
@@ -107,23 +105,38 @@ $(document).ready(function () {
    * -------------------------------------------------------------------------------------------------------------------------------------------------
    *                SEARCH
    * ------------------------------------------------------------------------------------------------------------------------------------------------
-   * 
+   */
+
+  /**
+   * @param {this} keyword
+   * @return void
    */
   const renderContentSearch = (keyword) => {
-    $('#beranda').load(url + '/web/search/' + keyword)
+    $('#root').load(url + '/web/search/' + keyword)
   }
-  // search keyword lg
+
+  // search id keyword-lg on controller web user page
   $('#keyword-lg').on('keyup', function () {
     let value = $(this).val().replace(/\s+/g, '-')
     renderContentSearch(value)
   })
 
+  // search id keyword-md on controller web user page
   $('#keyword-md').on('keyup', function () {
     let value = $(this).val().replace(' ', '-')
     renderContentSearch(value)
   })
 
-  // arrow function
+  /**
+   * @function cardContent
+   * @param {string} imageSource 
+   * @param {string} programSlug 
+   * @param {string} programKategori 
+   * @param {string} programName 
+   * @param {number} dana 
+   * @param {number} donatur 
+   * @returns {string} element html
+   */
   const cardContent = (imageSource, programSlug, programKategori, programName, dana, donatur) => {
     return `
       <div class="lg:w-1/3 shadow-md">

@@ -38,7 +38,7 @@ class Web extends Controller {
       "berita" => $this->model('Pageviews_model')->getDataBeritaByKeyword($replaceKey),
       "artikel" => $this->model('Pageviews_model')->getDataArtikelByKeyword($replaceKey)
     ];
-    $this->view('web/search', $data);
+    $this->view('template/search', $data);
   }
 
   public function profil(): void {
