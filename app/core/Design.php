@@ -287,11 +287,10 @@ class Design {
      *                  VIEW DATA KOSONG
      * -------------------------------------------------------------------------------------------------------------------------
      */
-    public static function blankData(): string {
-        return '<div class="flex flex-col justify-center items-center text-lightgray mt-20">
-                    <i class="fas fa-solid fa-file text-5xl"></i>
-                    <span class="mt-3 text-sm">Data Kosong</span>
-                </div>';
+    public static function blankData(string $message = null) {
+        $controller = new Controller();
+        $data['msg'] = $message;
+        return $controller->view('template/blankdata', $data);
     }
 
 }

@@ -45,13 +45,13 @@ const countOnly = (event) => {
   $(document).ready(function () {
 
     const gajibulanan = $('#gajibulanan')
-    const gajilain    = $('#gajilain')
-    const cicilan     = $('#cicilan')
-    const etotaluang  = $('#totaluang')
+    const gajilain = $('#gajilain')
+    const cicilan = $('#cicilan')
+    const etotaluang = $('#totaluang')
     const enilaizakat = $('#nilaizakat')
 
     $(event.target).on('input', function () {
-      if(this.value){
+      if (this.value) {
         const value = parseInt(this.value.replace(/\D/g, ''));
 
         // format currency
@@ -63,51 +63,68 @@ const countOnly = (event) => {
         const a = (gajibulanan.val()) ? gajibulanan.val() : '0'
         const b = (gajilain.val()) ? gajilain.val() : '0'
         const c = (cicilan.val()) ? cicilan.val() : '0'
-  
+
         // convert currency to number
         const num1 = parseInt(a.replace(/\D/g, ''));
         const num2 = parseInt(b.replace(/\D/g, ''));
         const num3 = parseInt(c.replace(/\D/g, ''));
-  
+
         // hitung nilai
         const hitung = num1 + num2 - num3
         const result = (hitung > 0) ? hitung : 0;
-  
+
         // hitung nilai zakat
         const nilaizakat = Math.floor((result > 6131333) ? result * 2.5 / 100 : 0)
-  
+
         // set value total dan nilai
         etotaluang.attr('value', 'Rp. ' + result.toLocaleString('id-ID'))
         enilaizakat.attr('value', 'Rp. ' + nilaizakat.toLocaleString('id-ID'))
-  
+
         return true
 
       } else this.value = 0
-      
+
     })
   })
 }
 
-/* =========================
-  | END  PERHITUNGAN ZAKAT
-  ==========================
-*/
-
 
 /* =========================
-  |   PROGRAM PAGINATION
-  ==========================
+|   PROGRAM PAGINATION
+==========================
 */
 /**
  * 
  * @public jquery
  * 
- */
-$(document).ready(function() {
+*/
+$(document).ready(function () {
+
+  // set url
+  const url = 'http://localhost/Pzakat';
+
+  /**
+   * -------------------------------------------------------------------------------------------------------------------------------------------------
+   *                SEARCH
+   * ------------------------------------------------------------------------------------------------------------------------------------------------
+   * 
+   */
+  const renderContentSearch = (keyword) => {
+    $('#beranda').load(url + '/web/search/' + keyword)
+  }
+  // search keyword lg
+  $('#keyword-lg').on('keyup', function () {
+    let value = $(this).val().replace(/\s+/g, '-')
+    renderContentSearch(value)
+  })
+
+  $('#keyword-md').on('keyup', function () {
+    let value = $(this).val().replace(' ', '-')
+    renderContentSearch(value)
+  })
 
   // arrow function
-  const url = 'http://localhost/Pzakat';
-  const cardContent = (imageSource, programSlug, programKategori, programName, dana, donatur) => { 
+  const cardContent = (imageSource, programSlug, programKategori, programName, dana, donatur) => {
     return `
       <div class="lg:w-1/3 shadow-md">
         <a href="${url}/program/${programSlug}">
@@ -129,7 +146,7 @@ $(document).ready(function() {
           </div>
         </div>
       </div>`
-  }  
+  }
 
   // set content card program
   const kategori_first = $('.program-kategori a:first-child').data('name')
@@ -141,18 +158,18 @@ $(document).ready(function() {
   $.ajax({
     url: url + '/web/getdataprogram',
     data: { name: kategori_first },
-    method: 'post', 
+    method: 'post',
     dataType: 'json',
-    success: function(data) {
+    success: function (data) {
       // tampilkan isi card content sesuai kategori awal
-      $.each(data, function(i, item) {
+      $.each(data, function (i, item) {
         $('.program').append(cardContent(item.gambar, item.slug, item.jenis_program, item.nama_program, item.total_dana.toLocaleString('id-ID'), item.jumlah_donatur))
       })
     }
   })
 
   // ketika program kategori diklik
-  $('.program-kategori a').on('click', function() {
+  $('.program-kategori a').on('click', function () {
     const name = $(this).data('name')
 
     // get kosongkan isi content
@@ -162,10 +179,10 @@ $(document).ready(function() {
     $.ajax({
       url: url + '/web/getdataprogram',
       data: { name },
-      method: 'post', 
+      method: 'post',
       dataType: 'json',
-      success: function(data) {
-        $.each(data, function(i, item) {
+      success: function (data) {
+        $.each(data, function (i, item) {
           $('.program').append(cardContent(item.gambar, item.slug, item.jenis_program, item.deskripsi_program, item.total_dana.toLocaleString('id-ID'), item.jumlah_donatur))
         })
       }

@@ -47,6 +47,22 @@ class Pageviews_model
     return $this->db->resultSet();  
   }
 
+  public function getDataBeritaByKeyword(string $keyword): array
+  {
+    $query = "SELECT judul, slug, gambar, content, datetime FROM vwAllBerita WHERE judul LIKE :keyword OR slug LIKE :keyword ORDER BY id_views DESC LIMIT 3";
+    $this->db->query($query);
+    $this->db->bind('keyword', '%'.$keyword.'%');
+    return $this->db->resultSet();
+  }
+
+  public function getDataArtikelByKeyword(string $keyword): array
+  {
+    $query = "SELECT judul, slug, gambar, content, datetime FROM vwAllArtikel WHERE judul LIKE :keyword OR slug LIKE :keyword ORDER BY id_views DESC LIMIT 3";
+    $this->db->query($query);
+    $this->db->bind('keyword', '%'.$keyword.'%');
+    return $this->db->resultSet();
+  }
+
   public function tambahBerita($dataPost, $dataFile)
   {
 

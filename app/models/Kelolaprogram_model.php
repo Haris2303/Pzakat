@@ -167,6 +167,15 @@ class Kelolaprogram_model {
         return $this->db->single();
     }
 
+    public function getDataProgramAktifByKeyword(string $keyword): array
+    {
+        $view = $this->view['allDataProgramAktifTunai'];
+        $query = "SELECT * FROM $view WHERE nama_program LIKE :keyword OR slug LIKE :keyword OR jenis_program LIKE :keyword ORDER BY id_program DESC LIMIT 3";
+        $this->db->query($query);
+        $this->db->bind('keyword', '%'.$keyword.'%');
+        return $this->db->resultSet();
+    }
+
     /**
      * 
      * @method CRUD
