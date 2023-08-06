@@ -181,7 +181,7 @@
         <!-- end content artikel -->
 
         <div class="flex justify-center">
-            <?php echo (count($data['program']) > 0 || count($data['berita']) > 0 && count($data['artikel']) > 0) ? '' : Design::blankData('Data Pencarian Tidak Ditemukan') ?>
+            <?php echo (count($data['program']) > 0 || count($data['berita']) > 0 || count($data['artikel']) > 0) ? '' : Design::blankData('Data Pencarian Tidak Ditemukan') ?>
         </div>
 
     </div>
