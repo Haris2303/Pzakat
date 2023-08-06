@@ -1,3 +1,6 @@
+<!-- close div id root -->
+</div>
+
 <!-- footer -->
 <div class="container">
   <div class="content flex lg:flex-row flex-wrap border-t-2 mt-20 py-10 gap-10 lg:gap-14 text-sm">
