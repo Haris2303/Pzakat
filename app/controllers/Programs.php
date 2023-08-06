@@ -7,7 +7,7 @@ class Programs extends Controller {
     $data = [
       "judul" => "Programs",
       "dataProgram" => $this->model('Kelolaprogram_model')->getAllDataProgramAktifTunai(),
-      "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
+      "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllKategoriProgram('aktif')
     ];
     $this->view('template/header', $data);
     $this->view('programs/index', $data);
@@ -19,7 +19,7 @@ class Programs extends Controller {
     $data = [
       "judul" => "Programs Zakat",
       "dataProgramZakat" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('zakat'),
-      "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
+      "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllKategoriProgram('aktif')
     ];
 
     if(count($data['dataProgramZakat']) <= 0) {
@@ -37,7 +37,7 @@ class Programs extends Controller {
     $data = [
       "judul" => "Programs Infaq",
       "dataProgramInfaq" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('infaq'),
-      "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
+      "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllKategoriProgram('aktif')
     ];
 
     if(count($data['dataProgramInfaq']) <= 0) {
@@ -55,7 +55,7 @@ class Programs extends Controller {
     $data = [
       "judul" => "Programs Qurban",
       "dataProgramQurban" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('qurban'),
-      "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
+      "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllKategoriProgram('aktif')
     ];
 
     if(count($data['dataProgramQurban']) <= 0) {
@@ -73,7 +73,7 @@ class Programs extends Controller {
     $data = [
       "judul" => "Programs Donasi",
       "dataProgramDonasi" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('donasi'),
-      "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
+      "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllKategoriProgram('aktif')
     ];
 
     if(count($data['dataProgramDonasi']) <= 0) {
@@ -91,7 +91,7 @@ class Programs extends Controller {
     $data = [
       "judul" => "Programs Ramadhan",
       "dataProgramRamadhan" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('ramadhan'),
-      "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
+      "dataJenisProgramAktif" => $this->model('Kelolaprogram_model')->getAllKategoriProgram('aktif')
     ];
 
     if(count($data['dataProgramRamadhan']) <= 0) {

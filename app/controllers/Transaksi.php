@@ -26,7 +26,7 @@ class Transaksi extends Controller
         }
 
         // get data program by slug
-        $dataProgram = $this->model('Kelolaprogram_model')->getDataProgramBySlug($slug);
+        $dataProgram = $this->model('Kelolaprogram_model')->getDataProgramAktifBySlug($slug);
         
         // jika halaman tidak ditemukan
         if(is_bool($dataProgram)) {
@@ -89,7 +89,7 @@ class Transaksi extends Controller
     {
         $data = [
             "judul" => "Form Quantity Fidyah",
-            "dataProgram" => $this->model('Kelolaprogram_model')->getDataProgramBySlug($slug)
+            "dataProgram" => $this->model('Kelolaprogram_model')->getDataProgramAktifBySlug($slug)
         ];
 
         if ($data['dataProgram']['jenis_pembayaran'] === $jenis) {

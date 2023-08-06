@@ -31,9 +31,14 @@ class Web extends Controller {
     echo $this->view('template/spinner');
   }
 
-  public function laporan(): void 
-  {
-
+  public function search(string $keyword = '') {
+    $replaceKey = str_replace('-', ' ', $keyword);
+    $data = [
+      "program" => $this->model('Kelolaprogram_model')->getDataProgramAktifByKeyword($replaceKey),
+      "berita" => $this->model('Pageviews_model')->getDataBeritaByKeyword($replaceKey),
+      "artikel" => $this->model('Pageviews_model')->getDataArtikelByKeyword($replaceKey)
+    ];
+    $this->view('web/search', $data);
   }
 
   public function profil(): void {
