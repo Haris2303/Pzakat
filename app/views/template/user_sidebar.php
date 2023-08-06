@@ -32,7 +32,7 @@
                     </div>
                 </a>
                 <a href="<?= BASEURL ?>/user_dashboard/donasi_gagal">
-                    <div class="flex gap-3 items-center hover:bg-green p-3 cursor-pointer transition-300 rounded-lg hover:text-white <?= ($data['judul'] === 'Konfirmasi Donasi') ? 'bg-green text-white' : '' ?>">
+                    <div class="flex gap-3 items-center hover:bg-green p-3 cursor-pointer transition-300 rounded-lg hover:text-white <?= ($data['judul'] === 'Donasi Gagal') ? 'bg-green text-white' : '' ?>">
                         <i class="fas fa-times-circle"></i>
                         <span class="text-sm">Donasi Gagal</span>
                     </div>

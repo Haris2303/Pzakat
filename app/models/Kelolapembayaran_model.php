@@ -112,7 +112,9 @@ class Kelolapembayaran_model {
      * -------------------------------------------------------------------------------------------------------------
      *                  GET DATA
      * -------------------------------------------------------------------------------------------------------------
-     * @param view&where
+     * @param string{status_pembayaran} value default null | pending|konfirmasi|failed|success
+     * @param string{where} value default null | field
+     * @param string{value} value default null | value pada field
      */
     public function getDataPembayaran(string $status_pembayaran = null, string $where = null, string $value = null): array|bool {
         $view = $this->view['dataAll'];

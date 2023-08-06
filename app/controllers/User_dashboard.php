@@ -135,6 +135,24 @@ class User_dashboard extends Controller {
         $this->view('template/footer', $data);
     }
 
+    public function detail(string $param = null): void {
+        if(!is_null($param)) {
+            $this->view('error/404');
+            exit;
+        }
+
+        $data_detail = $this->model('Kelolapembayaran_model')->getDataPembayaranById($_POST['id_donatur']);
+        $data = [
+            "judul" => "Detail Pembayaran",
+            "detail" => $data_detail
+        ];
+
+        $this->view('template/header', $data);
+        $this->view('template/user_sidebar', $data);
+        $this->view('user_dashboard/detail', $data);
+        $this->view('template/footer', $data);
+    }
+
     public function aksi_ubah_profil() {
         $id_user = $this->model('User_model')->getIdByUsername($_SESSION['username']);
         $update = $this->model('Muzakki_model')->ubahProfil($id_user, $_POST);

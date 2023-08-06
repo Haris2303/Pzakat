@@ -23,6 +23,9 @@
                         <th scope="col" class="px-6 py-3">
                             Jumlah Donasi
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            Aksi
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,6 +46,12 @@
                             </td>
                             <td class="px-6 py-4">
                                 Rp <?= number_format($item['jumlah_pembayaran'], 0, ',', '.') ?>
+                            </td>
+                            <td class="px-6 py-4">
+                                <form action="<?= BASEURL ?>/user_dashboard/detail" method="post">
+                                    <input type="hidden" name="id_donatur" value="<?= $item['id_donatur'] ?>">
+                                    <button type="submit" class="bg-lightgray hover:bg-gray-700 px-2 py-1 rounded-full text-white text-xs transition-300">Detail</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach ?>

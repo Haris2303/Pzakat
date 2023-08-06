@@ -89,7 +89,7 @@ if(isset($_SESSION['level']) && $_SESSION['level'] !== '3') {
                 <li class="lg:block hidden">
                   <!-- search -->
                   <div class="w-full flex items-center gap-2 relative">
-                    <input type="text" name="keyword" placeholder="Search..." id="keyword-lg" class="px-2 py-1 outline-none border-2 border-green text-sm rounded-full text-lightgray" autofocus>
+                    <input type="text" name="keyword" placeholder="Search..." id="keyword-lg" class="px-2 py-1 outline-none border-2 border-green text-sm rounded-full text-lightgray">
                     <button id="button-search" class="absolute right-3">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="curretColor" class="bi bi-search fill-green" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
