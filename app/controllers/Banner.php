@@ -10,7 +10,7 @@ class Banner extends Controller
             "css" => VENDOR_TABLES_CSS,
             "script" => VENDOR_TABLES,
             "dataBanner" => $this->model('Banner_model')->getAllDataBanner(),
-            "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
+            "programNameAktif" => $this->model('Kelolaprogram_model')->getAllKategoriProgram('aktif')
         ];
 
         $this->view('dashboard/sidebar', $data);
@@ -32,9 +32,9 @@ class Banner extends Controller
         }
     }
 
-    public function aksi_hapus_banner(): void
+    public function aksi_hapus_data(string $uuid): void
     {
-        $result = $this->model('Banner_model')->hapusDataBanner($_POST['id']);
+        $result = $this->model('Banner_model')->deleteData($uuid);
         if($result > 0) {
             Flasher::setFlash('Data Banner <strong>Berhasil</strong> dihapus', 'success');
             header('Location: ' . BASEURL . '/banner');

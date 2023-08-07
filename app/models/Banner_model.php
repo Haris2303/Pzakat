@@ -38,11 +38,11 @@ class Banner_model {
 
     }
 
-    public function hapusDataBanner($id): int
+    public function deleteData(string $uuid): int
     {
-        $query = "DELETE FROM $this->table WHERE id_banner = :id_banner";
+        $query = "DELETE FROM $this->table WHERE UUID = :uuid";
         $this->db->query($query);
-        $this->db->bind('id_banner', $id);
+        $this->db->bind('uuid', $uuid);
         $this->db->execute();
         return $this->db->rowCount();
     }

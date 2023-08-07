@@ -55,10 +55,10 @@
               <td>
                 <a href="<?= BASEURL ?>/kelola_pembayaran/detail/<?= $item['id_donatur'] ?>" class="btn badge btn-secondary">Detail</a>
                 <?php if(time() > $kode_expired): ?>
-                  <form action="<?= BASEURL ?>/kelola_pembayaran/aksi_hapus_pembayaran" method="post" class="d-inline">
+                  <form action="<?= BASEURL ?>/kelola_pembayaran/aksi_hapus_data" method="post" id="form-delete" class="d-inline">
                     <input type="hidden" name="pembayaran" value="pending">
-                    <input type="hidden" name="id" value="<?= $item['id_donatur'] ?>">
-                    <button type="submit" class="btn badge btn-danger" onclick="return confirm('Anda akan menghapus data <?= $item['nama_donatur'] ?>?')">Hapus</button>
+                    <input type="hidden" name="id" id="id" value="<?= $item['id_donatur'] ?>">
+                    <button type="submit" id="btn-delete" class="btn badge btn-danger" data-id="<?= $item['id_donatur'] ?>">Hapus</button>
                   </form>
                 <?php endif ?>
               </td>

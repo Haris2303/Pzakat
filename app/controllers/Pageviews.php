@@ -9,7 +9,6 @@ class Pageviews extends Controller {
       "css" => VENDOR_TABLES_CSS,
       "script" => VENDOR_TABLES,
       "dataBerita"  => $this->model('Pageviews_model')->getAllDataBerita(),
-      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
 
     $this->view('dashboard/sidebar', $data);
@@ -24,7 +23,6 @@ class Pageviews extends Controller {
       "css" => VENDOR_TABLES_CSS,
       "script" => VENDOR_TABLES,
       "dataArtikel" => $this->model('Pageviews_model')->getAllDataArtikel(),
-      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
 
     $this->view('dashboard/sidebar', $data);
@@ -38,7 +36,6 @@ class Pageviews extends Controller {
       "judul" => 'Muzakki',
       "css" => VENDOR_TABLES_CSS,
       "dataView" => $this->model('Pageviews_model')->getDataViewBySlug($slug),
-      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
 
     // jika halaman tidak ditemukan
@@ -63,7 +60,6 @@ class Pageviews extends Controller {
     $data = [
       "judul" => "Upload Berita",
       "jenis_view" => $jenis_view,
-      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
     
     $this->view('dashboard/sidebar', $data);

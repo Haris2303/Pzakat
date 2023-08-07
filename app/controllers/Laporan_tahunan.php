@@ -37,8 +37,8 @@ class Laporan_tahunan extends Controller {
         }
     }
 
-    public function aksi_hapus_laporan(): void {
-        $rowCount = $this->model('Laporantahunan_model')->hapusData($_POST['id']);
+    public function aksi_hapus_data(string $uuid): void {
+        $rowCount = $this->model('Laporantahunan_model')->deleteData($uuid);
         if($rowCount > 0 && is_int($rowCount)) {
             Flasher::setFlash('Laporan berhasil dihapus!', 'success');
             header('Location: ' . BASEURL . '/laporan_tahunan');

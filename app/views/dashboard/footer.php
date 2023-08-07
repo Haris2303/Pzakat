@@ -6,12 +6,14 @@
 
 <!-- core plugin -->
 <script src="<?= BASEURL ?>/vendor/jquery-easing/easing.js"></script>
+<script src="<?= BASEURL ?>/vendor/sweetalert2/sweetalert2.all.min.js"></script>
 
 <!-- javascript sb admin -->
 <script src="<?= BASEURL ?>/js/sb-admin-2.min.js"></script>
 
 <!-- my javascript -->
 <script src="<?= BASEURL ?>/js/main-admin.js"></script>
+<script src="<?= BASEURL ?>/js/util/sweetalert2.js"></script>
 
 
 <!-- plugin JavaScript-->

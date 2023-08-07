@@ -98,6 +98,42 @@ const countOnly = (event) => {
 */
 $(document).ready(function () {
 
+  $('#btn-delete').on('click', function (e) {
+    e.preventDefault();
+
+    const action = $('form').attr('action')
+    const data = $('form input#id').val()
+
+    Swal.fire({
+      title: 'Hapus data tersebut?',
+      text: "Klik hapus untuk menghapus data tersebut!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Hapus'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        $.ajax({
+          type: "post",
+          url: action,
+          data: { id: data } ,
+          success: function (response) {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Data berhasil dihapus',
+              showConfirmButton: false,
+              timer: 1500
+            })
+          }
+        });
+
+      }
+    })
+  })
+
   // set url
   const url = 'http://localhost/Pzakat';
 

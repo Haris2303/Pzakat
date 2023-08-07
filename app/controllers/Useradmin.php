@@ -11,7 +11,7 @@ class Useradmin extends Controller {
       ],
       "script" => VENDOR_TABLES,
       "dataAdmin" => $this->model('Useradmin_model')->getAllDataAdmin(),
-      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
+      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllKategoriProgram('aktif')
     ];
 
     if($_SESSION['level'] === '1') {
@@ -34,33 +34,6 @@ class Useradmin extends Controller {
     } else {
       Flasher::setFlash($result ,'danger');
       header('Location: ' . BASEURL . '/useradmin');
-      exit;
-    }
-  }
-
-  public function aksi_tambah_amil(): void {
-    $username = $_POST['username'];
-    $email    = $_POST['email'];
-    $result = $this->model('Daftar_model')->daftarUser('Amil', $_POST);
-    if($result > 0) {
-
-      // get token
-      $token = $this->model('User_model')->getTokenByUsername($username);
-
-      // kirim pesan email untuk aktivasi
-      $subject = 'Aktivasi Akun';
-      $msg = 'Klik ini berikut untuk aktivasi akun Anda: ' . BASEURL . '/daftar/aktivasi_akun/' . $token;
-      $is_email = Utility::sendEmail($email, $subject, $msg);
-
-      if($is_email) {
-        Flasher::setFlash('Akun Berhasil Terdaftar Silahkan <strong>Cek Email</strong> untuk <strong>Aktivasi Akun</strong>!', 'info');
-        header('Location: ' . BASEURL . '/amil');
-        exit;
-      }
-
-    } else {
-      Flasher::setFlash($result, 'danger');
-      header('Location: ' . BASEURL . '/amil');
       exit;
     }
   }

@@ -5,7 +5,6 @@ class Admin_visimisi extends Controller {
   public function index(): void {
     $data = [
       "judul" => "Visi Misi",
-      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
     $data['visimisi'] = $this->model('Visimisi_model')->getVisiMisi();
     $this->view('dashboard/sidebar', $data);

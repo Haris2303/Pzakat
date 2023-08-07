@@ -8,8 +8,8 @@ class Muzakki extends Controller {
       "judul" => 'Muzakki',
       "css" => VENDOR_TABLES_CSS,
       "script" => VENDOR_TABLES,
-      "dataMuzakki" => $this->model('Muzakki_model')->getAllDataMuzakki(),
-      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
+      "dataMuzakki" => $this->model('Muzakki_model')->getAllData(),
+      // "programNameAktif" => $this->model('Kelolaprogram_model')->getAllKategoriProgram('aktif')
     ];
 
     $this->view('dashboard/sidebar', $data);

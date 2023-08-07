@@ -42,9 +42,8 @@
                             <td><?= $item['link'] ?></td>
                             <td><?= $item['keterangan'] ?></td>
                             <td>
-                                <form action="<?= BASEURL ?>/laporan_tahunan/aksi_hapus_laporan" method="post" class="d-inline">
-                                    <input type="hidden" name="id" value="<?= $item['id_laporan'] ?>">
-                                    <button type="submit" class="btn badge btn-danger" onclick="return confirm('Anda yakin ingin menghapus norek tersebut?')">Hapus</button>
+                                <form action="" method="post" id="form-delete" class="d-inline">
+                                    <button type="submit" id="btn-delete" class="btn badge btn-danger" data-uuid="<?= $item['UUID'] ?>">Hapus</button>
                                 </form>
                             </td>
                         </tr>

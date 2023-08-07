@@ -10,7 +10,7 @@ class Masjid extends Controller
       "css" => VENDOR_TABLES_CSS,
       "script" => VENDOR_TABLES,
       "dataMasjid" => $this->model('Masjid_model')->getDataMasjid(),
-      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
+      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllKategoriProgram('aktif')
     ];
 
     $this->view('dashboard/sidebar', $data);
@@ -53,11 +53,9 @@ class Masjid extends Controller
   }
 
   // method hapus data mesjid
-  public function aksi_hapus_mesjid(): void {
+  public function aksi_hapus_data(string $uuid): void {
 
-    $id = $_POST['id'];
-    
-    if($this->model('Masjid_model')->hapusMesjid($id) > 0) {
+    if($this->model('Masjid_model')->hapusMesjid($uuid) > 0) {
       Flasher::setFlash('Data Masjid Berhasil Dihapus!', 'success');
       header("Location: " . BASEURL . '/Masjid');
       exit;

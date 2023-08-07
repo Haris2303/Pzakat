@@ -215,7 +215,7 @@ class Kelola_pembayaran extends Controller
     }
   }
 
-  public function aksi_hapus_pembayaran(): void
+  public function aksi_hapus_data(): void
   {
     
     $location = $_POST['pembayaran'];
@@ -223,11 +223,11 @@ class Kelola_pembayaran extends Controller
 
     $result = $this->model('Kelolapembayaran_model')->hapusPembayaran($id);
     if ($result > 0) {
-      Flasher::setFlash('Pembayaran <strong>Berhasil</strong> Dihapus!', 'success');
+      Flasher::setFlash('Pembayaran Berhasil Dihapus!', 'success');
       header('Location: ' . BASEURL . "/kelola_pembayaran/$location");
       exit;
     } else {
-      Flasher::setFlash('Pembayaran <strong>Gagal</strong> Dihapus!', 'danger');
+      Flasher::setFlash('Pembayaran Gagal Dihapus!', 'danger');
       header('Location: ' . BASEURL . "/kelola_pembayaran/$location");
       exit;
     }

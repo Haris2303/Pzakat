@@ -9,9 +9,8 @@ class Amil extends Controller
       "judul" => 'Amil',
       "css" => VENDOR_TABLES_CSS,
       "script" => VENDOR_TABLES,
-      "dataAmil" => $this->model('Amil_model')->getAllDataAmil(),
+      "dataAmil" => $this->model('Amil_model')->getAllData(),
       "dataMasjid" => $this->model('Masjid_model')->getDataMasjid(),
-      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
 
     if($_SESSION['level'] === "1") {
@@ -29,9 +28,8 @@ class Amil extends Controller
     $data = [
       "judul" => "Detail Amil",
       "css" => VENDOR_TABLES_CSS,
-      "detail" => $this->model('Amil_model')->getDataAmilByUsername($username),
+      "detail" => $this->model('Amil_model')->getDataByUsername($username),
       "allMasjid" => $this->model('Masjid_model')->getDataMasjid(),
-      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
     ];
     $data['masjid'] = $this->model('Masjid_model')->getDataMasjidById($data['detail']['id_mesjid']);
 
@@ -44,12 +42,49 @@ class Amil extends Controller
       exit;
     }
   }
-  
-  // method aksi ubah amil
-  public function aksi_ubah_amil(): void 
-  {
-    $result = $this->model('Amil_model')->ubahAmil($_POST);
+
+  /**
+   * -----------------------------------------------------------------------------------------------------------------------------------------------------
+   *                   ACTION METHOD
+   * -----------------------------------------------------------------------------------------------------------------------------------------------------
+   */
+
+  // method aksi tambah amil
+  public function aksi_tambah_amil(): void {
+    $username = $_POST['username'];
+    $email    = $_POST['email'];
+    $result = $this->model('User_model')->createUser('Amil', $_POST);
     if($result > 0) {
+
+      // get token
+      $token = $this->model('User_model')->getTokenByUsername($username);
+
+      // set href
+      $href = BASEURL . '/daftar/aktivasi_akun/' . $token;
+      
+      // kirim pesan email untuk aktivasi
+      $subject = 'Aktivasi Akun';
+      $msg = Design::emailMessageActivation($username, $href);
+      $is_email = Utility::sendEmail($email, $subject, $msg);
+
+      if($is_email) {
+        Flasher::setFlash('Akun Berhasil Terdaftar Silahkan <strong>Cek Email</strong> untuk <strong>Aktivasi Akun</strong>!', 'info', 'y');
+        header('Location: ' . BASEURL . '/amil');
+        exit;
+      }
+
+    } else {
+      Flasher::setFlash($result, 'danger');
+      header('Location: ' . BASEURL . '/amil');
+      exit;
+    }
+  }
+  
+  // method aksi ubah password amil
+  public function aksi_ubah_password(): void 
+  {
+    $result = $this->model('User_model')->updatePasswordByAdmin($_POST);
+    if($result > 0 && is_int($result)) {
       Flasher::setFlash('Data Amil Berhasil Diubah', 'success');
       header('Location: ' . BASEURL . '/amil/detail/' . $_POST['username']);
       exit;
@@ -61,14 +96,14 @@ class Amil extends Controller
   }
 
   // method aksi hapus amil
-  public function aksi_hapus_amil($username): void 
+  public function aksi_hapus_data(string $token): void 
   {
-    if($this->model('Amil_model')->hapusAmil($username) > 0) {
-      Flasher::setFlash('Data Amil Berhasil Dihapus', 'success');
+    if($this->model('Amil_model')->deleteAmil($token) > 0) {
+      Flasher::setFlash('Data Amil berhasil dihapus', 'success');
       header('Location: ' . BASEURL . '/amil');
       exit;
     } else {
-      Flasher::setFlash('Data Amil Gagal Diubah', 'danger');
+      Flasher::setFlash('Data Amil gagal dihapus', 'danger');
       header('Location: ' . BASEURL . '/amil');
       exit;
     }

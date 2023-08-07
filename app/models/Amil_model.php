@@ -11,15 +11,29 @@ class Amil_model {
     $this->db = new Database();
   }
 
+
+  /**
+   * -------------------------------------------------------------------------------------------------------------------------------------------------------
+   *                  GET ALL DATA
+   * -------------------------------------------------------------------------------------------------------------------------------------------------------
+   */
+
   // get all data amil
-  public function getAllDataAmil(): array {
+  public function getAllData(): array {
     $query = "SELECT * FROM $this->view";
     $this->db->query($query);
     return $this->db->resultSet();
   }
 
+
+  /**
+   * -------------------------------------------------------------------------------------------------------------------------------------------------------
+   *                  GET DATA BY
+   * -------------------------------------------------------------------------------------------------------------------------------------------------------
+   */
+
   // get data amil by id
-  public function getDataAmilByUsername($username): array {
+  public function getDataByUsername($username): array {
     $query = "SELECT * FROM $this->view WHERE username = :username";
     $this->db->query($query);
     $this->db->bind('username', $username);
@@ -27,42 +41,19 @@ class Amil_model {
 
   }
 
-  // method ubah data amil
-  public function ubahAmil($data) {
-    // initial data
-    $username     = $data['username'];
-    $password     = $data['password'];
-    $passConfirm  = $data['passConfirm'];
-
-    // get id user
-    $this->db->query("SELECT id_user FROM tb_user WHERE username = :username");
-    $this->db->bind('username', $username);
-    $dataUser = $this->db->single();
-
-    // cek panjang password
-    if(strlen($password) < 8) return 'Password Terlalu Lemah';
-
-    // cek konfirmasi password
-    if($password !== $passConfirm) return 'Konfirmasi Password Tidak Sama!';
-    
-    // encrypt password
-    $password = password_hash($password, PASSWORD_DEFAULT);
-    $query = "UPDATE tb_user SET password = :password WHERE id_user = :id_user";
-    $this->db->query($query);
-    $this->db->bind('password', $password);
-    $this->db->bind('id_user', $dataUser['id_user']);
-    $this->db->execute();
-
-    return $this->db->rowCount();
-  }
-
+  /**
+   * -------------------------------------------------------------------------------------------------------------------------------------------------------
+   *                    ACTION DATA
+   * -------------------------------------------------------------------------------------------------------------------------------------------------------
+   */
   // method hapus data amil
-  public function hapusAmil($id_user): int {
+  public function deleteAmil(string $token): int {
     // initial query
-    $query = "DELETE FROM tb_user WHERE id_user = $id_user";
+    $query = "DELETE FROM tb_user WHERE token = :token";
 
     // execute
     $this->db->query($query);
+    $this->db->bind('token', $token);
     $this->db->execute();
 
     return $this->db->rowCount();

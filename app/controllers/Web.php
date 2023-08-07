@@ -48,4 +48,14 @@ class Web extends Controller {
     $this->view('template/footer', $data);
   }
 
+  public function testing(): void {
+    $data = [
+      "judul" => "Testing"
+    ];
+
+    $this->view('template/header', $data);
+    $this->view('web/testing');
+    $this->view('template/footer');
+  }
+
 }

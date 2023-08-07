@@ -6,18 +6,24 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-dark">DataTables Amil</h6>
+    <div class="row justify-content-between align-items-center mx-0">
+      <div>
+        <h6 class="m-0 font-weight-bold text-dark">Daftar Data Amil</h6>
+      </div>
+      <div class="position-relative">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#exampleModal">
+          Tambah <i class="ml-1 fas fa-plus-circle"></i>
+        </button>
+      </div>
+    </div>
   </div>
-
   <div class="container mt-3">
     <!-- Button trigger modal -->
     <?php Flasher::flash() ?>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-      Tambah Amil
-    </button>
   </div>
 
-  
+
   <div class="card-body">
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -26,6 +32,7 @@
             <th>Nama</th>
             <th>Email</th>
             <th>No HP</th>
+            <th>Status Aktivasi</th>
             <th>Terakhir Login</th>
             <th>Aksi</th>
           </tr>
@@ -36,6 +43,7 @@
               <td><?= $item['nama'] ?></td>
               <td><?= $item['email'] ?></td>
               <td><?= $item['nohp'] ?></td>
+              <th><?= ($item['status_aktivasi'] === '1') ? '<span class="text-primary">Telah Aktivasi</span>' : '<span class="text-danger">Belum Aktivasi</span>' ?></th>
               <td><?= $item['waktu_login'] ?></td>
               <td>
                 <a href="<?= BASEURL ?>/amil/detail/<?= $item['username'] ?>" class="btn badge btn-secondary">Detail</a>
@@ -54,11 +62,11 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah User Amil</h1>
+        <h2 class="modal-title fs-5" id="exampleModalLabel">Tambah User Amil</h2>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
       </div>
 
-      <form action="<?= BASEURL ?>/useradmin/aksi_tambah_amil" method="post">
+      <form action="<?= BASEURL ?>/amil/aksi_tambah_amil" method="post">
 
         <div class="modal-body">
           <div class="mb-3">
@@ -81,7 +89,7 @@
             <label for="masjid" class="form-label">Masjid</label>
             <select name="masjid" id="masjid" class="form-control" required>
               <option disabled selected> -- Pilih Masjid -- </option>
-              <?php foreach ($data['dataMasjid'] as $item): ?>
+              <?php foreach ($data['dataMasjid'] as $item) : ?>
                 <option value="<?= $item['id_mesjid'] ?>"><?= $item['nama_mesjid'] ?></option>
               <?php endforeach ?>
             </select>
@@ -101,8 +109,8 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
-          <button type="submit" class="btn btn-primary">Tambah</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-arrow-alt-circle-left"></i> Keluar</button>
+          <button type="submit" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Tambah</button>
         </div>
       </form>
 

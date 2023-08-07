@@ -35,6 +35,7 @@ class Masjid_model {
   public function tambahMesjid($data): int {
 
     // initial
+    $uuid           = Utility::generateUUID();
     $nama_mesjid    = $data['nama_mesjid'];
     $alamat_mesjid  = $data['alamat_mesjid'];
     $rt             = $data['RT'];
@@ -45,10 +46,11 @@ class Masjid_model {
     $kelurahan      = $data['kelurahan'];
 
     // intial query
-    $query = "INSERT INTO $this->table VALUES(NULL, :nama_mesjid, :alamat_mesjid, :rt, :rw, :provinsi, :kabupaten, :kecamatan, :kelurahan)";
+    $query = "INSERT INTO $this->table VALUES(NULL, :uuid, :nama_mesjid, :alamat_mesjid, :rt, :rw, :provinsi, :kabupaten, :kecamatan, :kelurahan)";
 
     // execute and binding
     $this->db->query($query);
+    $this->db->bind('uuid', $uuid);
     $this->db->bind('nama_mesjid', $nama_mesjid);
     $this->db->bind('alamat_mesjid', $alamat_mesjid);
     $this->db->bind('rt', $rt);
@@ -83,10 +85,11 @@ class Masjid_model {
   }
 
   // method hapus data mesjid
-  public function hapusMesjid($id): int {
+  public function hapusMesjid(string $uuid): int {
     // initial query
-    $query = "DELETE FROM $this->table WHERE id_mesjid = $id";
+    $query = "DELETE FROM $this->table WHERE UUID = :uuid";
     $this->db->query($query);
+    $this->db->bind('uuid', $uuid);
     $this->db->execute();
     return $this->db->rowCount();
   }

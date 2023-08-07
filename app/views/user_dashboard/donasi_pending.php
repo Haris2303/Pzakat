@@ -50,8 +50,8 @@
                             <td class="px-6 py-4">
                                 <?php if(time() > $kode_expired): ?>
                                     <form action="<?= BASEURL ?>/transaksi/aksi_hapus_transaksi" method="post">
-                                        <input type="hidden" name="id" value="<?= $item['id_donatur'] ?>">
-                                        <button type="submit" class="bg-red-500 hover:bg-red-700 px-2 py-1 rounded-full text-white text-xs transition-300" onclick="return confirm('Anda akan menghapus data tersebut?')">Expired</button>
+                                        <input type="hidden" name="id" id="id" value="<?= $item['id_donatur'] ?>">
+                                        <button type="submit" id="btn-delete" class="bg-red-500 hover:bg-red-700 px-2 py-1 rounded-full text-white text-xs transition-300">Expired</button>
                                     </form>
                                 <?php else: ?>
                                     <a href="<?= BASEURL ?>/transaksi/summary/<?= $item['nomor_pembayaran'] ?>">

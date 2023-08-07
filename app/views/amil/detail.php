@@ -74,7 +74,9 @@
         <i class="fas fa-edit"></i> Ubah Password
       </button>
 
-      <a href="<?= BASEURL ?>/amil/aksi_hapus_amil/<?= $data['detail']['id_user'] ?>" class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</a>
+      <form action="" method="post" id="form-delete" class="d-inline">
+        <button type="submit" id="btn-delete" class="btn btn-danger" data-uuid="<?= $data['detail']['token'] ?>"><i class="fas fa-trash"></i> Hapus</button>
+      </form>
       <a href="<?= BASEURL ?>/amil" class="btn btn-secondary"><i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
     </div>
   </div>
@@ -90,7 +92,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">x</button>
       </div>
 
-      <form action="<?= BASEURL ?>/amil/aksi_ubah_amil" method="post">
+      <form action="<?= BASEURL ?>/amil/aksi_ubah_password" method="post">
 
         <div class="modal-body">
           <input type="hidden" class="form-control" id="username" name="username" value="<?= $data['detail']['username'] ?>" required autocomplete="off">

@@ -2,7 +2,6 @@
 
   "use strict"; // mulai dengan menggunakan strict
 
-
   /* ====================
   
           @Masjid

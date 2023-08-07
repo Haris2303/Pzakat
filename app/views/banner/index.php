@@ -45,9 +45,8 @@
               <td><?= $item['username'] ?></td>
               <td><?= $item['datetime'] ?></td>
               <td>
-                <form action="<?= BASEURL ?>/banner/aksi_hapus_banner/" method="post">
-                  <input type="hidden" name="id" value="<?= $item['id_banner'] ?>">
-                  <button type="submit" class="btn badge btn-danger" onclick="return confirm('Yakin ingin menghapus?')"><i class="fas fa-trash"></i> Hapus</button>
+                <form action="" method="post" id="form-delete">
+                  <button type="submit" id="btn-delete" class="btn badge btn-danger" data-uuid="<?= $item['UUID'] ?>"><i class="fas fa-trash"></i> Hapus</button>
                 </form>
               </td>
             </tr>

@@ -3,7 +3,7 @@ const renderCountInput = (event) => {
   const count = (event.which) ? event.which : event.keyCode
   if (count >= 48 && count <= 57) String.fromCharCode(count);
   else if (count === 8) String.fromCharCode(count);
-  else event.preventDefault() 
+  else event.preventDefault()
 }
 function countInput(event) { renderCountInput(event) }
 
@@ -18,7 +18,7 @@ const renderCurrency = (event) => {
   $(document).ready(function () {
 
     $(event.target).on('input', function () {
-      if(this.value){
+      if (this.value) {
         const value = parseInt(this.value.replace(/\D/g, ''));
 
         // format currency
@@ -27,7 +27,7 @@ const renderCurrency = (event) => {
         })
 
       } else this.value = 0
-      
+
     })
   })
 }
@@ -35,7 +35,7 @@ const renderCurrency = (event) => {
 function currency(event) { renderCurrency(event) }
 
 // calendar
-$('.calendar').ready(function() {
+$('.calendar').ready(function () {
 
   const months = [
     "Januari",
@@ -71,31 +71,31 @@ $('.calendar').ready(function() {
     const firstDayIndex = date.getDay()
     const lastDayIndex = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDay()
     const nextDays = 7 - lastDayIndex - 1
-    
+
     let days = "";
     let today = "";
-    
-    for(let x = firstDayIndex; x > 0; x--) {
+
+    for (let x = firstDayIndex; x > 0; x--) {
       days += `<div class="prev-date">${prevLastDay - x + 1}</div>`
     }
-  
-    for(let i = 1; i <= lastDay; i++) {
-      if(i === new Date().getDate() && new Date().getMonth() === date.getMonth()) {
+
+    for (let i = 1; i <= lastDay; i++) {
+      if (i === new Date().getDate() && new Date().getMonth() === date.getMonth()) {
         days += `<div class="today">${i}</div>`
         today = i;
       } else {
         days += `<div>${i}</div>`
       }
     }
-    
-    for(let j = 1; j <= nextDays; j++) {
+
+    for (let j = 1; j <= nextDays; j++) {
       days += `<div class="next-date">${j}</div>`
       monthDays.innerHTML = days
     }
 
     const dateToday = date.toDateString().split(' ')
-    for(let k = 0; k <= nameDays.length - 1; k++) {
-      if(k === new Date().getDay()) {
+    for (let k = 0; k <= nameDays.length - 1; k++) {
+      if (k === new Date().getDay()) {
         dateToday[0] = nameDays[k]
       }
     }
@@ -116,4 +116,3 @@ $('.calendar').ready(function() {
 
   renderCelendar()
 })
-  

@@ -39,6 +39,7 @@ class Laporantahunan_model {
         $tahun      = $data['tahun'];
         $link       = $data['link'];
         $deskripsi  = $data['deskripsi'];
+        $uuid       = Utility::generateUUID();
 
         // cek tahun valid
         if(strlen($tahun) > 4 || strlen($tahun) < 4) return 'Panjang tahun tidak valid!';
@@ -56,8 +57,9 @@ class Laporantahunan_model {
         if(!is_bool($this->db->single())) return 'link ' . $link . ' Sudah Ditambahkan!';
 
         // insert data
-        $insert = "INSERT INTO $this->table VALUES(NULL, :link, :deskripsi, :tahun, NOW())";
+        $insert = "INSERT INTO $this->table VALUES(NULL, :uuid, :link, :deskripsi, :tahun, NOW())";
         $this->db->query($insert);
+        $this->db->bind('uuid', $uuid);
         $this->db->bind('link', $link);
         $this->db->bind('deskripsi', $deskripsi);
         $this->db->bind('tahun', $tahun);
@@ -66,10 +68,10 @@ class Laporantahunan_model {
         return $this->db->rowCount();
     }
 
-    public function hapusData(int $id): int {
-        $query = "DELETE FROM $this->table WHERE id_laporan = :id_laporan";
+    public function deleteData(string $uuid): int {
+        $query = "DELETE FROM $this->table WHERE UUID = :uuid";
         $this->db->query($query);
-        $this->db->bind('id_laporan', $id);
+        $this->db->bind('uuid', $uuid);
         $this->db->execute();
         return $this->db->rowCount();
     }
