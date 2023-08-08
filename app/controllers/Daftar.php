@@ -41,7 +41,7 @@ class Daftar extends Controller {
   public function aksi_daftar_muzakki(): void {
     $username = $_POST['username'];
     $email = $_POST['email'];
-    $result = $this->model('Daftar_model')->daftarUser('muzakki', $_POST);
+    $result = $this->model('User_model')->createUser('muzakki', $_POST);
     if($result > 0) {
       
       // get token
@@ -54,7 +54,7 @@ class Daftar extends Controller {
       $is_email = Utility::sendEmail($email, $subject, $msg);
 
       if($is_email) {
-        Flasher::setFlash('Akun Anda Berhasil Terdaftar Silahkan <strong>Cek Email</strong> untuk <strong>Aktivasi Akun</strong>!', 'info');
+        Flasher::setFlash('Akun Anda Berhasil Terdaftar Silahkan <strong>Cek Email</strong> untuk <strong>Aktivasi Akun</strong>!', 'info', 'y');
         header('Location: ' . BASEURL . '/login');
         exit;
       }

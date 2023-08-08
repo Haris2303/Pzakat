@@ -56,7 +56,7 @@ class Norek extends Controller
     public function aksi_tambah_norek(): void
     {
         $result = $this->model('Norek_model')->tambahDataNorek($_POST, $_FILES);
-        if ($result > 0) {
+        if ($result > 0 && is_int($result)) {
             Flasher::setFlash('Data Nomor Rekening <strong>Berhasil</strong> ditambahkan!', 'success');
             header('Location: ' . BASEURL . '/norek');
             exit;
@@ -70,20 +70,20 @@ class Norek extends Controller
     public function aksi_ubah_norek(): void
     {
         $result = $this->model('Norek_model')->ubahDataNorek($_POST, $_FILES);
-        if($result > 0) {
+        if($result > 0 && is_int($result)) {
             Flasher::setFlash('Data Nomor Rekening <strong>Berhasil</strong> diubah!', 'success');
             header('Location: ' . BASEURL . '/norek');
             exit;
         } else {
-            Flasher::setFlash('Data Nomor Rekening <strong>Gagal</strong> diubah!', 'danger');
+            Flasher::setFlash($result, 'danger');
             header('Location: ' . BASEURL . '/norek');
             exit;
         }
     }
 
-    public function aksi_hapus_norek(): void
+    public function aksi_hapus_data(string $uuid): void
     {
-        $result = $this->model('Norek_model')->hapusDataNorekById($_POST['id']);
+        $result = $this->model('Norek_model')->deleteData($uuid);
         if($result > 0){
             Flasher::setFlash('Data Nomor Rekening <strong>Berhasil</strong> dihapus!', 'success');
             header('Location: ' . BASEURL . '/norek');

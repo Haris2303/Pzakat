@@ -6,13 +6,13 @@
         <?php Flasher::flash() ?>
         <form action="<?= BASEURL ?>/settings/aksi_ubah_password" method="post">
             <div class="mb-3">
-                <input type="password" name="password-lama" class="form-control" placeholder="Password Sebelumnya" autocomplete="off">
+                <input type="password" name="password" class="form-control" placeholder="Password Sebelumnya" autocomplete="off">
             </div>
             <div class="mb-3">
-                <input type="password" name="password-baru" class="form-control" placeholder="Password Baru">
+                <input type="password" name="password_baru" class="form-control" placeholder="Password Baru">
             </div>
             <div class="mb-3">
-                <input type="password" name="password-konfirmasi" class="form-control" placeholder="Konfirmasi Password">
+                <input type="password" name="password_konfirmasi" class="form-control" placeholder="Konfirmasi Password">
             </div>
             <div class="mb-3">
                 <button type="submit" class="btn btn-success"><i class="fas fa-save mr-1"></i> Simpan Password</button>

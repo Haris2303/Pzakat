@@ -8,6 +8,12 @@
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-dark">DataTables Muzakki</h6>
   </div>
+
+  <div class="container mt-3">
+    <!-- flasher alert -->
+    <?php Flasher::flash() ?>
+  </div>
+
   <div class="card-body">
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -22,7 +28,7 @@
           </tr>
         </thead>
         <tbody>
-          <?php foreach($data['dataMuzakki'] as $item) : ?>
+          <?php foreach ($data['dataMuzakki'] as $item) : ?>
             <tr>
               <td><?= $item['nama'] ?></td>
               <td><?= $item['username'] ?></td>
@@ -30,8 +36,9 @@
               <td><?= $item['nohp'] ?></td>
               <td><?= $item['waktu_login'] ?></td>
               <td>
-                  <a href="#" class="btn badge btn-success">Ubah</a>
-                  <a href="#" class="btn badge btn-danger">Hapus</a>
+                <form action="" id="form-delete">
+                  <button type="submit" id="btn-delete" class="btn badge btn-danger" data-uuid="<?= $item['id_user'] ?>">Hapus</button>
+                </form>
               </td>
             </tr>
           <?php endforeach ?>

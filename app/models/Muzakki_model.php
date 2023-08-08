@@ -1,17 +1,19 @@
-<?php 
+<?php
 
-class Muzakki_model {
+class Muzakki_model
+{
 
-  private $table = [
-    "muzakki" => "tb_muzakki", 
-    "user"    => "tb_user"
-  ];
+  private $table = 'tb_muzakki';
   private $view = 'vwAllMuzakki';
   private $db;
+  private $baseModel;
+  private $controller;
 
   public function __construct()
   {
     $this->db = new Database();
+    $this->baseModel = new BaseModel($this->table);
+    $this->controller = new Controller();
   }
 
   /**
@@ -19,8 +21,9 @@ class Muzakki_model {
    *                  GET ALL DATA
    * -------------------------------------------------------------------------------------------------------------------------------------------------------
    */
-  public function getAllData(): array {
-    $query = "SELECT * FROM $this->view"; 
+  public function getAllData(): array
+  {
+    $query = "SELECT * FROM $this->view";
     $this->db->query($query);
     return $this->db->resultSet();
   }
@@ -30,9 +33,17 @@ class Muzakki_model {
    *                  GET DATA BY ??
    * -------------------------------------------------------------------------------------------------------------------------------------------------------
    */
+  // get single data by id
+  public function getDataByIdUser(int $id_user): array {
+    $query = "SELECT * FROM $this->table WHERE id_user = :id_user";
+    $this->db->query($query);
+    $this->db->bind('id_user', $id_user);
+    return $this->db->single();
+  }
 
   // get data muzakki by username
-  public function getDataByUsername($username): array {
+  public function getDataByUsername($username): array
+  {
     $query = "SELECT * FROM $this->view WHERE username = :username";
     $this->db->query($query);
     $this->db->bind('username', $username);
@@ -45,41 +56,46 @@ class Muzakki_model {
    *                  DATA ACTION
    * ------------------------------------------------------------------------------------------------------------------------------------------------------
    */
-  public function updateData(int $id_user, array $data): int {
-    $tb_user = $this->table['user'];
-    $tb_muzakki = $this->table['muzakki'];
-    
+
+  /**
+   * @param int $id_user id_user yang ada pada tb_muzakki
+   * @param array $data data post
+   */
+  public function updateData(int $id_user, array $data): int|string
+  {
+
     $nama       = htmlspecialchars(trim($data['nama']));
     $username   = htmlspecialchars(trim($data['username']));
     $nohp       = $data['nohp'];
 
-    // cek username jika sama
-    $cek = "SELECT username FROM $tb_user WHERE username = :username";
-    $this->db->query($cek);
-    $this->db->bind('username', $username);
-    if(is_bool($this->db->single())) {
-      // update username
-      $query = "UPDATE $tb_user SET username = :username WHERE id_user = :id_user";
-      $this->db->query($query);
-      $this->db->bind('username', $username);
-      $this->db->bind('id_user', $id_user);
-      $this->db->execute();
-      $isUser = ($this->db->rowCount() > 0) ? true : false;
+    $cekUsername = $this->controller->model('User_model')->getIdByUsername($username);
 
+    // jika username ada pada database dan tidak sama dengan id user
+    if (!is_bool($cekUsername) && $cekUsername['id_user'] !== $id_user) return "Username sudah terdafar!";
+
+    // jika username tidak ada pada database
+    if(is_bool($cekUsername)) {
+      // update username
+      $updateUsername = $this->controller->model('User_model')->updateDataById(['username' => $username], $id_user);
+      $isUser = ($updateUsername > 0) ? true : false;
+  
       // set session username
       $_SESSION['username'] = $username;
     }
 
     // update data muzakki
-    $query = "UPDATE $tb_muzakki SET nama = :nama, nohp = :nohp WHERE id_user = :id_user";
-    $this->db->query($query);
-    $this->db->bind('nama', $nama);
-    $this->db->bind('nohp', $nohp);
-    $this->db->bind('id_user', $id_user);
-    $this->db->execute();
-    $isMuzakki = ($this->db->rowCount() > 0) ? true : false;
+    $data = [
+      "nama" => $nama,
+      "nohp" => $nohp
+    ];
+    $update = $this->baseModel->updateData($data, ["id_user" => $id_user]);
+    $isMuzakki = ($update > 0) ? true : false;
 
     return ($isMuzakki || $isUser) ? 1 : 0;
   }
 
+  public function deleteData(string $uuid): int {
+    $kondisi = ["id_user" => $uuid];
+    return $this->baseModel->deleteData($kondisi);
+  }
 }

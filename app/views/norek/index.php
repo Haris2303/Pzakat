@@ -49,9 +49,8 @@
                             <td><img src="<?= BASEURL ?>/img/norek/<?= $item['gambar'] ?>" alt="<?= $item['gambar'] ?>" width="100px"></td>
                             <td>
                                 <button type="submit" class="btn badge btn-success btn-ubah-norek" data-toggle="modal" data-target="#formNorekModal" data-id="<?= $item['id_norek'] ?>">Ubah</button>
-                                <form action="<?= BASEURL ?>/norek/aksi_hapus_norek" method="post" class="d-inline">
-                                    <input type="hidden" name="id" value="<?= $item['id_norek'] ?>">
-                                    <button type="submit" class="btn badge btn-danger" onclick="return confirm('Anda yakin ingin menghapus norek tersebut?')">Hapus</button>
+                                <form action="" id="form-delete" class="d-inline">
+                                    <button type="submit" id="btn-delete" class="btn badge btn-danger" data-uuid="<?= $item['UUID'] ?>">Hapus</button>
                                 </form>
                             </td>
                         </tr>

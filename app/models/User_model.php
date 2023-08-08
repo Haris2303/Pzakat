@@ -9,11 +9,13 @@ class User_model
         "amil" => "tb_amil",
         "muzakki" => "tb_muzakki"
     ];
+    private $baseModel;
 
     // constructor
     public function __construct()
     {
         $this->db = new Database();
+        $this->baseModel = new BaseModel($this->table['user']);
     }
 
     /**
@@ -21,13 +23,21 @@ class User_model
      * |        GET DATA By
      * |---------------------------------------------------------------------------------------------------------------------
      */
-    public function getIdByUsername(string $username): int
+    public function getDataById(int $id_user): array {
+        $table = $this->table['user'];
+        $query = "SELECT * FROM $table WHERE id_user = :id_user";
+        $this->db->query($query);
+        $this->db->bind('id_user', $id_user);
+        return $this->db->single();
+    }
+
+    public function getIdByUsername(string $username): array|bool
     {
         $table = $this->table['user'];
         $query = "SELECT id_user FROM $table WHERE username = :username";
         $this->db->query($query);
         $this->db->bind('username', $username);
-        return $this->db->single()['id_user'];
+        return $this->db->single();
     }
 
     public function getTokenByUsername(string $username): string
@@ -70,11 +80,7 @@ class User_model
      */
     public function aktivasiAkun(string $token): int
     {
-        $table = $this->table['user'];
-        $query = "UPDATE $table SET status_aktivasi = '1' WHERE token = '$token'";
-        $this->db->query($query);
-        $this->db->execute();
-        return $this->db->rowCount();
+        return $this->baseModel->updateData(["status_aktivasi" => "1"], ["token" => $token]);
     }
 
     /**
@@ -85,11 +91,7 @@ class User_model
     // check token
     public function isToken(string $token): bool
     {
-        $table = $this->table['user'];
-        $query = "SELECT token FROM $table WHERE token = '$token'";
-        $this->db->query($query);
-        if (is_bool($this->db->single())) return false;
-        return true;
+        return $this->baseModel->isData(["token" => $token]);
     }
 
     /**
@@ -114,7 +116,7 @@ class User_model
 
     /**
      * --------------------------------------------------------------------------------------------------------------------------
-     *               ACTION DATA
+     *               ACTION DATA  => CREATE | UPDATE | DELETE
      * --------------------------------------------------------------------------------------------------------------------------
      */
     public function createUser(string $user, array $data)
@@ -122,6 +124,9 @@ class User_model
         // buat $user jadi lowercase
         $user = strtolower($user);
 
+        // buat object dari class BaseModel
+        $baseModel = new BaseModel($this->table[$user]);
+        
         // deklarsi variabel
         $tipeUser   = $this->table[$user];
         $tb_user    = $this->table['user'];
@@ -138,19 +143,20 @@ class User_model
         }
 
         $query_user     = "INSERT INTO $tb_user VALUES(NULL, :username, :password, :token, NOW(), '$level', '0')";
-        $cek_email_nohp  = "SELECT email, nohp FROM $tipeUser WHERE email = :email OR nohp = :nohp";
-        $cek_username   = "SELECT username FROM $tb_user WHERE username = :username";
+        // $cek_email_nohp  = "SELECT email, nohp FROM $tipeUser WHERE email = :email OR nohp = :nohp";
+        // $cek_username   = "SELECT username FROM $tb_user WHERE username = :username";
 
         // cek username
-        $this->db->query($cek_username);
-        $this->db->bind('username', $data['username']);
-        if (count($this->db->resultSet()) > 0) return 'Usename is already available!';
+        // $this->db->query($cek_username);
+        // $this->db->bind('username', $data['username']);
+        if ($this->baseModel->isData(["username" => $data['username']])) return 'Usename is already available!';
 
         // cek email dan nohp
-        $this->db->query($cek_email_nohp);
-        $this->db->bind('email', $data['email']);
-        $this->db->bind('nohp', $data['nohp']);
-        if (count($this->db->resultSet()) > 0) return 'Email or NoHP is already available!';
+        // $this->db->query($cek_email_nohp);
+        // $this->db->bind('email', $data['email']);
+        // $this->db->bind('nohp', $data['nohp']);
+        if ($baseModel->isData(["email" => $data['email']])) return 'Email is already available!';
+        if ($baseModel->isData(["nohp" => $data['nohp']])) return 'Handphone Number is already available!';
 
         // generate token
         $token = base64_encode(random_bytes(32));
@@ -231,17 +237,14 @@ class User_model
             // cek konfirmasi pasword
             if ($password_baru !== $password_konfirmasi) return 'Password Konfirmasi Salah!';
 
+            // cek length dari password
+            if(strlen($password_baru) < 8) return 'Password minimal 8 karakter!';
+
             // encrypt pass
             $password_baru = password_hash($password_baru, PASSWORD_DEFAULT);
 
-            // update password
-            $query = "UPDATE $table SET password = :password WHERE username = :username";
-            $this->db->query($query);
-            $this->db->bind('password', $password_baru);
-            $this->db->bind('username', $username);
-            $this->db->execute();
-
-            return $this->db->rowCount();
+            // update data
+            return $this->baseModel->updateData(["password" => $password_baru], ["username" => $username]);
         }
 
         return 'Password Salah!';
@@ -270,12 +273,24 @@ class User_model
         // encrypt password
         $password = password_hash($password, PASSWORD_DEFAULT);
 
-        $query = "UPDATE $table SET password = :password WHERE id_user = :id_user";
-        $this->db->query($query);
-        $this->db->bind('password', $password);
-        $this->db->bind('id_user', $dataUser['id_user']);
-        $this->db->execute();
+        // update data
+        return $this->baseModel->updateData(["password" => $password], ["id_user" => $dataUser['id_user']]);
+    }
 
-        return $this->db->rowCount();
+    public function updateDataById(array $data, int $id_user): int {
+        // $table = $this->table['user'];
+        $row_data = $this->getDataById($id_user);
+        $username = (isset($data['username'])) ? $data['username'] : $row_data['username'];
+        $token = (isset($data['token'])) ? $data['token'] : $row_data['token'];
+
+        // cek username
+        if(isset($data['username']) && is_int($this->getIdByUsername($data['username'])['id_user'])) return 0;
+
+        return $this->baseModel->updateData(["username" => $username, "token" => $token], ["id_user" => $id_user]);
+    }
+
+    public function deleteData(int $id_user): int 
+    {
+        return $this->baseModel->deleteData(["id_user" => $id_user]);
     }
 }

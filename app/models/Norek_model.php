@@ -6,10 +6,12 @@ class Norek_model
     private $table  = 'tb_norek';
     private $view = ["allNorekHaveSaldo" => "vwAllNorekHaveSaldo"];
     private $db;
+    private $baseModel;
     
     public function __construct()
     {
         $this->db = new Database();
+        $this->baseModel = new BaseModel($this->table);
     }
 
     public function getAllDataNorekHaveSaldo()
@@ -43,21 +45,30 @@ class Norek_model
         return $this->db->single();
     }
 
+
     /**
-     * 
-     * @param getJSON
-     * 
+     * @method getDataBankJsonDecode 
+     * @param null
+     * @return array
      */
 
-    public function getDataBankJsonDecode() 
+    public function getDataBankJsonDecode(): array
     {
         $url = BASEURL . "/static/api/bank/bank.json";
         $result = file_get_contents($url);
         return json_decode($result, true);
     }
 
+    /**
+     * --------------------------------------------------------------------------------------------------------------------------
+     *                  ACTION DATA
+     * --------------------------------------------------------------------------------------------------------------------------
+     */
 
-    public function tambahDataNorek($dataPost)
+     /**
+      * @param array $dataPost data dari post
+      */
+    public function tambahDataNorek(array $dataPost): int|string
     {
         // initialisasi variabel
         $nama_pemilik   = ucwords(strtolower($dataPost['nama-pemilik']));
@@ -66,16 +77,15 @@ class Norek_model
         $jenis_program  = ucwords($dataPost['jenis-program']);
         $saldo_donasi   = 0;
         $gambar         = strtolower(join('-', explode(' ', $nama_bank))) . '.jpeg';
+        $uuid           = Utility::generateUUID();
 
-        // cek norek 
-        $cek = "SELECT norek FROM $this->table WHERE norek = $norek";
-        $this->db->query($cek);
-        $resultCek = $this->db->resultSet();
-        if (count($resultCek) > 0) return 'Norek sudah tersedia!';
+        // cek norek
+        if ($this->baseModel->isData(["norek" => $norek])) return 'Norek sudah tersedia!';
 
         // insert norek
-        $query = "INSERT INTO $this->table VALUES(NULL, :nama_pemilik, :nama_bank, :norek, :jenis_program, :saldo_donasi, :gambar)";
+        $query = "INSERT INTO $this->table VALUES(NULL, :uuid, :nama_pemilik, :nama_bank, :norek, :jenis_program, :saldo_donasi, :gambar)";
         $this->db->query($query);
+        $this->db->bind('uuid', $uuid);
         $this->db->bind('nama_pemilik', $nama_pemilik);
         $this->db->bind('nama_bank', $nama_bank);
         $this->db->bind('norek', $norek);
@@ -87,35 +97,29 @@ class Norek_model
         return $this->db->rowCount();
     }
 
-    public function ubahDataNorek($dataPost) {
+    public function ubahDataNorek($dataPost): int|string {
         
+        // init variabel
         $id_norek    = $dataPost['id'];
         $namapemilik = ucwords(strtolower($dataPost['nama-pemilik']));
         $norek       = $dataPost['norek'];
 
-        // update data
-        $query = " UPDATE $this->table SET 
-                        nama_pemilik = :nama_pemilik,
-                        norek = :norek
-                    WHERE id_norek = :id_norek";
-        
-        $this->db->query($query);
-        $this->db->bind('id_norek', $id_norek);
-        $this->db->bind('nama_pemilik', $namapemilik);
-        $this->db->bind('norek', $norek);
-        $this->db->execute();
+        // cek norek
+        if($this->baseModel->isData(["norek" => $norek]) && $this->baseModel->isData(["id_norek" => $id_norek])) return "Nomor rekening sudah terdaftar!";
 
-        return $this->db->rowCount();
+        $data = [
+            "nama_pemilik" => $namapemilik,
+            "norek" => $norek
+        ];
+
+        // update data
+        return $this->baseModel->updateData($data, ["id_norek" => $id_norek]);
 
     }
 
-    public function hapusDataNorekById($id): int
+    public function deleteData($uuid): int
     {
         // delete data
-        $query = "DELETE FROM $this->table WHERE id_norek = :id_norek";
-        $this->db->query($query);
-        $this->db->bind('id_norek', $id);
-        $this->db->execute();
-        return $this->db->rowCount();
+        return $this->baseModel->deleteData(["UUID" => $uuid]);
     }
 }

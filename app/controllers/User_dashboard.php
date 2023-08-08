@@ -18,7 +18,7 @@ class User_dashboard extends Controller {
         }
 
         // get id user
-        $this->id_user = $this->model('User_model')->getIdByUsername($_SESSION['username']);
+        $this->id_user = $this->model('User_model')->getIdByUsername($_SESSION['username'])['id_user'];
 
         // set data
         $this->data_pending = $this->model('Kelolapembayaran_model')->getDataPembayaran('pending', 'id_user', $this->id_user);
@@ -122,6 +122,7 @@ class User_dashboard extends Controller {
     }
 
     public function pengaturan() {
+
         $data_user = $this->model('Muzakki_model')->getDataByUsername($_SESSION['username']);
 
         $data = [
@@ -154,14 +155,13 @@ class User_dashboard extends Controller {
     }
 
     public function aksi_ubah_profil() {
-        $id_user = $this->model('User_model')->getIdByUsername($_SESSION['username']);
-        $update = $this->model('Muzakki_model')->updateData($id_user, $_POST);
-        if($update > 0) {
+        $update = $this->model('Muzakki_model')->updateData($this->id_user, $_POST);
+        if($update > 0 && is_int($update)) {
             Flasher::setFlash('Perubahan berhasil disimpan!', 'success');
             header('Location: ' . BASEURL . '/user_dashboard/pengaturan');
             exit;
         } else {
-            Flasher::setFlash('Perubahan gagal disimpan!', 'danger');
+            Flasher::setFlash((!is_int($update)) ? $update : 'Perubahan gagal disimpan!', 'danger');
             header('Location: ' . BASEURL . '/user_dashboard/pengaturan');
             exit;
         }

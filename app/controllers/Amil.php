@@ -54,7 +54,7 @@ class Amil extends Controller
     $username = $_POST['username'];
     $email    = $_POST['email'];
     $result = $this->model('User_model')->createUser('Amil', $_POST);
-    if($result > 0) {
+    if($result > 0 && is_int($result)) {
 
       // get token
       $token = $this->model('User_model')->getTokenByUsername($username);
