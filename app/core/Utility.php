@@ -180,4 +180,15 @@ class Utility
         return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
 
+    public static function generateToken(): string {
+        // generate token
+        $token = base64_encode(random_bytes(32));
+        // delete character '/' and '='
+        $token = trim($token, '=');
+        $token = explode('/', $token); // delete character '/'
+        $token = join('', $token);
+        $token = explode('+', $token); // delete character '+'
+        return urlencode(join('', $token));
+    }
+
 }

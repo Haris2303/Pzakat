@@ -98,7 +98,7 @@ class Amil extends Controller
   // method aksi hapus amil
   public function aksi_hapus_data(string $token): void 
   {
-    if($this->model('Amil_model')->deleteAmil($token) > 0) {
+    if($this->model('User_model')->deleteData($token) > 0) {
       Flasher::setFlash('Data Amil berhasil dihapus', 'success');
       header('Location: ' . BASEURL . '/amil');
       exit;

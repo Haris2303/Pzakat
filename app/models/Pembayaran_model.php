@@ -1,6 +1,6 @@
 <?php
 
-class Kelolapembayaran_model {
+class Pembayaran_model {
 
     private $view = [
         "dataAll"        => "vwAllPembayaran",
@@ -112,6 +112,9 @@ class Kelolapembayaran_model {
      * -------------------------------------------------------------------------------------------------------------
      *                  GET DATA
      * -------------------------------------------------------------------------------------------------------------
+     */
+    
+    /** 
      * @param string{status_pembayaran} value default null | pending|konfirmasi|failed|success
      * @param string{where} value default null | field
      * @param string{value} value default null | value pada field

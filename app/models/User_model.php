@@ -24,52 +24,42 @@ class User_model
      * |---------------------------------------------------------------------------------------------------------------------
      */
     public function getDataById(int $id_user): array {
-        $table = $this->table['user'];
-        $query = "SELECT * FROM $table WHERE id_user = :id_user";
-        $this->db->query($query);
-        $this->db->bind('id_user', $id_user);
-        return $this->db->single();
+        $this->baseModel->selectData(null, null, [], ["id_user = " => $id_user]);
+        return $this->baseModel->fetch();
     }
 
     public function getIdByUsername(string $username): array|bool
     {
-        $table = $this->table['user'];
-        $query = "SELECT id_user FROM $table WHERE username = :username";
-        $this->db->query($query);
-        $this->db->bind('username', $username);
-        return $this->db->single();
+        $this->baseModel->selectData(null, null, [], ["username = " => $username]);
+        return $this->baseModel->fetch();
     }
 
     public function getTokenByUsername(string $username): string
     {
-        $table = $this->table['user'];
-        $query = "SELECT token FROM $table WHERE username = :username";
-        $this->db->query($query);
-        $this->db->bind('username', $username);
-        return $this->db->single()['token'];
+        $this->baseModel->selectData(null, null, [], ["username = " => $username]);
+        return $this->baseModel->fetch()['token'];
     }
 
     public function getNamaByIdUser(int $id_user): string
     {
-        $tb_amil = $this->table['amil'];
-        $tb_muzakki = $this->table['muzakki'];
+        // buat object dari base model
+        $modelAdmin = new BaseModel('tb_admin');
+        $modelAmil = new BaseModel('tb_amil');
+        $modelMuzakki = new BaseModel('tb_muzakki');
         
         // cek pada tb_admin
-        $query = "SELECT nama FROM tb_admin WHERE id_user = $id_user";
-        $this->db->query($query);
-        $nama = $this->db->single()['nama'];
+        $modelAdmin->selectData(null, null, [], ["id_user = " => $id_user]);
+        $nama = $modelAdmin->fetch()['nama'];
         if (is_string($nama)) return $nama;
 
         // cek pada tb_amil
-        $query = "SELECT nama FROM $tb_amil WHERE id_user = $id_user";
-        $this->db->query($query);
-        $nama = $this->db->single()['nama'];
+        $modelAmil->selectData(null, null, [], ["id_user = " => $id_user]);
+        $nama = $modelAmil->fetch()['nama'];
         if (is_string($nama)) return $nama;
 
         // cek pada tb_muzakki
-        $query = "SELECT nama FROM $tb_muzakki WHERE id_user = $id_user";
-        $this->db->query($query);
-        $nama = $this->db->single()['nama'];
+        $modelMuzakki->selectData(null, null, [], ["id_user = " => $id_user]);
+        $nama = $modelMuzakki->fetch()['nama'];
         if (is_string($nama)) return $nama;
     }
 
@@ -124,100 +114,79 @@ class User_model
         // buat $user jadi lowercase
         $user = strtolower($user);
 
-        // buat object dari class BaseModel
+        // instansiasi object dari class BaseModel
         $baseModel = new BaseModel($this->table[$user]);
-        
-        // deklarsi variabel
-        $tipeUser   = $this->table[$user];
-        $tb_user    = $this->table['user'];
-        $uuid       = Utility::generateUUID();
+
+        // generate uuid
+        $uuid = Utility::generateUUID();
+        // generate token
+        $token = Utility::generateToken();
 
         // cek user
-        if ($user === 'amil') {
-            $level      = '2';
-            $queryAmil  = "INSERT INTO $tipeUser VALUES(NULL, :uuid, :id_user, :id_masjid, :nama, :email, :nohp, :alamat)";
-        }
-        if ($user === 'muzakki') {
-            $level        = '3';
-            $queryMuzakki = "INSERT INTO $tipeUser VALUES(NULL,:uuid, :id_user, :nama, :email, :nohp)";
-        }
-
-        $query_user     = "INSERT INTO $tb_user VALUES(NULL, :username, :password, :token, NOW(), '$level', '0')";
-        // $cek_email_nohp  = "SELECT email, nohp FROM $tipeUser WHERE email = :email OR nohp = :nohp";
-        // $cek_username   = "SELECT username FROM $tb_user WHERE username = :username";
+        if ($user === 'amil') $level = '2';
+        if ($user === 'muzakki') $level = '3';
 
         // cek username
-        // $this->db->query($cek_username);
-        // $this->db->bind('username', $data['username']);
         if ($this->baseModel->isData(["username" => $data['username']])) return 'Usename is already available!';
-
-        // cek email dan nohp
-        // $this->db->query($cek_email_nohp);
-        // $this->db->bind('email', $data['email']);
-        // $this->db->bind('nohp', $data['nohp']);
+        // cek email
         if ($baseModel->isData(["email" => $data['email']])) return 'Email is already available!';
+        // cek nohp
         if ($baseModel->isData(["nohp" => $data['nohp']])) return 'Handphone Number is already available!';
-
-        // generate token
-        $token = base64_encode(random_bytes(32));
-        // delete character '/' and '='
-        $token = trim($token, '=');
-        $token = explode('/', $token); // delete character '/'
-        $token = join('', $token);
-        $token = explode('+', $token); // delete character '+'
-        $token = urlencode(join('', $token));
 
         // cek panjang password
         if (strlen($data['password'] < 8)) return 'Password Terlalu Lemah!';
 
         // password konfirmasi
         if ($data['password'] === $data['passConfirm']) {
-
+            
             // insert data user
-            $this->db->query($query_user);
-            $this->db->bind('username', htmlspecialchars($data['username']));
-            $this->db->bind('password', password_hash($data['password'], PASSWORD_DEFAULT));
-            $this->db->bind('token', $token);
-            $this->db->execute();
+            $dataUser = [
+                "username" => htmlspecialchars($data['username']),
+                "password" => password_hash($data['password'], PASSWORD_DEFAULT),
+                "token" => $token,
+                "waktu_login" => date('Y-m-d H:i:s'),
+                "level" => $level,
+                "status_aktivasi" => '0'
+            ];
 
-            if ($this->db->rowCount() > 0) {
+            if ($this->baseModel->insertData($dataUser) > 0) {
 
                 // get id user
-                $this->db->query("SELECT id_user FROM $tb_user WHERE username = :username");
-                $this->db->bind('username', $data['username']);
-                $id_user = $this->db->single()['id_user'];
+                $this->baseModel->selectData(null, null, [], ["username =" => $data['username']]);
+                $id_user = $this->baseModel->fetch()['id_user'];
 
                 if ($user === 'muzakki') {
                     // insert data muzakki
-                    $this->db->query($queryMuzakki);
-                    $this->db->bind('uuid', $uuid);
-                    $this->db->bind('id_user', $id_user);
-                    $this->db->bind('nama', htmlspecialchars($data['name']));
-                    $this->db->bind('email', htmlspecialchars($data['email']));
-                    $this->db->bind('nohp', htmlspecialchars($data['nohp']));
-                    $this->db->execute();
+                    $dataMuzakki = [
+                        "uuid" => $uuid,
+                        "id_user" => $id_user, 
+                        "nama" => htmlspecialchars($data['name']),
+                        "email" => htmlspecialchars($data['email']),
+                        "nohp" => $data['nohp'],
+                    ];
+                    return $baseModel->insertData($dataMuzakki);
                 }
 
                 if ($user === 'amil') {
                     // insert data amil
-                    $this->db->query($queryAmil);
-                    $this->db->bind('uuid', $uuid);
-                    $this->db->bind('id_user', $id_user);
-                    $this->db->bind('id_masjid', $data['masjid']);
-                    $this->db->bind('nama', htmlspecialchars($data['name']));
-                    $this->db->bind('email', htmlspecialchars($data['email']));
-                    $this->db->bind('nohp', htmlspecialchars($data['nohp']));
-                    $this->db->bind('alamat', htmlspecialchars($data['alamat']));
-                    $this->db->execute();
+                    $dataAmil = [
+                        "uuid" => $uuid,
+                        "id_user" => $id_user,
+                        "id_mesjid" => $data['masjid'],
+                        "nama" => htmlspecialchars($data['name']),
+                        "email" => htmlspecialchars($data['email']),
+                        "nohp" => $data['nohp'],
+                        "alamat" => htmlspecialchars($data['alamat'])
+                    ];
+                    return $baseModel->insertData($dataAmil);
                 }
-
-                return $this->db->rowCount();
             }
         }
 
         return 'Konfirmasi password tidak sama!';
     }
 
+    // update password user
     public function updatePassword(string $username, array $data): int|string
     {
         $table = $this->table['user'];
@@ -250,6 +219,7 @@ class User_model
         return 'Password Salah!';
     }
 
+    // update password oleh admin
     public function updatePasswordByAdmin(array $data): int|string
     {
         $table = $this->table['user'];
@@ -277,6 +247,7 @@ class User_model
         return $this->baseModel->updateData(["password" => $password], ["id_user" => $dataUser['id_user']]);
     }
 
+    // update data
     public function updateDataById(array $data, int $id_user): int {
         // $table = $this->table['user'];
         $row_data = $this->getDataById($id_user);
@@ -289,8 +260,9 @@ class User_model
         return $this->baseModel->updateData(["username" => $username, "token" => $token], ["id_user" => $id_user]);
     }
 
-    public function deleteData(int $id_user): int 
+    // delete data
+    public function deleteData(string $token): int 
     {
-        return $this->baseModel->deleteData(["id_user" => $id_user]);
+        return $this->baseModel->deleteData(["token" => $token]);
     }
 }

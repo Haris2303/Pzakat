@@ -35,7 +35,8 @@ class BaseModel
     /**
      * @param string $view nilai default adalah `null` untuk table, jika Anda ingin menampilkan view, maka masukkan view yang Anda inginkan.
      * @param string $notSelect nilai default adalah `null` untuk menampilkan semua field, jika tidak ingin menampilkan field tertentuk maka berikan `-field` untuk tidak menampilkan field tersebut contoh `-id`
-     * @param string $orderBy nilai default adalah `created_at` jika ada, jika tidak ada maka Anda harus memberikan sebuah field sesuaikan dengan yang ada pada database Anda untuk di order.
+     * @param array $orderBy nilai default adalah `created_at` jika ada, jika tidak ada maka Anda harus memberikan sebuah field sesuaikan dengan yang ada pada database Anda untuk di order.
+     * @param array $kondisi masukkan sebuah kondisi where dengan menggunakan array contoh `["kolom =" => "nilai"]`
      * @return void
      * 
      * @continue Hubungkan dengan fungsi berikutnya itu `fetchAll` atau `fetch`
@@ -50,7 +51,7 @@ class BaseModel
 
         // init order
         $setOrder = "";
-        
+
         // jika order by ada
         if (count($orderBy) > 0) {
 
@@ -169,7 +170,7 @@ class BaseModel
         $this->db->bind(1, $value);
         // execute
         $this->db->execute();
-        
+
         return $this->db->rowCount();
     }
 
@@ -189,7 +190,7 @@ class BaseModel
 
         // init query
         $query = "UPDATE $this->table SET $placeholders WHERE $kondisi_key = ?";
-        
+
         // prepare query
         $this->db->query($query);
 

@@ -9,13 +9,13 @@ class Pagination
     protected static $page;
     protected static $data;
 
-    public function __construct(string $view, array $data, int $limit, int $page)
+    public function __construct(string $view, array $jumlahData, int $limit, int $page)
     {
         $this->db = new Database();
         $this->view = $view;
         self::$limit = $limit;
         self::$page = $page;
-        self::$data = count($data);
+        self::$data = count($jumlahData);
     }
 
     /**
@@ -27,37 +27,28 @@ class Pagination
      * @param array|null $where Klausa WHERE opsional
      * 
      */
-    public function setPager(callable $callback = null): array
+    public function setPager(array $kondisi): array
     {
         $limit = self::$limit;
         $page = self::$page;
         $view = $this->view;
+
+        $perPage = $limit;
+        $offset = ($page - 1) * $perPage;
+
+        $model = new BaseModel($view);
+        $model->selectData(null, null, ["tanggal_pembayaran" => "DESC"], $kondisi);
+        $data = $model->fetchAll();
+
+        $paginatedData = array_slice($data, $offset, $perPage);
+
+        return $paginatedData;
         
-        // jika page adalah 0
-        if($page <= 0) $page = 1;
-
-        // tentukan offset
-        $offset = $limit * ($page - 1);
-
-        // query limit tanpa callback
-        $q1 = "SELECT * FROM $view LIMIT $limit OFFSET $offset";
-
-        // jika array null
-        if (is_null($callback)) $query = $q1;
-
-        // jika callback tidak null
-        if (!is_null($callback)) {
-            $q2 = "SELECT * FROM $view " . $callback() . " LIMIT $limit OFFSET $offset";
-            $query = $q2;
-        }
-
-        // siapkan query
-        $this->db->query($query);
-
-        // Sesuaikan dengan metode resultSet() dari objek Database
-        return $this->db->resultSet();
     }
 
+    /**
+     * @param int $jumlah_pagination jumlah dari kiri dan kanan pagination yang tampil
+     */
     public static function view(int $jumlah_pagination = 3)
     {
         $page = self::$page;

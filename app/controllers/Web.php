@@ -5,14 +5,14 @@ class Web extends Controller {
   public function index(): void {
     $data = [
       "judul" => "Home",
-      "donaturTerdaftar" => $this->model('Kelolapembayaran_model')->getDonaturTerdaftar(),
+      "donaturTerdaftar" => $this->model('Pembayaran_model')->getDonaturTerdaftar(),
       "dataBerita"  => $this->model('Pageviews_model')->getAllDataBeritaLimit(3),
       "dataArtikel" => $this->model('Pageviews_model')->getAllDataArtikelLimit(4),
       "dataBanner" => $this->model('Banner_model')->getAllDataBanner(),
       "programNameAktif" => $this->model('Kategoriprogram_model')->getAllKategoriProgram('aktif'),
       "dataZakat" => $this->model('Program_model')->getDataProgramZakatLimit(1),
       "jumlahProgram" => count($this->model('Program_model')->getAllDataProgramAktifTunai()),
-      "danaTerkumpul" => $this->model('Kelolapembayaran_model')->getDataPemasukkanHarian(),
+      "danaTerkumpul" => $this->model('Pembayaran_model')->getDataPemasukkanHarian(),
       "src_video" => $this->model('Video_model')->getData()['link'],
       "laporan" => $this->model('Laporantahunan_model')->getDataLimit(3)
     ];
