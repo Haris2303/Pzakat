@@ -14,13 +14,13 @@ class Pengeluaran extends Controller {
                 "util" => "js/util/script.js"
             ],
             "dataPengeluaran" => $this->model('Pengeluaran_model')->getAllDataPengeluaranTunai(),
-            "dataProgram" => $this->model('Kelolaprogram_model')->getAllDataProgramHaveMoney(),
+            "dataProgram" => $this->model('Program_model')->getAllDataProgramHaveMoney(),
             "dataRekening" => $this->model('Norek_model')->getAllDataNorekHaveSaldo()
         ];
 
         $this->view('dashboard/sidebar', $data);
         $this->view('pengeluaran/index', $data);
-        $this->view('dashboard/footer', $data);
+        $this->view('dashboard/footer', $data); 
     }
 
     public function barang(): void

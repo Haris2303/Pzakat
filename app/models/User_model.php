@@ -23,30 +23,57 @@ class User_model
      * |        GET DATA By
      * |---------------------------------------------------------------------------------------------------------------------
      */
-    public function getDataById(int $id_user): array {
+
+    /**
+     * Mengambil data pengguna berdasarkan ID pengguna.
+     *
+     * @param int $id_user ID pengguna yang akan dicari.
+     * @return array Data pengguna yang cocok dengan ID pengguna yang diberikan.
+     */
+    public function getDataById(int $id_user): array
+    {
         $this->baseModel->selectData(null, null, [], ["id_user = " => $id_user]);
         return $this->baseModel->fetch();
     }
 
+    /**
+     * Mengambil ID pengguna berdasarkan nama pengguna.
+     *
+     * @param string $username Nama pengguna yang akan dicari.
+     * @return array|bool Data pengguna yang cocok dengan nama pengguna yang diberikan, atau false jika tidak ditemukan.
+     */
     public function getIdByUsername(string $username): array|bool
     {
         $this->baseModel->selectData(null, null, [], ["username = " => $username]);
         return $this->baseModel->fetch();
     }
 
+    /**
+     * Mengambil token pengguna berdasarkan nama pengguna.
+     *
+     * @param string $username Nama pengguna yang akan dicari.
+     * @return string Token pengguna yang cocok dengan nama pengguna yang diberikan.
+     */
     public function getTokenByUsername(string $username): string
     {
         $this->baseModel->selectData(null, null, [], ["username = " => $username]);
         return $this->baseModel->fetch()['token'];
     }
 
+    /**
+     * Mengambil nama pengguna berdasarkan ID pengguna.
+     * Fungsi akan mencari nama di tabel tb_admin, tb_amil, dan tb_muzakki.
+     *
+     * @param int $id_user ID pengguna yang akan dicari.
+     * @return string|null Nama pengguna jika ditemukan, null jika tidak ditemukan.
+     */
     public function getNamaByIdUser(int $id_user): string
     {
         // buat object dari base model
         $modelAdmin = new BaseModel('tb_admin');
         $modelAmil = new BaseModel('tb_amil');
         $modelMuzakki = new BaseModel('tb_muzakki');
-        
+
         // cek pada tb_admin
         $modelAdmin->selectData(null, null, [], ["id_user = " => $id_user]);
         $nama = $modelAdmin->fetch()['nama'];
@@ -68,6 +95,13 @@ class User_model
      *      AKTIVASI AKUN
      * ----------------------------------------------------------------------------------------------------------------------------
      */
+
+    /**
+     * Mengaktifkan akun berdasarkan token.
+     *
+     * @param string $token Token yang digunakan untuk mengidentifikasi akun yang akan diaktifkan.
+     * @return int Jumlah baris yang terpengaruh oleh operasi pembaruan.
+     */
     public function aktivasiAkun(string $token): int
     {
         return $this->baseModel->updateData(["status_aktivasi" => "1"], ["token" => $token]);
@@ -78,15 +112,24 @@ class User_model
      * |        CHECK DATA
      * |---------------------------------------------------------------------------------------------------------------------
      */
-    // check token
+
+    /**
+     * Memeriksa apakah token ada dalam basis data.
+     *
+     * @param string $token Token yang akan diperiksa.
+     * @return bool True jika token ditemukan, false jika tidak.
+     */
     public function isToken(string $token): bool
     {
         return $this->baseModel->isData(["token" => $token]);
     }
 
     /**
-     * @param string $email tidak boleh kosong
-     * @return true(jika valid)|`false`(jika tidak valid)
+     * Memeriksa apakah alamat email adalah unik dalam tabel tb_amil dan tb_muzakki, kecuali untuk pengguna dengan ID tertentu.
+     *
+     * @param string $email Alamat email yang akan diperiksa.
+     * @param int $id_user ID pengguna yang akan dikecualikan dalam pemeriksaan.
+     * @return bool True jika alamat email valid dan unik, false jika tidak.
      */
     public function isEmail(string $email, int $id_user): bool
     {
@@ -108,6 +151,14 @@ class User_model
      * --------------------------------------------------------------------------------------------------------------------------
      *               ACTION DATA  => CREATE | UPDATE | DELETE
      * --------------------------------------------------------------------------------------------------------------------------
+     */
+
+    /**
+     * Membuat pengguna baru dalam basis data.
+     *
+     * @param string $user Tipe pengguna (amil atau muzakki).
+     * @param array $data Data pengguna yang akan dimasukkan.
+     * @return string|int Pesan sukses, pesan kesalahan, atau jumlah baris yang terpengaruh (bergantung pada fungsi).
      */
     public function createUser(string $user, array $data)
     {
@@ -138,7 +189,7 @@ class User_model
 
         // password konfirmasi
         if ($data['password'] === $data['passConfirm']) {
-            
+
             // insert data user
             $dataUser = [
                 "username" => htmlspecialchars($data['username']),
@@ -159,7 +210,7 @@ class User_model
                     // insert data muzakki
                     $dataMuzakki = [
                         "uuid" => $uuid,
-                        "id_user" => $id_user, 
+                        "id_user" => $id_user,
                         "nama" => htmlspecialchars($data['name']),
                         "email" => htmlspecialchars($data['email']),
                         "nohp" => $data['nohp'],
@@ -186,7 +237,13 @@ class User_model
         return 'Konfirmasi password tidak sama!';
     }
 
-    // update password user
+    /**
+     * Mengupdate password pengguna berdasarkan username.
+     *
+     * @param string $username Username pengguna yang akan diupdate passwordnya.
+     * @param array $data Data yang berisi password lama, password baru, dan konfirmasi password baru.
+     * @return int|string Jumlah baris yang terpengaruh atau pesan kesalahan.
+     */
     public function updatePassword(string $username, array $data): int|string
     {
         $table = $this->table['user'];
@@ -207,7 +264,7 @@ class User_model
             if ($password_baru !== $password_konfirmasi) return 'Password Konfirmasi Salah!';
 
             // cek length dari password
-            if(strlen($password_baru) < 8) return 'Password minimal 8 karakter!';
+            if (strlen($password_baru) < 8) return 'Password minimal 8 karakter!';
 
             // encrypt pass
             $password_baru = password_hash($password_baru, PASSWORD_DEFAULT);
@@ -219,11 +276,16 @@ class User_model
         return 'Password Salah!';
     }
 
-    // update password oleh admin
+    /**
+     * Mengupdate password oleh admin berdasarkan username.
+     *
+     * @param array $data Data yang berisi username, password, dan konfirmasi password.
+     * @return int|string Jumlah baris yang terpengaruh atau pesan kesalahan.
+     */
     public function updatePasswordByAdmin(array $data): int|string
     {
         $table = $this->table['user'];
-        
+
         // initial data
         $username     = $data['username'];
         $password     = $data['password'];
@@ -247,21 +309,32 @@ class User_model
         return $this->baseModel->updateData(["password" => $password], ["id_user" => $dataUser['id_user']]);
     }
 
-    // update data
-    public function updateDataById(array $data, int $id_user): int {
-        // $table = $this->table['user'];
+    /**
+     * Mengupdate data pengguna berdasarkan ID pengguna.
+     *
+     * @param array $data Data yang akan diupdate.
+     * @param int $id_user ID pengguna yang akan diupdate datanya.
+     * @return int Jumlah baris yang terpengaruh oleh operasi pembaruan.
+     */
+    public function updateDataById(array $data, int $id_user): int
+    {
         $row_data = $this->getDataById($id_user);
         $username = (isset($data['username'])) ? $data['username'] : $row_data['username'];
         $token = (isset($data['token'])) ? $data['token'] : $row_data['token'];
 
         // cek username
-        if(isset($data['username']) && is_int($this->getIdByUsername($data['username'])['id_user'])) return 0;
+        if (isset($data['username']) && is_int($this->getIdByUsername($data['username'])['id_user'])) return 0;
 
         return $this->baseModel->updateData(["username" => $username, "token" => $token], ["id_user" => $id_user]);
     }
 
-    // delete data
-    public function deleteData(string $token): int 
+    /**
+     * Menghapus data pengguna berdasarkan token.
+     *
+     * @param string $token Token pengguna yang akan dihapus.
+     * @return int Jumlah baris yang terpengaruh oleh operasi penghapusan.
+     */
+    public function deleteData(string $token): int
     {
         return $this->baseModel->deleteData(["token" => $token]);
     }

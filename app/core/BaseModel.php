@@ -12,8 +12,10 @@ class BaseModel
     }
 
     /**
-     * @param array $kondisi masukkan sebuah kondisi where dengan menggunakan array contoh `["kolom" => "nilai"]`
-     * @return bool true | false
+     * Memeriksa apakah data ada dalam tabel berdasarkan kondisi yang diberikan.
+     *
+     * @param array $kondisi Kondisi WHERE dalam bentuk array (contoh: ["kolom" => "nilai"]).
+     * @return bool True jika data ditemukan, false jika tidak.
      */
     public function isData(array $kondisi): bool
     {
@@ -33,21 +35,23 @@ class BaseModel
     }
 
     /**
-     * @param string $view nilai default adalah `null` untuk table, jika Anda ingin menampilkan view, maka masukkan view yang Anda inginkan.
-     * @param string $notSelect nilai default adalah `null` untuk menampilkan semua field, jika tidak ingin menampilkan field tertentuk maka berikan `-field` untuk tidak menampilkan field tersebut contoh `-id`
-     * @param array $orderBy nilai default adalah `created_at` jika ada, jika tidak ada maka Anda harus memberikan sebuah field sesuaikan dengan yang ada pada database Anda untuk di order.
-     * @param array $kondisi masukkan sebuah kondisi where dengan menggunakan array contoh `["kolom =" => "nilai"]`
+     * Memilih data dari tabel atau view dengan kriteria tertentu.
+     *
+     * @param string|null $view Nama view yang ingin ditampilkan. Default null untuk menggunakan tabel utama.
+     * @param string|null $select Field yang ingin ditampilkan. Default null untuk menampilkan semua field.
+     * @param array $orderBy Pengurutan data. Default "[]" jika tidak diberikan.
+     * @param array|null $kondisi Kondisi WHERE dalam bentuk array (contoh: ["kolom =" => "nilai"]). Default null jika tidak ada kondisi.
      * @return void
      * 
-     * @continue Hubungkan dengan fungsi berikutnya itu `fetchAll` atau `fetch`
+     * @continue Lanjutkan dengan fungsi berikutnya seperti "fetchAll" atau "fetch".
      */
-    public function selectData(string $view = null, string $notSelect = null, array $orderBy = [], array $kondisi = null): void
+    public function selectData(string $view = null, string $select = null, array $orderBy = [], array $kondisi = null): void
     {
         // set table 
         $table = (!is_null($view)) ? $view : $this->table;
 
         // set field selection
-        $select = (!is_null($notSelect) && $notSelect !== '*') ? '*,' . $notSelect : '*';
+        $setSelect = (!is_null($select)) ? $select : "*";
 
         // init order
         $setOrder = "";
@@ -63,7 +67,7 @@ class BaseModel
         }
 
         // query awal 
-        $query = "SELECT $select FROM $table $setOrder";
+        $query = "SELECT $setSelect FROM $table $setOrder";
 
         // cek kondisi where
         if (!is_null($kondisi)) {
@@ -88,7 +92,7 @@ class BaseModel
             $setKondisi = implode(" ? $logic ", array_keys($arr)) . " ? ";
 
             // buat query
-            $query = "SELECT $select FROM $table WHERE ($setKondisi) $setOrder";
+            $query = "SELECT $setSelect FROM $table WHERE ($setKondisi) $setOrder";
 
             // siapkan query
             $this->db->query($query);
@@ -106,8 +110,9 @@ class BaseModel
     }
 
     /**
-     * @param null 
-     * @return array semua data dari fungisi `selectData()`
+     * Mengambil semua baris data yang cocok dari hasil query.
+     *
+     * @return array Array berisi semua baris data yang cocok.
      */
     public function fetchAll(): array
     {
@@ -115,14 +120,21 @@ class BaseModel
     }
 
     /**
-     * @param null 
-     * @return array semua data dari fungisi `selectData()`
+     * Mengambil satu baris data yang cocok dari hasil query.
+     *
+     * @return array Data baris yang cocok.
      */
-    public function fetch(): array
+    public function fetch(): array|bool
     {
         return $this->db->single();
     }
 
+    /**
+     * Memasukkan data baru ke dalam tabel.
+     *
+     * @param array $data Data yang akan dimasukkan dalam bentuk asosiatif array.
+     * @return int Jumlah baris yang terpengaruh oleh operasi penambahan data.
+     */
     public function insertData(array $data): int
     {
         /// INSERT INTO table VALUES(NULL, ?, ?, ?, ?, ...);
@@ -175,9 +187,11 @@ class BaseModel
     }
 
     /**
-     * @param array $update_values masukkan sebuah data update sesuaikan dengan nama field pada database berupa array contoh `["nama" => "Ucup", "nohp" => "08239999999"]`
-     * @param array $kondisi masukkan sebuah kondisi where untuk menghapus data contoh `["id" => 1]`
-     * @return int rowCount
+     * Memperbarui data dalam tabel berdasarkan kondisi tertentu.
+     *
+     * @param array $update_values Data yang akan diperbarui dalam bentuk array asosiatif.
+     * @param array $kondisi Kondisi WHERE dalam bentuk array (contoh: ["kolom =" => "nilai"]).
+     * @return int Jumlah baris yang terpengaruh oleh operasi pembaruan data.
      */
     public function updateData(array $update_values, array $kondisi): int
     {

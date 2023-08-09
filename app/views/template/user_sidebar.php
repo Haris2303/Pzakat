@@ -49,7 +49,7 @@
                         <span class="text-sm">Pengaturan</span>
                     </div>
                 </a>
-                <a href="<?= BASEURL ?>/userlogout" onclick="return confirm('Apakah Anda ingin logout?')">
+                <a id="btn-logout">
                     <div class="flex gap-3 items-center hover:bg-green p-3 cursor-pointer transition-300 rounded-lg hover:text-white">
                         <i class="fas fa-sign-out-alt"></i>
                         <span class="text-sm">Log out</span>

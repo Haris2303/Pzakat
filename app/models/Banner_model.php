@@ -1,50 +1,74 @@
 <?php
 
-class Banner_model {
+class Banner_model
+{
 
     private $table = 'tb_banner';
-    private $db;
+    private $baseModel;
 
     public function __construct()
     {
-        $this->db = new Database();
+        $this->baseModel = new BaseModel($this->table);
     }
 
+    /**
+     * -----------------------------------------------------------------------------------------------------------------------------------------------
+     *                  GET ALL DATA
+     * -----------------------------------------------------------------------------------------------------------------------------------------------
+     */
+
+    /**
+     * Mengambil semua data banner.
+     *
+     * @return array Data banner yang ditemukan.
+     */
     public function getAllDataBanner(): array
     {
-        $query = "SELECT * FROM $this->table";
-        $this->db->query($query);
-        return $this->db->resultSet();
+        $this->baseModel->selectData();
+        return $this->baseModel->fetchAll();
     }
 
+    /**
+     * --------------------------------------------------------------------------------------------------------------------------------------------------
+     *              ACTION DATA
+     * -------------------------------------------------------------------------------------------------------------------------------------------------
+     */
+
+    /**
+     * Menambahkan data banner baru.
+     *
+     * @param array $dataPost Data dari permintaan POST.
+     * @param array $dataFile Data berkas gambar yang diunggah.
+     * @return string|int Pesan kesalahan atau hasil operasi penambahan data.
+     */
     public function tambahDataBanner($dataPost, $dataFile)
     {
-        $username_amil = $dataPost['username_amil'];
+        // uplode gambar
         $gambar = Utility::uploadImage($dataFile, 'banner');
-        $link = $dataPost['link'];
 
         // cek gambar
-        if(!is_string($gambar)) return 'Gagal Upload Gambar! Mohon untuk memeriksa <strong>format gambar</strong> dan ukuran gambar kurang dari <strong>2mb</strong>';
+        if (!is_string($gambar)) return 'Gagal Upload Gambar! Mohon untuk memeriksa <strong>format gambar</strong> dan ukuran gambar kurang dari <strong>2mb</strong>';
+
+        // siapkan data
+        $dataBanner = [
+            "username" => $dataPost['username_amil'],
+            "gambar" => $gambar,
+            "link" => $dataPost['link'],
+            "datetime" => date('Y-m-d H:i:s')
+        ];
 
         // insert data
-        $query = "INSERT INTO $this->table VALUES(NULL, :username, :gambar, :link, NOW())";
-        $this->db->query($query);
-        $this->db->bind('username', $username_amil);
-        $this->db->bind('gambar', $gambar);
-        $this->db->bind('link', $link);
-        $this->db->execute();
-
-        return $this->db->rowCount();
-
+        return $this->baseModel->insertData($dataBanner);
     }
 
+    /**
+     * Menghapus data banner berdasarkan UUID.
+     *
+     * @param string $uuid UUID banner yang akan dihapus.
+     * @return int Jumlah baris yang terpengaruh oleh operasi penghapusan.
+     */
     public function deleteData(string $uuid): int
     {
-        $query = "DELETE FROM $this->table WHERE UUID = :uuid";
-        $this->db->query($query);
-        $this->db->bind('uuid', $uuid);
-        $this->db->execute();
-        return $this->db->rowCount();
+        return $this->baseModel->deleteData(["UUID" => $uuid]);
     }
-
 }

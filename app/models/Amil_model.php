@@ -1,15 +1,14 @@
 <?php
 
-class Amil_model {
-  
+class Amil_model
+{
+
   private $view   = 'vwAllAmil';
-  private $db;
   private $baseModel;
 
   // constructor
   public function __construct()
   {
-    $this->db = new Database();
     $this->baseModel = new BaseModel($this->view);
   }
 
@@ -20,8 +19,13 @@ class Amil_model {
    * -------------------------------------------------------------------------------------------------------------------------------------------------------
    */
 
-  // get all data amil
-  public function getAllData(): array {
+  /**
+   * Mengambil seluruh data yang tersedia.
+   *
+   * @return array Data yang berisi semua entri yang tersedia.
+   */
+  public function getAllData(): array
+  {
     $this->baseModel->selectData();
     return $this->baseModel->fetchAll();
   }
@@ -33,16 +37,15 @@ class Amil_model {
    * -------------------------------------------------------------------------------------------------------------------------------------------------------
    */
 
-  // get data amil by id
-  public function getDataByUsername($username): array {
+  /**
+   * Mengambil data berdasarkan username Amil.
+   *
+   * @param string $username Username Amil yang akan digunakan untuk mencari data.
+   * @return array Data yang cocok dengan username yang diberikan.
+   */
+  public function getDataByUsername(string $username): array
+  {
     $this->baseModel->selectData(null, null, [], ["username = " => $username]);
     return $this->baseModel->fetch();
   }
-
-  /**
-   * -------------------------------------------------------------------------------------------------------------------------------------------------------
-   *                    ACTION DATA
-   * -------------------------------------------------------------------------------------------------------------------------------------------------------
-   */
-
 }

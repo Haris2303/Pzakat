@@ -31,7 +31,7 @@ class Kategoriprogram_model {
     public function getAllKategoriProgram(string $status = null): array 
     {
         // cek apakah $status null atau tidak
-        (is_null($status)) ? $this->baseModel->selectData() : $this->baseModel->selectData(null, null, [], ["status =" => $status]);
+        (is_null($status)) ? $this->baseModel->selectData() : $this->baseModel->selectData(null, "*", [], ["status =" => $status]);
         return $this->baseModel->fetchAll();
     }
 
