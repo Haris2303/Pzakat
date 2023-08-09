@@ -1,97 +1,74 @@
 <?php
 
-class Masjid_model {
+class Masjid_model
+{
 
   private $table = 'tb_mesjid';
-  private $db;
+  private $baseModel;
 
   // constructor
   public function __construct()
   {
-    $this->db = new Database();
+    $this->baseModel = new BaseModel($this->table);
   }
 
   // method get data masjid
-  public function getDataMasjid(): array {
-
-    $query = "SELECT * FROM $this->table";
-    $this->db->query($query);
-    return $this->db->resultSet();
-
+  public function getDataMasjid(): array
+  {
+    $this->baseModel->selectData();
+    return $this->baseModel->fetchAll();
   }
 
   // method get data masjid by id
-  public function getDataMasjidById($id): array {
-
-    $query = "SELECT * FROM $this->table WHERE id_mesjid = :id_mesjid";
-    $this->db->query($query);
-    $this->db->bind('id_mesjid', $id);
-    $result = $this->db->single();
-    return $result;
-
+  public function getDataMasjidById($id): array
+  {
+    $this->baseModel->selectData(null, null, [], ["id_mesjid =" => $id]);
+    return $this->baseModel->fetch();
   }
 
   // methode tambah mesjid
-  public function tambahMesjid($data): int {
+  public function tambahMesjid($data): int|string
+  {
 
-    // initial
-    $uuid           = Utility::generateUUID();
-    $nama_mesjid    = $data['nama_mesjid'];
-    $alamat_mesjid  = $data['alamat_mesjid'];
-    $rt             = $data['RT'];
-    $rw             = $data['RW'];
-    $provinsi       = $data['provinsi'];
-    $kabupaten      = $data['kabupaten'];
-    $kecamatan      = $data['kecamatan'];
-    $kelurahan      = $data['kelurahan'];
+    // cek panjang dari RT RW
+    $lenRT = strlen($data['RT']);
+    $lenRW = strlen($data['RW']);
+    if(($lenRT > 3 || $lenRT < 2) && ($lenRW > 3 || $lenRW < 2)) return 'Minimal 2 dan Maksimal 3 karakter dari RT/RW!';
+    
+    $dataInsert = [
+      "uuid" => Utility::generateUUID(),
+      "nama_mesjid" => $data['nama_mesjid'], 
+      "alamat_mesjid" => $data['alamat_mesjid'],
+      "RT" => $data['RT'],
+      "RW" => $data['RW'],
+      "provinsi" => $data['provinsi'], 
+      "kabupaten" => $data['kabupaten'],
+      "kecamatan" => $data['kecamatan'],
+      "kelurahan" => $data['kelurahan']
+    ];
 
-    // intial query
-    $query = "INSERT INTO $this->table VALUES(NULL, :uuid, :nama_mesjid, :alamat_mesjid, :rt, :rw, :provinsi, :kabupaten, :kecamatan, :kelurahan)";
-
-    // execute and binding
-    $this->db->query($query);
-    $this->db->bind('uuid', $uuid);
-    $this->db->bind('nama_mesjid', $nama_mesjid);
-    $this->db->bind('alamat_mesjid', $alamat_mesjid);
-    $this->db->bind('rt', $rt);
-    $this->db->bind('rw', $rw);
-    $this->db->bind('provinsi', $provinsi);
-    $this->db->bind('kabupaten', $kabupaten);
-    $this->db->bind('kecamatan', $kecamatan);
-    $this->db->bind('kelurahan', $kelurahan);
-    $this->db->execute();
-
-    return $this->db->rowCount();
-
+    return $this->baseModel->insertData($dataInsert);
   }
 
   // method ubah data mesjid
-  public function ubahMesjid($data): int {
-    // initial query
-    $query = "UPDATE $this->table SET nama_mesjid = :nama_mesjid, alamat_mesjid = :alamat_mesjid, RT = :RT, RW = :RW, provinsi = :provinsi, kabupaten = :kabupaten, kecamatan = :kecamatan, kelurahan = :kelurahan WHERE id_mesjid = :id_mesjid";
-    $this->db->query($query);
-    $this->db->bind('id_mesjid', $data['id']);
-    $this->db->bind('nama_mesjid', $data['nama_mesjid']);
-    $this->db->bind('alamat_mesjid', $data['alamat_mesjid']);
-    $this->db->bind('RT', $data['RT']);
-    $this->db->bind('RW', $data['RW']);
-    $this->db->bind('provinsi', $data['provinsi']);
-    $this->db->bind('kabupaten', $data['kabupaten']);
-    $this->db->bind('kecamatan', $data['kecamatan']);
-    $this->db->bind('kelurahan', $data['kelurahan']);
-    $this->db->execute();
-
-    return $this->db->rowCount();
+  public function updateData(array $data): int
+  {
+    $dataUpdate = [
+      "nama_mesjid" => $data['nama_mesjid'],
+      "alamat_mesjid" => $data['alamat_mesjid'],
+      "RT" => $data['RT'],
+      "RW" => $data['RW'],
+      "provinsi" => $data['provinsi'],
+      "kabupaten" => $data['kabupaten'],
+      "kecamatan" => $data['kecamatan'],
+      "kelurahan" => $data['kelurahan']
+    ];
+    return $this->baseModel->updateData($dataUpdate, ["id_mesjid" => $data['id']]);
   }
 
   // method hapus data mesjid
-  public function hapusMesjid(string $uuid): int {
-    // initial query
-    $query = "DELETE FROM $this->table WHERE UUID = :uuid";
-    $this->db->query($query);
-    $this->db->bind('uuid', $uuid);
-    $this->db->execute();
-    return $this->db->rowCount();
+  public function hapusMesjid(string $uuid): int
+  {
+    return $this->baseModel->deleteData(['UUID' => $uuid]);
   }
-
 }

@@ -10,7 +10,6 @@ class Masjid extends Controller
       "css" => VENDOR_TABLES_CSS,
       "script" => VENDOR_TABLES,
       "dataMasjid" => $this->model('Masjid_model')->getDataMasjid(),
-      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllKategoriProgram('aktif')
     ];
 
     $this->view('dashboard/sidebar', $data);
@@ -26,12 +25,12 @@ class Masjid extends Controller
   // method tambah masjid
   public function aksi_tambah_mesjid(): void {
     $result = $this->model('Masjid_model')->tambahMesjid($_POST);
-    if($result > 0) {
+    if($result > 0 && is_int($result)) {
       Flasher::setFlash('Data Masjid Berhasil Ditambahkan!', 'success');
       header("Location: " . BASEURL . '/Masjid');
       exit;
     } else {
-      Flasher::setFlash('Data Masjid Gagal Ditambahkan!' ,'danger');
+      Flasher::setFlash($result ,'danger', 'y');
       header("Location: " . BASEURL . '/Masjid');
       exit;
     }
@@ -40,14 +39,14 @@ class Masjid extends Controller
 
   // method ubah data masjid
   public function aksi_ubah_mesjid(): void {
-    $result = $this->model('Masjid_model')->ubahMesjid($_POST);
-    if($result > 0) {
+    $result = $this->model('Masjid_model')->updateData($_POST);
+    if($result > 0 && is_int($result)) {
       Flasher::setFlash('Data Masjid Berhasil Diubah!' ,'success');
       header("Location: " . BASEURL . '/Masjid');
       exit;
     } else {
       header("Location: " . BASEURL . '/Masjid');
-      Flasher::setFlash('Data Masjid Gagal Diubah', 'danger');
+      Flasher::setFlash($result, 'danger');
       exit;
     }
   }

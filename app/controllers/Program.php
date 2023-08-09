@@ -15,7 +15,7 @@ class Program extends Controller {
             exit;
         }
 
-        $this->view('template/header', $data);
+        $this->view('template/header', $data); 
         $this->view('program/index', $data);
         $this->view('template/footer', $data);
     }

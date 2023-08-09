@@ -17,12 +17,18 @@ class BaseModel
      */
     public function isData(array $kondisi): bool
     {
+        // tangkap key dan value dari array kondisi
         $key = array_keys($kondisi)[0];
         $value = array_values($kondisi)[0];
+        // init query
         $query = "SELECT * FROM $this->table WHERE $key = ?";
+        // prepare query
         $this->db->query($query);
+        // binding
         $this->db->bind(1, $value);
+        // execute
         $this->db->execute();
+        // kembalikan true jika bukan boolean dan kembalikan false jika boolean
         return (!is_bool($this->db->single())) ? true : false;
     }
 
@@ -36,12 +42,17 @@ class BaseModel
      */
     public function selectData(string $view = null, string $notSelect = null, array $orderBy = [], array $kondisi = null): void
     {
+        // set table 
         $table = (!is_null($view)) ? $view : $this->table;
 
+        // set field selection
         $select = (!is_null($notSelect) && $notSelect !== '*') ? '*,' . $notSelect : '*';
 
+        // init order
         $setOrder = "";
-        if(count($orderBy) > 0) {
+        
+        // jika order by ada
+        if (count($orderBy) > 0) {
 
             // set key dan value order
             $keyOrder = array_keys($orderBy)[0];
@@ -49,7 +60,7 @@ class BaseModel
 
             $setOrder = "ORDER BY $keyOrder $valueOrder";
         }
-        
+
         // query awal 
         $query = "SELECT $select FROM $table $setOrder";
 
@@ -59,12 +70,12 @@ class BaseModel
             // ambil gerbang logika AND | OR 
             // set index $i
             if (array_key_exists("logic", $kondisi)) {
-               $logic = $kondisi['logic'];
-               $i = 1;
-            } else  {
+                $logic = $kondisi['logic'];
+                $i = 1;
+            } else {
                 $logic = "";
                 $i = 0;
-            } ;
+            };
 
             // ambil key dan value dari kondisi
             $arr = [];
@@ -74,16 +85,16 @@ class BaseModel
 
             // set where kondisi
             $setKondisi = implode(" ? $logic ", array_keys($arr)) . " ? ";
-            
+
             // buat query
             $query = "SELECT $select FROM $table WHERE ($setKondisi) $setOrder";
 
             // siapkan query
             $this->db->query($query);
-            
+
             // binding
             $i = 1;
-            foreach($arr as $value) {
+            foreach ($arr as $value) {
                 $this->db->bind($i, $value);
                 $i++;
             }
@@ -91,7 +102,6 @@ class BaseModel
             // siapkan query awal
             $this->db->query($query);
         }
-
     }
 
     /**
@@ -112,18 +122,54 @@ class BaseModel
         return $this->db->single();
     }
 
+    public function insertData(array $data): int
+    {
+        /// INSERT INTO table VALUES(NULL, ?, ?, ?, ?, ...);
+
+        // set array placeholder 
+        $placeholders = [];
+        foreach ($data as $value) {
+            $placeholders[] = "?";
+        }
+        // gabungkan placeholder ? menjadi string
+        $placeholdersStr = implode(', ', $placeholders);
+
+        // init query
+        $query = "INSERT INTO $this->table VALUES (NULL, $placeholdersStr)";
+
+        // prepare query
+        $this->db->query($query);
+
+        // binding
+        $i = 1;
+        foreach ($data as $value) {
+            $this->db->bind($i, $value);
+            $i++;
+        }
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+
     /**
      * @param array $kondisi masukkan sebuah kondisi where untuk menghapus data contoh `["id" => 1]`
      * @return int rowCount (0 || (> 0))
      */
     public function deleteData(array $kondisi): int
     {
+        // tangkap key dan value dari array kondisi
         $key = array_keys($kondisi)[0];
         $value = array_values($kondisi)[0];
+        // init query
         $query = "DELETE FROM $this->table WHERE $key = ?";
+        // prepare query
         $this->db->query($query);
+        // binding 
         $this->db->bind(1, $value);
+        // execute
         $this->db->execute();
+        
         return $this->db->rowCount();
     }
 
@@ -134,12 +180,17 @@ class BaseModel
      */
     public function updateData(array $update_values, array $kondisi): int
     {
+        // tangkap key dan value dari kondisi where
         $kondisi_key = array_keys($kondisi)[0];
         $kondisi_value = array_values($kondisi)[0];
 
-        $set_clause = implode(' = ?, ', array_keys($update_values)) . ' = ? ';
+        // set placeholder jadi : field = ?, field2 = ?
+        $placeholders = implode(' = ?, ', array_keys($update_values)) . ' = ? ';
 
-        $query = "UPDATE $this->table SET $set_clause WHERE $kondisi_key = ?";
+        // init query
+        $query = "UPDATE $this->table SET $placeholders WHERE $kondisi_key = ?";
+        
+        // prepare query
         $this->db->query($query);
 
         // binding data
