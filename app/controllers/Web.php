@@ -9,9 +9,9 @@ class Web extends Controller {
       "dataBerita"  => $this->model('Pageviews_model')->getAllDataBeritaLimit(3),
       "dataArtikel" => $this->model('Pageviews_model')->getAllDataArtikelLimit(4),
       "dataBanner" => $this->model('Banner_model')->getAllDataBanner(),
-      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllKategoriProgram('aktif'),
-      "dataZakat" => $this->model('Kelolaprogram_model')->getDataProgramZakatLimit(1),
-      "jumlahProgram" => count($this->model('Kelolaprogram_model')->getAllDataProgramAktifTunai()),
+      "programNameAktif" => $this->model('Kategoriprogram_model')->getAllKategoriProgram('aktif'),
+      "dataZakat" => $this->model('Program_model')->getDataProgramZakatLimit(1),
+      "jumlahProgram" => count($this->model('Program_model')->getAllDataProgramAktifTunai()),
       "danaTerkumpul" => $this->model('Kelolapembayaran_model')->getDataPemasukkanHarian(),
       "src_video" => $this->model('Video_model')->getData()['link'],
       "laporan" => $this->model('Laporantahunan_model')->getDataLimit(3)
@@ -23,7 +23,7 @@ class Web extends Controller {
 
   public function getdataprogram(): void 
   {
-    echo json_encode($this->model('Kelolaprogram_model')->getDataProgramLimitByJenisProgram(3, $_POST['name']));
+    echo json_encode($this->model('Program_model')->getDataProgramLimitByJenisProgram(3, $_POST['name']));
   }
 
   public function getTemplate(): void
@@ -34,7 +34,7 @@ class Web extends Controller {
   public function search(string $keyword = '') {
     $replaceKey = str_replace('-', ' ', $keyword);
     $data = [
-      "program" => $this->model('Kelolaprogram_model')->getDataProgramAktifByKeyword($replaceKey),
+      "program" => $this->model('Program_model')->getDataProgramAktifByKeyword($replaceKey),
       "berita" => $this->model('Pageviews_model')->getDataBeritaByKeyword($replaceKey),
       "artikel" => $this->model('Pageviews_model')->getDataArtikelByKeyword($replaceKey)
     ];

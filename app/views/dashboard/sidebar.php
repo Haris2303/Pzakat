@@ -13,7 +13,7 @@ $controller = New Controller();
 
 $countKonfirmasi = count($controller->model('Kelolapembayaran_model')->getAllDataPembayaranKonfirmasi());
 $countPending = count($controller->model('Kelolapembayaran_model')->getAllDataPembayaranPending());
-$programNameAktif = $this->model('Kelolaprogram_model')->getAllKategoriProgram('aktif');
+$programNameAktif = $this->model('Kategoriprogram_model')->getAllKategoriProgram('aktif');
 
 ?>
 

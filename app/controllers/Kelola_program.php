@@ -19,7 +19,7 @@ class Kelola_program extends Controller
         
         $data = [
             "judul" => "Kelola Programs",
-            "program" => $this->model('Kelolaprogram_model')->getAllKategoriProgram()
+            "program" => $this->model('Kategoriprogram_model')->getAllKategoriProgram()
         ];
 
         $this->view('dashboard/sidebar', $data);
@@ -39,7 +39,7 @@ class Kelola_program extends Controller
             "judul" => "Kelola Zakat Uang",
             "css" => VENDOR_TABLES_CSS,
             "script" => VENDOR_TABLES,
-            "dataZakat" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('zakat')
+            "dataZakat" => $this->model('Program_model')->getAllDataProgramTunai('zakat')
         ];
 
         $this->view('dashboard/sidebar', $data);
@@ -54,7 +54,7 @@ class Kelola_program extends Controller
             "judul" => "Kelola Zakat Barang",
             "css" => VENDOR_TABLES_CSS,
             "script" => VENDOR_TABLES,
-            "dataBarang" => $this->model('Kelolaprogram_model')->getAllDataProgramBarang('Zakat')
+            "dataBarang" => $this->model('Program_model')->getAllDataProgramBarang('Zakat')
         ];
 
         $this->view('dashboard/sidebar', $data);
@@ -74,7 +74,7 @@ class Kelola_program extends Controller
             "judul" => "Kelola Infaq",
             "css" => VENDOR_TABLES_CSS,
             "script" => VENDOR_TABLES,
-            "dataInfaq" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('infaq'),
+            "dataInfaq" => $this->model('Program_model')->getAllDataProgramTunai('infaq'),
         ];
 
         $this->view('dashboard/sidebar', $data);
@@ -96,7 +96,7 @@ class Kelola_program extends Controller
             "judul" => "Kelola Qurban",
             "css" => VENDOR_TABLES_CSS,
             "script" => VENDOR_TABLES,
-            "dataQurban" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('qurban')
+            "dataQurban" => $this->model('Program_model')->getAllDataProgramTunai('qurban')
         ];
         $array = ["util" => "js/util/script.js"];
         $data['script'] = array_merge($data['script'], $array);
@@ -117,7 +117,7 @@ class Kelola_program extends Controller
             "judul" => "Kelola Donasi Uang",
             "css"   => VENDOR_TABLES_CSS,
             "script" => VENDOR_TABLES,
-            "dataDonasi" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('donasi')
+            "dataDonasi" => $this->model('Program_model')->getAllDataProgramTunai('donasi')
         ];
 
         $this->view('dashboard/sidebar', $data);
@@ -130,7 +130,7 @@ class Kelola_program extends Controller
         $data = [
             "judul" => "Kelola Donasi Barang",
             "css"   => VENDOR_TABLES_CSS,
-            "dataBarang" => $this->model('Kelolaprogram_model')->getAllDataProgramBarang('Donasi')
+            "dataBarang" => $this->model('Program_model')->getAllDataProgramBarang('Donasi')
         ];
 
         $this->view('dashboard/sidebar', $data);
@@ -148,7 +148,7 @@ class Kelola_program extends Controller
             "judul" => "Kelola Ramdhan",
             "css"   => VENDOR_TABLES_CSS,
             "script" => VENDOR_TABLES,
-            "dataRamadhan" => $this->model('Kelolaprogram_model')->getAllDataProgramTunai('ramadhan')
+            "dataRamadhan" => $this->model('Program_model')->getAllDataProgramTunai('ramadhan')
         ];
 
         $this->view('dashboard/sidebar', $data);
@@ -175,7 +175,7 @@ class Kelola_program extends Controller
             "judul" => "Detail Program",
             "css" => VENDOR_TABLES_CSS,
             "script" => VENDOR_TABLES,
-            "dataProgram" => $this->model('Kelolaprogram_model')->getDataProgramAktifBySlug($slug),
+            "dataProgram" => $this->model('Program_model')->getDataProgramAktifBySlug($slug),
         ];
 
         // cek data model
@@ -198,12 +198,12 @@ class Kelola_program extends Controller
 
     public function getDataProgramHaveMoneyById()
     {
-        echo json_encode($this->model('Kelolaprogram_model')->getAllDataProgramHaveMoneyById($_POST['id_program']));
+        echo json_encode($this->model('Program_model')->getAllDataProgramHaveMoneyById($_POST['id_program']));
     }
 
     public function getDataProgramByJenisProgram()
     {
-        echo json_encode($this->model('Kelolaprogram_model')->getAllDataProgramTunai($_POST['jenis_program']));
+        echo json_encode($this->model('Program_model')->getAllDataProgramTunai($_POST['jenis_program']));
     }
 
 
@@ -217,7 +217,7 @@ class Kelola_program extends Controller
 
     public function aksi_tambah_barang(string $program): void
     {
-        $result = $this->model('Kelolaprogram_model')->tambahDataProgram(ucwords($program), $_POST);
+        $result = $this->model('Program_model')->tambahDataProgram(ucwords($program), $_POST);
         if(is_int($result) && $result > 0) {
             Flasher::setFlash('Data Barang <strong>Berhasil</strong> Ditambahkan!', 'success');
             header('Location: ' . BASEURL . "/kelola_program//" .$program. "barang");
@@ -231,7 +231,7 @@ class Kelola_program extends Controller
 
     public function aksi_tambah_program(string $program): void
     {
-        $result = $this->model('Kelolaprogram_model')->tambahDataProgram(ucwords($program), $_POST, $_FILES);
+        $result = $this->model('Program_model')->tambahDataProgram(ucwords($program), $_POST, $_FILES);
         if(is_int($result) && $result > 0) {
             Flasher::setFlash("Data $program <strong>Berhasil</strong> Ditambahkan!", 'success');
             header('Location: ' . BASEURL . "/kelola_program/$program");
@@ -247,7 +247,7 @@ class Kelola_program extends Controller
     {
         $update_to = ($_POST['status'] === 'aktif') ? 'pasif' : 'aktif';
         $pesan = ($_POST['status'] === 'aktif') ? 'Nonaktifkan' : 'Aktifkan';
-        $result = $this->model('Kelolaprogram_model')->ubahStatusProgram($_POST['id'], $update_to);
+        $result = $this->model('Kategoriprogram_model')->ubahStatusProgram($_POST['id'], $update_to);
         if($result > 0) {
             Flasher::setFlash('Status berhasil di ' . $pesan . '!', 'success');
             header('Location: ' . BASEURL . '/kelola_program');

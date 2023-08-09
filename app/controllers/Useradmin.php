@@ -11,7 +11,6 @@ class Useradmin extends Controller {
       ],
       "script" => VENDOR_TABLES,
       "dataAdmin" => $this->model('Useradmin_model')->getAllDataAdmin(),
-      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllKategoriProgram('aktif')
     ];
 
     if($_SESSION['level'] === '1') {

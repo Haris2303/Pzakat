@@ -15,12 +15,11 @@ class Dashboard extends Controller{
         "js_utility"      => "js/util/script.js"
       ],
       "countKonfirmasi" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranKonfirmasi()),
-      "sumDanaZakat"  => $this->model('Kelolaprogram_model')->getSumProgram('zakat'),
-      "sumDanaInfaq"  => $this->model('Kelolaprogram_model')->getSumProgram('infaq'),
-      "sumDanaQurban"  => $this->model('Kelolaprogram_model')->getSumProgram('qurban'),
-      "sumDanaDonasi"  => $this->model('Kelolaprogram_model')->getSumProgram('donasi'),
-      "sumDanaRamadhan"  => $this->model('Kelolaprogram_model')->getSumProgram('ramadhan'),
-      "programNameAktif" => $this->model('Kelolaprogram_model')->getAllKategoriProgram('aktif')
+      "sumDanaZakat"  => $this->model('Program_model')->getSumProgram('zakat'),
+      "sumDanaInfaq"  => $this->model('Program_model')->getSumProgram('infaq'),
+      "sumDanaQurban"  => $this->model('Program_model')->getSumProgram('qurban'),
+      "sumDanaDonasi"  => $this->model('Program_model')->getSumProgram('donasi'),
+      "sumDanaRamadhan"  => $this->model('Program_model')->getSumProgram('ramadhan'),
     ];
     $this->view('dashboard/sidebar', $data);
     $this->view('dashboard/index', $data);

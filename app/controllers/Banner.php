@@ -10,7 +10,6 @@ class Banner extends Controller
             "css" => VENDOR_TABLES_CSS,
             "script" => VENDOR_TABLES,
             "dataBanner" => $this->model('Banner_model')->getAllDataBanner(),
-            "programNameAktif" => $this->model('Kelolaprogram_model')->getAllKategoriProgram('aktif')
         ];
 
         $this->view('dashboard/sidebar', $data);

@@ -6,7 +6,7 @@ class Program extends Controller {
     {
         $data = [
             "judul" => "Program",
-            "dataProgram" => $this->model('Kelolaprogram_model')->getDataProgramAktifBySlug($slug)
+            "dataProgram" => $this->model('Program_model')->getDataProgramAktifBySlug($slug)
         ];
 
         // jika halaman tidak ditemukan

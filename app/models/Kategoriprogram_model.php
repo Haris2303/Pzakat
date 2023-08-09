@@ -2,12 +2,14 @@
 
 class Kategoriprogram_model {
 
-    private $table = 'tb_kategori_program';
+    private $table = 'tb_kategoriprogram';
     private $db;
+    private $baseModel;
 
     public function __construct()
     {
         $this->db = new Database();
+        $this->baseModel = new BaseModel($this->table);
     }   
 
     public function getAllDataKategoriProgram(): array
@@ -15,6 +17,22 @@ class Kategoriprogram_model {
         $query = "SELECT * FROM $this->table";
         $this->db->query($query);
         return $this->db->resultSet();
+    }
+
+    /**
+     * ------------------------------------------------------------------------------------------------------------------------------------------------
+     *                      GET DATA KATEGORI PROGRAM
+     * ------------------------------------------------------------------------------------------------------------------------------------------------
+     */
+
+    /**
+     * @param string $status value aktif|pasif
+     */
+    public function getAllKategoriProgram(string $status = null): array 
+    {
+        // cek apakah $status null atau tidak
+        (is_null($status)) ? $this->baseModel->selectData() : $this->baseModel->selectData(null, null, [], ["status =" => $status]);
+        return $this->baseModel->fetchAll();
     }
 
     public function tambahDataKategori($data): int {
@@ -40,4 +58,13 @@ class Kategoriprogram_model {
         return $this->db->rowCount();
     }
 
+    /**
+     * ----------------------------------------------------------------------------------------------------------------------------------------------------
+     *              UPDATE DATA KATEGORI PROGRAM
+     * ----------------------------------------------------------------------------------------------------------------------------------------------------
+     */
+
+    public function ubahStatusProgram(int $id, string $status): int {
+        return $this->baseModel->updateData(["status" => $status], ["id_kategoriprogram" => $id]);
+    }
 }

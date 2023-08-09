@@ -19,7 +19,7 @@ class Norek extends Controller
             "css" => VENDOR_TABLES_CSS,
             "script" => VENDOR_TABLES,
             "dataNorek" => $this->model('Norek_model')->getAllDataNorek(),
-            "programNameAktif" => $this->model('Kelolaprogram_model')->getAllKategoriProgram('aktif'),
+            "programNameAktif" => $this->model('Kategoriprogram_model')->getAllKategoriProgram('aktif'),
             "dataBank"  => $this->model('Norek_model')->getDataBankJsonDecode()
         ];
 
@@ -35,7 +35,6 @@ class Norek extends Controller
             "css" => VENDOR_TABLES_CSS,
             "script" => VENDOR_TABLES,
             "dataNorek" => $this->model('Norek_model')->getDataNorekById($id),
-            "programNameAktif" => $this->model('Kelolaprogram_model')->getAllProgramNameAktif()
         ];
 
         $this->view('dashboard/sidebar', $data);

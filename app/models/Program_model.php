@@ -1,9 +1,10 @@
 <?php
 
-class Kelolaprogram_model {
+class Program_model {
 
     private $db;
     private $table = 'tb_program';
+    private $baseModel;
     private $tb_kategori = 'tb_kategoriprogram';
     private $view = [
         "allZakat" => "vwAllDataZakat",
@@ -24,6 +25,21 @@ class Kelolaprogram_model {
     public function __construct()
     {
         $this->db = new Database();
+        $this->baseModel = new BaseModel($this->table);
+    }
+
+    /**
+     * ------------------------------------------------------------------------------------------------------------------------------------------------
+     *                      GET DATA
+     * -----------------------------------------------------------------------------------------------------------------------------------------------
+     */
+
+    /**
+     * @param array $kondisi value `["field =" => "value"]` atau `["logic" => "AND", "field = " => "value", "field2 = " => "value2"]`
+     */
+    public function getAllData(array $kondisi): array {
+        $this->baseModel->selectData($this->view['allDataProgramAktif'], null, ["datetime" => "DESC"], $kondisi);
+        return $this->baseModel->fetchAll();
     }
 
     /**
@@ -33,7 +49,7 @@ class Kelolaprogram_model {
      * @param NULL
      * 
      */
-    public function getSumProgram(string $jenis_program = NULL): string 
+    public function getSumProgram(string $jenis_program = NULL): string  
     {
         $view = $this->view['sumProgram'];
 
@@ -86,17 +102,6 @@ class Kelolaprogram_model {
         $view = $this->view['allDataProgramAktifTunai'];
         $query = "SELECT * FROM $view ORDER BY id_program DESC";
         $this->db->query($query);
-        return $this->db->resultSet();
-    }
-
-    public function getAllKategoriProgram(string $status = null): array 
-    {
-        $query = "SELECT * FROM $this->tb_kategori";
-        // WHERE query jika status tidak null
-        if(!is_null($status)) $query .= " WHERE status = :status";
-        $this->db->query($query);
-        // binding jika status tidak null
-        if(!is_null($status)) $this->db->bind('status', $status);
         return $this->db->resultSet();
     }
 
@@ -247,15 +252,6 @@ class Kelolaprogram_model {
         $this->db->bind('content', $content);
         $this->db->execute();
 
-        return $this->db->rowCount();
-    }
-
-    public function ubahStatusProgram(int $id, string $status): int {
-        $query = "UPDATE $this->tb_kategori SET status = :status WHERE id_kategoriprogram = :id";
-        $this->db->query($query);
-        $this->db->bind('status', $status);
-        $this->db->bind('id', $id);
-        $this->db->execute();
         return $this->db->rowCount();
     }
 
