@@ -1,165 +1,231 @@
 <?php
 
-class Pembayaran_model {
+class Pembayaran_model
+{
 
+    /**
+     * Properti yang menyimpan daftar nama view yang akan digunakan dalam model.
+     * Key merupakan alias dan value adalah nama view sebenarnya.
+     */
     private $view = [
-        "dataAll"        => "vwAllPembayaran",
-        "dataPending"    => "vwPembayaranPending",
-        "dataKonfirmasi" => "vwPembayaranKonfirmasi",
-        "dataSukses"     => "vwPembayaranSukses",
-        "dataGagal"      => "vwPembayaranGagal",
-        "pemasukkanBulanan" => "vwPemasukkanBulanan",
-        "pemasukkanHarian"  => "vwPemasukkanHarian"
+        "dataAll"            => "vwAllPembayaran",
+        "pemasukkanBulanan"  => "vwPemasukkanBulanan",
+        "pemasukkanHarian"   => "vwPemasukkanHarian"
     ];
+
+    /**
+     * Properti yang menyimpan nama tabel yang akan digunakan dalam model.
+     */
     private $table = 'tb_pembayaran';
+
+    /**
+     * Properti yang menyimpan objek database untuk operasi database.
+     */
     private $db;
+
+    /**
+     * Properti yang menyimpan objek model dasar untuk operasi pada tabel pembayaran.
+     */
     private $baseModel;
+
+    /**
+     * Properti yang menyimpan objek model dasar untuk operasi pada tabel donatur.
+     */
     private $modelDonatur;
 
+    /**
+     * Konstruktor kelas, melakukan inisialisasi objek database dan model dasar.
+     */
     public function __construct()
     {
+        // Inisialisasi objek database.
         $this->db = new Database();
+
+        // Inisialisasi objek model dasar untuk tabel pembayaran.
         $this->baseModel = new BaseModel($this->table);
+
+        // Inisialisasi objek model dasar untuk tabel donatur.
         $this->modelDonatur = new BaseModel('tb_donatur');
     }
 
     /**
-     * 
-     * @method Pembayaran Tunai
-     * 
+     * --------------------------------------------------------------------------------------------------------------------------------------------------------
+     *                      GET DATA
+     * --------------------------------------------------------------------------------------------------------------------------------------------------------
      */
 
-    public function getAllDataPembayaran()
+    /**
+     * Mengambil data pembayaran berdasarkan status pembayaran tertentu.
+     *
+     * @param string|null $status_pembayaran Status pembayaran yang ingin diambil datanya. Default: null.
+     * @return array Array yang berisi data pembayaran yang sesuai dengan status pembayaran.
+     */
+    public function getAllDataPembayaran(string $status_pembayaran = null): array
     {
-        $vw = $this->view['dataAll'];
-        $query = "SELECT * FROM $vw";
-        $this->db->query($query);
-        return $this->db->resultSet();
-    }
+        $vw = $this->view['dataAll']; // Nama tampilan data pembayaran.
 
-    public function getAllDataPembayaranPending(): array
-    {
-        $vw = $this->view['dataPending'];
-        $query = "SELECT * FROM $vw";
-        $this->db->query($query);
-        return $this->db->resultSet();
-    }
+        // Jika status_pembayaran tidak ditentukan, ambil semua data pembayaran.
+        // Jika status_pembayaran ditentukan, ambil data pembayaran dengan status tertentu.
+        (is_null($status_pembayaran)) ? $this->baseModel->selectData($vw) : $this->baseModel->selectData($vw, null, ["tanggal_pembayaran" => "DESC"], ["status_pembayaran =" => $status_pembayaran]);
 
-    public function getAllDataPembayaranKonfirmasi(): array
-    {
-        $vw = $this->view['dataKonfirmasi'];
-        $query = "SELECT * FROM $vw";
-        $this->db->query($query);
-        return $this->db->resultSet();
-    }
-
-    public function getAllDataPembayaranSukses(): array
-    {
-        $vw = $this->view['dataSukses'];
-        $query = "SELECT * FROM $vw";
-        $this->db->query($query);
-        return $this->db->resultSet();
-    }
-
-    public function getAllDataPembayaranGagal(): array
-    {
-        $vw = $this->view['dataGagal'];
-        $query = "SELECT * FROM $vw";
-        $this->db->query($query);
-        return $this->db->resultSet();
+        // Mengembalikan array berisi data pembayaran yang sesuai.
+        return $this->baseModel->fetchAll();
     }
 
     /**
-     * 
-     * @method GetDataBy
-     * 
+     * Mengambil data pembayaran berdasarkan ID donatur.
+     *
+     * @param int $id ID donatur yang ingin diambil datanya.
+     * @return array|bool Array yang berisi data pembayaran sesuai dengan ID donatur, atau false jika tidak ditemukan.
      */
-
     public function getDataPembayaranById($id): array|bool
     {
-        $vw = $this->view['dataAll'];
-        $query = "SELECT * FROM $vw WHERE id_donatur = :id_donatur";
-        $this->db->query($query);
-        $this->db->bind("id_donatur", $id);
-        return $this->db->single();
+        $vw = $this->view['dataAll']; // Nama tampilan data pembayaran.
+
+        // Mengambil data pembayaran dengan mengatur filter berdasarkan ID donatur.
+        $this->baseModel->selectData($vw, null, [], ["id_donatur =" => $id]);
+
+        // Mengembalikan array yang berisi data pembayaran sesuai dengan ID donatur, atau false jika tidak ditemukan.
+        return $this->baseModel->fetch();
     }
 
-    /**
-     * -------------------------------------------------------------------------------------------------------------
-     *                  GET DATA
-     * -------------------------------------------------------------------------------------------------------------
-     */
-    
     /** 
      * @param string{status_pembayaran} value default null | pending|konfirmasi|failed|success
      * @param string{where} value default null | field
      * @param string{value} value default null | value pada field
      */
-    public function getDataPembayaran(string $status_pembayaran = null, string $where = null, string $value = null): array|bool {
-        $view = $this->view['dataAll'];
-        $query = "SELECT * FROM $view";
-        if(!is_null($status_pembayaran) && !is_null($where) || !is_null($value)) $query .= " WHERE (status_pembayaran = '$status_pembayaran' AND $where = '$value') ORDER BY tanggal_pembayaran DESC";
-        elseif(!is_null($status_pembayaran)) $query .= " WHERE status_pembayaran = '$status_pembayaran' ORDER BY tanggal_pembayaran DESC";
-        $this->db->query($query);
-        return $this->db->resultSet();
-    }
+    // public function getDataPembayaran(string $status_pembayaran = null, string $where = null, string $value = null): array|bool {
+    //     $view = $this->view['dataAll'];
+    //     $query = "SELECT * FROM $view";
+    //     if(!is_null($status_pembayaran) && !is_null($where) || !is_null($value)) $query .= " WHERE (status_pembayaran = '$status_pembayaran' AND $where = '$value') ORDER BY tanggal_pembayaran DESC";
+    //     elseif(!is_null($status_pembayaran)) $query .= " WHERE status_pembayaran = '$status_pembayaran' ORDER BY tanggal_pembayaran DESC";
+    //     $this->db->query($query);
+    //     return $this->db->resultSet();
+    // }
 
-    // get data donatur terdaftar, dimana yang diambil hanyalah donatur yang mendaftar dan sudah sukses berdonasi
-    public function getDonaturTerdaftar(): int {
-        $this->baseModel->selectData(null, "COUNT(DISTINCT(id_user)) AS id_user", [], ["logic" => "AND", "status_pembayaran = " => "success", "id_user <> " => 0]);
+    /**
+     * Mengambil jumlah donatur terdaftar yang telah berhasil berdonasi.
+     *
+     * @return int Jumlah donatur terdaftar yang telah berhasil berdonasi.
+     */
+    public function getDonaturTerdaftar(): int
+    {
+        $this->baseModel->selectData(
+            null,
+            "COUNT(DISTINCT(id_user)) AS id_user",
+            [], // Tidak ada kondisi tambahan
+            [
+                "logic" => "AND",
+                "status_pembayaran = " => "success", // Hanya data dengan status pembayaran sukses yang dihitung
+                "id_user <> " => 0 // Hanya data dengan ID user yang bukan 0 yang dihitung
+            ]
+        );
+
+        // Mengembalikan jumlah donatur terdaftar yang telah berhasil berdonasi.
         return $this->baseModel->fetch()['id_user'];
-        // $table = $this->table['pembayaran'];
-        // $query = "SELECT COUNT(DISTINCT(id_user)) AS 'id_user' FROM $table WHERE (status_pembayaran = :status_pembayaran AND id_user <> :id_user)";
-        // $this->db->query($query);
-        // $this->db->bind('status_pembayaran', 'success');
-        // $this->db->bind('id_user', 0);
-        // return $this->db->single()['id_user'];
     }
 
-
     /**
-     * Pemasukkan
-     * @method GET DATA
-     * @param NULL
+     * Mengambil data pemasukkan bulanan.
+     *
+     * @return array Sebuah array yang berisi data pemasukkan bulanan.
      */
-    public function getDataPemasukkanBulanan(): array {
+    public function getDataPemasukkanBulanan(): array
+    {
         $view = $this->view['pemasukkanBulanan'];
-        $query1 = "SELECT * FROM $view";
-        $this->db->query($query1);
-        $result = $this->db->resultSet();
+        $this->baseModel->selectData($view);
 
-        return $result;
-    }
-
-    public function getDataPemasukkanHarian(): array {
-        $view = $this->view['pemasukkanHarian'];
-        $query = "SELECT * FROM $view";
-        $this->db->query($query);
-        return $this->db->resultSet();
+        // Mengembalikan data pemasukkan bulanan dalam bentuk array.
+        return $this->baseModel->fetchAll();
     }
 
     /**
-     * 
-     * @method Aksi Pembayaran Tunai
-     * 
+     * Mengambil data pemasukkan harian.
+     *
+     * @return array Sebuah array yang berisi data pemasukkan harian.
+     */
+    public function getDataPemasukkanHarian(): array
+    {
+        $view = $this->view['pemasukkanHarian'];
+        $this->baseModel->selectData($view);
+
+        // Mengembalikan data pemasukkan harian dalam bentuk array.
+        return $this->baseModel->fetchAll();
+    }
+
+    /**
+     * ------------------------------------------------------------------------------------------------------------------------------------------------------
+     *              ACTION DATA 
+     * ------------------------------------------------------------------------------------------------------------------------------------------------------
      */
 
+    /**
+     * Melakukan konfirmasi pembayaran tunai.
+     *
+     * @param array $dataPost Data yang dikirim melalui POST request.
+     * @param array $dataFile Data file yang dikirim.
+     * @return int|string Hasil dari operasi konfirmasi pembayaran.
+     */
+    public function konfirmasiDataTransaksi($dataPost, $dataFile): int|string
+    {
+        $nomor_pembayaran   = $dataPost['nomor-pembayaran'];
+        $jumlah_pembayaran  = str_replace('.', '', $dataPost['nominal-donasi']);
+        $gambar             = Utility::uploadImage($dataFile, 'bukti_pembayaran');
+
+        // Memeriksa apakah gambar berhasil diupload.
+        if (!is_string($gambar)) {
+            return 'Gagal upload gambar!';
+        }
+
+        // Mengambil id pembayaran dari basis data berdasarkan nomor pembayaran.
+        $this->baseModel->selectData(null, "id_pembayaran", [], ["nomor_pembayaran =" => $nomor_pembayaran]);
+        $id_pembayaran = $this->baseModel->fetch()['id_pembayaran'];
+
+        // Mengambil bagian pertama dari nomor pembayaran yang dipisahkan dengan "_".
+        $nomor_pembayaran = explode("_", $nomor_pembayaran)[0];
+
+        // Siapkan data untuk melakukan update pembayaran.
+        $dataUpdate = [
+            "nomor_pembayaran" => $nomor_pembayaran,
+            "jumlah_pembayaran" => $jumlah_pembayaran,
+            "bukti_pembayaran" => $gambar,
+            "tanggal_pembayaran" => date('Y-m-d H:i:s'),
+            "status_pembayaran" => "konfirmasi"
+        ];
+
+        // Melakukan update data pembayaran.
+        return $this->baseModel->updateData($dataUpdate, ["id_pembayaran" => $id_pembayaran]);
+    }
+
+    /**
+     * Melakukan konfirmasi pembayaran dan memperbarui informasi terkait.
+     *
+     * @param string $slug Slug program terkait.
+     * @param int $id ID donatur terkait.
+     * @param string $username Username amil yang melakukan konfirmasi.
+     * @param int $jumlah_dana Jumlah dana yang dikonfirmasi.
+     * @param string $nama_bank Nama bank yang terkait.
+     * @return int Jumlah baris yang terpengaruh oleh operasi.
+     */
     public function konfirmasiPembayaran($slug, $id, $username, $jumlah_dana, $nama_bank): int
     {
+        // Data pembayaran untuk diupdate.
         $dataPembayaran = [
             "username_amil" => $username,
             "status_pembayaran" => 'success',
         ];
+
+        // Melakukan update status pembayaran pada basis data.
         $rowCount = $this->baseModel->updateData($dataPembayaran, ["id_donatur" => $id]);
 
-        // tambah jumlah donasi
+        // Menambahkan jumlah donasi dan total dana pada program terkait.
         $tb_program = 'tb_program';
         $query = "UPDATE $tb_program SET total_dana = total_dana + $jumlah_dana, jumlah_donatur = jumlah_donatur + 1 WHERE slug = :slug";
         $this->db->query($query);
         $this->db->bind('slug', $slug);
         $this->db->execute();
 
-        // tambah jumlah saldo_donasi pada rekening
+        // Menambahkan saldo_donasi pada rekening terkait.
         $tb_norek = 'tb_norek';
         $nama_bank = join(' ', explode('-', $nama_bank));
         $query = "UPDATE $tb_norek SET saldo_donasi = saldo_donasi + $jumlah_dana WHERE nama_bank = :nama_bank";
@@ -170,24 +236,39 @@ class Pembayaran_model {
         return $rowCount;
     }
 
+    /**
+     * Membatalkan pembayaran dan mengubah status pembayaran menjadi gagal.
+     *
+     * @param int $id ID donatur terkait.
+     * @param string $username Username amil yang melakukan pembatalan.
+     * @return int Jumlah baris yang terpengaruh oleh operasi.
+     */
     public function batalkanPembayaran($id, $username): int
     {
+        // Data untuk diupdate (membatalkan pembayaran).
         $data = [
             "username_amil" => $username,
             "status_pembayaran" => 'failed',
         ];
+
+        // Melakukan update status pembayaran pada basis data.
         return $this->baseModel->updateData($data, ["id_donatur" => $id]);
     }
 
+    /**
+     * Menghapus pembayaran dan data donatur terkait berdasarkan ID donatur.
+     *
+     * @param int $id ID donatur terkait.
+     * @return int Jumlah baris yang terpengaruh oleh operasi penghapusan.
+     */
     public function hapusPembayaran($id): int
     {
-        // delete data pembayaran
-        $rowCount = $this->baseModel->deleteData(["id_doantur" => $id]);
+        // Menghapus data pembayaran berdasarkan ID donatur.
+        $rowCount = $this->baseModel->deleteData(["id_donatur" => $id]);
 
-        // delete data donatur by id_donatur
-        $rowCount = $this->modelDonatur->deleteData(["id_donatur" => $id]);
-        
+        // Menghapus data donatur berdasarkan ID donatur.
+        $rowCount += $this->modelDonatur->deleteData(["id_donatur" => $id]);
+
         return $rowCount;
     }
-
 }

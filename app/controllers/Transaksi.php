@@ -52,7 +52,7 @@ class Transaksi extends Controller
     {
 
         // get nominal
-        $nominal = $this->model('Kelolapembayaran_model')->getDataPembayaran('pending', 'nomor_pembayaran', $kode)[0]['jumlah_pembayaran'];
+        $nominal = $this->model('Pembayaran_model')->getDataPembayaran('pending', 'nomor_pembayaran', $kode)[0]['jumlah_pembayaran'];
 
         // jika kode valid
         if(is_null($nominal)) {
@@ -119,7 +119,7 @@ class Transaksi extends Controller
         if ($result > 0) {
             
             // get id donatur
-            $id_donatur = $this->model('Kelolapembayaran_model')->getDataPembayaran('pending', 'nomor_pembayaran', $key)[0]['id_donatur'];
+            $id_donatur = $this->model('Pembayaran_model')->getDataPembayaran('pending', 'nomor_pembayaran', $key)[0]['id_donatur'];
             
             $subject = 'Pembayaran Belum Terselesaikan';
             $message = Design::emailMessageSummary($id_donatur);
@@ -145,7 +145,7 @@ class Transaksi extends Controller
     public function aksi_tambah_transaksi(): void
     {
         
-        $result = $this->model('Transaksi_model')->konfirmasiDataTransaksi($_POST, $_FILES);
+        $result = $this->model('Pembayaran_model')->konfirmasiDataTransaksi($_POST, $_FILES);
         if ($result > 0 && is_int($result)) {
             Flasher::setFlash('Transaksi <strong>Berhasil</strong> Dikonfirmasi!', 'success');
             header("Location: " . BASEURL . "/programs");
@@ -160,7 +160,7 @@ class Transaksi extends Controller
     public function aksi_hapus_transaksi(): void 
     {
         $id = $_POST['id'];
-        $result = $this->model('Kelolapembayaran_model')->hapusPembayaran($id);
+        $result = $this->model('Pembayaran_model')->hapusPembayaran($id);
         if($result > 0) {
             Flasher::setFlash('Transaksi pending berhasil dihapus!', 'success');
             header('Location: ' . BASEURL . '/user_dashboard/donasi_pending');

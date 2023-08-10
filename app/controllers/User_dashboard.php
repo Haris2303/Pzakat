@@ -18,11 +18,13 @@ class User_dashboard extends Controller {
             exit;
         }
 
+        $pembayaran_model = new Pembayaran_model();
+
         // get id user
         $this->id_user = $this->model('User_model')->getIdByUsername($_SESSION['username'])['id_user'];
 
         // set data
-        $this->data_pending = $this->model('Pembayaran_model')->getDataPembayaran('pending', 'id_user', $this->id_user);
+        $this->data_pending = $pembayaran_model->getAllDataPembayaran('pending'); // $this->model('Pembayaran_model')->getDataPembayaran('pending', 'id_user', $this->id_user);
         $this->data_konfirmasi = $this->model('Pembayaran_model')->getDataPembayaran('konfirmasi', 'id_user', $this->id_user);
         $this->data_failed = $this->model('Pembayaran_model')->getDataPembayaran('failed', 'id_user', $this->id_user);
         $this->data_sukses = $this->model('Pembayaran_model')->getDataPembayaran('success', 'id_user', $this->id_user);
