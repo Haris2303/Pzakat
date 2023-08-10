@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 02, 2023 at 07:43 PM
+-- Generation Time: Aug 10, 2023 at 09:41 AM
 -- Server version: 8.0.34
 -- PHP Version: 8.1.2-1ubuntu2.13
 
@@ -50,8 +50,9 @@ INSERT INTO `tb_admin` (`id_admin`, `id_user`, `nama`) VALUES
 
 CREATE TABLE `tb_amil` (
   `id_amil` int NOT NULL,
+  `UUID` varchar(60) NOT NULL,
   `id_user` int NOT NULL,
-  `id_mesjid` int NOT NULL,
+  `id_mesjid` int DEFAULT NULL,
   `nama` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `nohp` varchar(13) NOT NULL,
@@ -62,9 +63,9 @@ CREATE TABLE `tb_amil` (
 -- Dumping data for table `tb_amil`
 --
 
-INSERT INTO `tb_amil` (`id_amil`, `id_user`, `id_mesjid`, `nama`, `email`, `nohp`, `alamat`) VALUES
-(10, 14, 8, 'Ilham Cool', 'hrsccf102@gmail.com', '081232122310', 'Jalan Baru, Belakang Gor'),
-(11, 25, 10, 'Tono Sartono', 'dramaindo00@gmail.com', '082312231223', 'Jalan Kok Lubang');
+INSERT INTO `tb_amil` (`id_amil`, `UUID`, `id_user`, `id_mesjid`, `nama`, `email`, `nohp`, `alamat`) VALUES
+(12, 'aadfadsf341324djfasdjf34132jjiadkfjaidjf', 14, 14, 'Ilham Cool', 'ilham@gmail.com', '08231223233', 'Jalan Kalangan Remaja'),
+(21, 'afbb793f-e576-4ce2-a0aa-6cab9849c138', 41, 21, 'Yanto Santoso', 'harisccf102@gmail.com', '09834123', 'Jalna Jlan');
 
 -- --------------------------------------------------------
 
@@ -74,6 +75,7 @@ INSERT INTO `tb_amil` (`id_amil`, `id_user`, `id_mesjid`, `nama`, `email`, `nohp
 
 CREATE TABLE `tb_banner` (
   `id_banner` int NOT NULL,
+  `UUID` varchar(60) NOT NULL,
   `username` varchar(50) NOT NULL,
   `gambar` varchar(100) NOT NULL,
   `link` varchar(255) NOT NULL,
@@ -84,11 +86,8 @@ CREATE TABLE `tb_banner` (
 -- Dumping data for table `tb_banner`
 --
 
-INSERT INTO `tb_banner` (`id_banner`, `username`, `gambar`, `link`, `datetime`) VALUES
-(2, 'ilham', '64798ede6b87d.webp', '', '2023-06-02 15:40:30'),
-(3, 'ilham', '64798ee6d578d.webp', '', '2023-06-02 15:40:39'),
-(4, 'ilham', '64798f5de5795.webp', '', '2023-06-02 15:42:38'),
-(5, 'ilham', '64c8c63a97f0b.webp', 'http://localhost/Pzakat/program/zakatmaal', '2023-08-01 17:45:46');
+INSERT INTO `tb_banner` (`id_banner`, `UUID`, `username`, `gambar`, `link`, `datetime`) VALUES
+(5, '0395123-adsghewe-39853215-aegfewgeaw', 'ilham', '64c8c63a97f0b.webp', 'http://localhost/Pzakat/program/zakatmaal', '2023-08-01 17:45:46');
 
 -- --------------------------------------------------------
 
@@ -98,6 +97,7 @@ INSERT INTO `tb_banner` (`id_banner`, `username`, `gambar`, `link`, `datetime`) 
 
 CREATE TABLE `tb_donasibarang` (
   `id_donasibarang` int NOT NULL,
+  `UUID` varchar(60) NOT NULL,
   `slug_program` varchar(255) NOT NULL,
   `nama_donatur` varchar(100) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
@@ -113,8 +113,8 @@ CREATE TABLE `tb_donasibarang` (
 -- Dumping data for table `tb_donasibarang`
 --
 
-INSERT INTO `tb_donasibarang` (`id_donasibarang`, `slug_program`, `nama_donatur`, `email`, `nohp`, `pesan`, `jenis_barang`, `berat_barang`, `bukti_barang`, `datetime`) VALUES
-(2, 'donasibarang', 'Yanto', 'yanto@yahoo.com', '082341234', 'asdfasd', 'beras', 500000, '64be5b7f54447.webp', '2023-07-24 20:07:43');
+INSERT INTO `tb_donasibarang` (`id_donasibarang`, `UUID`, `slug_program`, `nama_donatur`, `email`, `nohp`, `pesan`, `jenis_barang`, `berat_barang`, `bukti_barang`, `datetime`) VALUES
+(2, '', 'donasibarang', 'Yanto', 'yanto@yahoo.com', '082341234', 'asdfasd', 'beras', 500000, '64be5b7f54447.webp', '2023-07-24 20:07:43');
 
 -- --------------------------------------------------------
 
@@ -124,6 +124,7 @@ INSERT INTO `tb_donasibarang` (`id_donasibarang`, `slug_program`, `nama_donatur`
 
 CREATE TABLE `tb_donatur` (
   `id_donatur` int NOT NULL,
+  `UUID` varchar(60) NOT NULL,
   `id_user` int DEFAULT NULL,
   `id_bank` int DEFAULT NULL,
   `slug_program` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
@@ -140,34 +141,24 @@ CREATE TABLE `tb_donatur` (
 -- Dumping data for table `tb_donatur`
 --
 
-INSERT INTO `tb_donatur` (`id_donatur`, `id_user`, `id_bank`, `slug_program`, `kode`, `nama_donatur`, `email`, `nohp`, `donasi`, `pesan`, `datetime`) VALUES
-(2, NULL, 15, 'zakatmaal', '464f55841a4da06194ca5bd3a4d5ecb7', 'Fulan', 'haris1230723@gmail.com', '081223231223', 1000000, 'Semoga Berkah', '2023-07-22'),
-(3, NULL, 15, 'zakatumum', '20255532719aa7c976df91b3f0b19004', 'Guntur', 'haris1230723@gmail.com', '081223231223', 2400000, 'Semoga Berkah', '2023-07-22'),
-(5, NULL, 19, 'donasipantiasuhan', 'eff0c87162c7bf7f0c638a024896adda', 'Rofiah', 'gqr247andi@gmail.com', '081223231223', 3400000, 'Semoga Berkah', '2023-07-23'),
-(6, NULL, 20, 'ramadhanberbagi', '8cb1d5478bee5f71e45d0af99f3bb8ee', 'Fulan', 'haris1230723@gmail.com', '082312231223', 500000, 'Semoga Berkah', '2023-07-24'),
-(7, NULL, 18, 'qurbankambingsegar', 'baef99887680357ffae1699c1bb0b568', 'Fulan', 'haris1230723@gmail.com', '082312231223', 300000, 'Semoga Berkah', '2023-07-24'),
-(11, 16, 14, 'infaqpembangunan', '8ffaaa3390f3f769f02bf79f89284b6a', 'Fulan', 'haris1230723@gmail.com', '082312323123', 700000, 'Semoga Berkah', '2023-07-28'),
-(16, NULL, 14, 'infaqikhlas', '26c180cead95b1867ece4028d4d6172d', 'Asdfads', 'haris1230723@gmail.com', '082312231223', 50000, 'Semoga Berkah', '2023-07-28'),
-(17, 16, 14, 'infaqikhlas', 'KDA-64c5d38f6eac7_1690686351', 'Hamsa', 'haris1230723@gmail.com', '081232322323', 200000, 'Semoga Berkah', '2023-07-30'),
-(18, 16, 15, 'zakatpenghasilan', 'KDA-64c5e76fc4b96_1690691439', 'Zaki', 'haris1230723@gmail.com', '082341234', 150000, 'Semoga Berkah', '2023-07-30'),
-(19, NULL, 14, 'infaqikhlas', 'KDA-64c6171209ba9_1690703634', 'Genta', 'haris1230723@gmail.com', '082312323123', 400000, 'Semoga Berkah', '2023-07-30'),
-(20, NULL, 15, 'zakatmaal', 'KDA-64c627344aa64_1690707764', 'Gento', 'haris1230723@gmail.com', '082312231223', 400000, 'Semoga Berkah', '2023-07-30'),
-(21, NULL, 14, 'infaqikhlas', 'KDA-64c627f017c80_1690707952', 'Pentol', 'harisccf102@gmail.com', '08231234343', 120000, 'Semoga Berkah', '2023-07-30'),
-(22, NULL, 14, 'infaqikhlas', 'KDA-64c628b27e5e8_1690708146', 'Yaya', 'harisccf102@gmail.com', '082312323123', 320000, 'Semoga Berkah\r\n', '2023-07-30'),
-(23, NULL, 14, 'infaqikhlas', 'KDA-64c62939d47a8_1690708281', 'Yanti', 'harisccf102@gmail.com', '082312323123', 10000, 'Semoga Berkah', '2023-07-30'),
-(24, NULL, 14, 'infaqikhlas', 'KDA-64c635fe37cc9_1690711550', 'Surya', 'harisccf102@gmail.com', '082312323232', 20000, 'Semoga Berkah', '2023-07-30'),
-(25, NULL, 14, 'infaqikhlas', 'KDA-64c6363358dde_1690711603', 'Samsun', 'haris1230723@gmail.com', '082312323123', 12200, 'Semoga Berkah', '2023-07-30'),
-(26, NULL, 14, 'infaqikhlas', 'KDA-64c636b4433ca_1690711732', 'Tono', 'harisccf102@gmail.com', '082312323123', 14300, 'Semoga Berkah', '2023-07-30'),
-(27, NULL, 15, 'zakatmaal', 'KDA-64c6397e0e92d_1690712446', 'Garo', 'harisccf102@gmail.com', '082312323123', 30000, 'Semoga Berkah', '2023-07-30'),
-(28, NULL, 15, 'zakatmaal', 'KDA-64c639fc366a2_1690712572', 'Varo', 'harisccf102@gmail.com', '082312323123', 23000, 'Semoga Berkah', '2023-07-30'),
-(29, 16, 15, 'zakatpenghasilan', 'KDA-64c7219dee06c_1690771869', 'Fulan', 'harisccf102@gmail.com', '082312323123', 70000, 'Semoga Berkah', '2023-07-31'),
-(30, 16, 15, 'zakatpenghasilan', 'KDA-64c722caefcfc_1690772170', 'Genta', 'harisccf102@gmail.com', '082312323123', 72000, 'Semoga Berkah', '2023-07-31'),
-(31, 16, 15, 'zakatpenghasilan', 'KDA-64c722ebbad24_1690772203', 'Suharjo', 'harisccf102@gmail.com', '082312323123', 20000, 'Semoga Berkah', '2023-07-31'),
-(32, 16, 15, 'zakatmaal', 'KDA-64c72349bdd81_1690772297', 'Hansen', 'harisccf102@gmail.com', '082341234', 12000, 'Semoga Berkah', '2023-07-31'),
-(33, 16, 15, 'zakatmaal', 'KDA-64c72364d6ef6_1690772324', 'Garo', 'harisccf102@gmail.com', '08231234343', 23000, 'Semoga Berkah', '2023-07-31'),
-(34, 16, 15, 'zakatumum', 'KDA-64c7238dd0e11_1690772365', 'Fulana', 'harisccf102@gmail.com', '082312323123', 230000, 'Semoga Berkah', '2023-07-31'),
-(35, 16, 15, 'zakatpenghasilan', 'KDA-64c7244d34f87_1690772557', 'Fulan', 'harisccf102@gmail.com', '082312323123', 50000, 'Semoga Berkah', '2023-07-31'),
-(36, 16, 15, 'zakatpenghasilan', 'KDA-64c7247261741_1690772594', 'Fulan', 'harisccf102@gmail.com', '082312323123', 50000, 'Semoga Berkah', '2023-07-31');
+INSERT INTO `tb_donatur` (`id_donatur`, `UUID`, `id_user`, `id_bank`, `slug_program`, `kode`, `nama_donatur`, `email`, `nohp`, `donasi`, `pesan`, `datetime`) VALUES
+(2, '', NULL, 15, 'zakatmaal', '464f55841a4da06194ca5bd3a4d5ecb7', 'Fulan', 'haris1230723@gmail.com', '081223231223', 1000000, 'Semoga Berkah', '2023-07-22'),
+(3, '', NULL, 15, 'zakatumum', '20255532719aa7c976df91b3f0b19004', 'Guntur', 'haris1230723@gmail.com', '081223231223', 2400000, 'Semoga Berkah', '2023-07-22'),
+(5, '', NULL, 19, 'donasipantiasuhan', 'eff0c87162c7bf7f0c638a024896adda', 'Rofiah', 'gqr247andi@gmail.com', '081223231223', 3400000, 'Semoga Berkah', '2023-07-23'),
+(6, '', NULL, 20, 'ramadhanberbagi', '8cb1d5478bee5f71e45d0af99f3bb8ee', 'Fulan', 'haris1230723@gmail.com', '082312231223', 500000, 'Semoga Berkah', '2023-07-24'),
+(7, '', NULL, 18, 'qurbankambingsegar', 'baef99887680357ffae1699c1bb0b568', 'Fulan', 'haris1230723@gmail.com', '082312231223', 300000, 'Semoga Berkah', '2023-07-24'),
+(11, '', 16, 14, 'infaqpembangunan', '8ffaaa3390f3f769f02bf79f89284b6a', 'Fulan', 'haris1230723@gmail.com', '082312323123', 700000, 'Semoga Berkah', '2023-07-28'),
+(16, '', NULL, 14, 'infaqikhlas', '26c180cead95b1867ece4028d4d6172d', 'Asdfads', 'haris1230723@gmail.com', '082312231223', 50000, 'Semoga Berkah', '2023-07-28'),
+(17, '', 16, 14, 'infaqikhlas', 'KDA-64c5d38f6eac7_1690686351', 'Hamsa', 'haris1230723@gmail.com', '081232322323', 200000, 'Semoga Berkah', '2023-07-30'),
+(18, '', 16, 15, 'zakatpenghasilan', 'KDA-64c5e76fc4b96_1690691439', 'Zaki', 'haris1230723@gmail.com', '082341234', 150000, 'Semoga Berkah', '2023-07-30'),
+(27, '', NULL, 15, 'zakatmaal', 'KDA-64c6397e0e92d_1690712446', 'Garo', 'harisccf102@gmail.com', '082312323123', 30000, 'Semoga Berkah', '2023-07-30'),
+(29, '', 16, 15, 'zakatpenghasilan', 'KDA-64c7219dee06c_1690771869', 'Fulan', 'harisccf102@gmail.com', '082312323123', 70000, 'Semoga Berkah', '2023-07-31'),
+(34, '', 16, 15, 'zakatumum', 'KDA-64c7238dd0e11_1690772365', 'Fulana', 'harisccf102@gmail.com', '082312323123', 230000, 'Semoga Berkah', '2023-07-31'),
+(37, '', 16, 15, 'zakatpenghasilan', 'KDA-64cb1654584eb_1691031124', 'Samsudin Jalamaludin', 'haris1230723@gmail.com', '082312321223', 3000000, 'Semoga Berkah ', '2023-08-03'),
+(50, '', 16, 14, 'infaqikhlas', 'KDA-64cc80cc26b3d_1691123916', 'Hamba Allah', 'haris1230723@gmail.com', '082312321223', 2000000, 'Semoga Berkah', '2023-08-04'),
+(52, '', NULL, 14, 'infaqumum', 'KDA-64ced674f3fd6_1691276916', 'Bambang', 'haris1230723@gmail.com', '08321223333', 50000, 'Semoga Berkah', '2023-08-06'),
+(53, '', NULL, 14, 'infaqikhlas', 'KDA-64cf817d4bcfb_1691320701', 'Abdul', 'harisccf102@gmail.com', '082312321223', 500000, 'Semoga Berkah', '2023-08-06'),
+(54, '', NULL, 14, 'infaqikhlas', 'KDA-64cf81c87b168_1691320776', 'Abdul', 'harisccf102@gmail.com', '08231234343', 500000, 'Semoga Berkah', '2023-08-06');
 
 --
 -- Triggers `tb_donatur`
@@ -185,6 +176,7 @@ DELIMITER ;
 
 CREATE TABLE `tb_kategoriprogram` (
   `id_kategoriprogram` int NOT NULL,
+  `UUID` varchar(60) NOT NULL,
   `nama_kategoriprogram` varchar(20) NOT NULL,
   `status` enum('aktif','pasif') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -193,12 +185,35 @@ CREATE TABLE `tb_kategoriprogram` (
 -- Dumping data for table `tb_kategoriprogram`
 --
 
-INSERT INTO `tb_kategoriprogram` (`id_kategoriprogram`, `nama_kategoriprogram`, `status`) VALUES
-(1, 'Zakat', 'aktif'),
-(2, 'Infaq', 'aktif'),
-(3, 'Donasi', 'aktif'),
-(4, 'Qurban', 'pasif'),
-(5, 'Ramadhan', 'pasif');
+INSERT INTO `tb_kategoriprogram` (`id_kategoriprogram`, `UUID`, `nama_kategoriprogram`, `status`) VALUES
+(1, '', 'Zakat', 'aktif'),
+(2, '', 'Infaq', 'aktif'),
+(3, '', 'Donasi', 'aktif'),
+(4, '', 'Qurban', 'pasif'),
+(5, '', 'Ramadhan', 'pasif');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_laporan`
+--
+
+CREATE TABLE `tb_laporan` (
+  `id_laporan` int NOT NULL,
+  `UUID` varchar(60) NOT NULL,
+  `link` varchar(255) NOT NULL,
+  `keterangan` text NOT NULL,
+  `tahun` year NOT NULL,
+  `created_at` timestamp NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tb_laporan`
+--
+
+INSERT INTO `tb_laporan` (`id_laporan`, `UUID`, `link`, `keterangan`, `tahun`, `created_at`) VALUES
+(1, 'adsfadsadf-353523532-adsfkjfinvei-351325', 'https://etheses.uinsgd.ac.id/35103/1/0-HO%20Penulisan%20Makalah%20Mahasiswa.pdf', 'Laporan tahun ini bisa anda lihat di link berikut ini', '2023', '2023-08-07 08:49:39'),
+(4, '481d52f3-5fba-4d5e-a956-d50d6a395178', 'https://google.com/', 'Laporan wkwkwkwkwkw', '2065', '2023-08-07 08:55:06');
 
 -- --------------------------------------------------------
 
@@ -228,6 +243,7 @@ INSERT INTO `tb_latarbelakang` (`id_latarbelakang`, `username`, `content`, `date
 
 CREATE TABLE `tb_mesjid` (
   `id_mesjid` int NOT NULL,
+  `UUID` varchar(60) NOT NULL,
   `nama_mesjid` varchar(50) NOT NULL,
   `alamat_mesjid` varchar(255) NOT NULL,
   `RT` varchar(3) NOT NULL,
@@ -242,10 +258,10 @@ CREATE TABLE `tb_mesjid` (
 -- Dumping data for table `tb_mesjid`
 --
 
-INSERT INTO `tb_mesjid` (`id_mesjid`, `nama_mesjid`, `alamat_mesjid`, `RT`, `RW`, `provinsi`, `kabupaten`, `kecamatan`, `kelurahan`) VALUES
-(8, 'Al Wathan', 'Jalan Danau Tigi, Depan kali dekat jembatan', '004', '004', 'PAPUA BARAT', 'KOTA SORONG', 'SORONG BARAT', 'RUFEI'),
-(9, 'Al Mujtahidin', 'Jalan Aja gatau saya', '009', '002', 'PAPUA BARAT', 'KOTA SORONG', 'SORONG KOTA', 'KAMPUNG BARU'),
-(10, 'Al Fajar', 'Jalan Potong', '012', '002', 'MALUKU', 'KOTA AMBON', 'LEITIMUR SELATAN', 'EMA');
+INSERT INTO `tb_mesjid` (`id_mesjid`, `UUID`, `nama_mesjid`, `alamat_mesjid`, `RT`, `RW`, `provinsi`, `kabupaten`, `kecamatan`, `kelurahan`) VALUES
+(14, '8695c792-2bb1-4bce-8d03-0abb71c8e657', 'Al Wathan', 'Jalan Danau Tigi,  Komplek Buton', '002', '002', 'PAPUA BARAT', 'KOTA SORONG', 'SORONG BARAT', 'RUFEI'),
+(21, '42b8140f-cba1-4a99-8fbd-ab49701a05b8', 'adsfasdf', 'asdfdsf', '222', '222', 'BALI', 'KABUPATEN TABANAN', 'KEDIRI', 'PANGKUNG TIBAH'),
+(23, '67f353c4-d197-4d6d-803e-2cd2656f32de', 'adfadfdsf', 'adfadsfadsf', '323', '234', 'BALI', 'KABUPATEN KARANG ASEM', 'SELAT', 'MUNCAN');
 
 -- --------------------------------------------------------
 
@@ -255,6 +271,7 @@ INSERT INTO `tb_mesjid` (`id_mesjid`, `nama_mesjid`, `alamat_mesjid`, `RT`, `RW`
 
 CREATE TABLE `tb_muzakki` (
   `id_muzakki` int NOT NULL,
+  `UUID` varchar(60) NOT NULL,
   `id_user` int NOT NULL,
   `nama` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
@@ -265,10 +282,9 @@ CREATE TABLE `tb_muzakki` (
 -- Dumping data for table `tb_muzakki`
 --
 
-INSERT INTO `tb_muzakki` (`id_muzakki`, `id_user`, `nama`, `email`, `nohp`) VALUES
-(2, 16, 'Fulana', 'fulan@gmail.com', '081223122312'),
-(5, 19, 'Haris Aja', 'harisccf102@gmail.com', '08234142342'),
-(8, 22, 'Wahyu Tampan', 'harisaja2303@gmail.com', '08231232312');
+INSERT INTO `tb_muzakki` (`id_muzakki`, `UUID`, `id_user`, `nama`, `email`, `nohp`) VALUES
+(2, '35123543-adsfkanfiwe-3513523-adsfage', 16, 'Fulana bin fulan', 'fulan@gmail.com', '081223002333'),
+(15, 'aa9c3526-4acd-4d80-b7ed-f6fa6616a48f', 42, 'Choky choky', 'harisaja2303@gmail.com', '0834123512');
 
 -- --------------------------------------------------------
 
@@ -278,6 +294,7 @@ INSERT INTO `tb_muzakki` (`id_muzakki`, `id_user`, `nama`, `email`, `nohp`) VALU
 
 CREATE TABLE `tb_norek` (
   `id_norek` int NOT NULL,
+  `UUID` varchar(60) NOT NULL,
   `nama_pemilik` varchar(50) NOT NULL,
   `nama_bank` varchar(50) NOT NULL,
   `norek` varchar(20) NOT NULL,
@@ -290,13 +307,13 @@ CREATE TABLE `tb_norek` (
 -- Dumping data for table `tb_norek`
 --
 
-INSERT INTO `tb_norek` (`id_norek`, `nama_pemilik`, `nama_bank`, `norek`, `jenis_program`, `saldo_donasi`, `gambar`) VALUES
-(14, 'Salahudin', 'BANK BCA', '513413411', 'Infaq', 4200000, 'bank-bca.jpeg'),
-(15, 'Jalaludin Syukurudin', 'BANK BRI', '132412351233', 'Zakat', 7498000, 'bank-bri.jpeg'),
-(16, 'Sotoyo Maryo', 'BANK MUAMALAT', '1234234123432', 'Zakat', 653000, 'bank-muamalat.jpeg'),
-(18, 'Udin', 'BANK BNI', '12223412413445', 'Qurban', 4200000, 'bank-bni.jpeg'),
-(19, 'Andi Rahmat', 'BANK BNI', '13841320943122', 'Donasi', 3700000, 'bank-bni.jpeg'),
-(20, 'Suryanto', 'BANK BCA', '3412513134321', 'Ramadhan', 1400000, 'bank-bca.jpeg');
+INSERT INTO `tb_norek` (`id_norek`, `UUID`, `nama_pemilik`, `nama_bank`, `norek`, `jenis_program`, `saldo_donasi`, `gambar`) VALUES
+(14, 'adfadfadsf-3432423s-adsfadsf-3423143', 'Salahudin', 'BANK BCA', '513413411', 'Infaq', 6200000, 'bank-bca.jpeg'),
+(15, 'adfadfeve-357123-kdfngae-351235', 'Jalaludin Syukurudin', 'BANK BRI', '132412351233', 'Zakat', 10198000, 'bank-bri.jpeg'),
+(16, '32312-adsfkje-beigq-3512357df', 'Sotoyo Maryo', 'BANK MUAMALAT', '123423410999', 'Zakat', 653000, 'bank-muamalat.jpeg'),
+(18, '35843025-adfdafv-35185a-adfege', 'Udin', 'BANK BNI', '12223412413445', 'Qurban', 4200000, 'bank-bni.jpeg'),
+(19, 'dfkajdie-375132895-adfkjafe-3512351', 'Andi Rahmat', 'BANK BNI', '13841320943122', 'Donasi', 2700000, 'bank-bni.jpeg'),
+(20, 'dgegejige-8501958-adkgneo-17348613', 'Suryanto', 'BANK BCA', '3412513134321', 'Ramadhan', 3400000, 'bank-bca.jpeg');
 
 -- --------------------------------------------------------
 
@@ -347,24 +364,14 @@ INSERT INTO `tb_pembayaran` (`id_pembayaran`, `id_donatur`, `id_user`, `username
 (12, 16, NULL, 'ilham', 'KDA-1690532958', 'uang', 50000, '64c37c666e020.webp', '2023-07-28 17:29:26', 'failed'),
 (13, 17, 16, 'ilham', 'KDA-64c5d38f6eac7', 'uang', 200000, '64c5d7fcc75a9.webp', '2023-07-30 12:24:44', 'success'),
 (14, 18, 16, 'ilham', 'KDA-64c5e76fc4b96', 'uang', 150000, '64c5e7a322c14.webp', '2023-07-30 13:31:31', 'success'),
-(15, 19, NULL, NULL, 'KDA-64c6171209ba9_1690703634', 'uang', 400000, '', '2023-07-30 16:54:22', 'pending'),
-(16, 20, NULL, NULL, 'KDA-64c627344aa64_1690707764', 'uang', 400000, '', '2023-07-30 18:03:14', 'pending'),
-(17, 21, NULL, NULL, 'KDA-64c627f017c80_1690707952', 'uang', 120000, '', '2023-07-30 18:06:31', 'pending'),
-(18, 22, NULL, NULL, 'KDA-64c628b27e5e8_1690708146', 'uang', 320000, '', '2023-07-30 18:09:31', 'pending'),
-(19, 23, NULL, NULL, 'KDA-64c62939d47a8_1690708281', 'uang', 10000, '', '2023-07-30 18:11:45', 'pending'),
-(20, 24, NULL, NULL, 'KDA-64c635fe37cc9_1690711550', 'uang', 20000, '', '2023-07-30 19:06:11', 'pending'),
-(21, 25, NULL, NULL, 'KDA-64c6363358dde_1690711603', 'uang', 12200, '', '2023-07-30 19:07:22', 'pending'),
-(22, 26, NULL, NULL, 'KDA-64c636b4433ca_1690711732', 'uang', 14300, '', '2023-07-30 19:09:12', 'pending'),
 (23, 27, NULL, 'ilham', 'KDA-64c6397e0e92d', 'uang', 30000, '64c63b843a20b.webp', '2023-07-30 19:29:24', 'success'),
-(24, 28, NULL, 'ilham', 'KDA-64c639fc366a2', 'uang', 23000, '64c63b4db449e.webp', '2023-07-30 19:28:29', 'failed'),
 (25, 29, 16, 'ilham', 'KDA-64c7219dee06c', 'uang', 70000, '64c86834e2b0c.webp', '2023-08-01 11:04:36', 'success'),
-(26, 30, 16, NULL, 'KDA-64c722caefcfc_1690772170', 'uang', 72000, '', '2023-07-31 11:56:35', 'pending'),
-(27, 31, 16, NULL, 'KDA-64c722ebbad24_1690772203', 'uang', 20000, '', '2023-07-31 11:57:03', 'pending'),
-(28, 32, 16, NULL, 'KDA-64c72349bdd81_1690772297', 'uang', 12000, '', '2023-07-31 11:58:36', 'pending'),
-(29, 33, 16, NULL, 'KDA-64c72364d6ef6_1690772324', 'uang', 23000, '', '2023-07-31 11:59:07', 'pending'),
 (30, 34, 16, 'ilham', 'KDA-64c7238dd0e11', 'uang', 230000, '64c85df3946f6.webp', '2023-08-01 10:20:51', 'success'),
-(31, 35, 16, NULL, 'KDA-64c7244d34f87_1690772557', 'uang', 50000, '', '2023-07-31 12:02:55', 'pending'),
-(32, 36, 16, NULL, 'KDA-64c7247261741_1690772594', 'uang', 50000, '', '2023-07-31 12:03:33', 'pending');
+(33, 37, 16, NULL, 'KDA-64cb1654584eb', 'uang', 3000000, '64cb17a3d9509.webp', '2023-08-03 11:57:39', 'success'),
+(46, 50, 16, NULL, 'KDA-64cc80cc26b3d', 'uang', 2000000, '64cc8179ddc56.webp', '2023-08-04 13:41:30', 'success'),
+(48, 52, NULL, NULL, 'KDA-64ced674f3fd6', 'uang', 50000, '64ced6b8c3f0e.webp', '2023-08-06 08:09:44', 'konfirmasi'),
+(49, 53, NULL, NULL, 'KDA-64cf817d4bcfb_1691320701', 'uang', 500000, '', '2023-08-06 20:18:49', 'pending'),
+(50, 54, NULL, NULL, 'KDA-64cf81c87b168_1691320776', 'uang', 500000, '', '2023-08-06 20:19:57', 'pending');
 
 -- --------------------------------------------------------
 
@@ -394,7 +401,9 @@ INSERT INTO `tb_pengeluaran` (`id_pengeluaran`, `id_program`, `id_bank`, `userna
 (1, 13, 15, 'ilham', 'Penerima1', 'Jalan Sukun', '08123342233', 'uang', 1000000, 'Membantu fakir miskin', '2023-07-22 11:53:00'),
 (2, 9, 15, 'ilham', 'Penerima2', 'Jalan Peras', '08123432343', 'uang', 2000000, 'Membantu fikir miskin', '2023-07-22 11:56:27'),
 (3, 24, NULL, 'ilham', 'Penerima1', 'Jalan Sunyi', '082312334234', 'barang', 300000, 'Pengeluaran untuk masjid', '2023-07-24 20:09:09'),
-(4, 9, 15, 'ilham', 'Penerima3', 'Jalan Koyok', '082312343243', 'uang', 200000, 'Pengeluaran untuk fakir miskin', '2023-07-24 20:16:22');
+(4, 9, 15, 'ilham', 'Penerima3', 'Jalan Koyok', '082312343243', 'uang', 200000, 'Pengeluaran untuk fakir miskin', '2023-07-24 20:16:22'),
+(5, 15, 15, 'ilham', 'Tono', 'Jalan Pusar Tantangan', '08312341234', 'uang', 300000, 'Membutuhkan', '2023-08-07 10:34:52'),
+(6, 14, 19, 'ilham', 'Fakir Miskin ', 'Jalan Banyak', '08231232323', 'uang', 1000000, 'Membantu fakir miskin', '2023-08-07 10:37:15');
 
 -- --------------------------------------------------------
 
@@ -404,6 +413,7 @@ INSERT INTO `tb_pengeluaran` (`id_pengeluaran`, `id_program`, `id_bank`, `userna
 
 CREATE TABLE `tb_program` (
   `id_program` int NOT NULL,
+  `UUID` varchar(60) NOT NULL,
   `nama_program` varchar(100) NOT NULL,
   `slug` varchar(255) NOT NULL,
   `jenis_program` varchar(20) NOT NULL,
@@ -421,23 +431,23 @@ CREATE TABLE `tb_program` (
 -- Dumping data for table `tb_program`
 --
 
-INSERT INTO `tb_program` (`id_program`, `nama_program`, `slug`, `jenis_program`, `jenis_pembayaran`, `deskripsi_program`, `nominal_bayar`, `total_dana`, `jumlah_donatur`, `gambar`, `content`, `datetime`) VALUES
-(6, 'Asdfas', 'asdfas', 'Infaq', 'uang', 'asdfas', 0, 0, 0, '647ef34a0593e.webp', '<p>asdfasdf</p>', '2023-06-06 17:50:18'),
-(7, 'Infaq Umum', 'infaqumum', 'Infaq', 'uang', 'Ayo tunaikan infaq kamu di lazismu-unamin', 0, 0, 0, '647ef609375d7.webp', '<p><span style=\"color: rgb(126, 140, 141);\">Ini adalah content dari infaq umum</span></p>', '2023-06-06 18:02:01'),
-(8, 'Zakat Fidyah', 'zakatfidyah', 'Zakat', 'fidyah', 'Bayar Hutang Puasa Kamu Dengan Fidyah Untuk Fakir Miskin', 0, 0, 0, '647f0bbabfb7e.webp', '<p><span style=\"color: rgb(52, 73, 94);\">Ini adalah content dari zakat fidyah</span></p>', '2023-06-06 19:34:35'),
-(9, 'Zakat Umum', 'zakatumum', 'Zakat', 'uang', 'Tunaikan Zakat Umum Kamu Di Lazismu Unamin', 0, 430000, 2, '648021e306588.webp', '<p>ini adalah content</p>', '2023-06-07 15:21:23'),
-(10, 'Zakat Barang', 'zakatbarang', 'Zakat', 'barang', 'Zakatkan barang anda disini', 0, 0, 0, NULL, NULL, '2023-06-24 12:21:38'),
-(11, 'Qurban Sapi Gemuk 150kg', 'qurbansapigemuk150kg', 'qurban', 'qurban', 'Tunaikan Qurbanmu Disini Lazismu-unamin', 500000, 0, 0, '64a76b2f2ff31.webp', '<p>Tidak ada content</p>', '2023-07-07 10:32:31'),
-(13, 'Zakat Maal', 'zakatmaal', 'Zakat', 'uang', 'Tunaikan Zakat Maal Kamu Disini', NULL, 30000, 2, '64bb42bb74e42.webp', '<p>Belum ada content</p>', '2023-07-22 11:45:15'),
-(14, 'Donasi Panti Asuhan', 'donasipantiasuhan', 'Donasi', 'uang', 'Ayo Donasi Harta Anda Untuk Panti Asuhan Melalui Program Lazismu Unamin', NULL, 3400000, 1, '64bcb5c25cc19.webp', '<p>Tidak ada content</p>', '2023-07-23 14:08:18'),
-(15, 'Zakat Penghasilan', 'zakatpenghasilan', 'Zakat', 'uang', 'Tunaikan Zakat Penghasilan Disini', NULL, 220000, 2, '64bcb77696d12.webp', '<p>tidak ada content</p>', '2023-07-23 14:15:34'),
-(16, 'Infaq Ikhlas', 'infaqikhlas', 'Infaq', 'uang', 'Ikhlaskan Hartamu Pada Program Ini', NULL, 200000, 1, '64bcb8ac63311.webp', '<p>Tidak ada content</p>', '2023-07-23 14:20:44'),
-(17, 'Infaq Pembangunan', 'infaqpembangunan', 'Infaq', 'uang', 'Infaq Pembangunan Masjid', NULL, 700000, 1, '64bcb9c75d07a.webp', '<p>tidak ada content</p>', '2023-07-23 14:25:27'),
-(18, 'Qurban Kambing Segar', 'qurbankambingsegar', 'qurban', 'qurban', 'Qurban Kambing Segar Di Hari Raya Idul Adha', 300000, 300000, 1, '64bcba2e01712.webp', '<p>Tidak ada content</p>', '2023-07-23 14:27:10'),
-(21, 'Zakat Beras', 'zakatberas', 'Zakat', 'barang', 'Zakat Beras', NULL, 0, 0, NULL, NULL, '2023-07-23 15:05:28'),
-(23, 'Zakat Emas', 'zakatemas', 'Zakat', 'barang', 'Zakat Emas', NULL, 0, 0, NULL, NULL, '2023-07-23 15:12:50'),
-(24, 'Donasi Barang', 'donasibarang', 'Donasi', 'barang', 'Donasi Barang', NULL, 200000, 1, NULL, NULL, '2023-07-23 15:22:22'),
-(26, 'Ramadhan Berbagi', 'ramadhanberbagi', 'Ramadhan', 'uang', 'Berbagi Harga Untuk Orang-orang Berpuasa Agar Dapat Berbuka Bersama', NULL, 500000, 1, '64bdfdeaed463.webp', '<p>Tidak ada content</p>', '2023-07-24 13:28:27');
+INSERT INTO `tb_program` (`id_program`, `UUID`, `nama_program`, `slug`, `jenis_program`, `jenis_pembayaran`, `deskripsi_program`, `nominal_bayar`, `total_dana`, `jumlah_donatur`, `gambar`, `content`, `datetime`) VALUES
+(6, '', 'Asdfas', 'asdfas', 'Infaq', 'uang', 'asdfas', 0, 0, 0, '647ef34a0593e.webp', '<p>asdfasdf</p>', '2023-06-06 17:50:18'),
+(7, '', 'Infaq Umum', 'infaqumum', 'Infaq', 'uang', 'Ayo tunaikan infaq kamu di lazismu-unamin', 0, 0, 0, '647ef609375d7.webp', '<p><span style=\"color: rgb(126, 140, 141);\">Ini adalah content dari infaq umum</span></p>', '2023-06-06 18:02:01'),
+(8, '', 'Zakat Fidyah', 'zakatfidyah', 'Zakat', 'fidyah', 'Bayar Hutang Puasa Kamu Dengan Fidyah Untuk Fakir Miskin', 0, 0, 0, '647f0bbabfb7e.webp', '<p><span style=\"color: rgb(52, 73, 94);\">Ini adalah content dari zakat fidyah</span></p>', '2023-06-06 19:34:35'),
+(9, '', 'Zakat Umum', 'zakatumum', 'Zakat', 'uang', 'Tunaikan Zakat Umum Kamu Di Lazismu Unamin', 0, 430000, 2, '648021e306588.webp', '<p>ini adalah content</p>', '2023-06-07 15:21:23'),
+(10, '', 'Zakat Barang', 'zakatbarang', 'Zakat', 'barang', 'Zakatkan barang anda disini', 0, 0, 0, NULL, NULL, '2023-06-24 12:21:38'),
+(11, '', 'Qurban Sapi Gemuk 150kg', 'qurbansapigemuk150kg', 'qurban', 'qurban', 'Tunaikan Qurbanmu Disini Lazismu-unamin', 500000, 0, 0, '64a76b2f2ff31.webp', '<p>Tidak ada content</p>', '2023-07-07 10:32:31'),
+(13, '', 'Zakat Maal', 'zakatmaal', 'Zakat', 'uang', 'Tunaikan Zakat Maal Kamu Disini', NULL, 30000, 2, '64bb42bb74e42.webp', '<p>Belum ada content</p>', '2023-07-22 11:45:15'),
+(14, '', 'Donasi Panti Asuhan', 'donasipantiasuhan', 'Donasi', 'uang', 'Ayo Donasi Harta Anda Untuk Panti Asuhan Melalui Program Lazismu Unamin', NULL, 2400000, 1, '64bcb5c25cc19.webp', '<p>Tidak ada content</p>', '2023-07-23 14:08:18'),
+(15, '', 'Zakat Penghasilan', 'zakatpenghasilan', 'Zakat', 'uang', 'Tunaikan Zakat Penghasilan Disini', NULL, 2920000, 3, '64bcb77696d12.webp', '<p>tidak ada content</p>', '2023-07-23 14:15:34'),
+(16, '', 'Infaq Ikhlas', 'infaqikhlas', 'Infaq', 'uang', 'Ikhlaskan Hartamu Pada Program Ini', NULL, 2200000, 2, '64bcb8ac63311.webp', '<p>Tidak ada content</p>', '2023-07-23 14:20:44'),
+(17, '', 'Infaq Pembangunan', 'infaqpembangunan', 'Infaq', 'uang', 'Infaq Pembangunan Masjid', NULL, 700000, 1, '64bcb9c75d07a.webp', '<p>tidak ada content</p>', '2023-07-23 14:25:27'),
+(18, '', 'Qurban Kambing Segar', 'qurbankambingsegar', 'qurban', 'qurban', 'Qurban Kambing Segar Di Hari Raya Idul Adha', 300000, 300000, 1, '64bcba2e01712.webp', '<p>Tidak ada content</p>', '2023-07-23 14:27:10'),
+(21, '', 'Zakat Beras', 'zakatberas', 'Zakat', 'barang', 'Zakat Beras', NULL, 0, 0, NULL, NULL, '2023-07-23 15:05:28'),
+(23, '', 'Zakat Emas', 'zakatemas', 'Zakat', 'barang', 'Zakat Emas', NULL, 0, 0, NULL, NULL, '2023-07-23 15:12:50'),
+(24, '', 'Donasi Barang', 'donasibarang', 'Donasi', 'barang', 'Donasi Barang', NULL, 200000, 1, NULL, NULL, '2023-07-23 15:22:22'),
+(26, '', 'Ramadhan Berbagi', 'ramadhanberbagi', 'Ramadhan', 'uang', 'Berbagi Harga Untuk Orang-orang Berpuasa Agar Dapat Berbuka Bersama', NULL, 500000, 1, '64bdfdeaed463.webp', '<p>Tidak ada content</p>', '2023-07-24 13:28:27');
 
 -- --------------------------------------------------------
 
@@ -460,14 +470,13 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`id_user`, `username`, `password`, `token`, `waktu_login`, `level`, `status_aktivasi`) VALUES
-(4, 'admin', '$2y$10$W8VP79kDqxCc8Roq42tkl.1ZHq9mNDAZ82e/zAWQidfZFpRMbj8xi', '', '2023-05-24 21:05:07', '1', '1'),
+(4, 'fardhan', '$2y$10$x9PEY77B/BbI3BZVCOvrCeNH/Sg/O1IioYD6KX1T7BPKxrJDYquF2', '', '2023-05-24 21:05:07', '1', '1'),
 (12, 'ucup', '$2y$10$YnMo9W1wM.C8P3fQNPG6we74cVURjct6BfGNx6ZXon5XZMU45uCh2', '', '2023-05-25 23:15:44', '1', '1'),
-(14, 'ilham', '$2y$10$FGfbbt0lph2KOlwydDrNP.LNy3WH0T/uHtl1flUTOXBSdXUQpGvMe', 'tG7zZmaj25shsNkYx0xspTbKpeEhXzIMRYJYdumkNno', '2023-05-28 11:13:23', '2', '1'),
+(14, 'ilham', '$2y$10$FZK2q/8HtgUOQ0QZK6rGwuqQZUI0ighH/d9XYASBs4IwAUlXHh/0i', 'tG7zZmaj25shsNkYx0xspTbKpeEhXzIMRYJYdumkNno', '2023-05-28 11:13:23', '2', '1'),
 (15, 'superadmin', '$2y$10$DoReLCNA2Zc2ZgzPZzq/quIrTC1JDjvCv0xP81JGoDo4x2BBdU66y', '', '2023-06-01 12:36:18', '1', '1'),
-(16, 'fulan', '$2y$10$a2URq/kI1iI2Rf6fB.yRx.8TYoxokwW94tmHd7i7PvsQcs5rhG9cC', '', '2023-07-15 15:35:18', '3', '1'),
-(19, 'harisaja', '$2y$10$dpNocicxxw732Yazrhtey.RYx8lH3WXdMqPqtXEzskKlFi9ASNsoS', 'Ul32WhQrqjZGlhuwg0YmLdg5JKnjLiWqRdXn8E7LdAM', '2023-07-26 14:22:05', '3', '1'),
-(22, 'wahyu', '$2y$10$120cbvXlEp70gzgdOXiwMe0HZaLQGzKkUgB/N6lFO5qELJBtisnse', 'tGiPyschs1kT7rndzdehDkbkuhXzmRp59beb466weCM', '2023-08-02 18:02:45', '3', '1'),
-(25, 'sartono', '$2y$10$PpTtoxVQQvwpAS7MU185UuStspcrJ2OOxPqWM0EYG44p0HojLaO9G', 'L1Po8eW5rxl1iiFgAtb3UdIi96givjAvvzkp4HtAkY', '2023-08-02 19:19:29', '2', '1');
+(16, 'fulana', '$2y$10$eu8Lwlvn2eIEg5TfP87esujLqYjUGksQTik604hKlBtM.eTs2HNhm', '', '2023-07-15 15:35:18', '3', '1'),
+(41, 'yanto123', '$2y$10$dinGpv6wErYvDQBFFVVL/e4MuHAx8mVquZVfxl1T36j4Up3gnDzeO', 'BBuIat3450Gd2aPxZZqCVJzSeR6cjl1OjuEKRJUf5Q', '2023-08-09 15:04:45', '2', '0'),
+(42, 'choky123', '$2y$10$Evn.OkEZd1GTg.Y5Ns1.Fu9UfPcEKSCfnK7bAp7dQvTv3MQVGlR9i', 'Z1IgSkgGxibHLrLSlXERTbQtW8tTLfxYtgdTrZHTfsY', '2023-08-09 15:07:27', '3', '0');
 
 -- --------------------------------------------------------
 
@@ -485,7 +494,7 @@ CREATE TABLE `tb_video` (
 --
 
 INSERT INTO `tb_video` (`link`, `datetime`) VALUES
-('https://www.youtube.com/embed/yfm_CEHh8wY', '2023-08-01 17:31:29');
+('https://www.youtube.com/embed/kebghU-MAuo', '2023-08-07 17:43:06');
 
 -- --------------------------------------------------------
 
@@ -495,6 +504,7 @@ INSERT INTO `tb_video` (`link`, `datetime`) VALUES
 
 CREATE TABLE `tb_views` (
   `id_views` int NOT NULL,
+  `UUID` varchar(60) NOT NULL,
   `nama_penulis` varchar(50) NOT NULL,
   `jenis_views` varchar(25) NOT NULL,
   `judul` varchar(255) NOT NULL,
@@ -508,11 +518,13 @@ CREATE TABLE `tb_views` (
 -- Dumping data for table `tb_views`
 --
 
-INSERT INTO `tb_views` (`id_views`, `nama_penulis`, `jenis_views`, `judul`, `slug`, `gambar`, `content`, `datetime`) VALUES
-(1, 'admin', 'Berita', 'Ngerinya Kemajuan Teknologi Saat Ini', 'ngerinya-kemajuan-teknologi-saat-ini', '64788d74c6b57.webp', '<p><span style=\"color: rgb(126, 140, 141);\">Perkembangan teknologi saat ini sangat pesat dan terus berkembang dari waktu ke waktu. Teknologi telah mempengaruhi berbagai aspek kehidupan manusia, mulai dari cara berkomunikasi, transportasi, hingga perubahan ruang. Salah satu bidang teknologi yang semakin berkembang adalah teknologi komunikasi. Dalam bidang ini, smartphone dan internet menjadi teknologi yang semakin meningkatkan cara komunikasi manusia<a style=\"color: rgb(126, 140, 141);\" href=\"https://bdkjakarta.kemenag.go.id/berita/pengaruh-kemajuan-teknologi-komunikasi-dan-informasi-terhadap-karakter-anak\" target=\"_blank\" rel=\"noopener noreferrer\">1</a>. Selain itu, teknologi juga mempengaruhi karakter anak-anak. </span></p>\r\n<p><span style=\"color: rgb(126, 140, 141);\">Dalam sebuah artikel yang diterbitkan oleh Balai Diklat Keagamaan Jakarta, teknologi komunikasi dan informasi dapat mempengaruhi karakter anak-anak. Anak-anak yang terlalu sering menggunakan teknologi cenderung menjadi kurang peka terhadap lingkungan sekitar, kurang sabar, dan kurang mampu mengontrol diri<a style=\"color: rgb(126, 140, 141);\" href=\"https://bdkjakarta.kemenag.go.id/berita/pengaruh-kemajuan-teknologi-komunikasi-dan-informasi-terhadap-karakter-anak\" target=\"_blank\" rel=\"noopener noreferrer\">1</a>. Namun, teknologi juga memiliki dampak positif. Salah satu contoh perkembangan teknologi yang sering digunakan sehari-hari adalah kemudahan dalam mengirim pesan atau berkomunikasi dengan orang lain. Teknologi juga memudahkan manusia dalam melakukan pekerjaan sehari-hari, seperti belanja online, membayar tagihan, dan lain sebagainya<a style=\"color: rgb(126, 140, 141);\" href=\"https://www.kompas.com/skola/read/2021/10/15/163032469/contoh-perkembangan-teknologi-yang-sering-digunakan-sehari-hari\" target=\"_blank\" rel=\"noopener noreferrer\">2</a>. Perkembangan teknologi informasi dan komunikasi juga semakin dikenal luas dan menyebar dalam kehidupan manusia. Adanya globalisasi membantu penyebaran perkembangan teknologi ke berbagai negara. Akibatnya, teknologi semakin dikenal luas dan menyebar dalam kehidupan manusia<a style=\"color: rgb(126, 140, 141);\" href=\"https://www.kompas.com/skola/read/2020/12/21/164007469/perkembangan-teknologi-informasi-dan-komunikasi-di-indonesia?page=all\" target=\"_blank\" rel=\"noopener noreferrer\">3</a>. Dalam bidang sosial dan budaya, teknologi juga memiliki dampak yang signifikan. Saat ini, cara berpakaian yang bersifat lebih modern dan bisa menjangkau berbagai kalangan, khususnya anak muda, bisa ditemukan dengan mudah. Hal ini menunjukkan bahwa teknologi juga mempengaruhi budaya dan gaya hidup manusia<a style=\"color: rgb(126, 140, 141);\" href=\"https://www.kompas.com/skola/read/2021/04/09/142234669/dampak-kemajuan-teknologi-di-bidang-sosial-dan-budaya?page=all\" target=\"_blank\" rel=\"noopener noreferrer\">4</a>. Perkembangan teknologi juga mempengaruhi bidang transportasi. </span></p>\r\n<p><span style=\"color: rgb(126, 140, 141);\">Di Indonesia, perkembangan teknologi transportasi sangat dipengaruhi oleh kondisi geografis Indonesia dan pengaruh budaya luar. Saat ini, teknologi transportasi semakin berkembang, seperti adanya transportasi online dan mobil listrik<a style=\"color: rgb(126, 140, 141);\" href=\"https://www.kompas.com/skola/read/2020/12/21/152002869/perkembangan-teknologi-transportasi-di-indonesia?page=all\" target=\"_blank\" rel=\"noopener noreferrer\">5</a>. Perkembangan ilmu dan teknologi juga berpengaruh terhadap perubahan ruang. Dalam bidang arsitektur, teknologi memungkinkan arsitek untuk membuat desain yang lebih canggih dan efisien. Teknologi juga memungkinkan manusia untuk memanfaatkan ruang secara lebih optimal<a style=\"color: rgb(126, 140, 141);\" href=\"https://www.kompas.com/skola/read/2020/06/24/163000969/pengaruh-perkembangan-ilmu-dan-teknologi-terhadap-perubahan-ruang?page=all\" target=\"_blank\" rel=\"noopener noreferrer\">6</a>. Dalam kesimpulannya, perkembangan teknologi saat ini sangat pesat dan terus berkembang dari waktu ke waktu. </span></p>\r\n<p><span style=\"color: rgb(126, 140, 141);\">Teknologi mempengaruhi berbagai aspek kehidupan manusia, baik dampak positif maupun negatif. Oleh karena itu, manusia perlu bijak dalam menggunakan teknologi dan memanfaatkannya sebaik mungkin untuk kepentingan yang positif.</span></p>', '2023-06-01 21:22:12'),
-(5, 'arya', 'Artikel', 'Kewajiban Seorang Muslim Untuk Berzakat', 'kewajiban-seorang-muslim-untuk-berzakat', '64789015bf47c.webp', '<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Zakat adalah <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">salah satu</span> rukun <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">Islam yang</span> wajib <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">ditunaikan bagi setiap</span> muslim yang mampu <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">dan memiliki kelapangan harta</span>. <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">Zakat adalah bagian</span> tertentu <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">dari harta yang wajib</span> dikeluarkan oleh setiap muslim apabila telah mencapai syarat <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">yang ditetapkan</span>. Sebagai <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">salah satu kewajiban umat</span> muslim, zakat memiliki kedudukan yang tinggi dalam Islam. Allah SWT berfirman dalam Surah al-Baqarah: 43, &ldquo;Dirikanlah salat dan bayarkanlah zakat&rdquo;. Berikut adalah beberapa hal yang perlu diketahui tentang kewajiban seorang muslim untuk berzakat:</span></p>\r\n<ol class=\"list-decimal list-outside\" style=\"list-style: initial;\" type=\"1\">\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Zakat merupakan salah satu dari lima rukun Islam yang wajib ditunaikan bagi setiap muslim yang mampu dan memiliki kelapangan harta. Kewajiban zakat ini ditetapkan Allah SWT melalui firmannya dalam Alquran surah Al-Baqarah ayat 43.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Zakat adalah bentuk sedekah kepada umat Islam. Zakat diperlakukan dalam Islam sebagai kewajiban atau seperti pajak. Di dalam rukun Islam, berzakat ada di urutan ketiga, setelah sholat.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Zakat memiliki beberapa jenis, seperti zakat fitrah, zakat mal, zakat penghasilan, dan zakat perdagangan. Setiap jenis zakat memiliki ketentuan dan perhitungannya sendiri.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Zakat fitrah adalah zakat yang diwajibkan atas setiap jiwa baik lelaki dan perempuan muslim yang dilakukan pada bulan Ramadan hingga menjelang salat Idul Fitri. Sementara, zakat mal adalah zakat yang dikeluarkan dari harta kekayaan yang dimiliki oleh seseorang.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Zakat penghasilan atau zakat profesi adalah zakat yang dikeluarkan dari penghasilan yang diperoleh seseorang dari pekerjaannya. Zakat penghasilan diberikan kepada golongan yang berhak menerimanya, seperti fakir miskin, orang yang berhutang, dan lain sebagainya.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Zakat perdagangan adalah zakat yang dikeluarkan dari keuntungan yang diperoleh dari perdagangan. Zakat perdagangan diberikan kepada golongan yang berhak menerimanya, seperti fakir miskin, orang yang berhutang, dan lain sebagainya.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Tidak menunaikan zakat merupakan dosa besar dalam Islam. Tidak menunaikan zakat dapat mengakibatkan berbagai ancaman dalam kehidupan, seperti kekurangan rezeki, bencana, dan lain sebagainya.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Zakat memiliki syarat-syarat yang harus dipenuhi sebelum dikeluarkan, seperti memiliki harta yang cukup atau tidak kekurangan. Dalam pandangan Islam, memberikan hartanya kepada orang lain yang membutuhkan bisa mensucikan jiwa mereka dan juga sebagai pengingat bahwa harta itu bukanlah milik mereka, namun milik Allah SWT yang memberikan harta tersebut.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Zakat memiliki tujuan untuk membuktikan penghambaan diri kepada Allah dan menyucikan harta. Zakat juga memiliki tujuan untuk membantu golongan yang membutuhkan, seperti fakir miskin, orang yang berhutang, dan lain sebagainya.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Sebagai seorang muslim, kita harus memahami kewajiban berzakat dan menunaikannya dengan sungguh-sungguh. Kita harus berlomba-lomba dalam kebaikan dan ingatlah selalu nasib saudaramu yang berada dalam kesusahan. Kita harus berusaha untuk selalu menunaikan zakat dengan tepat waktu dan tepat sasaran, sehingga dapat membantu golongan yang membutuhkan dan mendapatkan ridha Allah SWT.</span></li>\r\n</ol>', '2023-06-01 21:33:26'),
-(6, 'arya', 'Artikel', '​Mengapa Harus Ber​​zakat', '​mengapa-harus-ber​​zakat', '6478900898ba6.webp', '<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Berzakat merupakan kewajiban <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">bagi setiap</span> muslim <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">yang</span> mampu <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">dan memiliki kelapangan harta</span>. <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">Berzakat memiliki</span> banyak <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">manfaat dan pentingnya</span> berzakat tidak <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">bisa diabaikan</span>. <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">Berikut adalah beberapa alasan</span> mengapa harus berzakat:</span></p>\r\n<ol class=\"list-decimal list-outside\" style=\"list-style: initial;\">\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Membantu Golongan yang Membutuhkan<br>Berzakat merupakan bentuk kepedulian terhadap golongan yang membutuhkan. Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Zakat diberikan kepada golongan yang berhak menerimanya, seperti fakir miskin, orang yang berhutang, dan lain sebagainya. Dengan berzakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Menyucikan Harta<br>Dalam pandangan Islam, harta yang kita miliki bukanlah milik kita sepenuhnya, melainkan milik Allah SWT yang memberikan harta tersebut. Dengan berzakat, kita dapat menyucikan harta yang kita miliki dan membuktikan penghambaan diri kepada Allah SWT.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Meningkatkan Kualitas Hidup<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat meningkatkan kualitas hidup mereka dan membantu mereka untuk keluar dari kemiskinan.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Meningkatkan Kepedulian Sosial<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat meningkatkan kepedulian sosial dan membantu membangun masyarakat yang lebih baik.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Meningkatkan Kualitas Iman<br>Dalam Islam, berzakat merupakan salah satu rukun Islam yang wajib ditunaikan bagi setiap muslim yang mampu dan memiliki kelapangan harta. Dengan menunaikan zakat, kita dapat meningkatkan kualitas iman kita dan membuktikan penghambaan diri kepada Allah SWT.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Menghindari Dosa Besar<br>Tidak menunaikan zakat merupakan dosa besar dalam Islam. Tidak menunaikan zakat dapat mengakibatkan berbagai ancaman dalam kehidupan, seperti kekurangan rezeki, bencana, dan lain sebagainya. Oleh karena itu, sebagai seorang muslim, kita harus memahami kewajiban berzakat dan menunaikannya dengan sungguh-sungguh.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Menjaga Keseimbangan Sosial<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat menjaga keseimbangan sosial dan mencegah terjadinya ketimpangan sosial.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Meningkatkan Solidaritas Umat Muslim<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat meningkatkan solidaritas umat muslim dan membantu membangun masyarakat yang lebih baik.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Meningkatkan Kualitas Hidup Kita Sendiri<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat meningkatkan kualitas hidup kita sendiri dan membantu membangun masyarakat yang lebih baik.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Membantu Membangun Masyarakat yang Lebih Baik<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat membantu membangun masyarakat yang lebih baik dan membantu menciptakan lingkungan yang lebih baik untuk kita semua.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Meningkatkan Kualitas Kehidupan Umat Muslim<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat meningkatkan kualitas kehidupan umat muslim dan membantu membangun masyarakat yang lebih baik.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Meningkatkan Kualitas Hidup Keluarga Kita<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat meningkatkan kualitas hidup keluarga kita dan membantu membangun masyarakat yang lebih baik.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Meningkatkan Kualitas Hidup Bangsa<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat meningkatkan kualitas hidup bangsa dan membantu membangun masyarakat yang lebih baik.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Meningkatkan Kualitas Hidup Manusia Secara Umum<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat meningkatkan kualitas hidup manusia secara umum dan membantu membangun masyarakat yang lebih baik.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Meningkatkan Kualitas Hidup di Dunia dan Akhirat<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat meningkatkan kualitas</span></li>\r\n</ol>', '2023-06-01 21:33:12'),
-(7, 'arya', 'Artikel', 'Hukum Orang Yang Tidak Berzakat', 'hukum-orang-yang-tidak-berzakat', '64789037ad65c.webp', '<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Menunaikan zakat merupakan <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">kewajiban bagi</span> setiap muslim <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">yang</span> mampu. <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">Namun</span>, <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">bagaimana hukum bagi orang yang</span> tidak berzakat <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">pada</span>hal ia mampu? <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">Berikut adalah beberapa hal yang</span> perlu <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">diketahui tentang hukum orang yang</span> tidak berzakat:</span></p>\r\n<ol class=\"list-decimal list-outside\" style=\"list-style-type: inherit;\">\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\"><span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">Zakat adalah</span> kewajiban bagi setiap muslim yang mampu melaksanakannya. Hal ini didasarkan pada dalil-dalil dari kitabullah, sunnah <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">Rasulullah</span>, <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">dan ijma</span>\' umat Islam.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat padahal ia mampu melaksanakannya, maka ia berdosa dan akan mendapatkan hukuman di akhirat dan di dunia.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Hukuman akhirat yang diterima oleh orang yang tidak berzakat adalah siksa yang pedih, sebagaimana firman-Nya: \"Dan barangsiapa yang menyimpan emas dan perak, dan tidak menafkahkannya pada jalan Allah, maka beritahukanlah kepadanya bahwa dia akan menerima siksa yang pedih.\" (QS. At-Taubah: 34)</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat juga akan mendapatkan hukuman di dunia, seperti kekurangan rezeki, bencana, dan lain sebagainya.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak mau membayar zakat mendapatkan hukuman yang lebih berat, yaitu kufur. Adapun, hukuman kufur ini berlaku bagi orang yang ingkar terhadap kewajibannya.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat juga akan kehilangan keberkahan dalam harta yang dimilikinya. Sebaliknya, orang yang menunaikan zakat akan mendapatkan keberkahan dalam harta yang dimilikinya.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Tidak menunaikan zakat juga dapat mengakibatkan terjadinya ketimpangan sosial. Hal ini karena zakat berfungsi sebagai alat untuk mengurangi kesenjangan antara orang yang kaya dan orang yang miskin.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat juga tidak dapat menyucikan hartanya. Dalam pandangan Islam, harta yang dimiliki bukanlah milik kita sepenuhnya, melainkan milik Allah SWT yang memberikan harta tersebut. Dengan berzakat, kita dapat menyucikan harta yang kita miliki dan membuktikan penghambaan diri kepada Allah SWT.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat juga tidak dapat membantu golongan yang membutuhkan. Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat juga tidak dapat meningkatkan kualitas hidup orang lain. Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat meningkatkan kualitas hidup orang lain dan membantu membangun masyarakat yang lebih baik.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat juga tidak dapat meningkatkan kualitas hidupnya sendiri. Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat meningkatkan kualitas hidup kita sendiri dan membantu membangun masyarakat yang lebih baik.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat juga tidak dapat meningkatkan kualitas hidup bangsa. Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat meningkatkan kualitas hidup bangsa dan membantu membangun masyarakat yang lebih baik.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat juga tidak dapat meningkatkan kualitas hidup manusia secara umum. Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat meningkatkan kualitas hidup manusia secara umum dan membantu membangun masyarakat yang lebih baik.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat juga tidak dapat membantu membangun masyarakat yang lebih baik. Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu membangun masyarakat yang lebih baik dan membantu menciptakan lingkungan yang lebih baik untuk kita semua.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat juga tidak dapat meningkatkan solidaritas umat muslim. Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat meningkatkan solidaritas umat muslim dan membantu membangun masyarakat yang lebih baik.</span></p>\r\n</li>\r\n</ol>', '2023-06-01 21:33:59');
+INSERT INTO `tb_views` (`id_views`, `UUID`, `nama_penulis`, `jenis_views`, `judul`, `slug`, `gambar`, `content`, `datetime`) VALUES
+(1, '', 'admin', 'Berita', 'Ngerinya Kemajuan Teknologi Saat Ini', 'ngerinya-kemajuan-teknologi-saat-ini', '64788d74c6b57.webp', '<p><span style=\"color: rgb(126, 140, 141);\">Perkembangan teknologi saat ini sangat pesat dan terus berkembang dari waktu ke waktu. Teknologi telah mempengaruhi berbagai aspek kehidupan manusia, mulai dari cara berkomunikasi, transportasi, hingga perubahan ruang. Salah satu bidang teknologi yang semakin berkembang adalah teknologi komunikasi. Dalam bidang ini, smartphone dan internet menjadi teknologi yang semakin meningkatkan cara komunikasi manusia<a style=\"color: rgb(126, 140, 141);\" href=\"https://bdkjakarta.kemenag.go.id/berita/pengaruh-kemajuan-teknologi-komunikasi-dan-informasi-terhadap-karakter-anak\" target=\"_blank\" rel=\"noopener noreferrer\">1</a>. Selain itu, teknologi juga mempengaruhi karakter anak-anak. </span></p>\r\n<p><span style=\"color: rgb(126, 140, 141);\">Dalam sebuah artikel yang diterbitkan oleh Balai Diklat Keagamaan Jakarta, teknologi komunikasi dan informasi dapat mempengaruhi karakter anak-anak. Anak-anak yang terlalu sering menggunakan teknologi cenderung menjadi kurang peka terhadap lingkungan sekitar, kurang sabar, dan kurang mampu mengontrol diri<a style=\"color: rgb(126, 140, 141);\" href=\"https://bdkjakarta.kemenag.go.id/berita/pengaruh-kemajuan-teknologi-komunikasi-dan-informasi-terhadap-karakter-anak\" target=\"_blank\" rel=\"noopener noreferrer\">1</a>. Namun, teknologi juga memiliki dampak positif. Salah satu contoh perkembangan teknologi yang sering digunakan sehari-hari adalah kemudahan dalam mengirim pesan atau berkomunikasi dengan orang lain. Teknologi juga memudahkan manusia dalam melakukan pekerjaan sehari-hari, seperti belanja online, membayar tagihan, dan lain sebagainya<a style=\"color: rgb(126, 140, 141);\" href=\"https://www.kompas.com/skola/read/2021/10/15/163032469/contoh-perkembangan-teknologi-yang-sering-digunakan-sehari-hari\" target=\"_blank\" rel=\"noopener noreferrer\">2</a>. Perkembangan teknologi informasi dan komunikasi juga semakin dikenal luas dan menyebar dalam kehidupan manusia. Adanya globalisasi membantu penyebaran perkembangan teknologi ke berbagai negara. Akibatnya, teknologi semakin dikenal luas dan menyebar dalam kehidupan manusia<a style=\"color: rgb(126, 140, 141);\" href=\"https://www.kompas.com/skola/read/2020/12/21/164007469/perkembangan-teknologi-informasi-dan-komunikasi-di-indonesia?page=all\" target=\"_blank\" rel=\"noopener noreferrer\">3</a>. Dalam bidang sosial dan budaya, teknologi juga memiliki dampak yang signifikan. Saat ini, cara berpakaian yang bersifat lebih modern dan bisa menjangkau berbagai kalangan, khususnya anak muda, bisa ditemukan dengan mudah. Hal ini menunjukkan bahwa teknologi juga mempengaruhi budaya dan gaya hidup manusia<a style=\"color: rgb(126, 140, 141);\" href=\"https://www.kompas.com/skola/read/2021/04/09/142234669/dampak-kemajuan-teknologi-di-bidang-sosial-dan-budaya?page=all\" target=\"_blank\" rel=\"noopener noreferrer\">4</a>. Perkembangan teknologi juga mempengaruhi bidang transportasi. </span></p>\r\n<p><span style=\"color: rgb(126, 140, 141);\">Di Indonesia, perkembangan teknologi transportasi sangat dipengaruhi oleh kondisi geografis Indonesia dan pengaruh budaya luar. Saat ini, teknologi transportasi semakin berkembang, seperti adanya transportasi online dan mobil listrik<a style=\"color: rgb(126, 140, 141);\" href=\"https://www.kompas.com/skola/read/2020/12/21/152002869/perkembangan-teknologi-transportasi-di-indonesia?page=all\" target=\"_blank\" rel=\"noopener noreferrer\">5</a>. Perkembangan ilmu dan teknologi juga berpengaruh terhadap perubahan ruang. Dalam bidang arsitektur, teknologi memungkinkan arsitek untuk membuat desain yang lebih canggih dan efisien. Teknologi juga memungkinkan manusia untuk memanfaatkan ruang secara lebih optimal<a style=\"color: rgb(126, 140, 141);\" href=\"https://www.kompas.com/skola/read/2020/06/24/163000969/pengaruh-perkembangan-ilmu-dan-teknologi-terhadap-perubahan-ruang?page=all\" target=\"_blank\" rel=\"noopener noreferrer\">6</a>. Dalam kesimpulannya, perkembangan teknologi saat ini sangat pesat dan terus berkembang dari waktu ke waktu. </span></p>\r\n<p><span style=\"color: rgb(126, 140, 141);\">Teknologi mempengaruhi berbagai aspek kehidupan manusia, baik dampak positif maupun negatif. Oleh karena itu, manusia perlu bijak dalam menggunakan teknologi dan memanfaatkannya sebaik mungkin untuk kepentingan yang positif.</span></p>', '2023-06-01 21:22:12'),
+(5, '', 'arya', 'Artikel', 'Kewajiban Seorang Muslim Untuk Berzakat', 'kewajiban-seorang-muslim-untuk-berzakat', '64789015bf47c.webp', '<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Zakat adalah <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">salah satu</span> rukun <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">Islam yang</span> wajib <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">ditunaikan bagi setiap</span> muslim yang mampu <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">dan memiliki kelapangan harta</span>. <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">Zakat adalah bagian</span> tertentu <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">dari harta yang wajib</span> dikeluarkan oleh setiap muslim apabila telah mencapai syarat <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">yang ditetapkan</span>. Sebagai <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">salah satu kewajiban umat</span> muslim, zakat memiliki kedudukan yang tinggi dalam Islam. Allah SWT berfirman dalam Surah al-Baqarah: 43, &ldquo;Dirikanlah salat dan bayarkanlah zakat&rdquo;. Berikut adalah beberapa hal yang perlu diketahui tentang kewajiban seorang muslim untuk berzakat:</span></p>\r\n<ol class=\"list-decimal list-outside\" style=\"list-style: initial;\" type=\"1\">\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Zakat merupakan salah satu dari lima rukun Islam yang wajib ditunaikan bagi setiap muslim yang mampu dan memiliki kelapangan harta. Kewajiban zakat ini ditetapkan Allah SWT melalui firmannya dalam Alquran surah Al-Baqarah ayat 43.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Zakat adalah bentuk sedekah kepada umat Islam. Zakat diperlakukan dalam Islam sebagai kewajiban atau seperti pajak. Di dalam rukun Islam, berzakat ada di urutan ketiga, setelah sholat.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Zakat memiliki beberapa jenis, seperti zakat fitrah, zakat mal, zakat penghasilan, dan zakat perdagangan. Setiap jenis zakat memiliki ketentuan dan perhitungannya sendiri.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Zakat fitrah adalah zakat yang diwajibkan atas setiap jiwa baik lelaki dan perempuan muslim yang dilakukan pada bulan Ramadan hingga menjelang salat Idul Fitri. Sementara, zakat mal adalah zakat yang dikeluarkan dari harta kekayaan yang dimiliki oleh seseorang.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Zakat penghasilan atau zakat profesi adalah zakat yang dikeluarkan dari penghasilan yang diperoleh seseorang dari pekerjaannya. Zakat penghasilan diberikan kepada golongan yang berhak menerimanya, seperti fakir miskin, orang yang berhutang, dan lain sebagainya.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Zakat perdagangan adalah zakat yang dikeluarkan dari keuntungan yang diperoleh dari perdagangan. Zakat perdagangan diberikan kepada golongan yang berhak menerimanya, seperti fakir miskin, orang yang berhutang, dan lain sebagainya.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Tidak menunaikan zakat merupakan dosa besar dalam Islam. Tidak menunaikan zakat dapat mengakibatkan berbagai ancaman dalam kehidupan, seperti kekurangan rezeki, bencana, dan lain sebagainya.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Zakat memiliki syarat-syarat yang harus dipenuhi sebelum dikeluarkan, seperti memiliki harta yang cukup atau tidak kekurangan. Dalam pandangan Islam, memberikan hartanya kepada orang lain yang membutuhkan bisa mensucikan jiwa mereka dan juga sebagai pengingat bahwa harta itu bukanlah milik mereka, namun milik Allah SWT yang memberikan harta tersebut.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Zakat memiliki tujuan untuk membuktikan penghambaan diri kepada Allah dan menyucikan harta. Zakat juga memiliki tujuan untuk membantu golongan yang membutuhkan, seperti fakir miskin, orang yang berhutang, dan lain sebagainya.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Sebagai seorang muslim, kita harus memahami kewajiban berzakat dan menunaikannya dengan sungguh-sungguh. Kita harus berlomba-lomba dalam kebaikan dan ingatlah selalu nasib saudaramu yang berada dalam kesusahan. Kita harus berusaha untuk selalu menunaikan zakat dengan tepat waktu dan tepat sasaran, sehingga dapat membantu golongan yang membutuhkan dan mendapatkan ridha Allah SWT.</span></li>\r\n</ol>', '2023-06-01 21:33:26'),
+(6, '', 'arya', 'Artikel', '​Mengapa Harus Ber​​zakat', '​mengapa-harus-ber​​zakat', '6478900898ba6.webp', '<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Berzakat merupakan kewajiban <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">bagi setiap</span> muslim <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">yang</span> mampu <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">dan memiliki kelapangan harta</span>. <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">Berzakat memiliki</span> banyak <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">manfaat dan pentingnya</span> berzakat tidak <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">bisa diabaikan</span>. <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">Berikut adalah beberapa alasan</span> mengapa harus berzakat:</span></p>\r\n<ol class=\"list-decimal list-outside\" style=\"list-style: initial;\">\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Membantu Golongan yang Membutuhkan<br>Berzakat merupakan bentuk kepedulian terhadap golongan yang membutuhkan. Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Zakat diberikan kepada golongan yang berhak menerimanya, seperti fakir miskin, orang yang berhutang, dan lain sebagainya. Dengan berzakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Menyucikan Harta<br>Dalam pandangan Islam, harta yang kita miliki bukanlah milik kita sepenuhnya, melainkan milik Allah SWT yang memberikan harta tersebut. Dengan berzakat, kita dapat menyucikan harta yang kita miliki dan membuktikan penghambaan diri kepada Allah SWT.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Meningkatkan Kualitas Hidup<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat meningkatkan kualitas hidup mereka dan membantu mereka untuk keluar dari kemiskinan.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Meningkatkan Kepedulian Sosial<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat meningkatkan kepedulian sosial dan membantu membangun masyarakat yang lebih baik.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Meningkatkan Kualitas Iman<br>Dalam Islam, berzakat merupakan salah satu rukun Islam yang wajib ditunaikan bagi setiap muslim yang mampu dan memiliki kelapangan harta. Dengan menunaikan zakat, kita dapat meningkatkan kualitas iman kita dan membuktikan penghambaan diri kepada Allah SWT.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Menghindari Dosa Besar<br>Tidak menunaikan zakat merupakan dosa besar dalam Islam. Tidak menunaikan zakat dapat mengakibatkan berbagai ancaman dalam kehidupan, seperti kekurangan rezeki, bencana, dan lain sebagainya. Oleh karena itu, sebagai seorang muslim, kita harus memahami kewajiban berzakat dan menunaikannya dengan sungguh-sungguh.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Menjaga Keseimbangan Sosial<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat menjaga keseimbangan sosial dan mencegah terjadinya ketimpangan sosial.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Meningkatkan Solidaritas Umat Muslim<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat meningkatkan solidaritas umat muslim dan membantu membangun masyarakat yang lebih baik.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Meningkatkan Kualitas Hidup Kita Sendiri<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat meningkatkan kualitas hidup kita sendiri dan membantu membangun masyarakat yang lebih baik.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Membantu Membangun Masyarakat yang Lebih Baik<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat membantu membangun masyarakat yang lebih baik dan membantu menciptakan lingkungan yang lebih baik untuk kita semua.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Meningkatkan Kualitas Kehidupan Umat Muslim<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat meningkatkan kualitas kehidupan umat muslim dan membantu membangun masyarakat yang lebih baik.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Meningkatkan Kualitas Hidup Keluarga Kita<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat meningkatkan kualitas hidup keluarga kita dan membantu membangun masyarakat yang lebih baik.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Meningkatkan Kualitas Hidup Bangsa<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat meningkatkan kualitas hidup bangsa dan membantu membangun masyarakat yang lebih baik.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Meningkatkan Kualitas Hidup Manusia Secara Umum<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat meningkatkan kualitas hidup manusia secara umum dan membantu membangun masyarakat yang lebih baik.</span></li>\r\n<li style=\"color: rgb(126, 140, 141);\"><span class=\"\" style=\"color: rgb(126, 140, 141);\">Meningkatkan Kualitas Hidup di Dunia dan Akhirat<br>Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka. Dengan demikian, kita dapat meningkatkan kualitas</span></li>\r\n</ol>', '2023-06-01 21:33:12'),
+(7, '', 'arya', 'Artikel', 'Hukum Orang Yang Tidak Berzakat', 'hukum-orang-yang-tidak-berzakat', '64789037ad65c.webp', '<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Menunaikan zakat merupakan <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">kewajiban bagi</span> setiap muslim <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">yang</span> mampu. <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">Namun</span>, <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">bagaimana hukum bagi orang yang</span> tidak berzakat <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">pada</span>hal ia mampu? <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">Berikut adalah beberapa hal yang</span> perlu <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">diketahui tentang hukum orang yang</span> tidak berzakat:</span></p>\r\n<ol class=\"list-decimal list-outside\" style=\"list-style-type: inherit;\">\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\"><span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">Zakat adalah</span> kewajiban bagi setiap muslim yang mampu melaksanakannya. Hal ini didasarkan pada dalil-dalil dari kitabullah, sunnah <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">Rasulullah</span>, <span class=\"entity-link underline underline-offset-2 decoration-1 transition-all duration-300 cursor-pointer decoration-super md:hover:text-super\">dan ijma</span>\' umat Islam.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat padahal ia mampu melaksanakannya, maka ia berdosa dan akan mendapatkan hukuman di akhirat dan di dunia.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Hukuman akhirat yang diterima oleh orang yang tidak berzakat adalah siksa yang pedih, sebagaimana firman-Nya: \"Dan barangsiapa yang menyimpan emas dan perak, dan tidak menafkahkannya pada jalan Allah, maka beritahukanlah kepadanya bahwa dia akan menerima siksa yang pedih.\" (QS. At-Taubah: 34)</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat juga akan mendapatkan hukuman di dunia, seperti kekurangan rezeki, bencana, dan lain sebagainya.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak mau membayar zakat mendapatkan hukuman yang lebih berat, yaitu kufur. Adapun, hukuman kufur ini berlaku bagi orang yang ingkar terhadap kewajibannya.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat juga akan kehilangan keberkahan dalam harta yang dimilikinya. Sebaliknya, orang yang menunaikan zakat akan mendapatkan keberkahan dalam harta yang dimilikinya.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Tidak menunaikan zakat juga dapat mengakibatkan terjadinya ketimpangan sosial. Hal ini karena zakat berfungsi sebagai alat untuk mengurangi kesenjangan antara orang yang kaya dan orang yang miskin.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat juga tidak dapat menyucikan hartanya. Dalam pandangan Islam, harta yang dimiliki bukanlah milik kita sepenuhnya, melainkan milik Allah SWT yang memberikan harta tersebut. Dengan berzakat, kita dapat menyucikan harta yang kita miliki dan membuktikan penghambaan diri kepada Allah SWT.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat juga tidak dapat membantu golongan yang membutuhkan. Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu golongan yang membutuhkan dan memberikan manfaat bagi mereka.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat juga tidak dapat meningkatkan kualitas hidup orang lain. Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat meningkatkan kualitas hidup orang lain dan membantu membangun masyarakat yang lebih baik.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat juga tidak dapat meningkatkan kualitas hidupnya sendiri. Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat meningkatkan kualitas hidup kita sendiri dan membantu membangun masyarakat yang lebih baik.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat juga tidak dapat meningkatkan kualitas hidup bangsa. Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat meningkatkan kualitas hidup bangsa dan membantu membangun masyarakat yang lebih baik.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat juga tidak dapat meningkatkan kualitas hidup manusia secara umum. Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat meningkatkan kualitas hidup manusia secara umum dan membantu membangun masyarakat yang lebih baik.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat juga tidak dapat membantu membangun masyarakat yang lebih baik. Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat membantu membangun masyarakat yang lebih baik dan membantu menciptakan lingkungan yang lebih baik untuk kita semua.</span></p>\r\n</li>\r\n<li style=\"color: rgb(126, 140, 141);\">\r\n<p><span class=\"\" style=\"color: rgb(126, 140, 141);\">Orang yang tidak berzakat juga tidak dapat meningkatkan solidaritas umat muslim. Dalam Islam, berzakat diperlakukan sebagai kewajiban atau seperti pajak. Dengan membayar zakat, kita dapat meningkatkan solidaritas umat muslim dan membantu membangun masyarakat yang lebih baik.</span></p>\r\n</li>\r\n</ol>', '2023-06-01 21:33:59'),
+(18, '', 'sartono', 'Artikel', 'Pilar Pendidikan', 'pilar-pendidikan', '64cb1c8dd55c1.webp', '<p><span style=\"color: rgb(52, 73, 94);\">Program pendidikan di Lazismu sebagai peningkatan mutu Sumber Daya Manusia dengan menjalankan berbagai program di bidang pendidikan baik pemenuhan sarana ataupun biaya pendidikan.</span></p>\r\n<p><span style=\"color: rgb(52, 73, 94);\">Selain dalam menjalankan amanat Undang-undang Dasar 1945 untuk berkontribusi dalam mencerdaskan kehidupan bangsa, program pendidikan lazismu untuk terus menghasilkan SDM yang memiliki inovasi dan keilmuan di dalam bidangnya dalam mendukung pembangunan negara.</span></p>\r\n<p><span style=\"color: rgb(52, 73, 94);\">Berikut program yang termasuk dalam bidang pendidikan :</span><br><span style=\"color: rgb(52, 73, 94);\">1. &nbsp; &nbsp; Beasiswa Mentari</span><br><span style=\"color: rgb(52, 73, 94);\">2. &nbsp; &nbsp; Beasiswa Sang Surya</span><br><span style=\"color: rgb(52, 73, 94);\">3. &nbsp; &nbsp; Lazismu Goes To Campus</span><br><span style=\"color: rgb(52, 73, 94);\">4. &nbsp; &nbsp; Peduli Guru</span><br><span style=\"color: rgb(52, 73, 94);\">5. &nbsp; &nbsp; MSPP</span><br><span style=\"color: rgb(52, 73, 94);\">6. &nbsp; &nbsp; Edutab-mu</span><br><span style=\"color: rgb(52, 73, 94);\">7. &nbsp; &nbsp; Save Our School</span></p>', '2023-08-03 12:18:38'),
+(19, '', 'ilham', 'Artikel', 'Pilar Kesehatan', 'pilar-kesehatan', '64cb25520c321.webp', '<p><span style=\"color: rgb(52, 73, 94);\">Program kesehatan Lazismu hadir untuk memenuhi hak mustahik dalam mendapatkan hidup yang berkualitas dengan terpenuhinya layanan kesehatan serta protokol kesehatan.</span></p>\r\n<p><span style=\"color: rgb(52, 73, 94);\">Program kesehatan memberikan layanan pencegahan, edukasi, pengobatan, pendampingan kepada mustahik yang membutuhkan. Terutama selama Pandemi Covid-19 menyerang. Lazismu terus melakukan kegiatan kesehatan di seluruh Indonesia.</span></p>\r\n<p><span style=\"color: rgb(52, 73, 94);\">Berikut perincian program kesehatan :</span><br><span style=\"color: rgb(52, 73, 94);\">1. &nbsp; &nbsp; Peduli Kesehatan</span><br><span style=\"color: rgb(52, 73, 94);\">2. &nbsp; &nbsp; Indonesia Mobile Clinic</span><br><span style=\"color: rgb(52, 73, 94);\">3. &nbsp; &nbsp; Rumah Singgah Pasien</span><br><span style=\"color: rgb(52, 73, 94);\">4. &nbsp; &nbsp; ENDTB</span><br><span style=\"color: rgb(52, 73, 94);\">5. &nbsp; &nbsp; TIMBANG</span><br><span style=\"color: rgb(52, 73, 94);\">6. &nbsp; &nbsp; Bebas Covid</span><br><span style=\"color: rgb(52, 73, 94);\">7. &nbsp; &nbsp; SAUM</span></p>', '2023-08-03 12:56:02');
 
 -- --------------------------------------------------------
 
@@ -532,7 +544,7 @@ CREATE TABLE `tb_visimisi` (
 --
 
 INSERT INTO `tb_visimisi` (`id_visimisi`, `username`, `content`, `datetime`) VALUES
-(2, 'admin', '<p><span style=\"color: rgb(126, 140, 141);\"><strong>Visi</strong></span></p>\r\n<p><span style=\"color: rgb(126, 140, 141);\">Visi adalah visi<br></span></p>\r\n<p><strong><span style=\"color: rgb(126, 140, 141);\">Misi</span></strong></p>\r\n<p><span style=\"color: rgb(126, 140, 141);\">Misi adalah misi<br></span></p>', '2023-06-12 09:18:57');
+(2, 'admin', '<div><span style=\"color: rgb(52, 73, 94);\"><strong>Visi</strong></span></div>\r\n<div>&nbsp;</div>\r\n<div><span style=\"color: rgb(52, 73, 94);\">Menjadi agen perubahan yang kuat dalam membantu masyarakat yang membutuhkan dan menciptakan dampak positif dalam mengatasi berbagai tantangan sosial.</span></div>\r\n<div>&nbsp;</div>\r\n<div><span style=\"color: rgb(52, 73, 94);\"><strong>Misi</strong></span></div>\r\n<div>\r\n<ol>\r\n<li style=\"color: rgb(52, 73, 94);\"><span style=\"color: rgb(52, 73, 94);\">Memberikan bantuan dan dukungan kepada masyarakat yang kurang beruntung, termasuk anak-anak yatim piatu, orang tua lanjut usia, dan orang-orang dengan kebutuhan khusus.</span></li>\r\n<li style=\"color: rgb(52, 73, 94);\"><span style=\"color: rgb(52, 73, 94);\">Memperjuangkan hak-hak dasar masyarakat seperti pendidikan, kesehatan, dan akses ke air bersih.</span></li>\r\n<li style=\"color: rgb(52, 73, 94);\"><span style=\"color: rgb(52, 73, 94);\">Menyediakan bantuan darurat dalam situasi krisis seperti bencana alam atau konflik bersenjata.</span></li>\r\n<li style=\"color: rgb(52, 73, 94);\"><span style=\"color: rgb(52, 73, 94);\">Menggalang dana dan sumber daya untuk mendukung program-program pembangunan berkelanjutan dalam berbagai bidang.</span></li>\r\n<li style=\"color: rgb(52, 73, 94);\"><span style=\"color: rgb(52, 73, 94);\">Mendorong partisipasi aktif masyarakat dalam kegiatan sosial dan lingkungan untuk menciptakan kesadaran dan kepedulian.</span></li>\r\n<li style=\"color: rgb(52, 73, 94);\"><span style=\"color: rgb(52, 73, 94);\">Menyediakan akses ke layanan kesehatan yang terjangkau dan berkualitas untuk masyarakat yang kurang mampu.</span></li>\r\n<li style=\"color: rgb(52, 73, 94);\"><span style=\"color: rgb(52, 73, 94);\">Memastikan transparansi dan akuntabilitas dalam pengelolaan dana donasi yang diterima untuk membangun kepercayaan dengan para donatur.</span></li>\r\n</ol>\r\n</div>\r\n<div><span style=\"color: rgb(126, 140, 141);\">Catatan: Visi dan misi donasi dapat bervariasi tergantung pada tujuan dan fokus organisasi atau kampanye donasi tertentu. Contoh di atas hanya merupakan contoh umum untuk memberikan gambaran. Penting untuk menggambarkan visi dan misi secara spesifik dan sesuai dengan tujuan dan nilai-nilai inti organisasi donasi.</span></div>', '2023-08-09 22:39:30');
 
 -- --------------------------------------------------------
 
@@ -555,14 +567,51 @@ CREATE TABLE `vwAllAdmin` (
 --
 CREATE TABLE `vwAllAmil` (
 `id_amil` int
+,`UUID` varchar(60)
 ,`id_mesjid` int
 ,`nama` varchar(50)
 ,`email` varchar(100)
 ,`alamat` varchar(255)
 ,`nohp` varchar(13)
 ,`id_user` int
+,`token` varchar(60)
 ,`username` varchar(50)
 ,`waktu_login` datetime
+,`status_aktivasi` enum('0','1')
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vwAllArtikel`
+-- (See below for the actual view)
+--
+CREATE TABLE `vwAllArtikel` (
+`id_views` int
+,`nama_penulis` varchar(50)
+,`jenis_views` varchar(25)
+,`judul` varchar(255)
+,`slug` varchar(255)
+,`gambar` varchar(100)
+,`content` text
+,`datetime` datetime
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vwAllBerita`
+-- (See below for the actual view)
+--
+CREATE TABLE `vwAllBerita` (
+`id_views` int
+,`nama_penulis` varchar(50)
+,`jenis_views` varchar(25)
+,`judul` varchar(255)
+,`slug` varchar(255)
+,`gambar` varchar(100)
+,`content` text
+,`datetime` datetime
 );
 
 -- --------------------------------------------------------
@@ -682,6 +731,7 @@ CREATE TABLE `vwAllDataProgramAktif` (
 ,`jenis_program` varchar(20)
 ,`jenis_pembayaran` varchar(20)
 ,`deskripsi_program` text
+,`nominal_bayar` int
 ,`total_dana` int
 ,`jumlah_donatur` int
 ,`gambar` varchar(100)
@@ -778,27 +828,13 @@ CREATE TABLE `vwAllLaporan` (
 --
 CREATE TABLE `vwAllMuzakki` (
 `id_muzakki` int
+,`UUID` varchar(60)
 ,`nama` varchar(50)
 ,`email` varchar(100)
 ,`nohp` varchar(13)
+,`id_user` int
 ,`username` varchar(50)
 ,`waktu_login` datetime
-);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `vwAllNorekHaveSaldo`
--- (See below for the actual view)
---
-CREATE TABLE `vwAllNorekHaveSaldo` (
-`id_norek` int
-,`nama_pemilik` varchar(50)
-,`nama_bank` varchar(50)
-,`norek` varchar(20)
-,`jenis_program` varchar(50)
-,`saldo_donasi` bigint
-,`gambar` varchar(100)
 );
 
 -- --------------------------------------------------------
@@ -907,30 +943,6 @@ CREATE TABLE `vwAllProgramHaveMoney` (
 ,`nama_program` varchar(100)
 ,`jenis_program` varchar(20)
 ,`total_dana` int
-);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `vwAllProgramNameAktif`
--- (See below for the actual view)
---
-CREATE TABLE `vwAllProgramNameAktif` (
-`id_kategoriprogram` int
-,`nama_kategoriprogram` varchar(20)
-,`status` enum('aktif','pasif')
-);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `vwAllProgramTidakAktif`
--- (See below for the actual view)
---
-CREATE TABLE `vwAllProgramTidakAktif` (
-`id_kategoriprogram` int
-,`nama_kategoriprogram` varchar(20)
-,`status` enum('aktif','pasif')
 );
 
 -- --------------------------------------------------------
@@ -1150,7 +1162,25 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vwAllAmil`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllAmil`  AS SELECT `tb_amil`.`id_amil` AS `id_amil`, `tb_amil`.`id_mesjid` AS `id_mesjid`, `tb_amil`.`nama` AS `nama`, `tb_amil`.`email` AS `email`, `tb_amil`.`alamat` AS `alamat`, `tb_amil`.`nohp` AS `nohp`, `tb_user`.`id_user` AS `id_user`, `tb_user`.`username` AS `username`, `tb_user`.`waktu_login` AS `waktu_login` FROM (`tb_amil` join `tb_user` on((`tb_amil`.`id_user` = `tb_user`.`id_user`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllAmil`  AS SELECT `tb_amil`.`id_amil` AS `id_amil`, `tb_amil`.`UUID` AS `UUID`, `tb_amil`.`id_mesjid` AS `id_mesjid`, `tb_amil`.`nama` AS `nama`, `tb_amil`.`email` AS `email`, `tb_amil`.`alamat` AS `alamat`, `tb_amil`.`nohp` AS `nohp`, `tb_user`.`id_user` AS `id_user`, `tb_user`.`token` AS `token`, `tb_user`.`username` AS `username`, `tb_user`.`waktu_login` AS `waktu_login`, `tb_user`.`status_aktivasi` AS `status_aktivasi` FROM (`tb_amil` join `tb_user` on((`tb_amil`.`id_user` = `tb_user`.`id_user`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vwAllArtikel`
+--
+DROP TABLE IF EXISTS `vwAllArtikel`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllArtikel`  AS SELECT `tb_views`.`id_views` AS `id_views`, `tb_views`.`nama_penulis` AS `nama_penulis`, `tb_views`.`jenis_views` AS `jenis_views`, `tb_views`.`judul` AS `judul`, `tb_views`.`slug` AS `slug`, `tb_views`.`gambar` AS `gambar`, `tb_views`.`content` AS `content`, `tb_views`.`datetime` AS `datetime` FROM `tb_views` WHERE ((`tb_views`.`jenis_views` = 'Artikel') AND (not((`tb_views`.`slug` like '%pilar%')))) ORDER BY `tb_views`.`id_views` DESC ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vwAllBerita`
+--
+DROP TABLE IF EXISTS `vwAllBerita`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllBerita`  AS SELECT `tb_views`.`id_views` AS `id_views`, `tb_views`.`nama_penulis` AS `nama_penulis`, `tb_views`.`jenis_views` AS `jenis_views`, `tb_views`.`judul` AS `judul`, `tb_views`.`slug` AS `slug`, `tb_views`.`gambar` AS `gambar`, `tb_views`.`content` AS `content`, `tb_views`.`datetime` AS `datetime` FROM `tb_views` WHERE ((`tb_views`.`jenis_views` = 'Berita') AND (not((`tb_views`.`slug` like '%pilar%')))) ORDER BY `tb_views`.`id_views` DESC ;
 
 -- --------------------------------------------------------
 
@@ -1204,7 +1234,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vwAllDataProgramAktif`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllDataProgramAktif`  AS SELECT `tb_program`.`id_program` AS `id_program`, `tb_program`.`nama_program` AS `nama_program`, `tb_program`.`slug` AS `slug`, `tb_program`.`jenis_program` AS `jenis_program`, `tb_program`.`jenis_pembayaran` AS `jenis_pembayaran`, `tb_program`.`deskripsi_program` AS `deskripsi_program`, `tb_program`.`total_dana` AS `total_dana`, `tb_program`.`jumlah_donatur` AS `jumlah_donatur`, `tb_program`.`gambar` AS `gambar`, `tb_program`.`content` AS `content`, `tb_program`.`datetime` AS `datetime`, `tb_kategoriprogram`.`id_kategoriprogram` AS `id_kategoriprogram`, `tb_kategoriprogram`.`nama_kategoriprogram` AS `nama_kategoriprogram`, `tb_kategoriprogram`.`status` AS `status` FROM (`tb_program` join `tb_kategoriprogram` on((`tb_program`.`jenis_program` = `tb_kategoriprogram`.`nama_kategoriprogram`))) WHERE (`tb_kategoriprogram`.`status` = 'aktif') ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllDataProgramAktif`  AS SELECT `tb_program`.`id_program` AS `id_program`, `tb_program`.`nama_program` AS `nama_program`, `tb_program`.`slug` AS `slug`, `tb_program`.`jenis_program` AS `jenis_program`, `tb_program`.`jenis_pembayaran` AS `jenis_pembayaran`, `tb_program`.`deskripsi_program` AS `deskripsi_program`, `tb_program`.`nominal_bayar` AS `nominal_bayar`, `tb_program`.`total_dana` AS `total_dana`, `tb_program`.`jumlah_donatur` AS `jumlah_donatur`, `tb_program`.`gambar` AS `gambar`, `tb_program`.`content` AS `content`, `tb_program`.`datetime` AS `datetime`, `tb_kategoriprogram`.`id_kategoriprogram` AS `id_kategoriprogram`, `tb_kategoriprogram`.`nama_kategoriprogram` AS `nama_kategoriprogram`, `tb_kategoriprogram`.`status` AS `status` FROM (`tb_program` join `tb_kategoriprogram` on((`tb_program`.`jenis_program` = `tb_kategoriprogram`.`nama_kategoriprogram`))) WHERE (`tb_kategoriprogram`.`status` = 'aktif') ;
 
 -- --------------------------------------------------------
 
@@ -1249,16 +1279,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vwAllMuzakki`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllMuzakki`  AS SELECT `tb_muzakki`.`id_muzakki` AS `id_muzakki`, `tb_muzakki`.`nama` AS `nama`, `tb_muzakki`.`email` AS `email`, `tb_muzakki`.`nohp` AS `nohp`, `tb_user`.`username` AS `username`, `tb_user`.`waktu_login` AS `waktu_login` FROM (`tb_muzakki` join `tb_user` on((`tb_muzakki`.`id_user` = `tb_user`.`id_user`))) ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `vwAllNorekHaveSaldo`
---
-DROP TABLE IF EXISTS `vwAllNorekHaveSaldo`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllNorekHaveSaldo`  AS SELECT `tb_norek`.`id_norek` AS `id_norek`, `tb_norek`.`nama_pemilik` AS `nama_pemilik`, `tb_norek`.`nama_bank` AS `nama_bank`, `tb_norek`.`norek` AS `norek`, `tb_norek`.`jenis_program` AS `jenis_program`, `tb_norek`.`saldo_donasi` AS `saldo_donasi`, `tb_norek`.`gambar` AS `gambar` FROM `tb_norek` WHERE (`tb_norek`.`saldo_donasi` > 0) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllMuzakki`  AS SELECT `tb_muzakki`.`id_muzakki` AS `id_muzakki`, `tb_muzakki`.`UUID` AS `UUID`, `tb_muzakki`.`nama` AS `nama`, `tb_muzakki`.`email` AS `email`, `tb_muzakki`.`nohp` AS `nohp`, `tb_user`.`id_user` AS `id_user`, `tb_user`.`username` AS `username`, `tb_user`.`waktu_login` AS `waktu_login` FROM (`tb_muzakki` join `tb_user` on((`tb_muzakki`.`id_user` = `tb_user`.`id_user`))) ;
 
 -- --------------------------------------------------------
 
@@ -1304,24 +1325,6 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `vwAllProgramHaveMoney`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllProgramHaveMoney`  AS SELECT `tb_program`.`id_program` AS `id_program`, `tb_program`.`nama_program` AS `nama_program`, `tb_program`.`jenis_program` AS `jenis_program`, `tb_program`.`total_dana` AS `total_dana` FROM `tb_program` WHERE (`tb_program`.`total_dana` > 0) ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `vwAllProgramNameAktif`
---
-DROP TABLE IF EXISTS `vwAllProgramNameAktif`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllProgramNameAktif`  AS SELECT `tb_kategoriprogram`.`id_kategoriprogram` AS `id_kategoriprogram`, `tb_kategoriprogram`.`nama_kategoriprogram` AS `nama_kategoriprogram`, `tb_kategoriprogram`.`status` AS `status` FROM `tb_kategoriprogram` WHERE (`tb_kategoriprogram`.`status` = 'aktif') ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `vwAllProgramTidakAktif`
---
-DROP TABLE IF EXISTS `vwAllProgramTidakAktif`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vwAllProgramTidakAktif`  AS SELECT `tb_kategoriprogram`.`id_kategoriprogram` AS `id_kategoriprogram`, `tb_kategoriprogram`.`nama_kategoriprogram` AS `nama_kategoriprogram`, `tb_kategoriprogram`.`status` AS `status` FROM `tb_kategoriprogram` WHERE (`tb_kategoriprogram`.`status` = 'pasif') ;
 
 -- --------------------------------------------------------
 
@@ -1457,6 +1460,7 @@ ALTER TABLE `tb_admin`
 ALTER TABLE `tb_amil`
   ADD PRIMARY KEY (`id_amil`),
   ADD UNIQUE KEY `UNIQUE` (`email`,`nohp`),
+  ADD UNIQUE KEY `UUID` (`UUID`),
   ADD KEY `INDEX` (`id_user`,`id_mesjid`),
   ADD KEY `id_mesjid` (`id_mesjid`);
 
@@ -1486,6 +1490,13 @@ ALTER TABLE `tb_kategoriprogram`
   ADD UNIQUE KEY `UNIQUE` (`nama_kategoriprogram`);
 
 --
+-- Indexes for table `tb_laporan`
+--
+ALTER TABLE `tb_laporan`
+  ADD PRIMARY KEY (`id_laporan`),
+  ADD UNIQUE KEY `UNIQUE` (`link`,`tahun`);
+
+--
 -- Indexes for table `tb_latarbelakang`
 --
 ALTER TABLE `tb_latarbelakang`
@@ -1496,7 +1507,8 @@ ALTER TABLE `tb_latarbelakang`
 -- Indexes for table `tb_mesjid`
 --
 ALTER TABLE `tb_mesjid`
-  ADD PRIMARY KEY (`id_mesjid`);
+  ADD PRIMARY KEY (`id_mesjid`),
+  ADD UNIQUE KEY `UNIQUE` (`UUID`);
 
 --
 -- Indexes for table `tb_muzakki`
@@ -1582,7 +1594,7 @@ ALTER TABLE `tb_admin`
 -- AUTO_INCREMENT for table `tb_amil`
 --
 ALTER TABLE `tb_amil`
-  MODIFY `id_amil` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_amil` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tb_banner`
@@ -1600,13 +1612,19 @@ ALTER TABLE `tb_donasibarang`
 -- AUTO_INCREMENT for table `tb_donatur`
 --
 ALTER TABLE `tb_donatur`
-  MODIFY `id_donatur` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id_donatur` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `tb_kategoriprogram`
 --
 ALTER TABLE `tb_kategoriprogram`
   MODIFY `id_kategoriprogram` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tb_laporan`
+--
+ALTER TABLE `tb_laporan`
+  MODIFY `id_laporan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_latarbelakang`
@@ -1618,19 +1636,19 @@ ALTER TABLE `tb_latarbelakang`
 -- AUTO_INCREMENT for table `tb_mesjid`
 --
 ALTER TABLE `tb_mesjid`
-  MODIFY `id_mesjid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_mesjid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `tb_muzakki`
 --
 ALTER TABLE `tb_muzakki`
-  MODIFY `id_muzakki` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_muzakki` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tb_norek`
 --
 ALTER TABLE `tb_norek`
-  MODIFY `id_norek` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_norek` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tb_pemasukkan`
@@ -1642,13 +1660,13 @@ ALTER TABLE `tb_pemasukkan`
 -- AUTO_INCREMENT for table `tb_pembayaran`
 --
 ALTER TABLE `tb_pembayaran`
-  MODIFY `id_pembayaran` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_pembayaran` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `tb_pengeluaran`
 --
 ALTER TABLE `tb_pengeluaran`
-  MODIFY `id_pengeluaran` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pengeluaran` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tb_program`
@@ -1660,13 +1678,13 @@ ALTER TABLE `tb_program`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `tb_views`
 --
 ALTER TABLE `tb_views`
-  MODIFY `id_views` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_views` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tb_visimisi`
