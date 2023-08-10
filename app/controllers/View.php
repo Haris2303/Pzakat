@@ -4,7 +4,7 @@ class View extends Controller {
 
   public function index($slug = NULL): void {
 
-    $dataView = $this->model('Pageviews_model')->getDataViewBySlug($slug);
+    $dataView = $this->model('Views_model')->getDataViewBySlug($slug);
     
     // jika halaman tidak ditemukan
     if(is_bool($dataView)) {

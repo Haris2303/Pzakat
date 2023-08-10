@@ -112,13 +112,13 @@ $(document).ready(function () {
 
         // popup confirmation
         Swal.fire({
-            title: 'Anda ingin hapus data?',
-            text: "Klik hapus untuk menghapus data tersebut!",
+            title: 'Anda ingin logout?',
+            text: "Klik logout untuk keluar dari akun!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Hapus'
+            confirmButtonText: 'Logout'
         }).then((result) => {
             if (result.isConfirmed) {
                 // Arahkan pengguna ke URL penghapusan data

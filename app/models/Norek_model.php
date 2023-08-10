@@ -51,9 +51,9 @@ class Norek_model
      * @param string $jenis_program Jenis program yang digunakan sebagai kondisi.
      * @return array Semua data dari tabel sesuai dengan jenis program yang diberikan.
      */
-    public function getAllDataNorekByProgram($jenis_program)
+    public function getAllDataNorekByProgram(string $jenis_program): array
     {
-        $this->baseModel->selectData(null, null, [], ["jenis_program =", $jenis_program]);
+        $this->baseModel->selectData(null, null, [], ["jenis_program =" => $jenis_program]);
         return $this->baseModel->fetchAll();
     }
 
@@ -63,7 +63,7 @@ class Norek_model
      * @param int $id ID norek yang digunakan sebagai kondisi.
      * @return array|null Data norek dari tabel sesuai dengan ID yang diberikan, atau null jika tidak ditemukan.
      */
-    public function getDataNorekById($id)
+    public function getDataNorekById(int $id): array
     {
         $this->baseModel->selectData(null, null, [], ["id_norek =" => $id]);
         return $this->baseModel->fetch();

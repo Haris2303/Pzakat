@@ -6,15 +6,15 @@ class Web extends Controller {
     $data = [
       "judul" => "Home",
       "donaturTerdaftar" => $this->model('Pembayaran_model')->getDonaturTerdaftar(),
-      "dataBerita"  => $this->model('Pageviews_model')->getAllDataBeritaLimit(3),
-      "dataArtikel" => $this->model('Pageviews_model')->getAllDataArtikelLimit(4),
+      "dataBerita"  => $this->model('Views_model')->getAllDataBeritaLimit(3),
+      "dataArtikel" => $this->model('Views_model')->getAllDataArtikelLimit(4),
       "dataBanner" => $this->model('Banner_model')->getAllDataBanner(),
       "programNameAktif" => $this->model('Kategoriprogram_model')->getAllKategoriProgram('aktif'),
       "dataZakat" => $this->model('Program_model')->getDataProgramZakatLimit(1),
       "jumlahProgram" => count($this->model('Program_model')->getAllDataProgramAktifTunai()),
       "danaTerkumpul" => $this->model('Pembayaran_model')->getDataPemasukkanHarian(),
       "src_video" => $this->model('Video_model')->getData()['link'],
-      "laporan" => $this->model('Laporantahunan_model')->getDataLimit(3)
+      "laporan" => $this->model('Laporan_model')->getDataLimit(3)
     ];
     $this->view('template/header', $data);
     $this->view('web/index', $data);
@@ -35,8 +35,8 @@ class Web extends Controller {
     $replaceKey = str_replace('-', ' ', $keyword);
     $data = [
       "program" => $this->model('Program_model')->getDataProgramAktifByKeyword($replaceKey),
-      "berita" => $this->model('Pageviews_model')->getDataBeritaByKeyword($replaceKey),
-      "artikel" => $this->model('Pageviews_model')->getDataArtikelByKeyword($replaceKey)
+      "berita" => $this->model('Views_model')->getDataBeritaByKeyword($replaceKey),
+      "artikel" => $this->model('Views_model')->getDataArtikelByKeyword($replaceKey)
     ];
     $this->view('template/search', $data);
   }

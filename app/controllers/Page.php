@@ -7,12 +7,9 @@ class Page extends Controller {
   }
 
   public function news(int $page = 1) {
-    $data = $this->model('Pageviews_model')->getAllDataBerita();
+    $data = $this->model('Views_model')->getAllDataBerita();
     $pagination = new Pagination('tb_views', $data, 10, $page);
-    $pager = $pagination->setPager(function() {
-      $where = "WHERE jenis_views = 'Berita' ORDER BY id_views DESC";
-      return $where;
-    });
+    $pager = $pagination->setPager(["id_views" => "DESC"], ["jenis_views =" => "Berita"]);
     $data = [
       "judul" => "Berita",
       "dataBerita" => $pager
@@ -23,12 +20,9 @@ class Page extends Controller {
   }
 
   public function artikel(int $page = 1): void {
-    $data = $this->model('Pageviews_model')->getAllDataArtikel();
+    $data = $this->model('Views_model')->getAllDataArtikel();
     $pagination = new Pagination('tb_views', $data, 10, $page);
-    $pager = $pagination->setPager(function() { 
-      $where = "WHERE jenis_views = 'Artikel' AND slug NOT LIKE '%Pilar%' ORDER BY id_views DESC";
-      return $where;
-    });
+    $pager = $pagination->setPager(["id_views" => "DESC"], ["logic" => "AND", "jenis_views =" => "Artikel", "slug NOT LIKE" => "%pilar%"]);
     $data = [
       "judul" => "Artikel",
       "dataArtikel" => $pager

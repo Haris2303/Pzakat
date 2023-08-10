@@ -1,30 +1,28 @@
 <?php
 
-class Program_model {
+class Program_model
+{
 
-    private $db;
-    private $table = 'tb_program';
-    private $baseModel;
-    private $tb_kategori = 'tb_kategoriprogram';
+    /**
+     * Atribut-atribut yang digunakan dalam kelas ProgramModel.
+     */
+    private $table = 'tb_program'; // Nama tabel basis data yang digunakan.
+    private $baseModel; // Objek BaseModel untuk operasi basis data.
     private $view = [
-        "allZakat" => "vwAllDataZakat",
-        "allInfaq" => "vwAllDataInfaq",
-        "allQurban" => "vwAllDataQurban",
-        "allDonasi" => "vwAllDataDonasi",
-        "allRamadhan" => "vwAllDataRamadhan",
-        "allDataProgramBarang" => "vwAllProgramBarangAktif",
-        "allDataProgramAktif" => "vwAllDataProgramAktif",
-        "allDataProgramAktifTunai" => "vwAllProgramAktifTunai",
-        "allDataProgramHaveMoney"   => "vwAllProgramHaveMoney",
-        "sumProgram"    => "vwSumProgram",
-        "sumZakat" => "vwSumProgramZakat",
-        "sumInfaq" => "vwSumProgramInfaq",
-        "sumQurban" => "vwSumProgramQurban",
+        "allZakat" => "vwAllDataZakat", // Nama tampilan untuk data Zakat.
+        "allDataProgramBarang" => "vwAllProgramBarangAktif", // Nama tampilan untuk data program barang aktif.
+        "allDataProgramAktif" => "vwAllDataProgramAktif", // Nama tampilan untuk semua data program aktif.
+        "allDataProgramAktifTunai" => "vwAllProgramAktifTunai", // Nama tampilan untuk semua data program aktif dengan jenis pembayaran tunai.
+        "allDataProgramHaveMoney" => "vwAllProgramHaveMoney", // Nama tampilan untuk semua data program yang memiliki dana terkumpul.
+        "sumProgram" => "vwSumProgram", // Nama tampilan untuk data total dana program.
     ];
 
+    /**
+     * Konstruktor kelas ProgramModel.
+     * Inisialisasi objek BaseModel dengan menggunakan tabel yang ditentukan.
+     */
     public function __construct()
     {
-        $this->db = new Database();
         $this->baseModel = new BaseModel($this->table);
     }
 
@@ -35,224 +33,295 @@ class Program_model {
      */
 
     /**
-     * @param array $kondisi value `["field =" => "value"]` atau `["logic" => "AND", "field = " => "value", "field2 = " => "value2"]`
+     * Mengambil semua data dari basis data sesuai dengan kondisi yang diberikan.
+     *
+     * @param array $kondisi Kondisi untuk pengambilan data dalam bentuk array asosiatif.
+     *                       Contoh: ["field =" => "value"] atau ["logic" => "AND", "field = " => "value", "field2 = " => "value2"].
+     * @return array Sebuah array yang berisi data yang diambil dari basis data sesuai dengan kondisi yang diberikan.
      */
-    public function getAllData(array $kondisi): array {
+    public function getAllData(array $kondisi): array
+    {
+        // Melakukan operasi SELECT data dari basis data dengan kondisi yang diberikan.
+        // Menggunakan view 'allDataProgramAktif', mengurutkan berdasarkan datetime descending.
         $this->baseModel->selectData($this->view['allDataProgramAktif'], null, ["datetime" => "DESC"], $kondisi);
+
+        // Mengambil dan mengembalikan data yang diambil dari basis data.
         return $this->baseModel->fetchAll();
     }
 
     /**
-     * 
-     * @method Sum (Menjumlahkan Total dana dari program)
-     * 
-     * @param NULL
-     * 
+     * Menghitung jumlah total dana dari program tertentu atau seluruh program.
+     *
+     * @method Sum
+     * @param string $jenis_program Jenis program yang akan dihitung total dana. Jika NULL, menghitung total dari seluruh program.
+     * @return string Jumlah total dana dari program dalam format dengan pemisah ribuan.
      */
-    public function getSumProgram(string $jenis_program = NULL): string  
+    public function getSumProgram(string $jenis_program = NULL): string
     {
+        // Mendefinisikan view yang akan digunakan untuk pengambilan data.
         $view = $this->view['sumProgram'];
 
-        $q1 = "SELECT * FROM $view WHERE jenis_program = :jenis_program";
-        $q2 = "SELECT * FROM $view";
-        
-        $query = (is_null($jenis_program)) ? $q2 : $q1;
-        $this->db->query($query);
+        // Memilih data dari view berdasarkan jenis_program (jika disediakan).
+        // Jika jenis_program NULL, memilih semua data.
+        (is_null($jenis_program)) ? $this->baseModel->selectData($view) : $this->baseModel->selectData($view, null, [], ["jenis_program =" => $jenis_program]);
 
-        if(!is_null($jenis_program)) $this->db->bind('jenis_program', ucwords($jenis_program));
-
-        return number_format($this->db->single()['total_dana'], 0, ',', '.');
+        // Mengambil data hasil query untuk total_dana dan memformatnya dengan pemisah ribuan.
+        return number_format($this->baseModel->fetch()['total_dana'], 0, ',', '.');
     }
 
     /**
-     * 
+     * Mengambil semua data program yang memiliki dana.
+     *
      * @method GetAllData
-     * 
      * @param NULL
-     * 
+     * @return array Sebuah array yang berisi data program yang memiliki dana.
      */
-
     public function getAllDataProgramHaveMoney(): array
     {
+        // Mendefinisikan view yang akan digunakan untuk pengambilan data.
         $view = $this->view['allDataProgramHaveMoney'];
-        $query = "SELECT * FROM $view";
-        $this->db->query($query);
-        return $this->db->resultSet();
-    }
 
-    public function getAllDataProgramTunai(string $jenis_program): array
-    {
-        $view = $this->view['allDataProgramAktif'];
-        $query = "SELECT * FROM $view WHERE jenis_program = :jenis_program AND jenis_pembayaran <> 'barang' ORDER BY id_program DESC";
-        $this->db->query($query);
-        $this->db->bind('jenis_program', ucwords($jenis_program));
-        return $this->db->resultSet();
-    }
+        // Memilih semua data program yang memiliki dana dari view.
+        $this->baseModel->selectData($view);
 
-    public function getAllDataProgramAktif(): array
-    {
-        $view = $this->view['allDataProgramAktif'];
-        $query = "SELECT * FROM $view ORDER BY id_program DESC";
-        $this->db->query($query);
-        return $this->db->resultSet();
-    }
-
-    public function getAllDataProgramAktifTunai(): array
-    {
-        $view = $this->view['allDataProgramAktifTunai'];
-        $query = "SELECT * FROM $view ORDER BY id_program DESC";
-        $this->db->query($query);
-        return $this->db->resultSet();
-    }
-
-    public function getAllDataProgramBarang(string $program = NULL): array
-    {
-        $view = $this->view['allDataProgramBarang'];
-        
-        // if $program is NULL
-        if(is_null($program)) $query = "SELECT * FROM $view";
-        else $query = "SELECT * FROM $view WHERE jenis_program = :program";
-
-        // query
-        $this->db->query($query);
-
-        // binding if not null
-        if(!is_null($program)) $this->db->bind('program', ucwords($program));
-
-        return $this->db->resultSet();
+        // Mengambil dan mengembalikan data yang diambil dari basis data.
+        return $this->baseModel->fetchAll();
     }
 
     /**
-     * 
-     * @method Limit
-     * 
-     * @param Limit|JenisProgram
-     * 
+     * Mengambil semua data program aktif dengan jenis pembayaran tunai.
+     *
+     * @param string $jenis_program Jenis program yang akan diambil datanya.
+     * @return array Sebuah array yang berisi data program aktif dengan jenis pembayaran tunai.
+     */
+    public function getAllDataProgramTunai(string $jenis_program): array
+    {
+        // Mendefinisikan view yang akan digunakan untuk pengambilan data.
+        $view = $this->view['allDataProgramAktif'];
+
+        // Memilih data program aktif dengan jenis pembayaran tunai dari view.
+        $this->baseModel->selectData($view, null, ["id_program" => "DESC"], ["logic" => "AND", "jenis_program =" => ucwords($jenis_program), "jenis_pembayaran <>" => "barang"]);
+
+        // Mengambil dan mengembalikan data yang diambil dari basis data.
+        return $this->baseModel->fetchAll();
+    }
+
+    /**
+     * Mengambil semua data program yang aktif.
+     *
+     * @return array Sebuah array yang berisi data program aktif.
+     */
+    public function getAllDataProgramAktif(): array
+    {
+        // Mendefinisikan view yang akan digunakan untuk pengambilan data.
+        $view = $this->view['allDataProgramAktif'];
+
+        // Memilih semua data program yang aktif dari view.
+        $this->baseModel->selectData($view, null, ["id_program" => "DESC"]);
+
+        // Mengambil dan mengembalikan data yang diambil dari basis data.
+        return $this->baseModel->fetchAll();
+    }
+
+    /**
+     * Mengambil semua data program aktif dengan jenis pembayaran tunai.
+     *
+     * @return array Sebuah array yang berisi data program aktif dengan jenis pembayaran tunai.
+     */
+    public function getAllDataProgramAktifTunai(): array
+    {
+        // Mendefinisikan view yang akan digunakan untuk pengambilan data.
+        $view = $this->view['allDataProgramAktifTunai'];
+
+        // Memilih semua data program aktif dengan jenis pembayaran tunai dari view.
+        $this->baseModel->selectData($view, null, ["id_program" => "DESC"]);
+
+        // Mengambil dan mengembalikan data yang diambil dari basis data.
+        return $this->baseModel->fetchAll();
+    }
+
+    /**
+     * Mengambil semua data program dengan jenis pembayaran berupa barang.
+     *
+     * @param string $program Jenis program yang akan diambil datanya.
+     * @return array Sebuah array yang berisi data program dengan jenis pembayaran barang.
+     */
+    public function getAllDataProgramBarang(string $program = NULL): array
+    {
+        // Mendefinisikan view yang akan digunakan untuk pengambilan data.
+        $view = $this->view['allDataProgramBarang'];
+
+        // Jika $program adalah NULL
+        if (is_null($program)) {
+            // Memilih semua data program dengan jenis pembayaran barang dari view.
+            $this->baseModel->selectData($view);
+        } else {
+            // Memilih data program dengan jenis pembayaran barang sesuai jenis program yang diberikan.
+            $this->baseModel->selectData($view, null, [], ["jenis_program =" => ucwords($program)]);
+        }
+
+        // Mengambil dan mengembalikan data yang diambil dari basis data.
+        return $this->baseModel->fetchAll();
+    }
+
+    /**
+     * Mengambil data program aktif dengan jenis program tertentu sebanyak $limit data.
+     *
+     * @param int $limit Jumlah data yang akan diambil.
+     * @param string $jenisprogram Jenis program yang akan diambil datanya.
+     * @return array Sebuah array yang berisi data program aktif dengan jenis program tertentu dan batasan jumlah data.
      */
     public function getDataProgramLimitByJenisProgram($limit, $jenisprogram): array
     {
+        // Mendefinisikan view yang akan digunakan untuk pengambilan data.
         $view = $this->view['allDataProgramAktif'];
-        $query = "SELECT * FROM $view WHERE jenis_program = :jenis_program AND jenis_pembayaran <> 'barang' ORDER BY id_program DESC LIMIT $limit";
-        $this->db->query($query);
-        $this->db->bind('jenis_program', $jenisprogram);
-        return $this->db->resultSet();
-    }
 
-    public function getDataProgramZakatLimit($limit): array 
-    {
-        $view = $this->view['allZakat'];
-        $query = "SELECT * FROM $view ORDER BY id_program DESC LIMIT $limit";
-        $this->db->query($query);
-        return $this->db->resultSet();
-    }
+        // Memilih data program aktif dengan jenis program tertentu dari view dengan batasan jumlah data.
+        $this->baseModel->selectData($view, null, ["id_program" => "DESC"], ["logic" => "AND", "jenis_program =" => $jenisprogram, "jenis_pembayaran <>" => "barang"], "LIMIT " . $limit);
 
+        // Mengambil dan mengembalikan data yang diambil dari basis data.
+        return $this->baseModel->fetchAll();
+    }
 
     /**
-     * 
-     * @method Get Data By
-     * @param Slug
-     * 
-    */
+     * Mengambil data program Zakat sebanyak $limit data.
+     *
+     * @param int $limit Jumlah data yang akan diambil.
+     * @return array Sebuah array yang berisi data program Zakat dengan batasan jumlah data.
+     */
+    public function getDataProgramZakatLimit($limit): array
+    {
+        // Mendefinisikan view yang akan digunakan untuk pengambilan data.
+        $view = $this->view['allZakat'];
 
+        // Memilih data program Zakat dari view dengan batasan jumlah data.
+        $this->baseModel->selectData($view, null, ["id_program" => "DESC"], null, "LIMIT " . $limit);
+
+        // Mengambil dan mengembalikan data yang diambil dari basis data.
+        return $this->baseModel->fetchAll();
+    }
+
+    /**
+     * Mengambil semua data program yang memiliki dana berdasarkan ID program.
+     *
+     * @param int $id ID program yang akan digunakan sebagai filter.
+     * @return array Sebuah array yang berisi data program yang memiliki dana berdasarkan ID program.
+     */
     public function getAllDataProgramHaveMoneyById($id): array
     {
+        // Mendefinisikan view yang akan digunakan untuk pengambilan data.
         $view = $this->view['allDataProgramHaveMoney'];
-        $query = "SELECT * FROM $view WHERE id_program = :id_program";
-        $this->db->query($query);
-        $this->db->bind('id_program', $id);
-        return $this->db->resultSet();
-    }
 
-    public function getDataProgramAktifBySlug(string $slug): array|bool
-    {
-        $view = $this->view['allDataProgramAktif'];
-        $query = "SELECT * FROM $view WHERE slug = :slug";
-        $this->db->query($query);
-        $this->db->bind('slug', $slug);
-        return $this->db->single();
-    }
+        // Memilih semua data program yang memiliki dana berdasarkan ID program dari view.
+        $this->baseModel->selectData($view, null, [], ["id_program =" => $id]);
 
-    public function getDataProgramAktifByKeyword(string $keyword): array
-    {
-        $view = $this->view['allDataProgramAktifTunai'];
-        $query = "SELECT * FROM $view WHERE nama_program LIKE :keyword OR slug LIKE :keyword OR jenis_program LIKE :keyword ORDER BY id_program DESC LIMIT 3";
-        $this->db->query($query);
-        $this->db->bind('keyword', '%'.$keyword.'%');
-        return $this->db->resultSet();
+        // Mengambil dan mengembalikan data yang diambil dari basis data.
+        return $this->baseModel->fetchAll();
     }
 
     /**
-     * 
-     * @method CRUD
-     * 
-     * @param POST|FILES
-     * 
+     * Mengambil data program aktif berdasarkan slug.
+     *
+     * @param string $slug Slug program yang akan digunakan sebagai filter.
+     * @return array|bool Sebuah array yang berisi data program aktif berdasarkan slug, atau false jika tidak ditemukan.
      */
+    public function getDataProgramAktifBySlug(string $slug): array|bool
+    {
+        // Mendefinisikan view yang akan digunakan untuk pengambilan data.
+        $view = $this->view['allDataProgramAktif'];
 
-    public function tambahDataProgram(string $jenis_program, array $dataPost, array $dataFiles = NULL): int|string {
-        // initial variabel
-        $namaprogram        = ucwords(htmlspecialchars($dataPost['nama-program']));
-        $jenis_pembayaran   = $dataPost['jenis-pembayaran'];
-        $deskripsi          = ucwords(htmlspecialchars($dataPost['deskripsi']));
-        $gambar             = NULL;
-        $content            = NULL;
-        $nominal_bayar      = NULL;
+        // Memilih data program aktif berdasarkan slug dari view.
+        $this->baseModel->selectData($view, null, [], ["slug =" => $slug]);
 
-        // if exist data post content
-        if(isset($dataPost['content'])) {
+        // Mengambil data yang diambil dari basis data menggunakan fetch.
+        $data = $this->baseModel->fetch();
+
+        // Mengembalikan data jika ditemukan, atau false jika tidak ditemukan.
+        return ($data) ? $data : false;
+    }
+
+    /**
+     * Mengambil data program aktif (tunai) berdasarkan kata kunci.
+     *
+     * @param string $keyword Kata kunci yang akan digunakan sebagai filter.
+     * @return array Sebuah array yang berisi data program aktif (tunai) berdasarkan kata kunci.
+     */
+    public function getDataProgramAktifByKeyword(string $keyword): array
+    {
+        // Mendefinisikan view yang akan digunakan untuk pengambilan data.
+        $view = $this->view['allDataProgramAktifTunai'];
+
+        // Memilih data program aktif (tunai) berdasarkan kata kunci dari view.
+        $this->baseModel->selectData($view, null, ["id_program" => "DESC"], ["logic" => "OR", "nama_program LIKE" => "%$keyword%", "slug LIKE" => "%$keyword%", "jenis_program LIKE" => "%$keyword%"], "LIMIT 3");
+
+        // Mengambil dan mengembalikan data yang diambil dari basis data.
+        return $this->baseModel->fetchAll();
+    }
+
+    /**
+     * Melakukan operasi CRUD untuk menambah data program.
+     *
+     * @param string $jenis_program Jenis program yang akan ditambahkan.
+     * @param array $dataPost Data yang dikirimkan melalui POST request.
+     * @param array|null $dataFiles Data gambar yang dikirimkan melalui FILES request (opsional).
+     * @return int|string Jumlah baris yang berhasil diubah atau pesan error jika terjadi masalah.
+     */
+    public function tambahDataProgram(string $jenis_program, array $dataPost, array $dataFiles = NULL): int|string
+    {
+        // Inisialisasi variabel dengan nilai awal.
+        $namaprogram = ucwords(htmlspecialchars($dataPost['nama-program']));
+        $jenis_pembayaran = $dataPost['jenis-pembayaran'];
+        $deskripsi = ucwords(htmlspecialchars($dataPost['deskripsi']));
+        $gambar = NULL;
+        $content = NULL;
+        $nominal_bayar = NULL;
+        $uuid = Utility::generateUUID();
+
+        // Jika terdapat data content dalam data post, asign ke variabel content.
+        if (isset($dataPost['content'])) {
             $content = $dataPost['content'];
         }
-        
-        // if exist data post nominal_bayar
-        if(isset($dataPost['nominal-bayar'])) {
+
+        // Jika terdapat data nominal-bayar dalam data post, assign ke variabel nominal_bayar.
+        if (isset($dataPost['nominal-bayar'])) {
             $nominal_bayar = str_replace('.', '', $dataPost['nominal-bayar']);
         }
 
-        // create slug
+        // Membuat slug dari nama program.
         $slug = strtolower(join('', explode(' ', $namaprogram)));
 
-        // if datafiles is null
-        if($dataFiles !== NULL) {
+        // Jika dataFiles bukan NULL, upload gambar dan asign ke variabel gambar.
+        if ($dataFiles !== NULL) {
             $gambar = Utility::uploadImage($dataFiles, 'program');
         }
 
-        // check slug
-        $cek = "SELECT slug FROM $this->table WHERE slug = :slug";
-        $this->db->query($cek);
-        $this->db->bind('slug', $slug);
-        if(count($this->db->resultSet()) > 0) return 'Nama Zakat Telah Tersedia';
+        // Mengecek apakah slug telah digunakan sebelumnya.
+        if ($this->baseModel->isData(["slug" => $slug])) {
+            return 'Nama Program Telah Tersedia';
+        }
 
-        // check image
-        if((!is_string($gambar)) && ($gambar !== NULL)) return 'Gagal Upload Gambar! Mohon untuk memeriksa <strong>format gambar</strong> dan ukuran gambar kurang dari <strong>2mb</strong>';
+        // Mengecek apakah gambar berhasil diupload.
+        if ((!is_string($gambar)) && ($gambar !== NULL)) {
+            return 'Gagal Upload Gambar! Mohon untuk memeriksa <strong>format gambar</strong> dan ukuran gambar kurang dari <strong>2mb</strong>';
+        }
 
-         // insert data
-         $query = "INSERT INTO $this->table VALUES(NULL, 
-                                            :nama_program, 
-                                            :slug, 
-                                            :jenis_program, 
-                                            :jenis_pembayaran, 
-                                            :deskripsi_program, 
-                                            :nominal_bayar,
-                                            :total_dana, 
-                                            :jumlah_donatur, 
-                                            :gambar, 
-                                            :content,
-                                            NOW())";
+        // Menyiapkan data untuk operasi insert.
+        $dataInsert = [
+            "uuid" => $uuid,
+            "nama_program" => ucwords($namaprogram),
+            "slug" => $slug,
+            "jenis_program" => $jenis_program,
+            "jenis_pembayaran" => $jenis_pembayaran,
+            "deskripsi_program" => ucwords($deskripsi),
+            "nominal_bayar" => $nominal_bayar,
+            "total_dana" => 0,
+            "jumlah_donatur" => 0,
+            "gambar" => $gambar,
+            "content" => $content,
+            "datetime" => date('Y-m-d H:i:s')
+        ];
 
-        $this->db->query($query);
-        $this->db->bind('nama_program', ucwords($namaprogram));
-        $this->db->bind('slug', $slug);
-        $this->db->bind('jenis_program', $jenis_program);
-        $this->db->bind('jenis_pembayaran', $jenis_pembayaran);
-        $this->db->bind('deskripsi_program', ucwords($deskripsi));
-        $this->db->bind('nominal_bayar', $nominal_bayar);
-        $this->db->bind('total_dana', 0);
-        $this->db->bind('jumlah_donatur', 0);
-        $this->db->bind('gambar', $gambar);
-        $this->db->bind('content', $content);
-        $this->db->execute();
-
-        return $this->db->rowCount();
+        // Melakukan operasi insert data dan mengembalikan hasilnya.
+        return $this->baseModel->insertData($dataInsert);
     }
-
 }

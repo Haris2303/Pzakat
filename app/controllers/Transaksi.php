@@ -27,7 +27,7 @@ class Transaksi extends Controller
 
         // get data program by slug
         $dataProgram = $this->model('Program_model')->getDataProgramAktifBySlug($slug);
-        
+
         // jika halaman tidak ditemukan
         if(is_bool($dataProgram)) {
             $this->view('error/404');

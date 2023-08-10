@@ -8,6 +8,7 @@ class User_dashboard extends Controller {
     protected $data_sukses = null;
     protected $data_failed = null;
     protected $limit = 5;
+    protected $orderby = ["tanggal_pembayaran" => "DESC"];
 
     public function __construct()
     {
@@ -44,7 +45,7 @@ class User_dashboard extends Controller {
 
         $pagination = new Pagination('vwAllPembayaran', $this->data_pending, $this->limit, $page);
 
-        $paginate = $pagination->setPager(["logic" => "AND", "status_pembayaran =" => "pending", "id_user =" => $this->id_user]);
+        $paginate = $pagination->setPager($this->orderby, ["logic" => "AND", "status_pembayaran =" => "pending", "id_user =" => $this->id_user]);
         
         $data = [
             'judul' => 'Menunggu Pembayaran',
@@ -61,7 +62,7 @@ class User_dashboard extends Controller {
     public function donasi_konfirmasi($page = 1) {
         $pagination = new Pagination('vwAllPembayaran', $this->data_konfirmasi, $this->limit, $page);
 
-        $paginate = $pagination->setPager(["logic" => "AND", "status_pembayaran =" => "konfirmasi", "id_user =" => $this->id_user]);
+        $paginate = $pagination->setPager($this->orderby, ["logic" => "AND", "status_pembayaran =" => "konfirmasi", "id_user =" => $this->id_user]);
 
         $data = [
             'judul' => 'Konfirmasi Donasi',
@@ -78,7 +79,7 @@ class User_dashboard extends Controller {
     public function donasi_gagal($page = 1) {
         $pagination = new Pagination('vwAllPembayaran', $this->data_failed, $this->limit, $page);
 
-        $paginate = $pagination->setPager(["logic" => "AND", "status_pembayaran =" => "failed", "id_user =" => $this->id_user]);
+        $paginate = $pagination->setPager($this->orderby, ["logic" => "AND", "status_pembayaran =" => "failed", "id_user =" => $this->id_user]);
 
         $data = [
             'judul' => 'Donasi Gagal',
@@ -95,7 +96,7 @@ class User_dashboard extends Controller {
     public function donasi_sukses($page = 1) {
         $pagination = new Pagination('vwAllPembayaran', $this->data_sukses, $this->limit, $page);
 
-        $paginate = $pagination->setPager(["logic" => "AND", "status_pembayaran =" => "success", "id_user =" => $this->id_user]);
+        $paginate = $pagination->setPager($this->orderby, ["logic" => "AND", "status_pembayaran =" => "success", "id_user =" => $this->id_user]);
 
         $data = [
             'judul' => 'Donasi Sukses',

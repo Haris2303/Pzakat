@@ -41,6 +41,7 @@ class BaseModel
      * @param string|null $select Field yang ingin ditampilkan. Default null untuk menampilkan semua field.
      * @param array $orderBy Pengurutan data. Default "[]" jika tidak diberikan.
      * @param array|null $kondisi Kondisi WHERE dalam bentuk array (contoh: ["kolom =" => "nilai"]). Default null jika tidak ada kondisi.
+     * @param string $limit Membatasi data yang tampil default string kosong `""`, berikut contoh parameter yang diberikan `"LIMIT 5"`
      * @return void
      * 
      * @continue Lanjutkan dengan fungsi berikutnya seperti "fetchAll" atau "fetch".

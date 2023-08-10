@@ -27,7 +27,7 @@ class Pagination
      * @param array|null $where Klausa WHERE opsional
      * 
      */
-    public function setPager(array $kondisi): array
+    public function setPager(array $orderby = [], array $kondisi): array
     {
         $limit = self::$limit;
         $page = self::$page;
@@ -37,7 +37,7 @@ class Pagination
         $offset = ($page - 1) * $perPage;
 
         $model = new BaseModel($view);
-        $model->selectData(null, null, ["tanggal_pembayaran" => "DESC"], $kondisi);
+        $model->selectData(null, null, $orderby, $kondisi);
         $data = $model->fetchAll();
 
         $paginatedData = array_slice($data, $offset, $perPage);

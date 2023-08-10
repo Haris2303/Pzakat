@@ -3,24 +3,27 @@
 class Pengeluaran_model {
 
     private $table = "tb_pengeluaran";
-    private $view = [
-        "allDataPengeluaran"        => "vwAllDataPengeluaran",
-        "allDataPengeluaranTunai"   => "vwAllDataPengeluaranTunai",
-        "allDataPengeluaranBarang"  => "vwAllDataPengeluaranBarang"
-    ];
+    private $view = 'vwAllDataPengeluaran';
+    // private $view = [
+    //     "allDataPengeluaran"        => "vwAllDataPengeluaran",
+    //     "allDataPengeluaranTunai"   => "vwAllDataPengeluaranTunai",
+    //     "allDataPengeluaranBarang"  => "vwAllDataPengeluaranBarang"
+    // ];
+    private $baseModel;
+    private $modelView;
     private $db;
 
     public function __construct()
     {
+        $this->baseModel = new BaseModel($this->table);
+        $this->modelView = new BaseModel($this->view);
         $this->db = new Database();
     }
 
     public function getAllDataPengeluaran(): array
     {
-        $view = $this->view['allDataPengeluaran'];
-        $query = "SELECT * FROM $view";
-        $this->db->query($query);
-        return $this->db->resultSet();
+        $this->modelView->selectData();
+        return $this->modelView->fetchAll();
     }
 
     public function getAllDataPengeluaranTunai(): array
