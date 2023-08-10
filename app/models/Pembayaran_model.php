@@ -55,18 +55,28 @@ class Pembayaran_model
      */
 
     /**
-     * Mengambil data pembayaran berdasarkan status pembayaran tertentu.
+     * Mengambil data pembayaran berdasarkan status pembayaran tertentu atau semua data jika status_pembayaran tidak ditentukan.
      *
      * @param string|null $status_pembayaran Status pembayaran yang ingin diambil datanya. Default: null.
-     * @return array Array yang berisi data pembayaran yang sesuai dengan status pembayaran.
+     * @param array $orderby Urutan pengurutan data. Default: array().
+     * @param array|null $kondisi Kondisi tambahan untuk seleksi data. Default: null.
+     * @return array Array yang berisi data pembayaran yang sesuai dengan status pembayaran atau semua data pembayaran.
      */
-    public function getAllDataPembayaran(string $status_pembayaran = null): array
+    public function getAllDataPembayaran(string $status_pembayaran = null, array $orderby = [], array $kondisi = null): array
     {
         $vw = $this->view['dataAll']; // Nama tampilan data pembayaran.
 
-        // Jika status_pembayaran tidak ditentukan, ambil semua data pembayaran.
-        // Jika status_pembayaran ditentukan, ambil data pembayaran dengan status tertentu.
-        (is_null($status_pembayaran)) ? $this->baseModel->selectData($vw) : $this->baseModel->selectData($vw, null, ["tanggal_pembayaran" => "DESC"], ["status_pembayaran =" => $status_pembayaran]);
+        
+        if (is_null($status_pembayaran)) {
+            // Jika status_pembayaran tidak ditentukan, ambil semua data pembayaran.
+            $this->baseModel->selectData($vw);
+        } else if(!is_null($status_pembayaran)) {
+            // Jika status_pembayaran ditentukan, ambil data pembayaran dengan status tertentu.
+            $this->baseModel->selectData($vw, null, [], ["status_pembayaran =" => $status_pembayaran]);
+        } else {
+            // Jika status_pembayaran ada dan parameter lain
+            $this->baseModel->selectData($vw, null, $orderby, $kondisi);
+        }
 
         // Mengembalikan array berisi data pembayaran yang sesuai.
         return $this->baseModel->fetchAll();
@@ -88,20 +98,6 @@ class Pembayaran_model
         // Mengembalikan array yang berisi data pembayaran sesuai dengan ID donatur, atau false jika tidak ditemukan.
         return $this->baseModel->fetch();
     }
-
-    /** 
-     * @param string{status_pembayaran} value default null | pending|konfirmasi|failed|success
-     * @param string{where} value default null | field
-     * @param string{value} value default null | value pada field
-     */
-    // public function getDataPembayaran(string $status_pembayaran = null, string $where = null, string $value = null): array|bool {
-    //     $view = $this->view['dataAll'];
-    //     $query = "SELECT * FROM $view";
-    //     if(!is_null($status_pembayaran) && !is_null($where) || !is_null($value)) $query .= " WHERE (status_pembayaran = '$status_pembayaran' AND $where = '$value') ORDER BY tanggal_pembayaran DESC";
-    //     elseif(!is_null($status_pembayaran)) $query .= " WHERE status_pembayaran = '$status_pembayaran' ORDER BY tanggal_pembayaran DESC";
-    //     $this->db->query($query);
-    //     return $this->db->resultSet();
-    // }
 
     /**
      * Mengambil jumlah donatur terdaftar yang telah berhasil berdonasi.

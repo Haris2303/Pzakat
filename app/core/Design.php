@@ -67,7 +67,7 @@ class Design {
     public static function emailMessageKonfirmasi(int $id):string {
 
         $controller = new Controller();
-        $dataKonfirmasi = $controller->model('Kelolapembayaran_model')->getDataPembayaranById($id);
+        $dataKonfirmasi = $controller->model('Pembayaran_model')->getDataPembayaranById($id);
 
         // assignment variabel
         $nomor_pembayaran   = $dataKonfirmasi['nomor_pembayaran'];
@@ -183,7 +183,7 @@ class Design {
     public static function emailMessageBatal(int $id):string {
 
         $controller = new Controller();
-        $dataKonfirmasi = $controller->model('Kelolapembayaran_model')->getDataPembayaranById($id);
+        $dataKonfirmasi = $controller->model('Pembayaran_model')->getDataPembayaranById($id);
 
         // assignment variabel
         $program            = $dataKonfirmasi['nama_program'];
@@ -202,7 +202,7 @@ class Design {
     public static function emailMessageSummary(int $id): string {
 
         $controller = new Controller();
-        $data = $controller->model('Kelolapembayaran_model')->getDataPembayaran('pending', 'id_donatur', $id)[0];
+        $data = $controller->model('Pembayaran_model')->getAllDataPembayaran('pending', [], ['id_donatur =' => $id])[0];
         
         $nama = ucwords($data['nama_donatur']);
         $kode = explode('_', $data['nomor_pembayaran'])[0];

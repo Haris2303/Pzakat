@@ -9,9 +9,9 @@ class Kelola_pembayaran extends Controller
       "judul" => "Kelola Data Pembayaran",
       "css" => VENDOR_TABLES_CSS,
       "script" => VENDOR_TABLES,
-      "dataPembayaran" => $this->model('Kelolapembayaran_model')->getAllDataPembayaran(),
-      "countKonfirmasi" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranKonfirmasi()),
-      "countPending" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranPending())
+      "dataPembayaran" => $this->model('Pembayaran_model')->getAllDataPembayaran(),
+      "countKonfirmasi" => count($this->model('Pembayaran_model')->getAllDataPembayaran('konfirmasi')),
+      "countPending" => count($this->model('Pembayaran_model')->getAllDataPembayaran('pending'))
     ];
 
     $this->view('dashboard/sidebar', $data);
@@ -24,7 +24,7 @@ class Kelola_pembayaran extends Controller
     $data = [
       "judul" => "Detail Pembayaran",
       "css" => VENDOR_TABLES_CSS,
-      "detail" => $this->model('Kelolapembayaran_model')->getDataPembayaranById($id)
+      "detail" => $this->model('Pembayaran_model')->getDataPembayaranById($id)
     ];
 
     // jika halaman tidak ditemukan
@@ -44,8 +44,8 @@ class Kelola_pembayaran extends Controller
       "judul" => "Pembayaran Pending",
       "css" => VENDOR_TABLES_CSS,
       "script" => VENDOR_TABLES,
-      "dataPending" => $this->model("Kelolapembayaran_model")->getDataPembayaran('pending'),
-      "countKonfirmasi" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranKonfirmasi()),
+      "dataPending" => $this->model("Pembayaran_model")->getAllDataPembayaran('pending'),
+      "countKonfirmasi" => count($this->model('Pembayaran_model')->getAllDataPembayaran('konfirmasi')),
     ];
 
     $this->view('dashboard/sidebar', $data);
@@ -59,8 +59,8 @@ class Kelola_pembayaran extends Controller
       "judul" => "Pembayaran Konfirmasi",
       "css" => VENDOR_TABLES_CSS,
       "script" => VENDOR_TABLES,
-      "dataKonfirmasi" => $this->model("Kelolapembayaran_model")->getAllDataPembayaranKonfirmasi(),
-      "countPending" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranPending())
+      "dataKonfirmasi" => $this->model("Pembayaran_model")->getAllDataPembayaran('konfirmasi'),
+      "countPending" => count($this->model('Pembayaran_model')->getAllDataPembayaran('pending'))
     ];
 
     $this->view('dashboard/sidebar', $data);
@@ -74,9 +74,9 @@ class Kelola_pembayaran extends Controller
       "judul" => "Pembayaran Berhasil",
       "css" => VENDOR_TABLES_CSS,
       "script" => VENDOR_TABLES,
-      "dataSukses" => $this->model("Kelolapembayaran_model")->getAllDataPembayaranSukses(),
-      "countKonfirmasi" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranKonfirmasi()),
-      "countPending" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranPending())
+      "dataSukses" => $this->model("Pembayaran_model")->getAllDataPembayaran('success'),
+      "countKonfirmasi" => count($this->model('Pembayaran_model')->getAllDataPembayaran('konfirmasi')),
+      "countPending" => count($this->model('Pembayaran_model')->getAllDataPembayaran('pending'))
     ];
 
     $this->view('dashboard/sidebar', $data);
@@ -90,9 +90,9 @@ class Kelola_pembayaran extends Controller
       "judul" => "Pembayaran Gagal",
       "css" => VENDOR_TABLES_CSS,
       "script" => VENDOR_TABLES,
-      "dataGagal" => $this->model("Kelolapembayaran_model")->getAllDataPembayaranGagal(),
-      "countKonfirmasi" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranKonfirmasi()),
-      "countPending" => count($this->model('Kelolapembayaran_model')->getAllDataPembayaranPending())
+      "dataGagal" => $this->model("Pembayaran_model")->getAllDataPembayaran('failed'),
+      "countKonfirmasi" => count($this->model('Pembayaran_model')->getAllDataPembayaran('konfirmasi')),
+      "countPending" => count($this->model('Pembayaran_model')->getAllDataPembayaran('pending'))
     ];
 
     $this->view('dashboard/sidebar', $data);
@@ -106,8 +106,8 @@ class Kelola_pembayaran extends Controller
       "judul" => "Kelola Pembayaran Barang",
       "css" => VENDOR_TABLES_CSS,
       "script" => VENDOR_TABLES,
-      "namaBarang" => $this->model('Kelolaprogram_model')->getAllDataProgramBarang(),
-      "dataBarang" => $this->model('Kelolapembayaran_model')->getAllDataPembayaranBarang()
+      "namaBarang" => $this->model('Program_model')->getAllDataProgramBarang(),
+      "dataBarang" => $this->model('Donasibarang_model')->getAllDataPembayaranBarang()
     ];
 
     $this->view('dashboard/sidebar', $data);
@@ -119,7 +119,7 @@ class Kelola_pembayaran extends Controller
   {
     $data = [
       "judul" => "Detail Barang",
-      "detail" => $this->model('Kelolapembayaran_model')->getDataPembayaranBarangById($id)
+      "detail" => $this->model('Donasibarang_model')->getDataPembayaranBarangById($id)
     ];
 
     // jika halaman tidak ditemukan
@@ -147,7 +147,7 @@ class Kelola_pembayaran extends Controller
     $id = $_POST['id_donatur'];
 
     // get data pembayaran by id
-    $dataKonfirmasi = $this->model('Kelolapembayaran_model')->getDataPembayaranById($id);
+    $dataKonfirmasi = $this->model('Pembayaran_model')->getDataPembayaranById($id);
 
     // initialisasi variabel on datakonfirmasi
     $slug             = $dataKonfirmasi['slug_program'];
@@ -164,7 +164,7 @@ class Kelola_pembayaran extends Controller
 
     // jika email terkirim
     if ($isEmail) {
-      $result = $this->model('Kelolapembayaran_model')->konfirmasiPembayaran($slug, $id, $username, $jumlah_dana, $nama_bank);
+      $result = $this->model('Pembayaran_model')->konfirmasiPembayaran($slug, $id, $username, $jumlah_dana, $nama_bank);
       if ($result > 0) {
         Flasher::setFlash('Pembayaran <strong>Berhasil</strong> Dikonfirmasi!', 'success');
         header('Location: ' . BASEURL . "/kelola_pembayaran/$location");
@@ -188,7 +188,7 @@ class Kelola_pembayaran extends Controller
     $id = $_POST['id_donatur'];
 
     // get data pembayaran by id
-    $dataKonfirmasi = $this->model('Kelolapembayaran_model')->getDataPembayaranById($id);
+    $dataKonfirmasi = $this->model('Pembayaran_model')->getDataPembayaranById($id);
 
     // initialisasi variabel on datakonfirmasi
     $username         = $_POST['username'];
@@ -202,7 +202,7 @@ class Kelola_pembayaran extends Controller
     // jika email terkirim
     if($isEmail) {
       // jalankan model
-      $result = $this->model('Kelolapembayaran_model')->batalkanPembayaran($id, $username);
+      $result = $this->model('Pembayaran_model')->batalkanPembayaran($id, $username);
       if ($result > 0) {
         Flasher::setFlash('Pembayaran <strong>Berhasil</strong> Dibatalkan!', 'success');
         header('Location: ' . BASEURL . '/kelola_pembayaran/konfirmasi');
@@ -221,7 +221,7 @@ class Kelola_pembayaran extends Controller
     $location = $_POST['pembayaran'];
     $id = $_POST['id'];
 
-    $result = $this->model('Kelolapembayaran_model')->hapusPembayaran($id);
+    $result = $this->model('Pembayaran_model')->hapusPembayaran($id);
     if ($result > 0) {
       Flasher::setFlash('Pembayaran Berhasil Dihapus!', 'success');
       header('Location: ' . BASEURL . "/kelola_pembayaran/$location");
@@ -241,7 +241,7 @@ class Kelola_pembayaran extends Controller
 
   public function aksi_pembayaran_barang(): void
   {
-    $result = $this->model('Kelolapembayaran_model')->tambahPembayaranBarang($_POST, $_FILES);
+    $result = $this->model('Pembayaran_model')->tambahPembayaranBarang($_POST, $_FILES);
     if ($result > 0) {
       Flasher::setFlash('Barang <strong>Berhasil</strong> Ditambahkan!', 'success');
       header('Location: ' . BASEURL . "/kelola_pembayaran/barang");

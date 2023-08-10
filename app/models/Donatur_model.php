@@ -66,7 +66,7 @@ class Donatur_model
      * @param array $data Data donatur yang akan ditambahkan.
      * @return int Jumlah baris yang terpengaruh oleh operasi penambahan data.
      */
-    public function tambahData(array $data)
+    public function tambahData(array $data): int
     {
         // initial variabel
         $slug_program   = $data['slug_program'];
@@ -78,12 +78,14 @@ class Donatur_model
         $nohp           = $data['nohp'];
         $donasi         = str_replace('.', '', $data['nominal-donasi']);
         $pesan          = htmlspecialchars($data['pesan']);
+        $uuid           = Utility::generateUUID();
 
         // siapkan data
         $dataArray = [
-            "slug_program" => $slug_program,
+            "UUID" => $uuid,
             "id_user" => $id_user,
             "id_bank" => $id_bank,
+            "slug_program" => $slug_program,
             "kode" => $kode,
             "nama_donatur" => $nama_donatur,
             "email" => $email,

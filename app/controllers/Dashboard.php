@@ -14,7 +14,7 @@ class Dashboard extends Controller{
         "demo_chartPie"   => "js/demo/chart-pie-demo.js",
         "js_utility"      => "js/util/script.js"
       ],
-      "countKonfirmasi" => count($this->model('Pembayaran_model')->getAllDataPembayaranKonfirmasi()),
+      "countKonfirmasi" => count($this->model('Pembayaran_model')->getAllDataPembayaran('konfirmasi')),
       "sumDanaZakat"  => $this->model('Program_model')->getSumProgram('zakat'),
       "sumDanaInfaq"  => $this->model('Program_model')->getSumProgram('infaq'),
       "sumDanaQurban"  => $this->model('Program_model')->getSumProgram('qurban'),

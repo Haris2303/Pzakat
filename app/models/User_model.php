@@ -40,12 +40,12 @@ class User_model
      * Mengambil ID pengguna berdasarkan nama pengguna.
      *
      * @param string $username Nama pengguna yang akan dicari.
-     * @return array|bool Data pengguna yang cocok dengan nama pengguna yang diberikan, atau false jika tidak ditemukan.
+     * @return int|bool Data pengguna yang cocok dengan nama pengguna yang diberikan, atau false jika tidak ditemukan.
      */
-    public function getIdByUsername(string $username): array|bool
+    public function getIdByUsername(string $username): int|bool
     {
-        $this->baseModel->selectData(null, null, [], ["username = " => $username]);
-        return $this->baseModel->fetch();
+        $this->baseModel->selectData(null, 'id_user', [], ["username = " => $username]);
+        return $this->baseModel->fetch()['id_user'];
     }
 
     /**

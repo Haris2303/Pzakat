@@ -24,7 +24,7 @@ class Login extends Controller {
     if($result > 0 && is_int($result)) {
 
       // get id user
-      $id_User = $this->model('User_model')->getIdByUsername($username)['id_user'];
+      $id_User = $this->model('User_model')->getIdByUsername($username);
       // set session nama 
       $_SESSION['nama'] = $this->model('User_model')->getNamaByIdUser($id_User);
 

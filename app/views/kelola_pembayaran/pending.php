@@ -44,6 +44,7 @@
           <?php foreach ($data['dataPending'] as $item) : ?>
             <?php
             // waktu expired dari kode
+            var_dump($item['nomor_pembayaran']);
             $kode_expired = explode('_', $item['nomor_pembayaran'])[1] + (24 * 3600);
             $tenggat_waktu = date('M-d H:i', $kode_expired);
             ?>

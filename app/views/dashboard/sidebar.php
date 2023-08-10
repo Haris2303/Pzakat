@@ -11,8 +11,8 @@ if (!isset($_SESSION['level'])) {
 
 $controller = New Controller();
 
-$countKonfirmasi = count($controller->model('Pembayaran_model')->getAllDataPembayaranKonfirmasi());
-$countPending = count($controller->model('Pembayaran_model')->getAllDataPembayaranPending());
+$countKonfirmasi = count($controller->model('Pembayaran_model')->getAllDataPembayaran('konfirmasi'));
+$countPending = count($controller->model('Pembayaran_model')->getAllDataPembayaran('pending'));
 $programNameAktif = $this->model('Kategoriprogram_model')->getAllKategoriProgram('aktif');
 
 ?>

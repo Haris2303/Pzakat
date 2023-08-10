@@ -47,7 +47,7 @@ class Donasibarang_model
      */
     public function getDataPembayaranBarangById($id): array|bool
     {
-        $this->baseModel->selectData(null, null, [], ["id_donasibarang = ", $id]);
+        $this->baseModel->selectData($this->view, null, [], ["id_donasibarang = " => $id]);
         return $this->baseModel->fetch();
     }
 

@@ -52,7 +52,7 @@ class Transaksi extends Controller
     {
 
         // get nominal
-        $nominal = $this->model('Pembayaran_model')->getDataPembayaran('pending', 'nomor_pembayaran', $kode)[0]['jumlah_pembayaran'];
+        $nominal = $this->model('Pembayaran_model')->getAllDataPembayaran('pending', [], ['nomor_pembayaran =' => $kode])[0]['jumlah_pembayaran'];
 
         // jika kode valid
         if(is_null($nominal)) {
@@ -114,12 +114,12 @@ class Transaksi extends Controller
         $key    = $_POST['key'];
         $email  = $_POST['email'];
 
-        $result = $this->model('Donatur_model')->tambahDataDonatur($_POST);
+        $result = $this->model('Donatur_model')->tambahData($_POST);
 
         if ($result > 0) {
             
             // get id donatur
-            $id_donatur = $this->model('Pembayaran_model')->getDataPembayaran('pending', 'nomor_pembayaran', $key)[0]['id_donatur'];
+            $id_donatur = $this->model('Pembayaran_model')->getAllDataPembayaran('pending', [], ["nomor_pembayaran =" => $key])[0]['id_donatur'];
             
             $subject = 'Pembayaran Belum Terselesaikan';
             $message = Design::emailMessageSummary($id_donatur);
@@ -129,7 +129,7 @@ class Transaksi extends Controller
             
             // jika email berhasil terkirim
             if($isEmail) {
-                Flasher::setFlash('Cek Email Anda jika halaman ini hilang!', 'info');
+                Flasher::setFlash('Cek Email Anda jika halaman ini hilang!', 'info', 'y');
                 header("Location: " . BASEURL . '/transaksi/summary/' . $key);
                 exit;
             }
@@ -144,10 +144,9 @@ class Transaksi extends Controller
 
     public function aksi_tambah_transaksi(): void
     {
-        
         $result = $this->model('Pembayaran_model')->konfirmasiDataTransaksi($_POST, $_FILES);
         if ($result > 0 && is_int($result)) {
-            Flasher::setFlash('Transaksi <strong>Berhasil</strong> Dikonfirmasi!', 'success');
+            Flasher::setFlash('Transaksi pembayaran <strong>berhasil</strong> dikirim, tunggu konfirmasi dari Admin!', 'success', 'y');
             header("Location: " . BASEURL . "/programs");
             exit;
         } else {

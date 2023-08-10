@@ -18,16 +18,34 @@ class User_dashboard extends Controller {
             exit;
         }
 
-        $pembayaran_model = new Pembayaran_model();
-
         // get id user
-        $this->id_user = $this->model('User_model')->getIdByUsername($_SESSION['username'])['id_user'];
+        $this->id_user = $this->model('User_model')->getIdByUsername($_SESSION['username']);
 
         // set data
-        $this->data_pending = $pembayaran_model->getAllDataPembayaran('pending'); // $this->model('Pembayaran_model')->getDataPembayaran('pending', 'id_user', $this->id_user);
-        $this->data_konfirmasi = $this->model('Pembayaran_model')->getDataPembayaran('konfirmasi', 'id_user', $this->id_user);
-        $this->data_failed = $this->model('Pembayaran_model')->getDataPembayaran('failed', 'id_user', $this->id_user);
-        $this->data_sukses = $this->model('Pembayaran_model')->getDataPembayaran('success', 'id_user', $this->id_user);
+        $this->data_pending = $this->model('Pembayaran_model')->getAllDataPembayaran('pending', $this->orderby, [
+            'logic' => 'AND', 
+            'status_pembayaran =' => 'pendig', 
+            'id_user =' => $this->id_user]
+        );
+        
+        $this->data_konfirmasi = $this->model('Pembayaran_model')->getAllDataPembayaran('konfirmasi', $this->orderby, [
+            'logic' => 'AND', 
+            'status_pembayaran =' => 'konfirmasi', 
+            'id_user =' => $this->id_user]
+        );
+
+        $this->data_failed = $this->model('Pembayaran_model')->getAllDataPembayaran('failed', $this->orderby, [
+            'logic' => 'AND', 
+            'status_pembayaran =' => 'failed', 
+            'id_user =' => $this->id_user]
+        );
+
+        $this->data_sukses = $this->model('Pembayaran_model')->getAllDataPembayaran('success', $this->orderby, [
+            'logic' => 'AND', 
+            'status_pembayaran =' => 'success', 
+            'id_user =' => $this->id_user]
+        );
+
     }
 
     public function index() {
@@ -133,7 +151,7 @@ class User_dashboard extends Controller {
             exit;
         }
 
-        $data_detail = $this->model('Kelolapembayaran_model')->getDataPembayaranById($_POST['id_donatur']);
+        $data_detail = $this->model('Pembayaran_model')->getDataPembayaranById($_POST['id_donatur']);
         $data = [
             "judul" => "Detail Pembayaran",
             "detail" => $data_detail
