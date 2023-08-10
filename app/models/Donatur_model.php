@@ -4,12 +4,10 @@ class Donatur_model
 {
 
     private $table = 'tb_donatur';
-    private $db;
     private $baseModel;
 
     public function __construct()
     {
-        $this->db = new Database();
         $this->baseModel = new BaseModel($this->table);
     }
 
@@ -30,12 +28,25 @@ class Donatur_model
         return $this->baseModel->fetchAll();
     }
 
+    /**
+     * ---------------------------------------------------------------------------------------------------------------------------------------------------------
+     *                      GET DATA BY
+     * ---------------------------------------------------------------------------------------------------------------------------------------------------------
+     */
+
+    /**
+     * Mendapatkan ID bank berdasarkan kode bank yang diberikan.
+     *
+     * @param string $kode Kode bank yang dicari.
+     * @return int ID bank yang ditemukan.
+     */
     public function getIdBankByKode(string $kode): int
     {
-        $query = "SELECT id_bank FROM $this->table WHERE kode = :kode";
-        $this->db->query($query);
-        $this->db->bind('kode', $kode);
-        return $this->db->single()['id_bank'];
+        // Melakukan operasi SELECT pada database menggunakan baseModel dengan kondisi kode bank.
+        $this->baseModel->selectData(null, null, [], ["kode =" => $kode]);
+
+        // Mengambil nilai 'id_bank' dari hasil yang diambil.
+        return $this->baseModel->fetch()['id_bank'];
     }
 
     /**

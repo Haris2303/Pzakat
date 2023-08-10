@@ -15,7 +15,7 @@ class Laporan_tahunan extends Controller {
             "judul" => "Laporan Tahunan",
             "css" => VENDOR_TABLES_CSS,
             "script" => VENDOR_TABLES,
-            "laporan" => $this->model('Laporantahunan_model')->getData()
+            "laporan" => $this->model('Laporan_model')->getData()
         ];
         $data["script"] += ["util" => "js/util/script.js"];
 
@@ -25,7 +25,7 @@ class Laporan_tahunan extends Controller {
     }
 
     public function aksi_tambah_laporan(): void {
-        $rowCount = $this->model('Laporantahunan_model')->tambahData($_POST);
+        $rowCount = $this->model('Laporan_model')->tambahData($_POST);
         if($rowCount > 0 && is_int($rowCount)) {
             Flasher::setFlash('Laporan berhasil ditambahkan!', 'success');
             header('Location: ' . BASEURL . '/laporan_tahunan');
@@ -38,7 +38,7 @@ class Laporan_tahunan extends Controller {
     }
 
     public function aksi_hapus_data(string $uuid): void {
-        $rowCount = $this->model('Laporantahunan_model')->deleteData($uuid);
+        $rowCount = $this->model('Laporan_model')->deleteData($uuid);
         if($rowCount > 0 && is_int($rowCount)) {
             Flasher::setFlash('Laporan berhasil dihapus!', 'success');
             header('Location: ' . BASEURL . '/laporan_tahunan');

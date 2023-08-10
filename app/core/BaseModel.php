@@ -45,7 +45,7 @@ class BaseModel
      * 
      * @continue Lanjutkan dengan fungsi berikutnya seperti "fetchAll" atau "fetch".
      */
-    public function selectData(string $view = null, string $select = null, array $orderBy = [], array $kondisi = null): void
+    public function selectData(string $view = null, string $select = null, array $orderBy = [], array $kondisi = null, string $limit = ''): void
     {
         // set table 
         $table = (!is_null($view)) ? $view : $this->table;
@@ -67,7 +67,7 @@ class BaseModel
         }
 
         // query awal 
-        $query = "SELECT $setSelect FROM $table $setOrder";
+        $query = "SELECT $setSelect FROM $table $setOrder $limit";
 
         // cek kondisi where
         if (!is_null($kondisi)) {
@@ -92,7 +92,7 @@ class BaseModel
             $setKondisi = implode(" ? $logic ", array_keys($arr)) . " ? ";
 
             // buat query
-            $query = "SELECT $setSelect FROM $table WHERE ($setKondisi) $setOrder";
+            $query = "SELECT $setSelect FROM $table WHERE ($setKondisi) $setOrder $limit";
 
             // siapkan query
             $this->db->query($query);
