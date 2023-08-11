@@ -3,8 +3,14 @@
 class Masjid extends Controller
 {
 
+  /**
+   * Halaman Utama untuk Modul Masjid
+   * 
+   * @method index
+   */
   public function index(): void
   {
+    // Menyiapkan data untuk tampilan
     $data = [
       "judul" => 'Masjid',
       "css" => VENDOR_TABLES_CSS,
@@ -12,57 +18,96 @@ class Masjid extends Controller
       "dataMasjid" => $this->model('Masjid_model')->getDataMasjid(),
     ];
 
+    // Menampilkan tampilan dengan komponen sidebar, konten halaman, dan footer
     $this->view('dashboard/sidebar', $data);
-    $this->view("masjid/index", $data);
+    $this->view('masjid/index', $data);
     $this->view('dashboard/footer', $data);
   }
 
+  /**
+   * Mengambil data masjid berdasarkan ID untuk tujuan perubahan
+   * 
+   * @method ubah
+   */
   public function ubah(): void
   {
-    echo json_encode($this->model('Masjid_model')->getDataMasjidById($_POST['id']));
+    // Mendapatkan data masjid berdasarkan ID yang diterima dari POST
+    $dataMasjid = $this->model('Masjid_model')->getDataMasjidById($_POST['id']);
+
+    // Mengirimkan data sebagai respons JSON
+    echo json_encode($dataMasjid);
   }
 
-  // method tambah masjid
-  public function aksi_tambah_mesjid(): void {
+  /**
+   * Aksi untuk menambahkan data masjid
+   * 
+   * @method aksi_tambah_mesjid
+   */
+  public function aksi_tambah_mesjid(): void
+  {
+    // Memanggil model untuk menambahkan data masjid
     $result = $this->model('Masjid_model')->tambahMesjid($_POST);
-    if($result > 0 && is_int($result)) {
+
+    // Pengecekan hasil penambahan data
+    if ($result > 0 && is_int($result)) {
+      // Jika berhasil ditambahkan
       Flasher::setFlash('Data Masjid Berhasil Ditambahkan!', 'success');
-      header("Location: " . BASEURL . '/Masjid');
-      exit;
     } else {
-      Flasher::setFlash($result ,'danger', 'y');
-      header("Location: " . BASEURL . '/Masjid');
-      exit;
+      // Jika gagal ditambahkan
+      Flasher::setFlash($result, 'danger', 'y');
     }
-  
+
+    // Kembali ke halaman Masjid setelah aksi selesai
+    header("Location: " . BASEURL . '/Masjid');
+    exit;
   }
 
-  // method ubah data masjid
-  public function aksi_ubah_mesjid(): void {
+  /**
+   * Aksi untuk mengubah data masjid
+   * 
+   * @method aksi_ubah_mesjid
+   */
+  public function aksi_ubah_mesjid(): void
+  {
+    // Memanggil model untuk mengubah data masjid
     $result = $this->model('Masjid_model')->updateData($_POST);
-    if($result > 0 && is_int($result)) {
-      Flasher::setFlash('Data Masjid Berhasil Diubah!' ,'success');
-      header("Location: " . BASEURL . '/Masjid');
-      exit;
+
+    // Pengecekan hasil pengubahan data
+    if ($result > 0 && is_int($result)) {
+      // Jika berhasil diubah
+      Flasher::setFlash('Data Masjid Berhasil Diubah!', 'success');
     } else {
-      header("Location: " . BASEURL . '/Masjid');
+      // Jika gagal diubah
       Flasher::setFlash($result, 'danger');
-      exit;
     }
+
+    // Kembali ke halaman Masjid setelah aksi selesai
+    header("Location: " . BASEURL . '/Masjid');
+    exit;
   }
 
-  // method hapus data mesjid
-  public function aksi_hapus_data(string $uuid): void {
+  /**
+   * Aksi untuk menghapus data masjid berdasarkan UUID
+   * 
+   * @method aksi_hapus_data
+   * @param string $uuid - UUID dari data masjid yang akan dihapus
+   */
+  public function aksi_hapus_data(string $uuid): void
+  {
+    // Memanggil model untuk menghapus data masjid berdasarkan UUID
+    $rowCount = $this->model('Masjid_model')->hapusMesjid($uuid);
 
-    if($this->model('Masjid_model')->hapusMesjid($uuid) > 0) {
+    // Pengecekan hasil penghapusan data
+    if ($rowCount > 0 && is_int($rowCount)) {
+      // Jika berhasil dihapus
       Flasher::setFlash('Data Masjid Berhasil Dihapus!', 'success');
-      header("Location: " . BASEURL . '/Masjid');
-      exit;
     } else {
+      // Jika gagal dihapus
       Flasher::setFlash('Data Masjid Gagal Dihapus', 'danger');
-      header("Location: " . BASEURL . '/Masjid');
-      exit;
     }
-  }
 
+    // Kembali ke halaman Masjid setelah aksi selesai
+    header("Location: " . BASEURL . '/Masjid');
+    exit;
+  }
 }

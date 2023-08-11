@@ -1,8 +1,14 @@
 <?php
 
-class Pengeluaran extends Controller {
+class Pengeluaran extends Controller
+{
 
-    public function index() :void 
+    /**
+     * Menampilkan halaman pengeluaran tunai.
+     *
+     * @method index
+     */
+    public function index(): void
     {
         $data = [
             "judul" => "Pengeluaran Tunai",
@@ -16,9 +22,14 @@ class Pengeluaran extends Controller {
 
         $this->view('dashboard/sidebar', $data);
         $this->view('pengeluaran/index', $data);
-        $this->view('dashboard/footer', $data); 
+        $this->view('dashboard/footer', $data);
     }
 
+    /**
+     * Menampilkan halaman pengeluaran barang.
+     * 
+     * @method barang
+     */
     public function barang(): void
     {
         $data = [
@@ -35,6 +46,12 @@ class Pengeluaran extends Controller {
         $this->view('dashboard/footer', $data);
     }
 
+    /**
+     * Menampilkan detail pengeluaran tunai berdasarkan ID.
+     *
+     * @method detailTunai
+     * @param mixed $id - ID pengeluaran tunai yang akan ditampilkan detailnya.
+     */
     public function detailTunai($id = true): void
     {
         $data = [
@@ -42,8 +59,8 @@ class Pengeluaran extends Controller {
             "detail" => $this->model('Pengeluaran_model')->getDataPengeluaranTunaiById($id)
         ];
 
-        // jika halaman tidak ditemukan
-        if(is_bool($data['detail'])) {
+        // Jika halaman tidak ditemukan
+        if (is_bool($data['detail'])) {
             $this->view('error/404');
             exit;
         }
@@ -53,6 +70,12 @@ class Pengeluaran extends Controller {
         $this->view('dashboard/footer', $data);
     }
 
+    /**
+     * Menampilkan detail pengeluaran barang berdasarkan ID.
+     * 
+     * @method detailBarang
+     * @param mixed $id - ID pengeluaran barang yang akan ditampilkan detailnya.
+     */
     public function detailBarang($id = true): void
     {
         $data = [
@@ -60,8 +83,8 @@ class Pengeluaran extends Controller {
             "detail" => $this->model('Pengeluaran_model')->getDataPengeluaranBarangById($id)
         ];
 
-        // jika halaman tidak ditemukan
-        if(is_bool($data['detail'])) {
+        // Jika halaman tidak ditemukan
+        if (is_bool($data['detail'])) {
             $this->view('error/404');
             exit;
         }
@@ -72,37 +95,38 @@ class Pengeluaran extends Controller {
     }
 
     /**
-     * 
-     * @method Aksi
-     * 
+     * Aksi untuk menambah data pengeluaran tunai.
+     *
+     * @method aksi_tambah_pengeluaran_tunai
      */
-
     public function aksi_tambah_pengeluaran_tunai()
     {
         $result = $this->model('Pengeluaran_model')->tambahDataPengeluaranTunai($_POST);
-        if($result > 0) {
+        if ($result > 0) {
             Flasher::setFlash('Data Pengeluaran <strong>Berhasil</strong> Ditambahkan!', 'success');
-            header('Location: ' . BASEURL . '/pengeluaran/index');
-            exit;
         } else {
             Flasher::setFlash('Data Pengeluaran <strong>Gagal</strong> Ditambahkan!', 'danger');
-            header('Location: ' . BASEURL . '/pengeluaran/index');
-            exit;
         }
+
+        header('Location: ' . BASEURL . '/pengeluaran/index');
+        exit;
     }
 
+    /**
+     * Aksi untuk menambah data pengeluaran barang.
+     *
+     * @method aksi_tambah_pengeluaran_barang
+     */
     public function aksi_tambah_pengeluaran_barang()
     {
         $result = $this->model('Pengeluaran_model')->tambahDataPengeluaranBarang($_POST);
-        if($result > 0) {
+        if ($result > 0) {
             Flasher::setFlash('Data Pengeluaran <strong>Berhasil</strong> Ditambahkan!', 'success');
-            header('Location: ' . BASEURL . '/pengeluaran/barang');
-            exit;
         } else {
             Flasher::setFlash('Data Pengeluaran <strong>Gagal</strong> Ditambahkan!', 'danger');
-            header('Location: ' . BASEURL . '/pengeluaran/barang');
-            exit;
         }
-    }
 
+        header('Location: ' . BASEURL . '/pengeluaran/barang');
+        exit;
+    }
 }

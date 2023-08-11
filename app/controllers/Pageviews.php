@@ -1,25 +1,36 @@
 <?php
 
-class Pageviews extends Controller {
+class Pageviews extends Controller
+{
 
-  public function index() {
-
+  /**
+   * Halaman utama untuk menampilkan data berita.
+   * 
+   * @method index
+   */
+  public function index()
+  {
     $data = [
       "judul" => "Berita",
       "css" => VENDOR_TABLES_CSS,
       "script" => VENDOR_TABLES,
-      "dataBerita"  => $this->model('Pageviews_model')->getAllDataBerita(),
+      "dataBerita" => $this->model('Pageviews_model')->getAllDataBerita(),
     ];
 
     $this->view('dashboard/sidebar', $data);
     $this->view('pageviews/index', $data);
     $this->view('dashboard/footer', $data);
-    
   }
 
-  public function artikel() {
+  /**
+   * Halaman untuk menampilkan data artikel.
+   * 
+   * @method artikel
+   */
+  public function artikel()
+  {
     $data = [
-      "judul" => 'Muzakki',
+      "judul" => 'Artikel',
       "css" => VENDOR_TABLES_CSS,
       "script" => VENDOR_TABLES,
       "dataArtikel" => $this->model('Pageviews_model')->getAllDataArtikel(),
@@ -30,16 +41,22 @@ class Pageviews extends Controller {
     $this->view('dashboard/footer', $data);
   }
 
-  public function detail($slug = true) {
-
+  /**
+   * Halaman detail untuk menampilkan data berdasarkan slug.
+   * 
+   * @method detail
+   * @param string $slug - Slug yang digunakan untuk mengambil data view
+   */
+  public function detail($slug = true)
+  {
     $data = [
-      "judul" => 'Muzakki',
+      "judul" => 'Detail',
       "css" => VENDOR_TABLES_CSS,
       "dataView" => $this->model('Pageviews_model')->getDataViewBySlug($slug),
     ];
 
-    // jika halaman tidak ditemukan
-    if(is_bool($data['dataView'])) {
+    // Jika halaman tidak ditemukan
+    if (is_bool($data['dataView'])) {
       $this->view('error/404');
       exit;
     }
@@ -49,31 +66,42 @@ class Pageviews extends Controller {
     $this->view('tinymce/tinymce', $data);
     $this->view('dashboard/footer', $data);
   }
-  
-  public function upload($jenis_view) {
-    
-    if($jenis_view !== 'Artikel' && $jenis_view !== 'Berita') {
+
+  /**
+   * Halaman upload berita atau artikel.
+   * 
+   * @method upload
+   * @param string $jenis_view - Jenis view (Berita atau Artikel) untuk halaman upload
+   */
+  public function upload($jenis_view)
+  {
+    if ($jenis_view !== 'Artikel' && $jenis_view !== 'Berita') {
       $this->view('error/404');
       exit;
     }
-    
+
     $data = [
-      "judul" => "Upload Berita",
+      "judul" => "Upload $jenis_view",
       "jenis_view" => $jenis_view,
     ];
-    
+
     $this->view('dashboard/sidebar', $data);
     $this->view('pageviews/upload', $data);
     $this->view('tinymce/tinymce', $data);
     $this->view('dashboard/footer', $data);
-
   }
 
-  public function aksi_tambah_berita() {
+  /**
+   * Aksi untuk menambahkan berita atau artikel.
+   * 
+   * @method aksi_tambah_berita
+   */
+  public function aksi_tambah_berita()
+  {
     $jenis_view = $_POST['jenis_view'];
     $href = ($jenis_view === 'Berita') ? '/Berita' : '/Artikel';
     $result = $this->model('Pageviews_model')->tambahBerita($_POST, $_FILES);
-    if($result > 0) {
+    if ($result > 0) {
       Flasher::setFlash($jenis_view . ' Berhasil Diupload!', 'success');
       header('Location: ' . BASEURL . '/pageviews' . $href);
       exit;
@@ -82,14 +110,19 @@ class Pageviews extends Controller {
       header('Location: ' . BASEURL . '/pageviews' . $href);
       exit;
     }
-
   }
 
-  public function aksi_ubah_view() {
+  /**
+   * Aksi untuk mengubah view (berita atau artikel).
+   * 
+   * @method aksi_ubah_view
+   */
+  public function aksi_ubah_view()
+  {
     $jenis_view = $_POST['jenis_view'];
     $href = ($jenis_view === 'Berita') ? '/Berita' : '/Artikel';
     $result = $this->model('Pageviews_model')->ubahView($_POST, $_FILES);
-    if($result > 0) {
+    if ($result > 0) {
       Flasher::setFlash($jenis_view . ' Berhasil Diupload', 'success');
       header('Location: ' . BASEURL . '/pageviews' . $href);
       exit;
@@ -100,11 +133,18 @@ class Pageviews extends Controller {
     }
   }
 
-  public function aksi_hapus_view($slug) {
+  /**
+   * Aksi untuk menghapus view berdasarkan slug.
+   * 
+   * @method aksi_hapus_view
+   * @param string $slug - Slug yang digunakan untuk menghapus data view
+   */
+  public function aksi_hapus_view($slug)
+  {
     $dataView = $this->model('Pageviews_model')->getDataViewBySlug($slug);
     $jenis_view = $dataView['jenis_views'];
     $href = ($jenis_view === 'Berita') ? '/Berita' : '/Artikel';
-    if($this->model('Pageviews_model')->hapusView($slug) > 0) {
+    if ($this->model('Pageviews_model')->hapusView($slug) > 0) {
       Flasher::setFlash('Berhasil Dihapus', 'success');
       header('Location: ' . BASEURL . '/pageviews' . $href);
       exit;
@@ -114,5 +154,4 @@ class Pageviews extends Controller {
       exit;
     }
   }
-
 }

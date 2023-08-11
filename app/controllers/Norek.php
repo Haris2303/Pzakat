@@ -3,17 +3,28 @@
 class Norek extends Controller
 {
 
+    /**
+     * Konstruktor kontroler Norek untuk mengatur akses hanya bagi admin (level 1)
+     * 
+     * @method __construct
+     */
     public function __construct()
     {
-        // jika yang akses bukan admin
-        if($_SESSION['level'] !== '1') {
+        // Jika yang mengakses bukan admin (level bukan 1), alihkan ke halaman utama
+        if ($_SESSION['level'] !== '1') {
             header('Location: ' . BASEURL . '/');
             exit;
         }
     }
 
+    /**
+     * Halaman index untuk menampilkan data nomor rekening
+     * 
+     * @method index
+     */
     public function index(): void
     {
+        // Mengatur data yang akan dikirimkan ke tampilan (view) halaman index
         $data = [
             "judul" => "Nomor Rekening",
             "css" => VENDOR_TABLES_CSS,
@@ -24,13 +35,21 @@ class Norek extends Controller
         ];
         $data['script'] += ["util" => "/js/util/script.js"];
 
+        // Menampilkan tampilan (view) halaman index dengan menggunakan data yang telah diatur
         $this->view('dashboard/sidebar', $data);
         $this->view('norek/index', $data);
         $this->view('dashboard/footer', $data);
     }
 
+    /**
+     * Halaman detail untuk mengedit nomor rekening berdasarkan ID
+     * 
+     * @method detail
+     * @param string $id - ID nomor rekening yang akan diubah
+     */
     public function detail($id): void
     {
+        // Mengatur data yang akan dikirimkan ke tampilan (view) halaman detail
         $data = [
             "judul" => "Edit Nomor Rekening",
             "css" => VENDOR_TABLES_CSS,
@@ -38,60 +57,84 @@ class Norek extends Controller
             "dataNorek" => $this->model('Norek_model')->getDataNorekById($id),
         ];
 
+        // Menampilkan tampilan (view) halaman detail dengan menggunakan data yang telah diatur
         $this->view('dashboard/sidebar', $data);
         $this->view('norek/detail', $data);
         $this->view('dashboard/footer', $data);
     }
 
+    /**
+     * Mengambil data nomor rekening berdasarkan ID dalam bentuk JSON
+     * 
+     * @method ubah
+     */
     public function ubah(): void
     {
         echo json_encode($this->model('Norek_model')->getDataNorekById($_POST['id']));
     }
 
+    /**
+     * Mengambil data nomor rekening berdasarkan jenis program dalam bentuk JSON
+     * 
+     * @method getRekeningByJenisProgram
+     */
     public function getRekeningByJenisProgram(): void
     {
         echo json_encode($this->model('Norek_model')->getAllDataNorekByProgram($_POST['jenisProgram']));
     }
 
+    /**
+     * Aksi tambah data nomor rekening
+     * 
+     * @method aksi_tambah_norek
+     */
     public function aksi_tambah_norek(): void
     {
         $result = $this->model('Norek_model')->tambahDataNorek($_POST, $_FILES);
+        // Penanganan hasil tambah data nomor rekening
         if ($result > 0 && is_int($result)) {
             Flasher::setFlash('Data Nomor Rekening <strong>Berhasil</strong> ditambahkan!', 'success');
-            header('Location: ' . BASEURL . '/norek');
-            exit;
         } else {
             Flasher::setFlash($result, 'danger');
-            header('Location: ' . BASEURL . '/norek');
-            exit;
         }
+        header('Location: ' . BASEURL . '/norek');
+        exit;
     }
 
+    /**
+     * Aksi ubah data nomor rekening
+     * 
+     * @method aksi_ubah_norek
+     */
     public function aksi_ubah_norek(): void
     {
         $result = $this->model('Norek_model')->ubahDataNorek($_POST, $_FILES);
-        if($result > 0 && is_int($result)) {
+        // Penanganan hasil ubah data nomor rekening
+        if ($result > 0 && is_int($result)) {
             Flasher::setFlash('Data Nomor Rekening <strong>Berhasil</strong> diubah!', 'success');
-            header('Location: ' . BASEURL . '/norek');
-            exit;
         } else {
             Flasher::setFlash($result, 'danger');
-            header('Location: ' . BASEURL . '/norek');
-            exit;
         }
+        header('Location: ' . BASEURL . '/norek');
+        exit;
     }
 
+    /**
+     * Aksi hapus data nomor rekening berdasarkan UUID
+     * 
+     * @method aksi_hapus_data
+     * @param string $uuid - UUID nomor rekening yang akan dihapus
+     */
     public function aksi_hapus_data(string $uuid): void
     {
         $result = $this->model('Norek_model')->deleteData($uuid);
-        if($result > 0){
+        // Penanganan hasil hapus data nomor rekening
+        if ($result > 0) {
             Flasher::setFlash('Data Nomor Rekening <strong>Berhasil</strong> dihapus!', 'success');
-            header('Location: ' . BASEURL . '/norek');
-            exit;
         } else {
             Flasher::setFlash('Data Nomor Rekening <strong>Gagal</strong> dihapus!', 'danger');
-            header('Location: ' . BASEURL . '/norek');
-            exit;
         }
+        header('Location: ' . BASEURL . '/norek');
+        exit;
     }
 }
