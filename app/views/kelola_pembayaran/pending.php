@@ -44,7 +44,6 @@
           <?php foreach ($data['dataPending'] as $item) : ?>
             <?php
             // waktu expired dari kode
-            var_dump($item['nomor_pembayaran']);
             $kode_expired = explode('_', $item['nomor_pembayaran'])[1] + (24 * 3600);
             $tenggat_waktu = date('M-d H:i', $kode_expired);
             ?>
@@ -55,13 +54,6 @@
               <td><?= (time() > $kode_expired)? '<span class="text-danger">Expired</span>' : '<span class="text-dark">'.$tenggat_waktu  .'</span>' ?></td>
               <td>
                 <a href="<?= BASEURL ?>/kelola_pembayaran/detail/<?= $item['id_donatur'] ?>" class="btn badge btn-secondary">Detail</a>
-                <?php if(time() > $kode_expired): ?>
-                  <form action="<?= BASEURL ?>/kelola_pembayaran/aksi_hapus_data" method="post" id="form-delete" class="d-inline">
-                    <input type="hidden" name="pembayaran" value="pending">
-                    <input type="hidden" name="id" id="id" value="<?= $item['id_donatur'] ?>">
-                    <button type="submit" id="btn-delete" class="btn badge btn-danger" data-id="<?= $item['id_donatur'] ?>">Hapus</button>
-                  </form>
-                <?php endif ?>
               </td>
             </tr>
           <?php endforeach ?>

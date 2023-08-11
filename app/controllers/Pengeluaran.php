@@ -7,16 +7,12 @@ class Pengeluaran extends Controller {
         $data = [
             "judul" => "Pengeluaran Tunai",
             "css" => VENDOR_TABLES_CSS,
-            "script" => [
-                "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
-                "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
-                "demo_datatables"       => "js/demo/datatables-demo.js",
-                "util" => "js/util/script.js"
-            ],
+            "script" => VENDOR_TABLES,
             "dataPengeluaran" => $this->model('Pengeluaran_model')->getAllDataPengeluaranTunai(),
             "dataProgram" => $this->model('Program_model')->getAllDataProgramHaveMoney(),
             "dataRekening" => $this->model('Norek_model')->getAllDataNorekHaveSaldo()
         ];
+        $data["script"] += ["util" => "js/util/script.js"];
 
         $this->view('dashboard/sidebar', $data);
         $this->view('pengeluaran/index', $data);
@@ -28,15 +24,11 @@ class Pengeluaran extends Controller {
         $data = [
             "judul" => "Pengeluaran Barang",
             "css" => VENDOR_TABLES_CSS,
-            "script" => [
-                "vendor_datatables"     => "vendor/datatables/jquery.dataTables.min.js",
-                "vendor_bootstraptable" => "vendor/datatables/dataTables.bootstrap4.min.js",
-                "demo_datatables"       => "js/demo/datatables-demo.js",
-                "util" => "js/util/script.js"
-            ],
+            "script" => VENDOR_TABLES,
             "dataPengeluaran" => $this->model('Pengeluaran_model')->getAllDataPengeluaranBarang(),
-            "dataBarang" => $this->model("Kelolaprogram_model")->getAllDataProgramBarang()
+            "dataBarang" => $this->model("Program_model")->getAllDataProgramBarang()
         ];
+        $data["script"] += ["util" => "js/util/script.js"];
 
         $this->view('dashboard/sidebar', $data);
         $this->view('pengeluaran/barang', $data);
@@ -47,7 +39,7 @@ class Pengeluaran extends Controller {
     {
         $data = [
             "judul" => "Detail Pengeluaran",
-            "detail" => $this->model('Pengeluaran_model')->getDataPengeluaranById($id)
+            "detail" => $this->model('Pengeluaran_model')->getDataPengeluaranTunaiById($id)
         ];
 
         // jika halaman tidak ditemukan

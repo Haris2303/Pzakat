@@ -15,6 +15,7 @@ class Dashboard extends Controller{
         "js_utility"      => "js/util/script.js"
       ],
       "countKonfirmasi" => count($this->model('Pembayaran_model')->getAllDataPembayaran('konfirmasi')),
+      "countMuzakki" => count($this->model("Muzakki_model")->getAllData()),
       "sumDanaZakat"  => $this->model('Program_model')->getSumProgram('zakat'),
       "sumDanaInfaq"  => $this->model('Program_model')->getSumProgram('infaq'),
       "sumDanaQurban"  => $this->model('Program_model')->getSumProgram('qurban'),

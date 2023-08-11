@@ -11,7 +11,7 @@ class Kelola_pembayaran extends Controller
       "script" => VENDOR_TABLES,
       "dataPembayaran" => $this->model('Pembayaran_model')->getAllDataPembayaran(),
       "countKonfirmasi" => count($this->model('Pembayaran_model')->getAllDataPembayaran('konfirmasi')),
-      "countPending" => count($this->model('Pembayaran_model')->getAllDataPembayaran('pending'))
+      "countPending" => count($this->model('Pembayaran_model')->getAllDataPembayaran('pending')),
     ];
 
     $this->view('dashboard/sidebar', $data);
@@ -215,13 +215,13 @@ class Kelola_pembayaran extends Controller
     }
   }
 
-  public function aksi_hapus_data(): void
+  public function aksi_hapus_data(string $kode): void
   {
-    
-    $location = $_POST['pembayaran'];
-    $id = $_POST['id'];
+    $baseModel = new BaseModel('tb_pembayaran');
+    $baseModel->selectData(null, 'status_pembayaran', [], ["nomor_pembayaran =" => $kode]);
+    $location = $baseModel->fetch()['status_pembayaran'];
 
-    $result = $this->model('Pembayaran_model')->hapusPembayaran($id);
+    $result = $this->model('Pembayaran_model')->hapusPembayaran($kode);
     if ($result > 0) {
       Flasher::setFlash('Pembayaran Berhasil Dihapus!', 'success');
       header('Location: ' . BASEURL . "/kelola_pembayaran/$location");
@@ -241,7 +241,7 @@ class Kelola_pembayaran extends Controller
 
   public function aksi_pembayaran_barang(): void
   {
-    $result = $this->model('Pembayaran_model')->tambahPembayaranBarang($_POST, $_FILES);
+    $result = $this->model('Donasibarang_model')->tambahPembayaranBarang($_POST, $_FILES);
     if ($result > 0) {
       Flasher::setFlash('Barang <strong>Berhasil</strong> Ditambahkan!', 'success');
       header('Location: ' . BASEURL . "/kelola_pembayaran/barang");

@@ -91,7 +91,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="norek" class="form-label">Norek</label>
-                        <input type="tel" class="form-control" id="norek" name="norek" required autocomplete="off">
+                        <input type="text" class="form-control" id="norek" name="norek" required autocomplete="off" onkeydown="return countInput(event)">
                     </div>
                     <div class="mb-3">
                         <label for="jenis-program" class="form-label">Jenis Program</label>

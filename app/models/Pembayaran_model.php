@@ -257,13 +257,16 @@ class Pembayaran_model
      * @param int $id ID donatur terkait.
      * @return int Jumlah baris yang terpengaruh oleh operasi penghapusan.
      */
-    public function hapusPembayaran($id): int
+    public function hapusPembayaran(string $kode): int
     {
-        // Menghapus data pembayaran berdasarkan ID donatur.
-        $rowCount = $this->baseModel->deleteData(["id_donatur" => $id]);
+        // ambil kode nomor pembayaran
+        $nomor_pembayaran = explode('_', $kode)[0];
+
+        // Menghapus data pembayaran berdasarkan nomor pembayran.
+        $rowCount = $this->baseModel->deleteData(["nomor_pembayaran" => $nomor_pembayaran]);
 
         // Menghapus data donatur berdasarkan ID donatur.
-        $rowCount += $this->modelDonatur->deleteData(["id_donatur" => $id]);
+        $rowCount += $this->modelDonatur->deleteData(["kode" => $kode]);
 
         return $rowCount;
     }

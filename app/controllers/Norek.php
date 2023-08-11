@@ -22,6 +22,7 @@ class Norek extends Controller
             "programNameAktif" => $this->model('Kategoriprogram_model')->getAllKategoriProgram('aktif'),
             "dataBank"  => $this->model('Norek_model')->getDataBankJsonDecode()
         ];
+        $data['script'] += ["util" => "/js/util/script.js"];
 
         $this->view('dashboard/sidebar', $data);
         $this->view('norek/index', $data);

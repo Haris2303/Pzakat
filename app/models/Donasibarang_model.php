@@ -75,6 +75,7 @@ class Donasibarang_model
 
         // siapkan data insert
         $data = [
+            "uuid" => Utility::generateUUID(),
             "slug_program" => $dataPost['slug-program'],
             "nama_donatur" => $dataPost['nama-donatur'],
             "email" => $dataPost['email'],

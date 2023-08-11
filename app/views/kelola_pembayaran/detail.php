@@ -9,9 +9,9 @@
     <div class="row justify-content-between align-items-center mx-1">
       <h6 class="m-0 font-weight-bold text-dark">Detail Kode Pembayaran <?= $data['detail']['nomor_pembayaran'] ?></h6>
       <?php if($data['detail']['status_pembayaran'] !== 'success'): ?>
-        <form action="<?= BASEURL ?>/kelola_pembayaran/aksi_hapus_pembayaran" method="post">
+        <form action="" id="form-delete">
           <input type="hidden" name="id" value="<?= $data['detail']['id_donatur'] ?>">
-          <button type="submit" class="btn btn-danger" onclick="return confirm('Anda akan menghapus data <?= $data['detail']['nomor_pembayaran'] ?>?')"><i class="fas fa-trash"></i> Hapus</button>
+          <button type="submit" id="btn-delete" class="btn btn-danger" data-uuid="<?= $data['detail']['kode'] ?>"><i class="fas fa-trash"></i> Hapus</button>
         </form>
       <?php endif ?>
     </div>
