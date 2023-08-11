@@ -1,8 +1,15 @@
 <?php
 
-class Dashboard extends Controller{
+class Dashboard extends Controller
+{
 
-  public function index(): void {
+  /**
+   * Metode index untuk menampilkan halaman dashboard.
+   *
+   * @return void
+   */
+  public function index(): void
+  {
     $data = [
       "judul" => 'Dashboard',
       "css" => [
@@ -22,19 +29,38 @@ class Dashboard extends Controller{
       "sumDanaDonasi"  => $this->model('Program_model')->getSumProgram('donasi'),
       "sumDanaRamadhan"  => $this->model('Program_model')->getSumProgram('ramadhan'),
     ];
+
+    // Menampilkan bagian-bagian dari dashboard
     $this->view('dashboard/sidebar', $data);
     $this->view('dashboard/index', $data);
     $this->view('dashboard/footer', $data);
   }
 
-  public function getDataPemasukkanBulanan(): void 
+  /**
+   * Mendapatkan data pemasukkan bulanan dan mengirimkannya dalam format JSON.
+   *
+   * @return void
+   */
+  public function getDataPemasukkanBulanan(): void
   {
-    echo json_encode($this->model('Pembayaran_model')->getDataPemasukkanBulanan());
+    // Mengambil data pemasukkan bulanan menggunakan model Pembayaran_model
+    $dataPemasukkanBulanan = $this->model('Pembayaran_model')->getDataPemasukkanBulanan();
+
+    // Mengirimkan data dalam format JSON
+    echo json_encode($dataPemasukkanBulanan);
   }
 
-  public function getDataPemasukkanHarian(): void 
+  /**
+   * Mendapatkan data pemasukkan harian dan mengirimkannya dalam format JSON.
+   *
+   * @return void
+   */
+  public function getDataPemasukkanHarian(): void
   {
-    echo json_encode($this->model('Pembayaran_model')->getDataPemasukkanHarian());
-  }
+    // Mengambil data pemasukkan harian menggunakan model Pembayaran_model
+    $dataPemasukkanHarian = $this->model('Pembayaran_model')->getDataPemasukkanHarian();
 
+    // Mengirimkan data dalam format JSON
+    echo json_encode($dataPemasukkanHarian);
+  }
 }
