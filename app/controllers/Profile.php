@@ -22,7 +22,7 @@ class Profile extends Controller {
 
         $data = [
             "judul" => "Profile Amil",
-            "dataProfile" => $this->model('Amil_model')->getDataAmilByUsername($_SESSION['username']),
+            "dataProfile" => $this->model('Amil_model')->getDataByUsername($_SESSION['username']),
             "dataMasjid"  => $this->model('Masjid_model')->getDataMasjid()
         ];
 
@@ -54,7 +54,7 @@ class Profile extends Controller {
      * @param NULL
      */
     public function aksi_ubah_profil_amil(): void {
-        $result = $this->model('Profile_model')->ubahProfilAmil($_POST, $_SESSION['username']);
+        $result = $this->model('Amil_model')->ubahProfil($_POST, $_SESSION['username']);
         if($result > 0 && is_int($result)) {
             Flasher::setFlash('Perubahan <strong>Berhasil</strong> Disimpan!', 'success');
             header('Location: ' . BASEURL . '/profile');
@@ -67,7 +67,7 @@ class Profile extends Controller {
     }
 
     public function aksi_ubah_profil_admin(): void {
-        $result = $this->model('Profile_model')->ubahProfilAdmin($_POST, $_SESSION['username']);
+        $result = $this->model('Useradmin_model')->ubahProfil($_POST, $_SESSION['username']);
         if($result > 0 && is_int($result)) {
             Flasher::setFlash('Perubahan <strong>Berhasil</strong> Disimpan!', 'success');
             header('Location: ' . BASEURL . '/profile');

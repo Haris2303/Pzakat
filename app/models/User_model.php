@@ -238,6 +238,31 @@ class User_model
     }
 
     /**
+     * Memperbarui username pengguna berdasarkan ID pengguna yang diberikan.
+     *
+     * @param int $id_user ID pengguna yang username-nya akan diubah.
+     * @param string $username Username baru yang akan digunakan.
+     * @return int|string Hasil dari operasi perubahan username. Jika berhasil, mengembalikan jumlah baris yang diubah, jika gagal, mengembalikan pesan error (string).
+     */
+    public function updateUsername(int $id_user, string $username): int|string
+    {
+        // Memeriksa apakah username sudah terdaftar di dalam database
+        $cekUsername = $this->baseModel->isData(['username' => $username]);
+        if ($cekUsername) {
+            return 'Username sudah terdaftar!';
+        }
+
+        // Melakukan perubahan username
+        $rowCount = $this->baseModel->updateData(["username" => $username], ["id_user" => $id_user]);
+
+        // Mengatur session username
+        $_SESSION['username'] = $username;
+
+        // Mengembalikan hasil dari operasi perubahan username (jumlah baris yang diubah atau pesan error)
+        return $rowCount;
+    }
+
+    /**
      * Mengupdate password pengguna berdasarkan username.
      *
      * @param string $username Username pengguna yang akan diupdate passwordnya.
