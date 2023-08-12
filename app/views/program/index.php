@@ -29,7 +29,7 @@
         </div>
 
         <ul class="flex gap-10 mt-20 border-y py-5 text-lightgray text-sm">
-            <li class="w-full">Deskripsi</li>
+            <li class="w-full">Content</li>
             <li class="w-2/3 lg:block hidden">Donatur</li>
         </ul>
 
