@@ -50,6 +50,21 @@ class Donatur_model
     }
 
     /**
+     * Mendapatkan data donatur berdasarkan slug yang diberikan.
+     *
+     * @param string $slug Slug program yang dicari.
+     * @return array data donatur yang ditemukan.
+     */
+    public function getDataBySlug(string $slug): array
+    {
+        // Melakukan operasi SELECT pada database menggunakan baseModel dengan kondisi kode bank.
+        $this->baseModel->selectData(null, null, [], ["slug_program =" => $slug]);
+
+        // Mengambil nilai 'id_bank' dari hasil yang diambil.
+        return $this->baseModel->fetchAll();
+    }
+
+    /**
      * Memeriksa apakah kode tertentu sudah ada dalam database.
      *
      * @param string $kode Kode yang akan diperiksa.
