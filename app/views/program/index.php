@@ -29,12 +29,25 @@
         </div>
 
         <ul class="flex gap-10 mt-20 border-y py-5 text-lightgray text-sm">
-            <li class="border-b-2 border-lightgreen hover:cursor-pointer">Deskripsi</li>
-            <li class="border-b-2 hover:cursor-pointer">Donatur</li>
+            <li class="w-full">Deskripsi</li>
+            <li class="w-2/3 lg:block hidden">Donatur</li>
         </ul>
 
-        <div class="w-2/3 mt-9 text-lightgray text-sm">
-            <?= $data['dataProgram']['content'] ?>
+        <div class="flex lg:flex-row flex-col mt-9 text-lightgray text-sm lg:gap-10 gap-20">
+            <div class="w-full">
+                <?= $data['dataProgram']['content'] ?>
+            </div>
+            <div class="lg:w-2/3">
+                <?php foreach($data['donatur'] as $item): ?>
+                <div class="flex gap-5 mb-5">
+                    <img src="<?= BASEURL ?>/svg/undraw_profile.svg" alt="" width="50rem" class="rounded-full">
+                    <div class="flex flex-col gap-1">
+                        <span class="block font-bold"><?= $item['nama_donatur'] ?></span>
+                        <span><?= $item['pesan'] ?></span>
+                    </div>
+                </div>
+                <?php endforeach ?>
+            </div>
         </div>
 
     </div>

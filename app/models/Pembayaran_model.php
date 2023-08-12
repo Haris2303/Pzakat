@@ -67,7 +67,7 @@ class Pembayaran_model
         $vw = $this->view['dataAll']; // Nama tampilan data pembayaran.
 
         
-        if (is_null($status_pembayaran)) {
+        if (is_null($status_pembayaran) && count($orderby) <= 0 && is_null($kondisi)) {
             // Jika status_pembayaran tidak ditentukan, ambil semua data pembayaran.
             $this->baseModel->selectData($vw);
         } else if(!is_null($status_pembayaran) && count($orderby) <= 0 && is_null($kondisi)) {
