@@ -70,8 +70,8 @@ class Pembayaran_model
         if (is_null($status_pembayaran)) {
             // Jika status_pembayaran tidak ditentukan, ambil semua data pembayaran.
             $this->baseModel->selectData($vw);
-        } else if(!is_null($status_pembayaran)) {
-            // Jika status_pembayaran ditentukan, ambil data pembayaran dengan status tertentu.
+        } else if(!is_null($status_pembayaran) && count($orderby) <= 0 && is_null($kondisi)) {
+            // Jika status_pembayaran ditentukan, ordernya kosongambil dan kondisi null, maka ambil semua data pembayaran dengan status tertentu.
             $this->baseModel->selectData($vw, null, [], ["status_pembayaran =" => $status_pembayaran]);
         } else {
             // Jika status_pembayaran ada dan parameter lain

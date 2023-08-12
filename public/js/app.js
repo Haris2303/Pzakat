@@ -118,7 +118,7 @@ $(document).ready(function () {
         $.ajax({
           type: "post",
           url: action,
-          data: { id: data } ,
+          data: { id: data },
           success: function (response) {
             Swal.fire({
               position: 'top-end',
@@ -237,4 +237,47 @@ $(document).ready(function () {
       }
     })
   })
+
+  // Fungsi untuk menampilkan konten detail pembayaran dan donatur
+  const detailContent = (item) => {
+    return `
+      <p><strong style="font-size:14px">Donatur:</strong></p>
+      <p><strong style="font-size:16px">Nama Donatur:</strong> ${item.nama_donatur}</p>
+      <p><strong style="font-size:16px">Email:</strong> ${item.email}</p>
+      <p><strong style="font-size:16px">Nomor Telepon:</strong> ${item.nohp}</p>
+      <p><strong style="font-size:16px">Pesan:</strong> ${item.pesan}</p>
+      <br>
+      <p><strong style="font-size:14px">PROGRAM:</strong></p>
+      <p><strong style="font-size:16px">Jenis Program:</strong> ${item.jenis_program}</p>
+      <p><strong style="font-size:16px">Nama Program:</strong> ${item.nama_program}</p>
+      <p><strong style="font-size:16px">Status Pembayaran:</strong> ${item.status_pembayaran}</p>
+      <p><strong style="font-size:16px">Tanggal Pembayaran:</strong> ${item.tanggal_pembayaran.split(' ')[0]}</p>
+    `;
+  }
+
+  // Event handler untuk tombol detail
+  $('.btn-detail').on('click', function () {
+    // Ambil data id dari atribut data-id pada tombol
+    const id = $(this).data('id');
+    // Kirim permintaan ajax untuk mendapatkan data pembayaran
+    $.ajax({
+      url: url + '/user_dashboard/getDataPembayaran',
+      data: { id },
+      method: 'post',
+      dataType: "json",
+      success: function (response) {
+        // Tampilkan pop-up detail pembayaran menggunakan library Swal (SweetAlert)
+        Swal.fire({
+          title: `<span style="font-size: 20px">Detail Pembayaran <em>${response.nomor_pembayaran}</em> </span>`,
+          html: detailContent(response),
+          confirmButtonText: 'Tutup',
+          text: 'Klik oke untuk close',
+          imageUrl: url + "/public/img/bukti_pembayaran/" + response.bukti_pembayaran,
+          imageWidth: 250,
+          imageHeight: 350,
+          imageAlt: 'Bukti Pembayaran',
+        });
+      }
+    });
+  });
 })

@@ -28,7 +28,7 @@
 
 /* navbar */
 .navbar-fixed {
-  @apply fixed z-[9999] bg-white shadow-md;
+  @apply fixed z-[5] bg-white shadow-md;
 }
 
 .hamburger-line {

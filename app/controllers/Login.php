@@ -199,7 +199,7 @@ class Login extends Controller
     $emailSent = Utility::sendEmail($email, 'Lupa Password', $message);
 
     if ($emailSent) {
-      Flasher::setFlash('Pesan Berhasil terkirim! Silahkan cek email Anda', 'success');
+      Flasher::setFlash('Pesan Berhasil terkirim! Silahkan cek email Anda', 'success', 'y');
       header('Location: ' . BASEURL . '/login');
       exit;
     }

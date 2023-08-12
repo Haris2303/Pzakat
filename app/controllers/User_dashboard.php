@@ -32,7 +32,7 @@ class User_dashboard extends Controller
             $this->orderby,
             [
                 'logic' => 'AND',
-                'status_pembayaran =' => 'pendig',
+                'status_pembayaran =' => 'pending',
                 'id_user =' => $this->id_user
             ]
         );
@@ -278,34 +278,36 @@ class User_dashboard extends Controller
      * @method detail
      * @param string|null $param ID donatur (jika tidak ada, akan menampilkan halaman error 404)
      */
-    public function detail(string $param = null): void
+    public function getDataPembayaran(): void
     {
-        // Jika parameter ID donatur tidak diberikan, tampilkan halaman error 404
-        if (is_null($param)) {
-            $this->view('error/404');
-            exit;
-        }
+        echo json_encode($this->model('Pembayaran_model')->getDataPembayaranById($_POST['id']));
 
-        // Mengambil data detail pembayaran berdasarkan ID donatur yang diberikan
-        $data_detail = $this->model('Pembayaran_model')->getDataPembayaranById($_POST['id_donatur']);
+        // // Jika parameter ID donatur tidak diberikan, tampilkan halaman error 404
+        // if (is_null($param)) {
+        //     $this->view('error/404');
+        //     exit;
+        // }
 
-        // Persiapan data untuk ditampilkan di halaman detail pembayaran
-        $data = [
-            "judul" => "Detail Pembayaran",  // Judul halaman
-            "detail" => $data_detail         // Data detail pembayaran yang akan ditampilkan pada halaman
-        ];
+        // // Mengambil data detail pembayaran berdasarkan ID donatur yang diberikan
+        // $data_detail = $this->model('Pembayaran_model')->getDataPembayaranById($_POST['id_donatur']);
 
-        // Memuat template header
-        $this->view('template/header', $data);
+        // // Persiapan data untuk ditampilkan di halaman detail pembayaran
+        // $data = [
+        //     "judul" => "Detail Pembayaran",  // Judul halaman
+        //     "detail" => $data_detail         // Data detail pembayaran yang akan ditampilkan pada halaman
+        // ];
 
-        // Memuat template sidebar pengguna
-        $this->view('template/user_sidebar', $data);
+        // // Memuat template header
+        // $this->view('template/header', $data);
 
-        // Memuat tampilan halaman detail pembayaran
-        $this->view('user_dashboard/detail', $data);
+        // // Memuat template sidebar pengguna
+        // $this->view('template/user_sidebar', $data);
 
-        // Memuat template footer
-        $this->view('template/footer', $data);
+        // // Memuat tampilan halaman detail pembayaran
+        // $this->view('user_dashboard/detail', $data);
+
+        // // Memuat template footer
+        // $this->view('template/footer', $data);
     }
 
     /**
