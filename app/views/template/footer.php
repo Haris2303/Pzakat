@@ -102,10 +102,14 @@
     },
   });
 </script>
+<!-- vendor -->
 <script src="<?= BASEURL ?>/vendor/jquery/jquery.js"></script>
 <script type="text/javascript" src="<?= BASEURL ?>/vendor/sweetalert2/sweetalert2.all.min.js"></script>
+
+<!-- my javascript -->
 <script type="text/javascript" src="<?= BASEURL ?>/js/util/sweetalert2.js"></script>
 <script type="text/javascript" src="<?= BASEURL ?>/js/app.js"></script>
+
 </body>
 
 </html>

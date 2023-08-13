@@ -11,7 +11,7 @@
 
     <div class="row justify-content-center mt-2 mb-5">
         <div class="col-lg-6 border-bottom shadow-lg py-4 px-3">
-            <form action="<?= BASEURL ?>/transaksi/aksi_tambah_donatur" method="POST">
+            <form action="<?= BASEURL ?>/transaksi/aksi_tambah_donatur" method="POST" class="form-loader">
                 <input type="hidden" name="slug_program" value="<?= $data['dataProgram']['slug'] ?>">
                 <input type="hidden" name="key" value="<?= uniqid('KDA-', false) . '_' . time() ?>">
 

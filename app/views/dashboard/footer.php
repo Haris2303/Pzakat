@@ -14,6 +14,7 @@
 <!-- my javascript -->
 <script src="<?= BASEURL ?>/js/main-admin.js"></script>
 <script src="<?= BASEURL ?>/js/util/sweetalert2.js"></script>
+<script src="<?= BASEURL ?>/js/util/loader.js"></script>
 
 
 <!-- plugin JavaScript-->

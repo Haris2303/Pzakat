@@ -53,14 +53,14 @@
               <td>
 
               <!-- konfirmasi button -->
-                <form action="<?= BASEURL ?>/kelola_pembayaran/aksi_konfirmasi_pembayaran" method="post" class="d-inline">
+                <form action="<?= BASEURL ?>/kelola_pembayaran/aksi_konfirmasi_pembayaran" method="post" class="d-inline form-loader">
                   <input type="hidden" name="id_donatur" value="<?= $item['id_donatur'] ?>">
                   <input type="hidden" name="username" value="<?= $_SESSION['username'] ?>">
                   <button type="submit" class="btn badge btn-primary">Konfirmasi</button>
                 </form>
 
                 <!-- batal button -->
-                <form action="<?= BASEURL ?>/kelola_pembayaran/aksi_batal_pembayaran" method="post" class="d-inline">
+                <form action="<?= BASEURL ?>/kelola_pembayaran/aksi_batal_pembayaran" method="post" class="d-inline form-loader">
                   <input type="hidden" name="id_donatur" value="<?= $item['id_donatur'] ?>">
                   <input type="hidden" name="username" value="<?= $_SESSION['username'] ?>">
                   <button type="submit" class="btn badge btn-danger">Batal</button>

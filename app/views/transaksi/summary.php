@@ -25,7 +25,7 @@
             <div class="mb-3 border-bottom">
                 <h4>Data Konfirmasi Donasi</h4>
             </div>
-            <form action="<?= BASEURL ?>/transaksi/aksi_tambah_transaksi" method="POST" enctype="multipart/form-data">
+            <form action="<?= BASEURL ?>/transaksi/aksi_tambah_transaksi" method="POST" enctype="multipart/form-data" class="form-loader">
                 <input type="hidden" name="nomor-pembayaran" value="<?= $data['dataKode'] ?>">
                 <div class="mb-3">
                     <label for="nominal-donasi">Nominal Donasi</label>

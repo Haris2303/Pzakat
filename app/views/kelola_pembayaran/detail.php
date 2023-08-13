@@ -69,7 +69,7 @@
     <div class="mt-3">
       <a href="<?= BASEURL ?>/kelola_pembayaran/<?= $data['detail']['status_pembayaran'] ?>" class="btn btn-secondary"><i class="fas fa-arrow-alt-circle-left"></i> Kembali</a>
       <?php if($data['detail']['status_pembayaran'] === 'konfirmasi'):?>
-        <form action="<?= BASEURL ?>/kelola_pembayaran/aksi_konfirmasi_pembayaran" method="post" class="d-inline">
+        <form action="<?= BASEURL ?>/kelola_pembayaran/aksi_konfirmasi_pembayaran" method="post" class="d-inline form-loader">
           <input type="hidden" name="id_donatur" value="<?= $data['detail']['id_donatur'] ?>">
           <button type="submit" class="btn btn-primary"><i class="fas fa-arrow-alt-circle-left"></i> Konfirmasi</button>
         </form>

@@ -1,7 +1,15 @@
-const root = document.querySelector("#root");
-const loader = document.querySelector('#loader');
-
-window.onload = function() {
-    root.classList.toggle('hidden')
-    loader.classList.add('none')
+const showLoading = function() {
+    Swal.fire({
+        title: 'Please Wait !',
+        html: 'data sedang diproses...',// add html attribute if you want or remove
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        willOpen: () => {
+            Swal.showLoading()
+        },
+    });
 }
+
+document.querySelector(".form-loader").addEventListener("submit", function () {
+    showLoading();
+});
