@@ -37,7 +37,7 @@ class Settings extends Controller
         // Mengambil data akun amil berdasarkan username yang disimpan di sesi
         $data = [
             "judul" => "Pengaturan Akun",
-            "dataAmil" => $this->model('Amil_model')->getDataAmilByUsername($_SESSION['username'])
+            "dataAmil" => $this->model('Amil_model')->getDataByUsername($_SESSION['username'])
         ];
 
         // Memuat view sidebar, halaman pengaturan akun (settings/index), dan footer
