@@ -22,7 +22,7 @@ class LatarBelakang_model
     $this->baseModel->selectData();
 
     // Mengambil semua baris data yang dihasilkan dari SELECT.
-    return $this->baseModel->fetchAll();
+    return $this->baseModel->fetch();
   }
 
   /**
