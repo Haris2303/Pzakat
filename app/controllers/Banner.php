@@ -25,9 +25,9 @@ class Banner extends Controller
     }
 
     /**
-     * -------------------------------------------------------------------------------------------------------------------------
+     * --------------------------------------------------------------------
      *                      ACTION METHOD
-     * -------------------------------------------------------------------------------------------------------------------------
+     * --------------------------------------------------------------------
      */
 
     /**
@@ -44,14 +44,13 @@ class Banner extends Controller
         if ($result > 0) {
             // Menampilkan pesan sukses dan arahkan kembali ke halaman "Banner"
             Flasher::setFlash('Data Banner <strong>Berhasil</strong> ditambahkan!', 'success');
-            header('Location: ' . BASEURL . '/banner');
-            exit;
         } else {
             // Jika ada kesalahan, tampilkan pesan kesalahan dan arahkan kembali ke halaman "Banner"
             Flasher::setFlash($result, 'danger');
-            header('Location: ' . BASEURL . '/banner');
-            exit;
         }
+
+        header($this->location . '/banner');
+        exit;
     }
 
     /**
@@ -69,13 +68,12 @@ class Banner extends Controller
         if ($result > 0) {
             // Menampilkan pesan sukses dan arahkan kembali ke halaman "Banner"
             Flasher::setFlash('Data Banner <strong>Berhasil</strong> dihapus', 'success');
-            header('Location: ' . BASEURL . '/banner');
-            exit;
         } else {
             // Jika ada kesalahan, tampilkan pesan kesalahan dan arahkan kembali ke halaman "Banner"
             Flasher::setFlash('Data Banner <strong>Gagal</strong> dihapus', 'danger');
-            header('Location: ' . BASEURL . '/banner');
-            exit;
         }
+
+        header($this->location . '/banner');
+        exit;
     }
 }

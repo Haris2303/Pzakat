@@ -1,14 +1,18 @@
-<?php 
+<?php
 
-class Controller {
+class Controller
+{
 
-  public function view($view, $data = []): void {
+  protected $location = "Location: " . BASEURL;
+
+  public function view($view, $data = []): void
+  {
     require_once '../app/views/' . $view . '.php';
   }
 
-  public function model($model_class): object {
-    require_once '../app/models/' . $model_class . '.php';
-    return new $model_class;
+  public function model($modelClass): object
+  {
+    require_once '../app/models/' . $modelClass . '.php';
+    return new $modelClass;
   }
-
 }

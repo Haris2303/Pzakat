@@ -49,29 +49,34 @@ class Pembayaran_model
     }
 
     /**
-     * --------------------------------------------------------------------------------------------------------------------------------------------------------
+     * --------------------------------------------------------
      *                      GET DATA
-     * --------------------------------------------------------------------------------------------------------------------------------------------------------
+     * --------------------------------------------------------
      */
 
     /**
-     * Mengambil data pembayaran berdasarkan status pembayaran tertentu atau semua data jika status_pembayaran tidak ditentukan.
+     * Mengambil data pembayaran berdasarkan status pembayaran tertentu atau 
+     * semua data jika status_pembayaran tidak ditentukan.
      *
      * @param string|null $status_pembayaran Status pembayaran yang ingin diambil datanya. Default: null.
      * @param array $orderby Urutan pengurutan data. Default: array().
      * @param array|null $kondisi Kondisi tambahan untuk seleksi data. Default: null.
      * @return array Array yang berisi data pembayaran yang sesuai dengan status pembayaran atau semua data pembayaran.
      */
-    public function getAllDataPembayaran(string $status_pembayaran = null, array $orderby = [], array $kondisi = null): array
-    {
+    public function getAllDataPembayaran(
+        string $status_pembayaran = null,
+        array $orderby = [],
+        array $kondisi = null
+    ): array {
         $vw = $this->view['dataAll']; // Nama tampilan data pembayaran.
 
-        
-        if (is_null($status_pembayaran) && count($orderby) <= 0 && is_null($kondisi)) {
+
+        if (is_null($status_pembayaran) && empty($orderby) <= 0 && is_null($kondisi)) {
             // Jika status_pembayaran tidak ditentukan, ambil semua data pembayaran.
             $this->baseModel->selectData($vw);
-        } else if(!is_null($status_pembayaran) && count($orderby) <= 0 && is_null($kondisi)) {
-            // Jika status_pembayaran ditentukan, ordernya kosongambil dan kondisi null, maka ambil semua data pembayaran dengan status tertentu.
+        } elseif (!is_null($status_pembayaran) && empty($orderby) <= 0 && is_null($kondisi)) {
+            // Jika status_pembayaran ditentukan, ordernya kosongambil dan kondisi null,
+            //maka ambil semua data pembayaran dengan status tertentu.
             $this->baseModel->selectData($vw, null, [], ["status_pembayaran =" => $status_pembayaran]);
         } else {
             // Jika status_pembayaran ada dan parameter lain
@@ -150,9 +155,9 @@ class Pembayaran_model
     }
 
     /**
-     * ------------------------------------------------------------------------------------------------------------------------------------------------------
+     * --------------------------------------------------------------
      *              ACTION DATA 
-     * ------------------------------------------------------------------------------------------------------------------------------------------------------
+     * --------------------------------------------------------------
      */
 
     /**

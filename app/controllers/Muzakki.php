@@ -45,7 +45,7 @@ class Muzakki extends Controller
     }
 
     // Kembali ke halaman Muzakki setelah aksi selesai
-    header('Location: ' . BASEURL . '/muzakki');
+    header($this->location . '/muzakki');
     exit;
   }
 }

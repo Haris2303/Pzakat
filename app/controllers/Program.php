@@ -5,7 +5,8 @@ class Program extends Controller
 
     /**
      * Menampilkan halaman detail program berdasarkan slug.
-     * Metode ini menerima parameter slug yang digunakan untuk mengambil data program aktif berdasarkan slug dari model Program_model.
+     * Metode ini menerima parameter slug yang digunakan untuk mengambil data program aktif
+     * berdasarkan slug dari model Program_model.
      * Jika program dengan slug tersebut ditemukan, halaman detail program akan ditampilkan.
      * Jika program dengan slug tersebut tidak ditemukan, halaman 404 (Not Found) akan ditampilkan.
      * @param string $slug Slug dari program yang akan ditampilkan.
@@ -16,7 +17,15 @@ class Program extends Controller
         $data = [
             "judul" => "Program",
             "dataProgram" => $this->model('Program_model')->getDataProgramAktifBySlug($slug),
-            "donatur" => $this->model('Pembayaran_model')->getAllDataPembayaran('success', ["tanggal_pembayaran" => "DESC"], ['logic' => 'AND', 'status_pembayaran =' => 'success', "slug_program =" => $slug])
+            "donatur" => $this->model('Pembayaran_model')->getAllDataPembayaran(
+                'success',
+                [
+                    "tanggal_pembayaran" => "DESC"
+                ],
+                [
+                    'logic' => 'AND', 'status_pembayaran =' => 'success', "slug_program =" => $slug
+                ]
+            )
         ];
 
         // Memeriksa apakah program dengan slug tersebut ditemukan

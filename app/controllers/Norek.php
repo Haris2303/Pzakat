@@ -3,6 +3,8 @@
 class Norek extends Controller
 {
 
+    protected $urlNorek = '/norek';
+
     /**
      * Konstruktor kontroler Norek untuk mengatur akses hanya bagi admin (level 1)
      * 
@@ -12,7 +14,7 @@ class Norek extends Controller
     {
         // Jika yang mengakses bukan admin (level bukan 1), alihkan ke halaman utama
         if ($_SESSION['level'] !== '1') {
-            header('Location: ' . BASEURL . '/');
+            header($this->location . '/');
             exit;
         }
     }
@@ -97,7 +99,7 @@ class Norek extends Controller
         } else {
             Flasher::setFlash($result, 'danger');
         }
-        header('Location: ' . BASEURL . '/norek');
+        header($this->location . $this->urlNorek);
         exit;
     }
 
@@ -115,7 +117,7 @@ class Norek extends Controller
         } else {
             Flasher::setFlash($result, 'danger');
         }
-        header('Location: ' . BASEURL . '/norek');
+        header($this->location . $this->urlNorek);
         exit;
     }
 
@@ -134,7 +136,7 @@ class Norek extends Controller
         } else {
             Flasher::setFlash('Data Nomor Rekening <strong>Gagal</strong> dihapus!', 'danger');
         }
-        header('Location: ' . BASEURL . '/norek');
+        header($this->location . $this->urlNorek);
         exit;
     }
 }

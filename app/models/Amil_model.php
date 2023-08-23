@@ -48,9 +48,9 @@ class Amil_model
 
 
   /**
-   * -------------------------------------------------------------------------------------------------------------------------------------------------------
+   * ------------------------------------------------------------------
    *                  GET ALL DATA
-   * -------------------------------------------------------------------------------------------------------------------------------------------------------
+   * ------------------------------------------------------------------
    */
 
   /**
@@ -66,9 +66,9 @@ class Amil_model
 
 
   /**
-   * -------------------------------------------------------------------------------------------------------------------------------------------------------
+   * -------------------------------------------------------------------
    *                  GET DATA BY
-   * -------------------------------------------------------------------------------------------------------------------------------------------------------
+   * -------------------------------------------------------------------
    */
 
   /**
@@ -88,12 +88,13 @@ class Amil_model
    *
    * @param array $data Data baru yang akan digunakan untuk perubahan profil.
    * @param string $username Username pengguna yang profilnya akan diubah.
-   * @return int|string Hasil dari operasi perubahan profil. Jika berhasil, mengembalikan jumlah baris yang diubah, jika gagal, mengembalikan pesan error (string).
+   * @return int|string Hasil dari operasi perubahan profil. Jika berhasil,
+   * mengembalikan jumlah baris yang diubah, jika gagal, mengembalikan pesan error (string).
    */
   public function ubahProfil(array $data, string $username): int|string
   {
     // Merubah username baru ke huruf kecil
-    $username_baru = strtolower($data['username']);
+    $usernameBaru = strtolower($data['username']);
 
     // Membuat dataArray dengan data yang dimasukkan
     $dataArray = [
@@ -105,22 +106,22 @@ class Amil_model
     ];
 
     // Mendapatkan id pengguna berdasarkan username
-    $id_user = $this->controller->model('User_model')->getIdByUsername($username);
+    $idUser = $this->controller->model('User_model')->getIdByUsername($username);
 
     // Memeriksa apakah email yang dimasukkan sudah ada di dalam database
-    if ($this->controller->model('User_model')->isEmail($dataArray['email'], $id_user)) {
+    if ($this->controller->model('User_model')->isEmail($dataArray['email'], $idUser)) {
       return 'Email sudah terdaftar!';
     }
 
     // Mengubah data profil
-    $rowCount = $this->baseModel->updateData($dataArray, ["id_user" => $id_user]);
+    $rowCount = $this->baseModel->updateData($dataArray, ["id_user" => $idUser]);
 
     // Mengatur session nama pengguna
     $_SESSION['nama'] = $dataArray['nama'];
 
     // Jika username diubah, juga melakukan update username
-    if ($username_baru !== $username) {
-      $rowCount = $this->controller->model('User_model')->updateUsername($id_user, $username_baru);
+    if ($usernameBaru !== $username) {
+      $rowCount = $this->controller->model('User_model')->updateUsername($idUser, $usernameBaru);
       if (is_string($rowCount)) {
         return $rowCount;
       }

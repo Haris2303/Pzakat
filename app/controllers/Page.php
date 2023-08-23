@@ -26,10 +26,13 @@ class Page extends Controller
   {
     // Mengambil data berita
     $data = $this->model('Views_model')->getAllDataBerita();
+
     // Membuat objek Pagination dengan nama tabel, data, jumlah item per halaman, dan halaman saat ini
     $pagination = new Pagination('tb_views', $data, 10, $page);
+
     // Mengatur paginasi dengan kondisi tertentu (mengambil data berita)
     $pager = $pagination->setPager(["id_views" => "DESC"], ["jenis_views =" => "Berita"]);
+
     // Data yang akan dikirimkan ke tampilan (view) halaman berita
     $data = [
       "judul" => "Berita",
@@ -51,8 +54,10 @@ class Page extends Controller
   {
     // Mengambil data artikel
     $data = $this->model('Views_model')->getAllDataArtikel();
+
     // Membuat objek Pagination dengan nama tabel, data, jumlah item per halaman, dan halaman saat ini
     $pagination = new Pagination('tb_views', $data, 10, $page);
+
     // Mengatur paginasi dengan kondisi tertentu (mengambil data artikel)
     $pager = $pagination->setPager(
       ["id_views" => "DESC"],
@@ -62,11 +67,13 @@ class Page extends Controller
         "slug NOT LIKE" => "%pilar%"
       ]
     );
+
     // Data yang akan dikirimkan ke tampilan (view) halaman artikel
     $data = [
       "judul" => "Artikel",
       "dataArtikel" => $pager
     ];
+
     // Menampilkan tampilan (view) halaman artikel dengan menggunakan data yang telah diatur
     $this->view('template/header', $data);
     $this->view('page/artikel', $data);

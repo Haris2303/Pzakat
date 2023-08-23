@@ -12,7 +12,7 @@ class Kelola_program extends Controller
     {
         // Jika yang mengakses bukan admin
         if ($_SESSION['level'] !== '1') {
-            header('Location: ' . BASEURL . '/');
+            header($this->location . '/');
             exit;
         }
 
@@ -186,7 +186,7 @@ class Kelola_program extends Controller
     {
         // Jika slug kosong/null, alihkan ke halaman utama
         if (is_null($slug)) {
-            header('Location: ' . BASEURL . '/');
+            header($this->location . '/');
             exit;
         }
 
@@ -213,17 +213,18 @@ class Kelola_program extends Controller
     }
 
     /**
-     * GetDataProgramHaveMoneyById: Mengambil data program donasi yang memiliki informasi tentang donasi uang berdasarkan ID program.
+     * GetDataProgramHaveMoneyById: Mengambil data program donasi 
+     * yang memiliki informasi tentang donasi uang berdasarkan ID program.
      *
      * @return void
      */
     public function getDataProgramHaveMoneyById()
     {
         // Mengambil ID program dari data POST
-        $id_program = $_POST['id_program'];
+        $id = $_POST['id_program'];
 
         // Mengambil data program donasi yang memiliki informasi tentang donasi uang berdasarkan ID program
-        $data = $this->model('Program_model')->getAllDataProgramHaveMoneyById($id_program);
+        $data = $this->model('Program_model')->getAllDataProgramHaveMoneyById($id);
 
         // Mengirimkan data dalam format JSON
         echo json_encode($data);
@@ -237,19 +238,19 @@ class Kelola_program extends Controller
     public function getDataProgramByJenisProgram()
     {
         // Mengambil jenis program dari data POST
-        $jenis_program = $_POST['jenis_program'];
+        $jenisProgram = $_POST['jenis_program'];
 
         // Mengambil data program donasi berdasarkan jenis program
-        $data = $this->model('Program_model')->getAllDataProgramTunai($jenis_program);
+        $data = $this->model('Program_model')->getAllDataProgramTunai($jenisProgram);
 
         // Mengirimkan data dalam format JSON
         echo json_encode($data);
     }
 
     /**
-     * ---------------------------------------------------------------------------------------------------------------------------
+     * ----------------------------------------------------------------------------
      *                  ACTION METHOD
-     * ---------------------------------------------------------------------------------------------------------------------------
+     * ----------------------------------------------------------------------------
      */
 
     /**
@@ -264,13 +265,11 @@ class Kelola_program extends Controller
         $result = $this->model('Program_model')->tambahDataProgram(ucwords($program), $_POST);
         if (is_int($result) && $result > 0) {
             Flasher::setFlash('Data Barang <strong>Berhasil</strong> Ditambahkan!', 'success');
-            header('Location: ' . BASEURL . "/kelola_program/" . $program . "/barang");
-            exit;
         } else {
             Flasher::setFlash($result, 'danger');
-            header('Location: ' . BASEURL . "/kelola_program/" . $program . "/barang");
-            exit;
         }
+        header($this->location . "/kelola_program/" . $program . "/barang");
+        exit;
     }
 
     /**
@@ -285,13 +284,11 @@ class Kelola_program extends Controller
         $result = $this->model('Program_model')->tambahDataProgram(ucwords($program), $_POST, $_FILES);
         if (is_int($result) && $result > 0) {
             Flasher::setFlash("Data $program <strong>Berhasil</strong> Ditambahkan!", 'success');
-            header('Location: ' . BASEURL . "/kelola_program/$program");
-            exit;
         } else {
             Flasher::setFlash($result, 'danger');
-            header('Location: ' . BASEURL . "/kelola_program/$program");
-            exit;
         }
+        header($this->location . "/kelola_program/$program");
+        exit;
     }
 
     /**
@@ -302,21 +299,20 @@ class Kelola_program extends Controller
     public function aksi_status_program(): void
     {
         // Tentukan status yang akan diubah (aktif menjadi pasif atau sebaliknya)
-        $update_to = ($_POST['status'] === 'aktif') ? 'pasif' : 'aktif';
+        $status = ($_POST['status'] === 'aktif') ? 'pasif' : 'aktif';
         $pesan = ($_POST['status'] === 'aktif') ? 'Nonaktifkan' : 'Aktifkan';
 
         // Mengubah status program menggunakan model Kategoriprogram_model
-        $result = $this->model('Kategoriprogram_model')->ubahStatusProgram($_POST['id'], $update_to);
+        $result = $this->model('Kategoriprogram_model')->ubahStatusProgram($_POST['id'], $status);
 
         // Set pesan flash berdasarkan hasil perubahan status
         if ($result > 0) {
             Flasher::setFlash('Status berhasil di ' . $pesan . '!', 'success');
-            header('Location: ' . BASEURL . '/kelola_program');
-            exit;
         } else {
             Flasher::setFlash('Status gagal di ' . $pesan . '!', 'danger');
-            header('Location: ' . BASEURL . '/kelola_program');
-            exit;
         }
+
+        header($this->location . '/kelola_program');
+        exit;
     }
 }

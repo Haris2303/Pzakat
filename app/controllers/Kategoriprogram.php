@@ -26,9 +26,9 @@ class Kategoriprogram extends Controller
     }
 
     /**
-     * -------------------------------------------------------------------------------------------------------------------------
+     * ------------------------------------------------------------------------
      *              ACTION METHOD
-     * -------------------------------------------------------------------------------------------------------------------------
+     * ------------------------------------------------------------------------
      */
 
     /**
@@ -45,14 +45,13 @@ class Kategoriprogram extends Controller
         if ($result > 0) {
             // Jika berhasil, menampilkan pesan sukses, kemudian kembali ke halaman kategoriprogram
             Flasher::setFlash('Data Kategori <strong>Berhasil</strong> Ditambahkan!', 'success');
-            header('Location: ' . BASEURL . '/kategoriprogram');
-            exit;
         } else {
             // Jika gagal, menampilkan pesan gagal, kemudian kembali ke halaman kategoriprogram
             Flasher::setFlash('Data Kategori <strong>Gagal</strong> Ditambahkan!', 'danger');
-            header('Location: ' . BASEURL . '/kategoriprogram');
-            exit;
         }
+
+        header($this->location . '/kategoriprogram');
+        exit;
     }
 
     /**
@@ -70,13 +69,12 @@ class Kategoriprogram extends Controller
         if ($result > 0) {
             // Jika berhasil, menampilkan pesan sukses, kemudian kembali ke halaman kategoriprogram
             Flasher::setFlash('Data Kategori <strong>Berhasil</strong> Dihapus!', 'success');
-            header('Location: ' . BASEURL . '/kategoriprogram');
-            exit;
         } else {
             // Jika gagal, menampilkan pesan gagal, kemudian kembali ke halaman kategoriprogram
             Flasher::setFlash('Data Kategori <strong>Gagal</strong> Dihapus!', 'danger');
-            header('Location: ' . BASEURL . '/kategoriprogram');
-            exit;
         }
+
+        header($this->location . '/kategoriprogram');
+        exit;
     }
 }

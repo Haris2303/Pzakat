@@ -1,13 +1,15 @@
 <?php
 
-class Design {
+class Design
+{
 
     /**
-     * --------------------------------------------------------------------------------------------------------------------------
+     * ---------------------------------------------------------------
      *                  VIEW EMAIL
-     * --------------------------------------------------------------------------------------------------------------------------
+     * ---------------------------------------------------------------
      */
-    private static function emailHeader(): string {
+    private static function emailHeader(): string
+    {
         return '<!DOCTYPE html>
                 <html>
                 
@@ -51,7 +53,8 @@ class Design {
                 <div class="container">';
     }
 
-    private static function emailFooter(): string {
+    private static function emailFooter(): string
+    {
         return '<p>Salam,<br>
                         Layanan Lazismu-Unamin</p>
                     <hr style="border: none; border-top: 1px solid #ccc;">
@@ -64,16 +67,17 @@ class Design {
     }
 
     // pesan email body
-    public static function emailMessageKonfirmasi(int $id):string {
+    public static function emailMessageKonfirmasi(int $id): string
+    {
 
         $controller = new Controller();
         $dataKonfirmasi = $controller->model('Pembayaran_model')->getDataPembayaranById($id);
 
         // assignment variabel
-        $nomor_pembayaran   = $dataKonfirmasi['nomor_pembayaran'];
+        $nomorPembayaran    = $dataKonfirmasi['nomor_pembayaran'];
         $program            = $dataKonfirmasi['nama_program'];
         $nama               = $dataKonfirmasi['nama_donatur'];
-        $nominal_donasi     = $dataKonfirmasi['jumlah_pembayaran'];
+        $totalDonasi        = $dataKonfirmasi['jumlah_pembayaran'];
 
         return '<!DOCTYPE html>
                 <html>
@@ -155,19 +159,19 @@ class Design {
                             <table border="1px" cellspacing="0">
                                 <tr>
                                     <td><p><span class="details-label">Nomor Transaksi</span></p></td>
-                                    <td><p>'. $nomor_pembayaran .'</p></td>
+                                    <td><p>' . $nomorPembayaran . '</p></td>
                                 </tr>
                                 <tr>
                                     <td><p><span class="details-label">Nama Donatur</span></p></td>
-                                    <td><p>'. $nama .'</p></td>
+                                    <td><p>' . $nama . '</p></td>
                                 </tr>
                                 <tr>
                                     <td><p><span class="details-label">Program</span></p></td>
-                                    <td><p>'. $program .'</p></td>
+                                    <td><p>' . $program . '</p></td>
                                 </tr>
                                 <tr>
                                     <td><p><span class="details-label">Nominal Donasi</span></p></td>
-                                    <td><p>Rp '. number_format($nominal_donasi, 0, ',', '.') .'</p></td>
+                                    <td><p>Rp ' . number_format($totalDonasi, 0, ',', '.') . '</p></td>
                                 </tr>
                             </table>
                         </div>
@@ -180,7 +184,8 @@ class Design {
     }
 
     // pesan email body
-    public static function emailMessageBatal(int $id):string {
+    public static function emailMessageBatal(int $id): string
+    {
 
         $controller = new Controller();
         $dataKonfirmasi = $controller->model('Pembayaran_model')->getDataPembayaranById($id);
@@ -190,24 +195,25 @@ class Design {
         $nama               = $dataKonfirmasi['nama_donatur'];
         $nominal_donasi     = $dataKonfirmasi['jumlah_pembayaran'];
 
-        return self::emailHeader() .'
-                <h3>Dear '. $nama .',</h3>
-                <p>Kami menyesal memberitahu Anda bahwa pembayaran sebesar <strong>Rp '. number_format($nominal_donasi, 0, ',', '.') .'</strong> untuk program <strong>'. $program .'</strong> tidak dapat kami terima karena tidak memenuhi syarat pembayaran. Silakan periksa kembali informasi pembayaran yang Anda berikan.</p>
+        return self::emailHeader() . '
+                <h3>Dear ' . $nama . ',</h3>
+                <p>Kami menyesal memberitahu Anda bahwa pembayaran sebesar <strong>Rp ' . number_format($nominal_donasi, 0, ',', '.') . '</strong> untuk program <strong>' . $program . '</strong> tidak dapat kami terima karena tidak memenuhi syarat pembayaran. Silakan periksa kembali informasi pembayaran yang Anda berikan.</p>
                 <p>Kami harap Anda dapat menyelesaikan pembayaran sesuai syarat yang berlaku agar transaksi Anda dapat kami proses dengan baik.</p>
                 <p>Terima kasih atas perhatian Anda.</p>
-                '. self::emailFooter();
+                ' . self::emailFooter();
     }
 
     // pesan summary
-    public static function emailMessageSummary(int $id): string {
+    public static function emailMessageSummary(int $id): string
+    {
 
         $controller = new Controller();
         $data = $controller->model('Pembayaran_model')->getAllDataPembayaran('pending', [], ['id_donatur =' => $id])[0];
-        
+
         $nama = ucwords($data['nama_donatur']);
         $kode = explode('_', $data['nomor_pembayaran'])[0];
         $nominal = number_format($data['jumlah_pembayaran'], 0, ',', '.');
-        $nama_program = $data['nama_program'];
+        $namaProgram = $data['nama_program'];
         $expired = explode('_', $data['nomor_pembayaran'])[1];
         $tautan = BASEURL . '/transaksi/summary/' . $data['nomor_pembayaran'];
 
@@ -216,81 +222,83 @@ class Design {
 
         // Konversi timestamp 24 jam ke depan ke dalam format tanggal dan waktu
         $futureDateTime = date('Y-m-d H:i', $futureTimestamp);
-        
-        return self::emailHeader() .'
-                <h3>Dear '. $nama .',</h3>
+
+        return self::emailHeader() . '
+                <h3>Dear ' . $nama . ',</h3>
                 <p>Kami ingin memberikan pemberitahuan penting mengenai pembayaran yang belum dibayarkan pada akun Anda.</p>
                 <p><strong>Detail pembayaran yang belum diselesaikan</strong>:</p>
                 <table cellpadding="5" cellspacing="0">
                     <tr>
                         <th>Kode Pembayaran</th>
-                        <td>: '. $kode .'</td>
+                        <td>: ' . $kode . '</td>
                     </tr>
                     <tr>
                         <th>Nama Program</th>
-                        <td>: '. $nama_program .'</td>
+                        <td>: ' . $namaProgram . '</td>
                     </tr>
                     <tr>
                         <th>Jumlah Tagihan</th>
-                        <td>: Rp '. $nominal .'</td>
+                        <td>: Rp ' . $nominal . '</td>
                     </tr>
                     <tr>
                         <th>Tenggat Pembayaran</th>
-                        <td>: '. $futureDateTime .'</td>
+                        <td>: ' . $futureDateTime . '</td>
                     </tr>
                 </table>
                 <p>Kami memahami bahwa kadang-kadang ada kendala atau kelalaian yang dapat terjadi. Untuk menghindari gangguan
                     layanan atau akun yang dinonaktifkan, harap segera melakukan pembayaran sebelum tanggal jatuh tempo yang
                     disebutkan di atas.</p>
-                <p class="btn"><a href="'. $tautan .'">Bayar Sekarang</a></p>
+                <p class="btn"><a href="' . $tautan . '">Bayar Sekarang</a></p>
                 <p>Kami sangat menghargai kerjasama Anda dalam menyelesaikan pembayaran ini dengan segera. Terima kasih atas
                     perhatian dan waktu Anda.</p>
                 
-            '. self::emailFooter();
+            ' . self::emailFooter();
     }
 
     /**
      * @return string html
      */
-    public static function emailMessageForgot(int $user_id, string $email, string $token): string {
+    public static function emailMessageForgot(int $userId, string $email, string $token): string
+    {
         $controller = new Controller();
-        $nama = $controller->model('User_model')->getNamaByIdUser($user_id);
+        $nama = $controller->model('User_model')->getNamaByIdUser($userId);
 
-        return self::emailHeader().'
-                    <h3>Hello, '.$nama.'</h3>
+        return self::emailHeader() . '
+                    <h3>Hello, ' . $nama . '</h3>
                     <p>Seseorang telah meminta untuk mereset password akun Anda. Jika Anda tidak melakukan permintaan ini, Anda dapat
                         mengabaikan email ini.</p>
                     <p>Jika Anda ingin mereset password Anda, kunjungi halaman reset password kami:</p>
-                    <p class="btn"><a href="' . BASEURL . '/login/ubah_password/'.$email.'/'.$token.'">Reset Password</a></p>
+                    <p class="btn"><a href="' . BASEURL . '/login/ubah_password/' . $email . '/' . $token . '">Reset Password</a></p>
                     <p>Terima kasih,</p>
-                '.self::emailFooter();
+                ' . self::emailFooter();
     }
 
     /**
      * @return string html
      */
-    public static function emailMessageActivation(string $username, string $href) {
-        return self::emailHeader().'
-                <p>Halo '.$username.',</p>
+    public static function emailMessageActivation(string $username, string $href)
+    {
+        return self::emailHeader() . '
+                <p>Halo ' . $username . ',</p>
                 <p>Terima kasih telah mendaftar di situs kami! Untuk melengkapi proses pendaftaran, silakan mengaktifkan akun Anda dengan mengklik tombol di bawah ini:</p>
                 <p class="btn">
-                    <a href="'. $href .'">Aktifkan Akun</a>
+                    <a href="' . $href . '">Aktifkan Akun</a>
                 </p>
                 <p>Setelah akun Anda diaktifkan, Anda akan dapat mengakses layanan kami dan menikmati semua fitur yang disediakan.</p>
                 <p>Jika Anda tidak melakukan pendaftaran di situs kami, Anda dapat mengabaikan pesan ini. Akun tersebut tidak akan diaktifkan tanpa tindakan konfirmasi dari Anda.</p>
                 <p>Terima kasih atas perhatian dan dukungan Anda.</p>
-                '.self::emailFooter();
+                ' . self::emailFooter();
     }
 
     /**
-     * -------------------------------------------------------------------------------------------------------------------------
+     * -----------------------------------------------------------------
      *                  VIEW DATA KOSONG
-     * -------------------------------------------------------------------------------------------------------------------------
+     * -----------------------------------------------------------------
      */
-    public static function blankData(string $message = null) {
+    public static function blankData(string $message = null)
+    {
         $controller = new Controller();
         $data['msg'] = $message;
         return $controller->view('template/blankdata', $data);
     }
-
 }

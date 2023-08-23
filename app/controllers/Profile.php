@@ -3,6 +3,8 @@
 class Profile extends Controller
 {
 
+    protected $url = '/profile';
+
     /**
      * Mengarahkan pengguna ke halaman profile berdasarkan level mereka.
      * Jika level adalah '1' (admin), pengguna akan diarahkan ke halaman profile admin.
@@ -14,11 +16,11 @@ class Profile extends Controller
         // Periksa level pengguna
         if ($_SESSION['level'] === '1') {
             // Jika admin, arahkan ke halaman profile admin
-            header('Location: ' . BASEURL . '/profile/admin');
+            header($this->location . '/profile/admin');
             exit;
         } else {
             // Jika bukan admin, arahkan ke halaman profile amil
-            header('Location: ' . BASEURL . '/profile/amil');
+            header($this->location . '/profile/amil');
             exit;
         }
     }
@@ -34,7 +36,7 @@ class Profile extends Controller
         // Periksa apakah pengguna adalah admin
         if ($_SESSION['level'] === '1') {
             // Jika admin, arahkan ke halaman profil admin
-            header('Location: ' . BASEURL . '/profile/admin');
+            header($this->location . '/profile/admin');
             exit;
         }
 
@@ -62,7 +64,7 @@ class Profile extends Controller
         // Periksa apakah pengguna adalah amil
         if ($_SESSION['level'] === '2') {
             // Jika amil, arahkan ke halaman profil amil
-            header('Location: ' . BASEURL . '/profile/amil');
+            header($this->location . '/profile/amil');
             exit;
         }
 
@@ -95,12 +97,13 @@ class Profile extends Controller
         if ($result > 0 && is_int($result)) {
             // Jika perubahan berhasil, set pesan sukses dan arahkan kembali ke halaman profil
             Flasher::setFlash('Perubahan <strong>Berhasil</strong> Disimpan!', 'success');
-            header('Location: ' . BASEURL . '/profile');
+            header($this->location . $this->url);
             exit;
         } else {
+            $flashMsg = "Perubahan <strong>Gagal</strong> Disimpan!";
             // Jika perubahan gagal, set pesan kesalahan dan arahkan kembali ke halaman profil
-            Flasher::setFlash((is_string($result)) ? $result : "'Perubahan <strong>Gagal</strong> Disimpan!'", 'danger');
-            header('Location: ' . BASEURL . '/profile');
+            Flasher::setFlash((is_string($result)) ? $result : $flashMsg, 'danger');
+            header($this->location . $this->url);
             exit;
         }
     }
@@ -120,15 +123,15 @@ class Profile extends Controller
 
         // Memeriksa hasil dari perubahan
         if ($result > 0 && is_int($result)) {
+            $flashMsg = 'Perubahan <strong>Berhasil</strong> Disimpan!';
             // Jika perubahan berhasil, set pesan sukses dan arahkan kembali ke halaman profil
-            Flasher::setFlash('Perubahan <strong>Berhasil</strong> Disimpan!', 'success');
-            header('Location: ' . BASEURL . '/profile');
-            exit;
+            Flasher::setFlash($flashMsg, 'success');
         } else {
+            $flashMsg = 'Perubahan <strong>Gagal</strong> Disimpan!';
             // Jika perubahan gagal, set pesan kesalahan dan arahkan kembali ke halaman profil
-            Flasher::setFlash((is_string($result)) ? $result : "'Perubahan <strong>Gagal</strong> Disimpan!'", 'danger');
-            header('Location: ' . BASEURL . '/profile');
-            exit;
+            Flasher::setFlash((is_string($result)) ? $result : $flashMsg, 'danger');
         }
+        header($this->location . $this->url);
+        exit;
     }
 }

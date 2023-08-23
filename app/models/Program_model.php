@@ -27,16 +27,16 @@ class Program_model
     }
 
     /**
-     * ------------------------------------------------------------------------------------------------------------------------------------------------
+     * ---------------------------------------------------------
      *                      GET DATA
-     * -----------------------------------------------------------------------------------------------------------------------------------------------
+     * ---------------------------------------------------------
      */
 
     /**
      * Mengambil semua data dari basis data sesuai dengan kondisi yang diberikan.
      *
      * @param array $kondisi Kondisi untuk pengambilan data dalam bentuk array asosiatif.
-     *                       Contoh: ["field =" => "value"] atau ["logic" => "AND", "field = " => "value", "field2 = " => "value2"].
+     * Contoh: ["field =" => "value"] atau ["logic" => "AND", "field = " => "value", "field2 = " => "value2"].
      * @return array Sebuah array yang berisi data yang diambil dari basis data sesuai dengan kondisi yang diberikan.
      */
     public function getAllData(array $kondisi): array
@@ -53,7 +53,8 @@ class Program_model
      * Menghitung jumlah total dana dari program tertentu atau seluruh program.
      *
      * @method Sum
-     * @param string $jenis_program Jenis program yang akan dihitung total dana. Jika NULL, menghitung total dari seluruh program.
+     * @param string $jenis_program Jenis program yang akan dihitung total dana. 
+     * Jika NULL, menghitung total dari seluruh program.
      * @return string Jumlah total dana dari program dalam format dengan pemisah ribuan.
      */
     public function getSumProgram(string $jenis_program = NULL): string

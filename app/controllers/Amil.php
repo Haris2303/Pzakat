@@ -31,7 +31,7 @@ class Amil extends Controller
       $this->view('dashboard/footer', $data);
     } else {
       // Jika level tidak sesuai, arahkan kembali ke halaman beranda
-      header('Location: ' . BASEURL . '/');
+      header($this->location . '/');
       exit;
     }
   }
@@ -67,15 +67,15 @@ class Amil extends Controller
       $this->view('dashboard/footer', $data);
     } else {
       // Jika level tidak sesuai, arahkan kembali ke halaman beranda
-      header('Location: ' . BASEURL . '/');
+      header($this->location . '/');
       exit;
     }
   }
 
   /**
-   * -----------------------------------------------------------------------------------------------------------------------------------------------------
+   * ---------------------------------------------------------------
    *                   ACTION METHOD
-   * -----------------------------------------------------------------------------------------------------------------------------------------------------
+   * ---------------------------------------------------------------
    */
 
   /**
@@ -106,20 +106,21 @@ class Amil extends Controller
       $msg = Design::emailMessageActivation($username, $href);
 
       // Mengirim email menggunakan Utility class
-      $is_email = Utility::sendEmail($email, $subject, $msg);
+      $isEmail = Utility::sendEmail($email, $subject, $msg);
 
       // Jika email berhasil dikirim
-      if ($is_email) {
-        Flasher::setFlash('Akun Berhasil Terdaftar Silahkan <strong>Cek Email</strong> untuk <strong>Aktivasi Akun</strong>!', 'info', 'y');
-        header('Location: ' . BASEURL . '/amil');
-        exit;
+      if ($isEmail) {
+        $flashMsg = 'Akun Berhasil Terdaftar Silahkan <strong>Cek Email</strong> untuk <strong>Aktivasi Akun</strong>!';
+        Flasher::setFlash($flashMsg, 'info', 'y');
       }
     } else {
       // Jika ada kesalahan, tampilkan pesan kesalahan
       Flasher::setFlash($result, 'danger');
-      header('Location: ' . BASEURL . '/amil');
-      exit;
     }
+
+    // redirect
+    header($this->location . '/amil');
+    exit;
   }
 
   /**
@@ -136,12 +137,12 @@ class Amil extends Controller
     if ($result > 0 && is_int($result)) {
       // Menampilkan pesan sukses dan mengarahkan kembali ke halaman detail Amil
       Flasher::setFlash('Data Amil Berhasil Diubah', 'success');
-      header('Location: ' . BASEURL . '/amil/detail/' . $_POST['username']);
+      header($this->location . '/amil/detail/' . $_POST['username']);
       exit;
     } else {
       // Jika ada kesalahan, tampilkan pesan kesalahan dan arahkan kembali ke halaman detail Amil
       Flasher::setFlash($result, 'danger');
-      header('Location: ' . BASEURL . '/amil/detail/' . $_POST['username']);
+      header($this->location . '/amil/detail/' . $_POST['username']);
       exit;
     }
   }
@@ -158,13 +159,13 @@ class Amil extends Controller
     if ($this->model('User_model')->deleteData($token) > 0) {
       // Jika penghapusan berhasil, tampilkan pesan sukses dan arahkan kembali ke halaman "Amil"
       Flasher::setFlash('Data Amil berhasil dihapus', 'success');
-      header('Location: ' . BASEURL . '/amil');
-      exit;
     } else {
       // Jika ada kesalahan, tampilkan pesan kesalahan dan arahkan kembali ke halaman "Amil"
       Flasher::setFlash('Data Amil gagal dihapus', 'danger');
-      header('Location: ' . BASEURL . '/amil');
-      exit;
     }
+
+    // redirect ke halaman amil
+    header($this->location . '/amil');
+    exit;
   }
 }

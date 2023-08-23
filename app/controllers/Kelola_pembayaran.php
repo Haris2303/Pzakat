@@ -193,9 +193,9 @@ class Kelola_pembayaran extends Controller
 
 
   /**
-   * -----------------------------------------------------------------------------------------------------------------------------
+   * ----------------------------------------------------------------------------
    *                ACTION METHOD
-   * -----------------------------------------------------------------------------------------------------------------------------
+   * ----------------------------------------------------------------------------
    */
 
   /**
@@ -214,34 +214,34 @@ class Kelola_pembayaran extends Controller
     // Initialize variables from dataKonfirmasi
     $slug             = $dataKonfirmasi['slug_program'];
     $username         = $_POST['username'];
-    $jumlah_dana      = $dataKonfirmasi['jumlah_pembayaran'];
-    $nama_bank        = $dataKonfirmasi['nama_bank'];
-    $email_donatur    = $dataKonfirmasi['email'];
+    $totalDana        = $dataKonfirmasi['jumlah_pembayaran'];
+    $namaBank         = $dataKonfirmasi['nama_bank'];
+    $emailDonatur     = $dataKonfirmasi['email'];
     $location         = $dataKonfirmasi['status_pembayaran'];
 
     // Send email to donatur
     $subject = "Konfirmasi Donasi Anda Telah Diterima";
-    $message = Design::emailMessageKonfirmasi($id); // Assuming Design::emailMessageKonfirmasi generates the email message
-    $isEmail = Utility::sendEmail($email_donatur, $subject, $message);
+
+    // Assuming Design::emailMessageKonfirmasi generates the email message
+    $message = Design::emailMessageKonfirmasi($id);
+
+    $isEmail = Utility::sendEmail($emailDonatur, $subject, $message);
 
     // If email is sent successfully
     if ($isEmail) {
       // Confirm the payment in the database
-      $result = $this->model('Pembayaran_model')->konfirmasiPembayaran($slug, $id, $username, $jumlah_dana, $nama_bank);
+      $result = $this->model('Pembayaran_model')->konfirmasiPembayaran($slug, $id, $username, $totalDana, $namaBank);
       if ($result > 0) {
         Flasher::setFlash('Pembayaran <strong>Berhasil</strong> Dikonfirmasi!', 'success');
-        header('Location: ' . BASEURL . "/kelola_pembayaran/$location");
-        exit;
       } else {
         Flasher::setFlash('Pembayaran <strong>Gagal</strong> Dikonfirmasi!', 'danger');
-        header('Location: ' . BASEURL . "/kelola_pembayaran/$location");
-        exit;
       }
     } else {
       Flasher::setFlash('Pesan Email <strong>Gagal</strong> Terkirim!', 'danger');
-      header('Location: ' . BASEURL . "/kelola_pembayaran/$location");
-      exit;
     }
+
+    header($this->location . "/kelola_pembayaran/$location");
+    exit;
   }
 
   /**
@@ -259,12 +259,12 @@ class Kelola_pembayaran extends Controller
 
     // Initialize variables from dataKonfirmasi
     $username      = $_POST['username'];
-    $email_donatur = $dataKonfirmasi['email'];
+    $emailDonatur = $dataKonfirmasi['email'];
 
     // Send email to donatur
     $subject = "Konfirmasi Donasi Anda Gagal";
     $message = Design::emailMessageBatal($id); // Assuming Design::emailMessageBatal generates the email message
-    $isEmail = Utility::sendEmail($email_donatur, $subject, $message);
+    $isEmail = Utility::sendEmail($emailDonatur, $subject, $message);
 
     // If email is sent successfully
     if ($isEmail) {
@@ -272,13 +272,11 @@ class Kelola_pembayaran extends Controller
       $result = $this->model('Pembayaran_model')->batalkanPembayaran($id, $username);
       if ($result > 0) {
         Flasher::setFlash('Pembayaran <strong>Berhasil</strong> Dibatalkan!', 'success');
-        header('Location: ' . BASEURL . '/kelola_pembayaran/konfirmasi');
-        exit;
       } else {
         Flasher::setFlash('Pembayaran <strong>Gagal</strong> Dibatalkan!', 'danger');
-        header('Location: ' . BASEURL . '/kelola_pembayaran/konfirmasi');
-        exit;
       }
+      header($this->location . '/kelola_pembayaran/konfirmasi');
+      exit;
     }
   }
 
@@ -299,15 +297,15 @@ class Kelola_pembayaran extends Controller
 
     // Execute the model to delete the payment record
     $result = $this->model('Pembayaran_model')->hapusPembayaran($kode);
+
     if ($result > 0) {
       Flasher::setFlash('Pembayaran Berhasil Dihapus!', 'success');
-      header('Location: ' . BASEURL . "/kelola_pembayaran/$location");
-      exit;
     } else {
       Flasher::setFlash('Pembayaran Gagal Dihapus!', 'danger');
-      header('Location: ' . BASEURL . "/kelola_pembayaran/$location");
-      exit;
     }
+
+    header($this->location . "/kelola_pembayaran/$location");
+    exit;
   }
 
   /**
@@ -319,14 +317,14 @@ class Kelola_pembayaran extends Controller
   {
     // Execute the model to add the payment for the barang
     $result = $this->model('Donasibarang_model')->tambahPembayaranBarang($_POST, $_FILES);
+
     if ($result > 0) {
       Flasher::setFlash('Barang <strong>Berhasil</strong> Ditambahkan!', 'success');
-      header('Location: ' . BASEURL . "/kelola_pembayaran/barang");
-      exit;
     } else {
       Flasher::setFlash('Barang <strong>Gagal</strong> Ditambahkan!', 'danger');
-      header('Location: ' . BASEURL . "/kelola_pembayaran/barang");
-      exit;
     }
+
+    header($this->location . "/kelola_pembayaran/barang");
+    exit;
   }
 }

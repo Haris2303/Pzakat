@@ -5,37 +5,47 @@ use PHPMailer\PHPMailer\Exception;
 
 class Utility
 {
-    // method upload image 
+
+    // method upload image
     public static function uploadImage(array $dataFile, string $folderName)
     {
+
         // initialisasi file gambar
         $namaFile   = $dataFile['gambar']['name'];
         $ukuran     = $dataFile['gambar']['size'];
         $errorFile  = $dataFile['gambar']['error'];
         $tmpName    = $dataFile['gambar']['tmp_name'];
 
+        $result = null;
+
         // cek gambar di upload atau tidak
-        if ($errorFile === 4) return 0;
+        $result = ($errorFile === 4) ? 0 : $result;
 
         // cek ekstensi gambar
         $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
         $ekstensiGambar = explode('.', $namaFile);
         $ekstensiGambar = strtolower(end($ekstensiGambar));
-        if (!in_array($ekstensiGambar, $ekstensiGambarValid)) return 0;
+        $result = (in_array($ekstensiGambar, $ekstensiGambarValid)) ? $result : 0;
 
         // cek ukuran gambar > 2mb
-        if ($ukuran === 2000000) return 0;
+        $result = ($ukuran === 2000000) ? 0 : $result;
 
-        // generate nama file baru 
+        // generate nama file baru
         $namaFileWebp = uniqid();
         $namaFileWebp .= '.' . 'webp';
 
         // convert to webp
-        if (!Utility::webpConvert($tmpName)) return false;
+        $result = Utility::webpConvert($tmpName) ? $result : false;
 
         // gambar siap upload
-        if (move_uploaded_file($tmpName, '/var/www/html/Pzakat/public/img/' . $folderName . '/' . $namaFileWebp)) return $namaFileWebp;
-        else return 0;
+        $path = '/var/www/html/Pzakat/public/img/';
+        if (move_uploaded_file($tmpName, $path . $folderName . '/' . $namaFileWebp)) {
+            $result = $namaFileWebp;
+        } else {
+            $result = 0;
+        }
+
+        return $result;
     }
 
     // method convert image to webp
@@ -103,6 +113,7 @@ class Utility
             $image->writeImage($output_file);
             return $output_file;
         }
+
         return false;
     }
 
@@ -119,17 +130,18 @@ class Utility
 
     public static function convertGramToKilogram(int $gram): float
     {
-        $kilogram = $gram / 1000;
-        return $kilogram;
+        return $gram / 1000;
     }
 
     public static function sendEmail(string $address, string $subject, string $message): bool
     {
         //Load Composer's autoloader
-        require '/var/www/html/Pzakat/vendor/autoload.php';
+        require_once LOCALE_URL . '/vendor/autoload.php';
 
         //Create an instance; passing `true` enables exceptions
         $mail = new PHPMailer(true);
+
+        $userEmail = 'hrsccf102@gmail.com';
 
         try {
             //Server settings
@@ -137,15 +149,15 @@ class Utility
             $mail->isSMTP();                                            //Send using SMTP
             $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'hrsccf102@gmail.com';                     //SMTP username
+            $mail->Username   = $userEmail;                     //SMTP username
             $mail->Password   = 'fegaucnvcajlshfp';                               //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
-            $mail->setFrom('hrsccf102@gmail.com', 'Lazismu Unamin');
+            $mail->setFrom($userEmail, 'Lazismu Unamin');
             $mail->addAddress($address);               //Name is optional
-            $mail->addReplyTo('hrsccf102@gmail.com', 'Information');
+            $mail->addReplyTo($userEmail, 'Information');
 
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
@@ -161,7 +173,8 @@ class Utility
         }
     }
 
-    public static function generateUUID(): string {
+    public static function generateUUID(): string
+    {
         if (function_exists('random_bytes')) {
             $data = random_bytes(16);
         } elseif (function_exists('openssl_random_pseudo_bytes')) {
@@ -169,18 +182,19 @@ class Utility
         } else {
             $data = uniqid(mt_rand(), true);
         }
-    
+
         assert(strlen($data) == 16);
-    
+
         // Set version (4) and variant (random)
         $data[6] = chr(ord($data[6]) & 0x0f | 0x40); // version 4
         $data[8] = chr(ord($data[8]) & 0x3f | 0x80); // variant: 10
-    
+
         // Convert to UUID format (8-4-4-4-12)
         return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
 
-    public static function generateToken(): string {
+    public static function generateToken(): string
+    {
         // generate token
         $token = base64_encode(random_bytes(32));
         // delete character '/' and '='
@@ -190,5 +204,4 @@ class Utility
         $token = explode('+', $token); // delete character '+'
         return urlencode(join('', $token));
     }
-
 }

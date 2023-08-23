@@ -3,6 +3,8 @@
 class Pageviews extends Controller
 {
 
+  protected $url = '/pageviews';
+
   /**
    * Halaman utama untuk menampilkan data berita.
    * 
@@ -73,16 +75,16 @@ class Pageviews extends Controller
    * @method upload
    * @param string $jenis_view - Jenis view (Berita atau Artikel) untuk halaman upload
    */
-  public function upload($jenis_view)
+  public function upload($jenisView)
   {
-    if ($jenis_view !== 'Artikel' && $jenis_view !== 'Berita') {
+    if ($jenisView !== 'Artikel' && $jenisView !== 'Berita') {
       $this->view('error/404');
       exit;
     }
 
     $data = [
-      "judul" => "Upload $jenis_view",
-      "jenis_view" => $jenis_view,
+      "judul" => "Upload $jenisView",
+      "jenis_view" => $jenisView,
     ];
 
     $this->view('dashboard/sidebar', $data);
@@ -98,18 +100,16 @@ class Pageviews extends Controller
    */
   public function aksi_tambah_berita()
   {
-    $jenis_view = $_POST['jenis_view'];
-    $href = ($jenis_view === 'Berita') ? '/Berita' : '/Artikel';
+    $jenisView = $_POST['jenis_view'];
+    $href = ($jenisView === 'Berita') ? '/berita' : '/artikel';
     $result = $this->model('Pageviews_model')->tambahBerita($_POST, $_FILES);
     if ($result > 0) {
-      Flasher::setFlash($jenis_view . ' Berhasil Diupload!', 'success');
-      header('Location: ' . BASEURL . '/pageviews' . $href);
-      exit;
+      Flasher::setFlash($jenisView . ' Berhasil Diupload!', 'success');
     } else {
       Flasher::setFlash($result, 'danger');
-      header('Location: ' . BASEURL . '/pageviews' . $href);
-      exit;
     }
+    header($this->location . $this->url . $href);
+    exit;
   }
 
   /**
@@ -119,18 +119,16 @@ class Pageviews extends Controller
    */
   public function aksi_ubah_view()
   {
-    $jenis_view = $_POST['jenis_view'];
-    $href = ($jenis_view === 'Berita') ? '/Berita' : '/Artikel';
+    $jenisView = $_POST['jenis_view'];
+    $href = ($jenisView === 'Berita') ? '/Berita' : '/Artikel';
     $result = $this->model('Pageviews_model')->ubahView($_POST, $_FILES);
     if ($result > 0) {
-      Flasher::setFlash($jenis_view . ' Berhasil Diupload', 'success');
-      header('Location: ' . BASEURL . '/pageviews' . $href);
-      exit;
+      Flasher::setFlash($jenisView . ' Berhasil Diupload', 'success');
     } else {
-      Flasher::setFlash($jenis_view . ' Gagal Diubah!', 'success');
-      header('Location: ' . BASEURL . '/pageviews' . $href);
-      exit;
+      Flasher::setFlash($jenisView . ' Gagal Diubah!', 'success');
     }
+    header($this->location . $this->url . $href);
+    exit;
   }
 
   /**
@@ -142,16 +140,14 @@ class Pageviews extends Controller
   public function aksi_hapus_view($slug)
   {
     $dataView = $this->model('Pageviews_model')->getDataViewBySlug($slug);
-    $jenis_view = $dataView['jenis_views'];
-    $href = ($jenis_view === 'Berita') ? '/Berita' : '/Artikel';
+    $jenisView = $dataView['jenis_views'];
+    $href = ($jenisView === 'Berita') ? '/Berita' : '/Artikel';
     if ($this->model('Pageviews_model')->hapusView($slug) > 0) {
       Flasher::setFlash('Berhasil Dihapus', 'success');
-      header('Location: ' . BASEURL . '/pageviews' . $href);
-      exit;
     } else {
       Flasher::setFlash('Gagal Dihapus', 'danger');
-      header('Location: ' . BASEURL . '/pageviews' . $href);
-      exit;
     }
+    header($this->location . $this->url . $href);
+    exit;
   }
 }

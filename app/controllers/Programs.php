@@ -40,8 +40,15 @@ class Programs extends Controller
     $data = [
       "judul" => "Programs Zakat",
 
-      // Mengambil semua data program dengan jenis_pembayaran tidak sama dengan 'barang' dan nama_kategoriprogram sama dengan 'zakat'
-      "dataProgramZakat" => $this->model('Program_model')->getAllData(["logic" => "AND", "jenis_pembayaran <>" => "barang", "nama_kategoriprogram =" => "zakat"]),
+      // Mengambil semua data program dengan jenis_pembayaran tidak sama dengan 'barang'
+      // dan nama_kategoriprogram sama dengan 'zakat'
+      "dataProgramZakat" => $this->model('Program_model')->getAllData(
+        [
+          "logic" => "AND",
+          "jenis_pembayaran <>" => "barang",
+          "nama_kategoriprogram =" => "zakat"
+        ]
+      ),
 
       // Mengambil semua kategori program yang memiliki status 'aktif'
       "dataJenisProgramAktif" => $this->model('Kategoriprogram_model')->getAllKategoriProgram('aktif')
@@ -73,8 +80,15 @@ class Programs extends Controller
     $data = [
       "judul" => "Programs Infaq",
 
-      // Mengambil semua data program dengan jenis_pembayaran tidak sama dengan 'barang' dan nama_kategoriprogram sama dengan 'infaq'
-      "dataProgramInfaq" => $this->model('Program_model')->getAllData(["logic" => "AND", "jenis_pembayaran <>" => "barang", "nama_kategoriprogram =" => "infaq"]),
+      // Mengambil semua data program dengan jenis_pembayaran tidak sama dengan 'barang'
+      // dan nama_kategoriprogram sama dengan 'infaq'
+      "dataProgramInfaq" => $this->model('Program_model')->getAllData(
+        [
+          "logic" => "AND",
+          "jenis_pembayaran <>" => "barang",
+          "nama_kategoriprogram =" => "infaq"
+        ]
+      ),
 
       // Mengambil semua kategori program yang memiliki status 'aktif'
       "dataJenisProgramAktif" => $this->model('Kategoriprogram_model')->getAllKategoriProgram('aktif')
@@ -106,8 +120,15 @@ class Programs extends Controller
     $data = [
       "judul" => "Programs Qurban",
 
-      // Mengambil semua data program dengan jenis_pembayaran tidak sama dengan 'barang' dan nama_kategoriprogram sama dengan 'qurban'
-      "dataProgramQurban" => $this->model('Program_model')->getAllData(["logic" => "AND", "jenis_pembayaran <>" => "barang", "nama_kategoriprogram =" => "qurban"]),
+      // Mengambil semua data program dengan jenis_pembayaran tidak sama dengan 'barang' dan
+      // nama_kategoriprogram sama dengan 'qurban'
+      "dataProgramQurban" => $this->model('Program_model')->getAllData(
+        [
+          "logic" => "AND",
+          "jenis_pembayaran <>" => "barang",
+          "nama_kategoriprogram =" => "qurban"
+        ]
+      ),
 
       // Mengambil semua kategori program yang memiliki status 'aktif'
       "dataJenisProgramAktif" => $this->model('Kategoriprogram_model')->getAllKategoriProgram('aktif')
@@ -139,8 +160,15 @@ class Programs extends Controller
     $data = [
       "judul" => "Programs Donasi",
 
-      // Mengambil semua data program dengan jenis_pembayaran tidak sama dengan 'barang' dan nama_kategoriprogram sama dengan 'donasi'
-      "dataProgramDonasi" => $this->model('Program_model')->getAllData(["logic" => "AND", "jenis_pembayaran <>" => "barang", "nama_kategoriprogram =" => "donasi"]),
+      // Mengambil semua data program dengan jenis_pembayaran tidak sama dengan 'barang' dan
+      // nama_kategoriprogram sama dengan 'donasi'
+      "dataProgramDonasi" => $this->model('Program_model')->getAllData(
+        [
+          "logic" => "AND",
+          "jenis_pembayaran <>" => "barang",
+          "nama_kategoriprogram =" => "donasi"
+        ]
+      ),
 
       // Mengambil semua kategori program yang memiliki status 'aktif'
       "dataJenisProgramAktif" => $this->model('Kategoriprogram_model')->getAllKategoriProgram('aktif')
@@ -172,8 +200,15 @@ class Programs extends Controller
     $data = [
       "judul" => "Programs Ramadhan",
 
-      // Mengambil semua data program dengan jenis_pembayaran tidak sama dengan 'barang' dan nama_kategoriprogram sama dengan 'ramadhan'
-      "dataProgramRamadhan" => $this->model('Program_model')->getAllData(["logic" => "AND", "jenis_pembayaran <>" => "barang", "nama_kategoriprogram =" => "ramadhan"]),
+      // Mengambil semua data program dengan jenis_pembayaran tidak sama dengan 'barang' dan
+      // nama_kategoriprogram sama dengan 'ramadhan'
+      "dataProgramRamadhan" => $this->model('Program_model')->getAllData(
+        [
+          "logic" => "AND",
+          "jenis_pembayaran <>" => "barang",
+          "nama_kategoriprogram =" => "ramadhan"
+        ]
+      ),
 
       // Mengambil semua kategori program yang memiliki status 'aktif'
       "dataJenisProgramAktif" => $this->model('Kategoriprogram_model')->getAllKategoriProgram('aktif')

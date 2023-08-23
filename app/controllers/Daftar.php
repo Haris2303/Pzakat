@@ -16,7 +16,7 @@ class Daftar extends Controller
     // Memeriksa apakah sesi dengan level akses sudah diset
     if (isset($_SESSION['level'])) {
       // Jika sesi dengan level akses sudah diset, alihkan ke halaman utama
-      header('Location: ' . BASEURL . '/');
+      header($this->location . '/');
       exit; // Keluar untuk memastikan kode selanjutnya tidak dieksekusi
     }
   }
@@ -45,9 +45,9 @@ class Daftar extends Controller
   }
 
   /**
-   * --------------------------------------------------------------------------------------------------------------------------
+   * ------------------------------------------------------------------------------
    *              ACTION METHOD
-   * --------------------------------------------------------------------------------------------------------------------------
+   * ------------------------------------------------------------------------------
    */
 
   /**
@@ -63,11 +63,13 @@ class Daftar extends Controller
    */
   public function aktivasi_akun(string $token): void
   {
+    $url = '/login';
+
     // Mengecek validitas token
     $isToken = $this->model('User_model')->isToken($token);
     if (!$isToken) {
       // Jika token tidak valid, alihkan pengguna ke halaman login
-      header('Location: ' . BASEURL . '/login');
+      header($this->location . $url);
       exit;
     }
 
@@ -76,13 +78,12 @@ class Daftar extends Controller
     if ($aktivasi > 0) {
       // Jika aktivasi berhasil, tampilkan pesan sukses dan arahkan ke halaman login
       Flasher::setFlash('Akun Anda telah diaktivasi. Silahkan login!', 'success');
-      header("Location: " . BASEURL . '/login');
-      exit;
     } else {
       // Jika aktivasi gagal, tampilkan pesan gagal dan arahkan ke halaman login
       Flasher::setFlash('Akun Anda gagal diaktivasi!', 'danger');
-      header("Location: " . BASEURL . '/login');
     }
+    header($this->location . $url);
+    exit;
   }
 
   /**
@@ -109,11 +110,12 @@ class Daftar extends Controller
       $msg = Design::emailMessageActivation($username, $href);
 
       // Mengirim email aktivasi
-      $is_email = Utility::sendEmail($email, $subject, $msg);
+      $isEmail = Utility::sendEmail($email, $subject, $msg);
 
-      if ($is_email) {
+      if ($isEmail) {
+        $flashMsg = 'Akun Anda Berhasil Terdaftar. <strong>Cek Email</strong> untuk <strong>Aktivasi Akun</strong>!';
         // Jika email berhasil dikirim, tampilkan pesan sukses dan arahkan ke halaman login
-        Flasher::setFlash('Akun Anda Berhasil Terdaftar. Silahkan <strong>Cek Email</strong> untuk <strong>Aktivasi Akun</strong>!', 'info', 'y');
+        Flasher::setFlash($flashMsg, 'info', 'y');
         header('Location: ' . BASEURL . '/login');
         exit;
       }

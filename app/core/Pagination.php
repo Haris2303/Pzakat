@@ -27,7 +27,7 @@ class Pagination
      * @param array|null $where Klausa WHERE opsional
      * 
      */
-    public function setPager(array $orderby = [], array $kondisi): array
+    public function setPager(array $orderby = [], array $kondisi = null): array
     {
         $limit = self::$limit;
         $page = self::$page;
@@ -40,48 +40,45 @@ class Pagination
         $model->selectData(null, null, $orderby, $kondisi);
         $data = $model->fetchAll();
 
-        $paginatedData = array_slice($data, $offset, $perPage);
-
-        return $paginatedData;
-        
+        return array_slice($data, $offset, $perPage);
     }
 
     /**
      * @param int $jumlah_pagination jumlah dari kiri dan kanan pagination yang tampil
      */
-    public static function view(int $jumlah_pagination = 3)
+    public static function view(int $jumlahPagination = 3)
     {
         $page = self::$page;
-        $jumlah_page = ceil(self::$data / self::$limit);
+        $jumlahPage = ceil(self::$data / self::$limit);
         $next = $page + 1; // tambahkan 1 setiap klik
         $prev = $page - 1; // kurangkan 1 setiap klik
 
         // set awal start and end page
-        $start_page = 1;
-        $end_page = $page + $jumlah_pagination;
+        $startPage = 1;
+        $endPage = $page + $jumlahPagination;
 
         // start pagination
-        if($page > $jumlah_pagination) {
-            $start_page =+ ($page - $jumlah_pagination);
+        if ($page > $jumlahPagination) {
+            $startPage = + ($page - $jumlahPagination);
         }
 
         // end pagination
-        if(($page + $jumlah_pagination) > $jumlah_page) {
-            $end_page = $jumlah_page;
+        if (($page + $jumlahPagination) > $jumlahPage) {
+            $endPage = $jumlahPage;
         }
 
         // kirimkan data
         $data = [
-            "jumlah_page" => $jumlah_page,
+            "jumlah_page" => $jumlahPage,
             "next_page" => $next,
             "prev_page" => $prev,
-            "start_page" => $start_page,
-            "end_page" => $end_page,
+            "start_page" => $startPage,
+            "end_page" => $endPage,
             "page" => $page,
         ];
 
         // jika data lebih banyak dari limit munculkan view pagination
-        if(self::$data > self::$limit) {
+        if (self::$data > self::$limit) {
             $view = new Controller();
             return $view->view('pagination/default', $data);
         }

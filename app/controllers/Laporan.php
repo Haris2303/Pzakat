@@ -3,6 +3,8 @@
 class Laporan extends Controller
 {
 
+    protected $view = 'template/laporan';
+
     public function index(): void
     {
         // Set HTTP response code to 404
@@ -36,7 +38,7 @@ class Laporan extends Controller
         ];
 
         // Tampilkan tampilan laporan menggunakan view 'template/laporan'
-        $this->view('template/laporan', $data);
+        $this->view($this->view, $data);
     }
 
     /**
@@ -58,7 +60,7 @@ class Laporan extends Controller
         ];
 
         // Tampilkan tampilan laporan menggunakan view 'template/laporan'
-        $this->view('template/laporan', $data);
+        $this->view($this->view, $data);
     }
 
     /**
@@ -80,7 +82,7 @@ class Laporan extends Controller
         ];
 
         // Tampilkan tampilan laporan menggunakan view 'template/laporan'
-        $this->view('template/laporan', $data);
+        $this->view($this->view, $data);
     }
 
     /**
@@ -102,7 +104,7 @@ class Laporan extends Controller
         ];
 
         // Tampilkan tampilan laporan menggunakan view 'template/laporan'
-        $this->view('template/laporan', $data);
+        $this->view($this->view, $data);
     }
 
     /**
@@ -124,6 +126,6 @@ class Laporan extends Controller
         ];
 
         // Tampilkan tampilan laporan menggunakan view 'template/laporan'
-        $this->view('template/laporan', $data);
+        $this->view($this->view, $data);
     }
 }

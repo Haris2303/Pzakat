@@ -3,6 +3,8 @@
 class Login extends Controller
 {
 
+  protected $urlLogin = '/login';
+
   /**
    * Constructor untuk mengontrol akses berdasarkan level pengguna.
    * 
@@ -13,7 +15,7 @@ class Login extends Controller
     // Cek apakah level pengguna sudah di-set di session
     if (isset($_SESSION['level'])) {
       // Jika level pengguna sudah di-set, redirect ke halaman utama
-      header('Location: ' . BASEURL . '/');
+      header($this->location . '/');
       exit;
     }
   }
@@ -69,7 +71,7 @@ class Login extends Controller
   {
     // Jika tidak ada email atau token yang disediakan
     if (is_null($email) && is_null($token)) {
-      header('Location: ' . BASEURL . '/login');
+      header($this->location . $this->urlLogin);
       exit;
     }
 
@@ -77,7 +79,7 @@ class Login extends Controller
     $isEmailValid = $this->model('Login_model')->checkEmail($email);
     if ($isEmailValid <= 0) {
       Flasher::setFlash('Gagal Ubah Password! Email tidak valid!', 'danger');
-      header('Location: ' . BASEURL . '/login');
+      header($this->location . $this->urlLogin);
       exit;
     }
 
@@ -85,7 +87,7 @@ class Login extends Controller
     $isTokenValid = $this->model('Login_model')->checkToken($token);
     if (is_bool($isTokenValid)) {
       Flasher::setFlash('Gagal Ubah Password! Token tidak valid atau telah kadaluarsa', 'danger');
-      header('Location: ' . BASEURL . '/login');
+      header($this->location . $this->urlLogin);
       exit;
     }
 
@@ -98,7 +100,7 @@ class Login extends Controller
 
     // Jika sesi ubah password telah kadaluarsa
     if (!isset($_SESSION['ubah_password'])) {
-      header('Location: ' . BASEURL . '/login');
+      header($this->location . $this->urlLogin);
       exit;
     }
 
@@ -113,9 +115,9 @@ class Login extends Controller
   }
 
   /**
-   * --------------------------------------------------------------------------------------------------------------------------------
+   * -------------------------------------------------------------------------
    *              ACTION METHOD
-   * --------------------------------------------------------------------------------------------------------------------------------
+   * -------------------------------------------------------------------------
    */
 
   /**
@@ -144,22 +146,22 @@ class Login extends Controller
       switch ($_SESSION['level']) {
         case '3':
           // Jika level user adalah 3, arahkan ke user_dashboard
-          header('Location: ' . BASEURL . '/user_dashboard');
+          header($this->location . '/user_dashboard');
           break;
         case '2':
           // Jika level user adalah 2, arahkan ke dashboard admin
-          header('Location: ' . BASEURL . '/dashboard');
+          header($this->location . '/dashboard');
           break;
         default:
           // Jika level user tidak dikenali, arahkan ke halaman awal
-          header('Location: ' . BASEURL . '/');
+          header($this->location . '/');
           break;
       }
       exit;
     } else {
       // Jika login gagal, tampilkan pesan error dan arahkan kembali ke halaman login
       Flasher::setFlash($result, 'danger');
-      header('Location: ' . BASEURL . '/login');
+      header($this->location . $this->urlLogin);
       exit;
     }
   }
@@ -178,7 +180,7 @@ class Login extends Controller
     $isEmail = $this->model('Login_model')->checkEmail($email);
     if ($isEmail <= 0) {
       Flasher::setFlash('Gagal Lupa Password! Email tidak terdaftar', 'danger');
-      header('Location: ' . BASEURL . '/login');
+      header($this->location . $this->urlLogin);
       exit;
     }
 
@@ -200,7 +202,7 @@ class Login extends Controller
 
     if ($emailSent) {
       Flasher::setFlash('Pesan Berhasil terkirim! Silahkan cek email Anda', 'success', 'y');
-      header('Location: ' . BASEURL . '/login');
+      header($this->location . $this->urlLogin);
       exit;
     }
   }
@@ -215,7 +217,7 @@ class Login extends Controller
     // Ambil data dari sesi untuk validasi
     $email = $_SESSION['email'];
     $token = $_SESSION['token'];
-    $user_id = $_SESSION['user_id'];
+    $userId = $_SESSION['user_id'];
 
     // Lakukan proses perubahan password
     $result = $this->model('Login_model')->ubahPassword($_POST);
@@ -225,7 +227,7 @@ class Login extends Controller
       $newToken = Utility::generateToken();
 
       // Update token di database
-      $isTokenUpdated = $this->model('Login_model')->updateToken($newToken, $user_id);
+      $isTokenUpdated = $this->model('Login_model')->updateToken($newToken, $userId);
 
       if (is_string($isTokenUpdated)) {
         // Bersihkan data sesi terkait dan beri pesan sukses
@@ -235,13 +237,13 @@ class Login extends Controller
         unset($_SESSION['user_id']);
 
         Flasher::setFlash('Password berhasil diubah! Silahkan login.', 'success');
-        header('Location: ' . BASEURL . '/login');
+        header($this->location . $this->urlLogin);
         exit;
       }
     } else {
       // Jika perubahan password gagal, kembalikan ke halaman ubah password dengan pesan error
       Flasher::setFlash($result, 'danger');
-      header('Location: ' . BASEURL . '/login/ubah_password/' . $email . '/' . $token);
+      header($this->location . '/login/ubah_password/' . $email . '/' . $token);
       exit;
     }
   }

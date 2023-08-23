@@ -3,6 +3,8 @@
 class Masjid extends Controller
 {
 
+  protected $urlMasjid = '/masjid';
+
   /**
    * Halaman Utama untuk Modul Masjid
    * 
@@ -58,7 +60,7 @@ class Masjid extends Controller
     }
 
     // Kembali ke halaman Masjid setelah aksi selesai
-    header("Location: " . BASEURL . '/Masjid');
+    header($this->location . $this->urlMasjid);
     exit;
   }
 
@@ -82,7 +84,7 @@ class Masjid extends Controller
     }
 
     // Kembali ke halaman Masjid setelah aksi selesai
-    header("Location: " . BASEURL . '/Masjid');
+    header($this->location . $this->urlMasjid);
     exit;
   }
 
@@ -107,7 +109,7 @@ class Masjid extends Controller
     }
 
     // Kembali ke halaman Masjid setelah aksi selesai
-    header("Location: " . BASEURL . '/Masjid');
+    header($this->location . $this->urlMasjid);
     exit;
   }
 }

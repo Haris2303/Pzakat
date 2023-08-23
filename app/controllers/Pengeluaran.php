@@ -108,7 +108,7 @@ class Pengeluaran extends Controller
             Flasher::setFlash('Data Pengeluaran <strong>Gagal</strong> Ditambahkan!', 'danger');
         }
 
-        header('Location: ' . BASEURL . '/pengeluaran/index');
+        header($this->location . '/pengeluaran/index');
         exit;
     }
 
@@ -126,7 +126,7 @@ class Pengeluaran extends Controller
             Flasher::setFlash('Data Pengeluaran <strong>Gagal</strong> Ditambahkan!', 'danger');
         }
 
-        header('Location: ' . BASEURL . '/pengeluaran/barang');
+        header($this->location . '/pengeluaran/barang');
         exit;
     }
 }
