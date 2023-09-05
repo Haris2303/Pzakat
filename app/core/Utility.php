@@ -136,7 +136,7 @@ class Utility
     public static function sendEmail(string $address, string $subject, string $message): bool
     {
         //Load Composer's autoloader
-        require_once LOCALE_URL . '/vendor/autoload.php';
+        // require_once LOCALE_URL . '/vendor/autoload.php';
 
         //Create an instance; passing `true` enables exceptions
         $mail = new PHPMailer(true);

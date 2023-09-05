@@ -51,7 +51,7 @@
               <td><?= $item['nama_donatur'] ?></td>
               <td><?= explode("_", $item['nomor_pembayaran'])[0] ?></td>
               <td>Rp <?= number_format($item['jumlah_pembayaran'], 0, ',', '.') ?></td>
-              <td><?= (time() > $kode_expired)? '<span class="text-danger">Expired</span>' : '<span class="text-dark">'.$tenggat_waktu  .'</span>' ?></td>
+              <td><?= (time() > $kode_expired) ? '<span class="text-danger">Expired</span>' : '<span class="text-dark">' . $tenggat_waktu  . '</span>' ?></td>
               <td>
                 <a href="<?= BASEURL ?>/kelola_pembayaran/detail/<?= $item['id_donatur'] ?>" class="btn badge btn-secondary">Detail</a>
               </td>

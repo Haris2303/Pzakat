@@ -70,11 +70,10 @@ class Pembayaran_model
     ): array {
         $vw = $this->view['dataAll']; // Nama tampilan data pembayaran.
 
-
-        if (is_null($status_pembayaran) && empty($orderby) <= 0 && is_null($kondisi)) {
+        if (is_null($status_pembayaran) && empty($orderby) && is_null($kondisi)) {
             // Jika status_pembayaran tidak ditentukan, ambil semua data pembayaran.
             $this->baseModel->selectData($vw);
-        } elseif (!is_null($status_pembayaran) && empty($orderby) <= 0 && is_null($kondisi)) {
+        } elseif (!is_null($status_pembayaran) && empty($orderby) && is_null($kondisi)) {
             // Jika status_pembayaran ditentukan, ordernya kosongambil dan kondisi null,
             //maka ambil semua data pembayaran dengan status tertentu.
             $this->baseModel->selectData($vw, null, [], ["status_pembayaran =" => $status_pembayaran]);
