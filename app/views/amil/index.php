@@ -1,7 +1,5 @@
 <!-- Page Heading -->
 <h2 class="h3">Amil</h2>
-<!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-  For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -43,7 +41,9 @@
               <td><?= $item['nama'] ?></td>
               <td><?= $item['email'] ?></td>
               <td><?= $item['nohp'] ?></td>
-              <th><?= ($item['status_aktivasi'] === '1') ? '<span class="text-primary">Telah Aktivasi</span>' : '<span class="text-danger">Belum Aktivasi</span>' ?></th>
+              <th><?= ($item['status_aktivasi'] === '1') ?
+                    '<span class="text-primary">Telah Aktivasi</span>' : '<span class="text-danger">Belum Aktivasi</span>' ?>
+              </th>
               <td><?= $item['waktu_login'] ?></td>
               <td>
                 <a href="<?= BASEURL ?>/amil/detail/<?= $item['username'] ?>" class="btn badge btn-secondary">Detail</a>
